@@ -1,0 +1,22 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer components {
+  .card {
+    background-color: theme("colors.rose.500");
+    color: theme("colors.white");
+    box-shadow: theme("boxShadow.xl");
+    border-radius: theme("borderRadius.lg");
+    padding: theme("spacing.6");
+    width: theme("width.full");
+  }
+}
+
+@layer utilities {
+  .transit {
+    @apply transition-all ease-linear duration-200;
+  }
+}
