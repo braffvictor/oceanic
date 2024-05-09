@@ -1,16 +1,25 @@
 <template>
-  <div class="bg-slate-100 h-[150vw] dark:bg-slate-900 transit">
-    <section>
-      <main class="mt-5 md:px-8 relative">
+  <div class="bg-slate-100 h-auto dark:bg-slate-900 transit">
+    <section class="h-svh">
+      <main class="md:mt-5 md:px-8 relative h-full">
         <div
-          class="h-[500px] absolute md:rounded-xl blurB dark:blurBg w-[95%]"
+          class="h-full absolute md:rounded-xl w-[100%] md:w-[95%] transit"
+          :style="`background: linear-gradient(
+            to bottom,
+           ${theme == 'light' || theme == null ? lightShade : darkShade}
+          ),
+          url(https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;`"
         ></div>
         <div
-          class="h-[500px] md:border md:rounded-xl absolute text-slate-100 w-[95%] backdrop-blur-lg"
+          class="h-full md:rounded-xl absolute text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
         >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
           corrupti optio ut et culpa consectetur fugit numquam quaerat
           excepturi. Quod obcaecati pariatur nobis?
+          {{ theme }}
         </div>
       </main>
     </section>
@@ -21,6 +30,14 @@
 import DButton from "@/components/utils/DButton.vue";
 import svgComp from "@/components/svgComp.vue";
 // @ is an alias to /src
+import { inject, ref } from "vue";
+
+const theme = inject("theme");
+
+const darkShade = ref("rgba(0, 0, 0, 0.247), rgba(0, 0, 0, 0.416)");
+const lightShade = ref(
+  " rgba(255, 255, 255, 0.216), rgba(255, 255, 255, 0.253)"
+);
 </script>
 
 <style>

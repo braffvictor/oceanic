@@ -1,7 +1,7 @@
 <template>
   <div
     :class="themeState == 'light' || themeState == null ? '' : 'dark'"
-    class="min-h-[200vh]"
+    class="h-auto"
   >
     <!-- navbar section -->
     <nav
@@ -206,15 +206,15 @@
       ></div>
 
       <!-- login and registration button -->
-      <div class="flex mt-6 ml-10 gap-x-2">
+      <div class="flex mt-4 ml-10 gap-x-2">
         <d-button
           type="outlined"
-          class="border-green-500 px-4 !text-green-400 dark:!text-green-500"
+          class="border-green-500 px-4 !text-green-400 dark:!text-green-500 active:!bg-green-200"
           >Login</d-button
         >
         <d-button
           type="elevated"
-          class="bg-green-400 dark:bg-green-500 shadow-green-300 dark:shadow-green-400"
+          class="bg-green-400 dark:bg-green-500 shadow-green-300 dark:shadow-green-400 active:!bg-green-200"
         />
       </div>
     </div>
@@ -226,7 +226,7 @@
 <script setup>
 import svgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { ref } from "vue";
+import { provide, ref } from "vue";
 const themeState = ref(localStorage.getItem("theme"));
 
 // const scrollPosition = ref("No Scrolls");
@@ -240,6 +240,8 @@ function localTheme(theme) {
   localStorage.setItem("theme", theme);
   themeState.value = localStorage.getItem("theme");
 }
+
+const theme = provide("theme", themeState);
 </script>
 
 <style scoped>
