@@ -51,7 +51,9 @@
             </div>
 
             <!-- second div -->
-            <div class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl">
+            <div
+              class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl dark:text-slate-100 text-slate-900"
+            >
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
               quas tempore quae ipsa, nostrum, enim illo eum debitis, quidem
               molestiae ab ipsam nobis itaque?
