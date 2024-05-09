@@ -74,7 +74,11 @@
           class="p-2 rounded-lg transit active:animate-spin"
           @click="localTheme('light')"
         >
-          <img src="../assets/svg/lightmode.svg" class="max-w-6" alt="" />
+          <img
+            src="../assets/svg/lightmode.svg"
+            class="max-w-6"
+            alt="light Mode"
+          />
         </button>
         <button
           v-if="themeState != 'dark'"
@@ -84,7 +88,7 @@
           <img
             src="../assets/svg/darkmode.svg"
             class="max-w-6 transform -rotate-45"
-            alt=""
+            alt="dark mode"
           />
         </button>
 
