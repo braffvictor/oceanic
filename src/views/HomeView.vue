@@ -9,7 +9,7 @@
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-          url(https://solanart.io/_next/image?url=https%3A%2F%2Fapi-v2.solanart.io%2Fcdn%2F500%2Fhttps%3A%2F%2Farweave.net%2Fjm6wD4dL6h-ngCdATOmufSbaYLXsAzCseyOveXnkYk8&w=1920&q=75);
+          url(https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -52,7 +52,7 @@
 
             <!-- second div -->
             <div
-              class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl dark:text-slate-100 text-slate-900"
+              class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl dark:text-slate-100 text-slate-900 bg-[url('https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3')] bg-center"
             >
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
               quas tempore quae ipsa, nostrum, enim illo eum debitis, quidem
