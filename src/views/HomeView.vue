@@ -2,6 +2,7 @@
   <div class="bg-white h-auto dark:bg-slate-900 transit">
     <section class="h-svh">
       <main class="md:mt-5 md:px-8 relative h-full -mt-2">
+        <!-- div with just image -->
         <div
           class="h-full absolute md:rounded-xl w-[100%] md:w-[95%] transit"
           :style="`background: linear-gradient(
@@ -14,6 +15,8 @@
         background-repeat: no-repeat;
         transition: all linear 300ms;`"
         ></div>
+
+        <!-- div with content -->
         <div
           class="h-full md:rounded-xl p-4 px-8 py-16 md:py-8 md:px-12 absolute text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
         >
@@ -37,18 +40,18 @@
               <div class="flex mt-4 gap-x-2">
                 <d-button
                   type="outlined"
-                  class="border-green-500 px-4 !text-green-400 hover:scale-105 hover:-translate-y-2 dark:!text-green-500 active:!bg-green-200"
+                  class="border-green-500 w-1/4 text-center px-4 !text-green-400 hover:!bg-green-200 dark:!text-green-500 active:!bg-green-300"
                   >Login</d-button
                 >
                 <d-button
                   type="elevated"
-                  class="bg-green-400 dark:bg-green-500 shadow-green-300 hover:scale-105 hover:-translate-y-2 dark:shadow-green-400 active:!bg-green-200"
+                  class="bg-green-400 dark:bg-green-500 shadow-green-300 hover:scale-105 hover:-translate-y-2 dark:shadow-green-400 active:!bg-green-300"
                 />
               </div>
             </div>
 
             <!-- second div -->
-            <div>
+            <div class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
               quas tempore quae ipsa, nostrum, enim illo eum debitis, quidem
               molestiae ab ipsam nobis itaque?
