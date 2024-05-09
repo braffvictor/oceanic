@@ -17,6 +17,6 @@
 
 @layer utilities {
   .transit {
-    @apply transition-all ease-linear duration-200;
+    @apply transition-all ease-linear duration-300;
   }
 }
