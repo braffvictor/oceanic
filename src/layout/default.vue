@@ -223,7 +223,7 @@
       </div>
     </div>
 
-    <router-view class="pt-20" @click="show = !show" />
+    <router-view class="pt-20" />
   </div>
 </template>
 

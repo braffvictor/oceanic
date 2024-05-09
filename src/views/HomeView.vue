@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit">
-    <section class="h-svh">
+    <section class="h-svh mb-10">
       <main class="md:mt-5 md:px-8 relative h-full -mt-2">
         <!-- div with just image -->
         <div
@@ -9,14 +9,21 @@
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-          url(https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3);
+         url(https://i.seadn.io/gcs/files/f3b11e36be14a5d31c75b19d03996fed.gif?w=500);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         transition: all linear 300ms;`"
         ></div>
 
-        <!-- div with content -->
+        <!-- <div class="absolute">
+          <img
+            class="h-full w-[700px] block md:rounded-xl md:w-[95%] transit object-cover bg-cover mx-auto text-center"
+            src="https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3"
+            :class="theme == 'light' || theme == null ? lightShade : darkShade"
+          />
+        </div>
+        div with content -->
         <div
           class="h-full md:rounded-xl p-4 px-8 py-16 md:py-8 md:px-12 absolute text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
         >
@@ -52,7 +59,7 @@
 
             <!-- second div -->
             <div
-              class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl dark:text-slate-100 text-slate-900 bg-[url('https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3')] bg-center"
+              class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl dark:text-slate-100 text-slate-900 bg-[url('https://i.seadn.io/gcs/files/f3b11e36be14a5d31c75b19d03996fed.gif?w=500')] bg-center"
             >
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
               quas tempore quae ipsa, nostrum, enim illo eum debitis, quidem
