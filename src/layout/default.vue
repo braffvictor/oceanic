@@ -189,7 +189,7 @@
       </nav>
 
       <!-- content in navigation drawer -->
-      <div class="ml-10">
+      <div class="ml-10 mt-4">
         <button
           class="text-slate-900 block dark:text-slate-100 font-semibold active:text-green-400 mb-6 mt-2 transit"
           v-for="link in ['Collections', 'Explore', 'About', 'Contact']"
@@ -210,7 +210,7 @@
       ></div>
 
       <!-- login and registration button -->
-      <div class="flex mt-4 ml-10 gap-x-2">
+      <div class="flex mt-3 ml-10 gap-x-2">
         <d-button
           type="outlined"
           class="border-green-500 px-4 !text-green-400 dark:!text-green-500 active:!bg-green-200"
@@ -223,7 +223,7 @@
       </div>
     </div>
 
-    <router-view class="pt-20" />
+    <router-view class="pt-20" @click="show = false" />
   </div>
 </template>
 

@@ -1,16 +1,16 @@
 <template>
-  <div class="bg-white h-auto dark:bg-slate-900 transit">
+  <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
     <section class="h-svh mb-10">
       <main class="md:mt-5 md:px-8 relative h-full -mt-2">
         <!-- div with just image -->
 
         <div
-          class="h-[50em] md:h-[40em] md:rounded-xl w-[100%] md:w-[95%] transit"
+          class="h-[50em] md:h-[35em] md:rounded-xl w-[100%] md:w-[95%] transit"
           :style="`background: linear-gradient(
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-         url(https://i.seadn.io/gcs/files/f3b11e36be14a5d31c75b19d03996fed.gif?w=500);
+         url(https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -30,7 +30,7 @@
                 <br />cost
               </p>
               <p
-                class="dark:text-slate-100 text-slate-900 font-thin md:text-2xl my-5 md:my-10"
+                class="dark:text-slate-100 text-slate-900 font-mono font-semibold md:text-2xl my-5 md:my-10"
               >
                 Buy or sell NFTs and save in fees. The lowest-fee marketplace on
                 Solana.
@@ -40,7 +40,7 @@
               <div class="flex mt-4 gap-x-2">
                 <d-button
                   type="outlined"
-                  class="border-green-500 w-1/4 text-center px-4 !text-green-400 hover:!bg-green-200 dark:!text-green-500 active:!bg-green-300 hover:scale-105 hover:-translate-y-2"
+                  class="border-green-500 text-center px-4 !text-green-400 hover:!bg-green-200 dark:!text-green-500 !bg-green-200 hover:scale-105 hover:-translate-y-2"
                   >Login</d-button
                 >
                 <d-button
@@ -52,11 +52,11 @@
 
             <!-- second div -->
             <div
-              class="h-[110%] mx-auto text-center mt-12 md:mt-0 w-10/12 rounded-xl p-4 dark:text-slate-100 text-slate-900 bg-center"
+              class="md:h-[103%] h-[90%] mx-auto text-center mt-12 md:mt-0 w-10/12 rounded-xl p-4 dark:text-slate-100 text-slate-900 bg-center"
               :class="
                 theme == 'light' || theme == null
                   ? 'border border-slate-100'
-                  : 'border border-slate-800'
+                  : 'border border-gray-600'
               "
               :style="`
                 background: linear-gradient(
@@ -72,10 +72,17 @@
                 background-repeat: no-repeat;`"
             >
               <img
-                src="https://i.seadn.io/gcs/files/f3b11e36be14a5d31c75b19d03996fed.gif?w=500"
+                src="https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3"
                 alt=""
-                class="rounded-xl"
+                class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit"
               />
+              <p class="text-green-400 text-left mt-2">
+                Solaan Monkey Business
+              </p>
+              <div class="flex justify-between">
+                <p>SMB #1695</p>
+                <p>380</p>
+              </div>
             </div>
           </div>
         </div>
@@ -95,10 +102,11 @@ const theme = inject("theme");
 const darkShade = ref("rgba(0, 0, 0, 0.247), #0e182f 90%");
 const lightShade = ref("rgba(255, 255, 255, 0.216), white 90%");
 
-const darkShade2 = ref("rgba(0, 0, 0, 0.247), rgba(0, 0, 0, 0.247)");
+// const darkShade2 = ref("rgba(0, 0, 0, 0.247), rgba(0, 0, 0, 0.247)");
 const lightShade2 = ref(
   "rgba(255, 255, 255, 0.216), rgba(255, 255, 255, 0.216)"
 );
+const darkShade2 = ref("rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)");
 </script>
 
 <style>
