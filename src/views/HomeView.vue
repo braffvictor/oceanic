@@ -3,8 +3,9 @@
     <section class="h-svh mb-10">
       <main class="md:mt-5 md:px-8 relative h-full -mt-2">
         <!-- div with just image -->
+
         <div
-          class="h-full absolute md:rounded-xl w-[100%] md:w-[95%] transit"
+          class="h-[50em] md:h-[40em] md:rounded-xl w-[100%] md:w-[95%] transit"
           :style="`background: linear-gradient(
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
@@ -13,19 +14,11 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        transition: all linear 300ms;`"
+        transition: all linear 300ms`"
         ></div>
 
-        <!-- <div class="absolute">
-          <img
-            class="h-full w-[700px] block md:rounded-xl md:w-[95%] transit object-cover bg-cover mx-auto text-center"
-            src="https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3"
-            :class="theme == 'light' || theme == null ? lightShade : darkShade"
-          />
-        </div>
-        div with content -->
         <div
-          class="h-full md:rounded-xl p-4 px-8 py-16 md:py-8 md:px-12 absolute text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
+          class="h-full md:rounded-xl p-4 px-8 py-16 md:py-8 md:px-12 absolute top-0 text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
         >
           <div class="grid md:grid-cols-2">
             <div>
@@ -47,7 +40,7 @@
               <div class="flex mt-4 gap-x-2">
                 <d-button
                   type="outlined"
-                  class="border-green-500 w-1/4 text-center px-4 !text-green-400 hover:!bg-green-200 dark:!text-green-500 active:!bg-green-300"
+                  class="border-green-500 w-1/4 text-center px-4 !text-green-400 hover:!bg-green-200 dark:!text-green-500 active:!bg-green-300 hover:scale-105 hover:-translate-y-2"
                   >Login</d-button
                 >
                 <d-button
@@ -59,11 +52,30 @@
 
             <!-- second div -->
             <div
-              class="h-[110%] mt-12 md:mt-0 border w-10/12 rounded-xl dark:text-slate-100 text-slate-900 bg-[url('https://i.seadn.io/gcs/files/f3b11e36be14a5d31c75b19d03996fed.gif?w=500')] bg-center"
+              class="h-[110%] mx-auto text-center mt-12 md:mt-0 w-10/12 rounded-xl p-4 dark:text-slate-100 text-slate-900 bg-center"
+              :class="
+                theme == 'light' || theme == null
+                  ? 'border border-slate-100'
+                  : 'border border-slate-800'
+              "
+              :style="`
+                background: linear-gradient(
+                    to bottom,
+                    ${
+                      theme == 'light' || theme == null
+                        ? lightShade2
+                        : darkShade2
+                    }
+                  );
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;`"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
-              quas tempore quae ipsa, nostrum, enim illo eum debitis, quidem
-              molestiae ab ipsam nobis itaque?
+              <img
+                src="https://i.seadn.io/gcs/files/f3b11e36be14a5d31c75b19d03996fed.gif?w=500"
+                alt=""
+                class="rounded-xl"
+              />
             </div>
           </div>
         </div>
@@ -81,7 +93,12 @@ import { inject, ref } from "vue";
 const theme = inject("theme");
 
 const darkShade = ref("rgba(0, 0, 0, 0.247), #0e182f 90%");
-const lightShade = ref(" rgba(255, 255, 255, 0.216), white 90%");
+const lightShade = ref("rgba(255, 255, 255, 0.216), white 90%");
+
+const darkShade2 = ref("rgba(0, 0, 0, 0.247), rgba(0, 0, 0, 0.247)");
+const lightShade2 = ref(
+  "rgba(255, 255, 255, 0.216), rgba(255, 255, 255, 0.216)"
+);
 </script>
 
 <style>
