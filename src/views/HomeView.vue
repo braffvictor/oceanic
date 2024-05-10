@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
-    <section class="h-svh mb-10">
+    <section class="h-svh">
       <main class="md:mt-5 md:px-8 relative h-full -mt-2">
         <!-- div with just image -->
 
@@ -10,7 +10,7 @@
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-         url(https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3);
+         url(https://ipfs.io/ipfs/QmRRPWG96cmgTn2qSzjwr2qvfNEuhunv6FNeMFGa9bx6mQ);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -25,8 +25,8 @@
               <p
                 class="text-5xl md:text-7xl font-semibold dark:text-slate-100 text-slate-900 transit"
               >
-                Trade NFTs <br />at
-                <span class="shining uppercase">Lowest</span>
+                Trade NFTs<br />at
+                <span class="shining uppercase font-semibold">Lowest</span>
                 <br />cost
               </p>
               <p
@@ -39,8 +39,9 @@
               <!-- login and registration button -->
               <div class="flex mt-4 gap-x-2">
                 <d-button
+                  to="/about"
                   type="outlined"
-                  class="border-green-500 text-center px-4 !text-green-400 hover:!bg-green-200 dark:!text-green-500 !bg-green-200 hover:scale-105 hover:-translate-y-2"
+                  class="border-slate-700 active:!bg-slate-50 text-center dark:border-slate-100 px-4 !text-slate-700 dark:!text-slate-100 hover:!bg-slate-50 dark:hover:!bg-slate-900 !bg-green-200 hover:scale-105 hover:-translate-y-2"
                   >Login</d-button
                 >
                 <d-button
@@ -72,7 +73,7 @@
                 background-repeat: no-repeat;`"
             >
               <img
-                src="https://ipfs.io/ipfs/QmYmce6oPzkCZhPM9mB8874i1ywx3c4P2ogsPp5YFCc5H3"
+                src="https://ipfs.io/ipfs/QmRRPWG96cmgTn2qSzjwr2qvfNEuhunv6FNeMFGa9bx6mQ"
                 alt=""
                 class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit"
               />

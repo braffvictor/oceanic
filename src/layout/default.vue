@@ -72,7 +72,7 @@
         <button
           v-if="themeState != 'light' && themeState != null"
           class="p-2 rounded-lg transit active:animate-spin"
-          @click="localTheme('light')"
+          @click="changeTheme('light')"
         >
           <img
             src="../assets/svg/lightmode.svg"
@@ -82,8 +82,8 @@
         </button>
         <button
           v-if="themeState != 'dark'"
-          class="p-2 rounded-lg transit active:animate-ping"
-          @click="localTheme('dark')"
+          class="p-2 rounded-lg transit active:animate-ping relative"
+          @click="changeTheme('dark')"
         >
           <img
             src="../assets/svg/darkmode.svg"
@@ -94,7 +94,10 @@
 
         <!-- burger menu -->
         <button class="md:hidden" @click="show = true">
-          <svg-comp icon="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          <svg-comp
+            icon="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            Sclass="active:stroke-green-400"
+          />
         </button>
       </div>
     </nav>
@@ -111,7 +114,7 @@
     >
       <!-- top navbar section -->
       <nav
-        class="p-4 md:px-8 bg-red flex items-center justify-between border-b w-full backdrop-blur-sm"
+        class="p-4 md:px-8 bg-red flex items-center justify-between border-b w-full"
         :class="
           themeState == 'light' || themeState == null
             ? 'bg-slate-100 border-b-gray-200'
@@ -162,14 +165,14 @@
           <button
             v-if="themeState != 'light' && themeState != null"
             class="p-2 rounded-lg transit active:animate-spin"
-            @click="localTheme('light')"
+            @click="changeTheme('light')"
           >
             <img src="../assets/svg/lightmode.svg" class="max-w-6" alt="" />
           </button>
           <button
             v-if="themeState != 'dark'"
             class="p-2 rounded-lg transit active:animate-ping"
-            @click="localTheme('dark')"
+            @click="changeTheme('dark')"
           >
             <img
               src="../assets/svg/darkmode.svg"
@@ -224,6 +227,92 @@
     </div>
 
     <router-view class="pt-20" @click="show = false" />
+
+    <!-- footer section -->
+    <section
+      class="bg-gradient-to-t from-green-400 to-white dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
+    >
+      <main class="px-5 py-5 md:px-8">
+        <div class="grid md:grid-cols-2 gap-y-4">
+          <div>
+            <div class="flex gap-x-3 items-center mb-3">
+              <img
+                src="https://solanart.io/solanart-logo-black.svg"
+                class="md:max-w-10 max-w-8 block"
+                v-if="themeState != 'dark'"
+                alt=""
+              />
+              <img
+                src="https://solanart.io/solanart-logo.svg"
+                class="max-w-10 max-w-8 block"
+                alt=""
+                v-if="themeState != 'light' && themeState != null"
+              />
+              <p
+                class="inline text-slate-800 dark:text-slate-50 md:text-3xl text-2xl font-semibold"
+              >
+                Oceanic
+              </p>
+            </div>
+            <p class="text-slate-900 dark:text-slate-100">
+              The first marketplace on Solana to buy, trade and sell
+              non-fungible tokens (NFTs). Chat on chain with buyers/sellers,
+              launch a project with our launchpad or just explore.
+            </p>
+          </div>
+          <div>
+            <p
+              class="font-semibold text-slate-900 text-xl mb-3 md:text-3xl dark:text-slate-100"
+            >
+              Stay In the Loop
+            </p>
+            <p class="text-slate-900 dark:text-slate-100">
+              Join our mailing list to stay in the loop with our newest feature
+              releases, NFT drops, and tips and tricks for navigating solana.
+            </p>
+            <div class="my-3">
+              <input
+                type="text"
+                placeholder="Your Email Address"
+                class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-8/12 h-12 justify-self-start inline-block align-start rounded-lg indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
+              />
+              <d-button
+                class="w-3/12 text-center h-12 ml-3 bg-green-400 dark:bg-green-500 dark:!text-slate-900 !text-slate-100"
+                type="filled"
+                >Sign Up</d-button
+              >
+            </div>
+          </div>
+        </div>
+        <!-- divider -->
+        <div
+          class="border-b w-full opacity-20"
+          :class="
+            themeState == 'light' || themeState == null
+              ? 'whiteT border-b-slate-900'
+              : 'darkT border-b-slate-100'
+          "
+        ></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 my-3 gap-2 opacity-60">
+          <d-button
+            type="outlined"
+            class="rounded-md border-slate-700 !text-slate-700 dark:border-slate-200 dark:!text-slate-200"
+            v-for="link in ['Collection', 'Explore', 'About', 'Contact']"
+            :key="link"
+            >{{ link }}</d-button
+          >
+        </div>
+        <!-- divider -->
+        <div
+          class="border-b w-full opacity-20"
+          :class="
+            themeState == 'light' || themeState == null
+              ? 'whiteT border-b-slate-900'
+              : 'darkT border-b-slate-100'
+          "
+        ></div>
+      </main>
+    </section>
   </div>
 </template>
 
@@ -240,7 +329,7 @@ const themeState = ref(localStorage.getItem("theme"));
 
 const show = ref(false);
 
-function localTheme(theme) {
+function changeTheme(theme) {
   localStorage.setItem("theme", theme);
   themeState.value = localStorage.getItem("theme");
 }

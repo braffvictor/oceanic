@@ -7,8 +7,8 @@ module.exports = defineConfig({
     appleMobileWebAppCache: "yes",
     manifestOptions: {
       background_color: "#4ADE80",
-      name: "Parcelling",
-      short_name: "Parcling",
+      name: "Oceanic",
+      short_name: "Oceanic",
       theme_color: "#4ADE80",
     },
   },
