@@ -293,7 +293,9 @@
               : 'darkT border-b-slate-100'
           "
         ></div>
-        <div class="grid grid-cols-2 md:grid-cols-4 my-3 gap-2 opacity-60">
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-2 opacity-60 my-3 transit"
+        >
           <d-button
             type="outlined"
             class="rounded-md border-slate-700 !text-slate-700 dark:border-slate-200 dark:!text-slate-200"
@@ -313,13 +315,53 @@
         ></div>
       </main>
     </section>
+    <div class="gtranslate_wrapper text-white bg-black"></div>
   </div>
 </template>
 
 <script setup>
 import svgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { provide, ref } from "vue";
+import { useHead } from "@vueuse/head";
+import { onMounted, provide, ref } from "vue";
+
+onMounted(() => {
+  window.gtranslateSettings = {
+    default_language: "en",
+    detect_browser_language: true,
+    languages: [
+      "en",
+      "fr",
+      "de",
+      "it",
+      "es",
+      "ko",
+      "ps",
+      "sd",
+      "fy",
+      "xh",
+      "mn",
+      "bs",
+      "sn",
+      "my",
+      "zh-CN",
+      "zh-TW",
+      "ru",
+      "hu",
+    ],
+    wrapper_selector: ".gtranslate_wrapper",
+  };
+});
+
+useHead({
+  script: [
+    {
+      src: "//code.tidio.co/zccgj8k6v1twa1uydrnxydegil8o2rlv.js",
+    },
+    { src: "https://cdn.gtranslate.net/widgets/latest/float.js" },
+  ],
+});
+
 const themeState = ref(localStorage.getItem("theme"));
 
 // const scrollPosition = ref("No Scrolls");
