@@ -117,9 +117,9 @@
 
     <!--todo top navigation drawer -->
     <div
-      class="w-[100vw] fixed z-30 top-0 border-b transition-all ease-in-out duration-1000 !overflow-hidden backdrop-blur-md transit pb-3"
+      class="w-[100vw] fixed z-30 top-0 border-b transition-all ease-in-out duration-1000 !overflow-hidden backdrop-blur-md transit"
       :class="[
-        show ? 'h-auto' : 'h-0',
+        show ? 'min-h-[58%] md:min-h-[70%] h-auto pb-3' : 'h-0',
         themeState == 'light' || themeState == null
           ? 'whiteT border-b-gray-200'
           : 'darkT border-b-gray-600',
@@ -130,7 +130,7 @@
         class="p-4 md:px-8 bg-red flex items-center justify-between border-b w-full"
         :class="
           themeState == 'light' || themeState == null
-            ? 'bg-slate-100 border-b-gray-200'
+            ? 'bg-white border-b-gray-200'
             : 'bg-slate-900 border-b-gray-600'
         "
       >
@@ -196,7 +196,7 @@
           :key="links.title"
         >
           <div
-            @click="show2 = true"
+            @click="show2 = !show2"
             class="flex transit items-center bg-transparent justify-between"
           >
             <p class="text-slate-900 dark:text-slate-100 d">
@@ -439,7 +439,7 @@ useHead({
 });
 
 //for controlling the drop down nav
-const show = ref(true);
+const show = ref(false);
 
 const show2 = ref(false);
 
