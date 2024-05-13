@@ -1,16 +1,16 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
     <section class="h-svh">
-      <main class="md:mt-5 md:px-8 relative h-full -mt-2">
+      <main class="md:mt-9 md:px-8 relative h-full -mt-4">
         <!-- div with just image -->
 
         <div
-          class="h-[50em] md:h-[35em] md:rounded-xl w-[100%] md:w-[95%] transit"
+          class="h-[50em] md:h-[35em] md:rounded-xl w-[100%] md:w-[100%] transit"
           :style="`background: linear-gradient(
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-         url(https://ipfs.io/ipfs/QmRRPWG96cmgTn2qSzjwr2qvfNEuhunv6FNeMFGa9bx6mQ);
+         url(https://solanart.io/_next/image?url=https%3A%2F%2Fapi-v2.solanart.io%2Fcdn%2F500%2Fhttps%3A%2F%2Farweave.net%2Fjm6wD4dL6h-ngCdATOmufSbaYLXsAzCseyOveXnkYk8&w=1920&q=75);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -30,7 +30,7 @@
                 <br />cost
               </p>
               <p
-                class="dark:text-slate-100 text-slate-900 font-mono font-semibold md:text-2xl my-5 md:my-10"
+                class="dark:text-slate-100 text-slate-900 md:text-2xl my-5 md:my-10"
               >
                 Buy or sell NFTs and save in fees. The lowest-fee marketplace on
                 Solana.
@@ -73,9 +73,9 @@
                 background-repeat: no-repeat;`"
             >
               <img
-                src="https://ipfs.io/ipfs/QmRRPWG96cmgTn2qSzjwr2qvfNEuhunv6FNeMFGa9bx6mQ"
+                src="https://solanart.io/_next/image?url=https%3A%2F%2Fapi-v2.solanart.io%2Fcdn%2F500%2Fhttps%3A%2F%2Farweave.net%2Fjm6wD4dL6h-ngCdATOmufSbaYLXsAzCseyOveXnkYk8&w=1920&q=75"
                 alt=""
-                class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit"
+                class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center"
               />
               <p class="text-green-400 text-left mt-2">
                 Solaan Monkey Business
@@ -89,6 +89,8 @@
         </div>
       </main>
     </section>
+
+    <section class="h-screen bg-white w-full"></section>
   </div>
 </template>
 
