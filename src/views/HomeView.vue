@@ -10,7 +10,7 @@
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-         url(https://solanart.io/_next/image?url=https%3A%2F%2Fapi-v2.solanart.io%2Fcdn%2F500%2Fhttps%3A%2F%2Farweave.net%2Fjm6wD4dL6h-ngCdATOmufSbaYLXsAzCseyOveXnkYk8&w=1920&q=75);
+         url(https://i.seadn.io/gcs/files/4f627345f3a6a7718d447fd148052ee1.png?w=500&auto=format);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -73,7 +73,7 @@
                 background-repeat: no-repeat;`"
             >
               <img
-                src="https://solanart.io/_next/image?url=https%3A%2F%2Fapi-v2.solanart.io%2Fcdn%2F500%2Fhttps%3A%2F%2Farweave.net%2Fjm6wD4dL6h-ngCdATOmufSbaYLXsAzCseyOveXnkYk8&w=1920&q=75"
+                src="https://i.seadn.io/gcs/files/4f627345f3a6a7718d447fd148052ee1.png?w=500&auto=format"
                 alt=""
                 class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center"
               />

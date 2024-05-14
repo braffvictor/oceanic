@@ -38,7 +38,7 @@
       <div class="w-full ml-8 hidden md:block">
         <input
           type="text"
-          placeholder="Search Collection, Nft, User..."
+          placeholder="Search Collection, Nft..."
           class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-6/12 h-9 justify-self-start inline-block align-start rounded-3xl indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
         />
       </div>
@@ -49,9 +49,19 @@
           :key="text.title"
           class="p-2 px-3 dark:text-slate-200 dark:hover:text-green-400 hover:text-green-500 transit rounded-lg md:block hidden text-slate-900 relative group"
         >
-          <p class="block min-w-24">{{ text.title }}</p>
           <div
-            class="absolute bg-green-400 scale-x-0 group-hover:scale-x-100 transition-all duration-3 00 ease-in-out text-slate-900 dark:text-slate-100 dark:bg-green-500 rounded-xl shadow-sm p-4 flex flex-col divide-y divide-opacity-10 dark:divide-opacity-20 divide-slate-800 dark:divide-slate-100"
+            class="block flex w-auto items-center"
+            @click="text.to ? $router.push(text.to) : () => {}"
+          >
+            <p class="w-24">{{ text.title }}</p>
+            <svg-comp
+              v-if="text.children"
+              icon="M7 10L12 15L17 10"
+              class="transit group-hover:!stroke-green-400"
+            />
+          </div>
+          <div
+            class="absolute bg-green-400 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out text-slate-900 dark:text-slate-100 dark:bg-green-500 rounded-xl shadow-sm p-4 flex flex-col divide-y divide-opacity-10 dark:divide-opacity-20 divide-slate-800 dark:divide-slate-100"
             v-if="text.children"
           >
             <router-link
@@ -117,7 +127,7 @@
 
     <!--todo top navigation drawer -->
     <div
-      class="w-[100vw] fixed z-30 top-0 border-b transition-all ease-in-out duration-1000 !overflow-hidden backdrop-blur-md transit"
+      class="w-[100vw] fixed z-30 top-0 border-b transition-all ease-linear duration-1000 !overflow-hidden backdrop-blur-md transit"
       :class="[
         show ? 'min-h-[58%] md:min-h-[70%] h-auto pb-3' : 'h-0',
         themeState == 'light' || themeState == null
@@ -127,7 +137,7 @@
     >
       <!-- top navbar section -->
       <nav
-        class="p-4 md:px-8 bg-red flex items-center justify-between border-b w-full"
+        class="px-4 py-3 md:px-8 bg-red flex items-center justify-between border-b w-full"
         :class="
           themeState == 'light' || themeState == null
             ? 'bg-white border-b-gray-200'
@@ -191,15 +201,15 @@
       <!-- content in navigation drawer -->
       <div class="mx-5 my-4">
         <main
-          class="group p-4 rounded-md dark:active:bg-slate-900 transit"
+          class="group p-4 rounded-md active:bg-slate-100 dark:active:bg-slate-900 transit"
           v-for="links in dropLinks"
           :key="links.title"
         >
           <div
-            @click="show2 = !show2"
             class="flex transit items-center bg-transparent justify-between"
+            @click="links.to ? closeMenu(links.to) : () => {}"
           >
-            <p class="text-slate-900 dark:text-slate-100 d">
+            <p class="text-slate-900 dark:text-slate-100">
               {{ links.title }}
             </p>
             <p v-if="links.children">
@@ -213,13 +223,14 @@
           <!-- children -->
           <router-link
             class="block mt-2 h-0 opacity-0 group-hover:opacity-100 scale-y-0 group-hover:scale-y-100 group-hover:h-full transition-transform ease-in-out duration-300"
-            v-if="links.children && show2"
+            v-if="links.children"
             to="/"
           >
             <div
               class="flex items-center my-2"
               v-for="link in links.children"
               :key="link.name"
+              @click="show = false"
             >
               <p class="ml-2">
                 <svg
@@ -301,6 +312,7 @@
 
     <!-- footer section -->
     <section
+      @click="show = false"
       class="bg-gradient-to-t from-green-400 to-white dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
     >
       <main class="px-5 py-5 md:px-8">
@@ -365,15 +377,30 @@
           "
         ></div>
         <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-2 opacity-60 my-3 transit"
+          class="grid grid-cols-2 md:grid-cols-4 gap-2 opacity-90 my-3 transit"
         >
-          <d-button
-            type="outlined"
-            class="rounded-md border-slate-700 !text-slate-700 dark:border-slate-200 dark:!text-slate-200"
-            v-for="link in ['Collection', 'Explore', 'About', 'Contact']"
-            :key="link"
-            >{{ link }}</d-button
+          <div
+            class="bg-transparent text-center mx-auto"
+            v-for="links in dropLinks"
+            :key="links.title"
           >
+            <p
+              class="dark:text-slate-100 text-slate-900 font-semibold text-lg md:text-xl"
+              @click="links.to ? $router.push(links.to) : () => {}"
+              :class="links.to ? 'cursor-pointer' : null"
+            >
+              {{ links.title }}
+            </p>
+            <div v-if="links.children">
+              <d-button
+                v-for="link in links.children"
+                :key="link.name"
+                type="filled"
+                class="rounded-sm block w-full font-light !transition-all !duration-200 !ease-in-out hover:font-semibold"
+                >{{ link.name }}</d-button
+              >
+            </div>
+          </div>
         </div>
         <!-- divider -->
         <div
@@ -384,6 +411,20 @@
               : 'darkT border-b-slate-100'
           "
         ></div>
+
+        <div
+          class="md:flex justify-between text-center items-center mt-3 dark:text-slate-100 text-slate-900 text-xs"
+        >
+          <p>© 2018 - 2024 Ozone Networks, Inc</p>
+          <p>
+            <d-button type="filled" class="bg-transparent"
+              >Privacy Policy</d-button
+            >
+            <d-button type="filled" class="bg-transparent"
+              >Terms of Service</d-button
+            >
+          </p>
+        </div>
       </main>
     </section>
     <!-- todo the translation widget -->
@@ -394,6 +435,7 @@
 <script setup>
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
+import router from "@/router";
 import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref } from "vue";
 
@@ -441,7 +483,11 @@ useHead({
 //for controlling the drop down nav
 const show = ref(false);
 
-const show2 = ref(false);
+//chaning the route....and closing the nav bar
+function closeMenu(to) {
+  router.push(to);
+  show.value = false;
+}
 
 // const scrollPosition = ref("No Scrolls");
 // window.addEventListener("scroll", () => {
@@ -500,9 +546,11 @@ const dropLinks = computed(() => {
     },
     {
       title: "About Us",
+      to: "/about",
     },
     {
       title: "Contact Us",
+      to: "/about",
     },
   ];
 });
