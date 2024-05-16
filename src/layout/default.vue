@@ -137,7 +137,7 @@
     >
       <!-- top navbar section -->
       <nav
-        class="px-4 py-3 md:px-8 bg-red flex items-center justify-between border-b w-full"
+        class="px-4 py-3 md:px-8 bg-red flex items-center justify-between border-b w-full transit"
         :class="
           themeState == 'light' || themeState == null
             ? 'bg-white border-b-gray-200'
@@ -313,7 +313,7 @@
     <!-- footer section -->
     <section
       @click="show = false"
-      class="bg-gradient-to-t from-green-400 to-white dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
+      class="bg-gradient-to-t transit from-green-400 to-white dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
     >
       <main class="px-5 py-5 md:px-8">
         <div class="grid md:grid-cols-2 gap-y-4">
@@ -332,12 +332,12 @@
                 v-if="themeState != 'light' && themeState != null"
               />
               <p
-                class="inline text-slate-800 dark:text-slate-50 md:text-3xl text-2xl font-semibold"
+                class="inline text-slate-800 dark:text-slate-50 md:text-3xl text-2xl font-semibold transit"
               >
                 Oceanic
               </p>
             </div>
-            <p class="text-slate-900 dark:text-slate-100">
+            <p class="text-slate-900 dark:text-slate-100 transit">
               The first marketplace on Solana to buy, trade and sell
               non-fungible tokens (NFTs). Chat on chain with buyers/sellers,
               launch a project with our launchpad or just explore.
@@ -345,11 +345,11 @@
           </div>
           <div>
             <p
-              class="font-semibold text-slate-900 text-xl mb-3 md:text-3xl dark:text-slate-100"
+              class="font-semibold text-slate-900 text-xl mb-3 md:text-3xl dark:text-slate-100 transit"
             >
               Stay In the Loop
             </p>
-            <p class="text-slate-900 dark:text-slate-100">
+            <p class="text-slate-900 dark:text-slate-100 transit">
               Join our mailing list to stay in the loop with our newest feature
               releases, NFT drops, and tips and tricks for navigating solana.
             </p>
@@ -440,31 +440,31 @@ import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref } from "vue";
 
 onMounted(() => {
-  window.gtranslateSettings = {
-    default_language: "en",
-    detect_browser_language: true,
-    languages: [
-      "en",
-      "fr",
-      "de",
-      "it",
-      "es",
-      "ko",
-      "ps",
-      "sd",
-      "fy",
-      "xh",
-      "mn",
-      "bs",
-      "sn",
-      "my",
-      "zh-CN",
-      "zh-TW",
-      "ru",
-      "hu",
-    ],
-    wrapper_selector: ".gtranslate_wrapper",
-  };
+  // window.gtranslateSettings = {
+  //   default_language: "en",
+  //   detect_browser_language: true,
+  //   languages: [
+  //     "en",
+  //     "fr",
+  //     "de",
+  //     "it",
+  //     "es",
+  //     "ko",
+  //     "ps",
+  //     "sd",
+  //     "fy",
+  //     "xh",
+  //     "mn",
+  //     "bs",
+  //     "sn",
+  //     "my",
+  //     "zh-CN",
+  //     "zh-TW",
+  //     "ru",
+  //     "hu",
+  //   ],
+  //   wrapper_selector: ".gtranslate_wrapper",
+  // };
 });
 
 //for the head properties
@@ -474,9 +474,10 @@ useHead({
     // {
     //   src: "//code.tidio.co/zccgj8k6v1twa1uydrnxydegil8o2rlv.js",
     // },
-    {
-      src: "https://cdn.gtranslate.net/widgets/latest/float.js",
-    },
+    // for translation
+    // {
+    //   src: "https://cdn.gtranslate.net/widgets/latest/float.js",
+    // },
   ],
 });
 

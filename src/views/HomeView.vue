@@ -90,15 +90,22 @@
       </main>
     </section>
 
-    <section class="h-screen bg-white w-full"></section>
+    <!-- for the large table -->
+    <big-tab />
   </div>
 </template>
 
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
+import bigTab from "@/components/tables/bigTab.vue";
 import svgComp from "@/components/svgComp.vue";
 // @ is an alias to /src
-import { inject, ref } from "vue";
+import { inject, ref, watch } from "vue";
+
+const value = ref("1");
+watch(value, () => {
+  console.log(value.value);
+});
 
 const theme = inject("theme");
 
