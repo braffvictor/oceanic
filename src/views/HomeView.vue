@@ -92,6 +92,8 @@
 
     <!-- for the large table -->
     <big-tab />
+
+    <div class="h-screen"></div>
   </div>
 </template>
 

@@ -1,26 +1,39 @@
 <template>
   <section
-    class="h-screen bg-white dark:bg-slate-900 pt-5 w-full md:px-8 mt-2 transit"
+    class="h-screen bg-white dark:bg-slate-900 pt-5 pb-32 w-full md:px-8 mt-20 px-4 transit"
   >
-    <p class="font-bold text-slate-500 text-xl">
-      Trending Collection
-      <label
-        for="timeframe"
-        class="border-2 border-green-400 dark:border-green-500 rounded-lg overflow-hidden p-1"
-      >
-        <select
-          name="timeframe"
-          class="text-base cursor-pointer font-medium outline-none dark:bg-slate-900 transit"
-          id=""
-          v-model="value"
+    <div class="flex items-center gap-x-5">
+      <p class="dark:text-slate-100 inline">Trending Collection</p>
+
+      <div class="inline ml-2 relative group">
+        <div
+          class="border flex cursor-pointer gap-x-7 px-1 justify-between w-40 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-green-200 hover:border-green-400 dark:hover:bg-green-500 dark:hover:border-green-300 transit"
         >
-          <option value="1">Last 5 Minutes</option>
-          <option value="2">Last 1 Hour</option>
-          <option value="3">Last 24 Hours</option>
-        </select>
-      </label>
-    </p>
-    <div class="flex gap-16 overflow-auto">
+          <p class="block select-none">{{ select }}</p>
+
+          <p>
+            <svg-comp
+              icon="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+              class="group-hover:rotate-90 transit"
+            />
+          </p>
+        </div>
+        <div
+          class="absolute flex flex-col divide-y w-full overflow-hidden shadow-xl rounded-2xl bg-slate-50 dark:bg-slate-800 transit hidden group-hover:block"
+        >
+          <p
+            v-for="chain in collectionChains"
+            :key="chain.name"
+            class="text-slate-900 px-3 py-1 dark:text-slate-100 hover:bg-green-200 cursor-pointer dark:hover:bg-green-500"
+            @click="chain.action"
+          >
+            {{ chain.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-4 overflow-auto">
       <table
         class="w-6/12 border-separate border-spacing-x-0 border-spacing-y-1.5 dark:text-slate-100 table-auto"
       >
@@ -32,47 +45,44 @@
             <th class="border-b">Volume</th>
           </tr>
         </thead>
-        <tbody class="rounded-2xl">
+        <tbody
+          class="rounded-2xl"
+          v-if="nftApiCollection && nftApiCollection.length > 0"
+        >
           <tr
             class="text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transit"
-            v-for="n in 5"
-            :key="n"
+            v-for="(nft, n) in nftApiCollection.slice(0, 5)"
+            :key="nft.contracts[0].contract_address"
           >
-            <td class="p-4 rounded-l-xl">{{ n }}</td>
+            <td class="p-4 rounded-l-xl">{{ n + 1 }}</td>
             <td class="py-4">
               <div class="flex items-center justify-start gap-x-3">
                 <img
-                  class="block object-contain max-w-16 rounded-2xl"
-                  src="https://i.seadn.io/gcs/files/9b9979a9e40659c788d66fd2ed2749e3.png?auto=format&dpr=1&w=136&h=136&fr=1"
+                  class="block object-contain max-w-16 rounded-xl"
+                  :src="nft.image_url"
                   alt=""
                 />
-                <p class="font-bold text-slate-900 dark:text-slate-100">
-                  Kanpai Pandas<img
+                <p class="font-bold text-slate-900 dark:text-slate-100 flex">
+                  {{ nft.name }}
+                  <img
                     src="@/assets/verified.svg"
                     alt="tick"
-                    class="max-w-5 inline"
+                    class="max-w-5 block pl-1"
                   />
                 </p>
               </div>
             </td>
             <td>
-              <p class="font-bold text-slate-900 dark:text-slate-100">
-                0.97ETH
+              <p class="font-bold text-slate-900 px-3 dark:text-slate-100">
+                {{ nft.stats.floor_price }}{{ nft.stats.floor_price_symbol }}
               </p>
             </td>
             <td
               class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100"
             >
-              178ETH
+              {{ nft.stats.total_volume.toString().slice(0, 7) }}
             </td>
           </tr>
-
-          <!-- <tr class="text-center">
-            <td class="border">Carter</td>
-            <td class="border">34</td>
-            <td class="border">carter@yahoo.com</td>
-            <td class="border">21/21/2012</td>
-          </tr> -->
         </tbody>
       </table>
       <table
@@ -86,47 +96,41 @@
             <th class="border-b">Volume</th>
           </tr>
         </thead>
-        <tbody class="rounded-2xl">
+        <tbody class="rounded-2xl" v-if="nftApiCollection.length > 0">
           <tr
             class="text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transit"
-            v-for="n in 5"
-            :key="n"
+            v-for="(nft, n) in nftApiCollection.slice(5, 10)"
+            :key="nft.contracts[0].contract_address"
           >
-            <td class="p-4 rounded-l-xl">{{ n }}</td>
+            <td class="p-4 rounded-l-xl">{{ n + 6 }}</td>
             <td class="py-4">
               <div class="flex items-center justify-start gap-x-3">
                 <img
-                  class="block object-contain max-w-16 rounded-2xl"
-                  src="https://i.seadn.io/gcs/files/9b9979a9e40659c788d66fd2ed2749e3.png?auto=format&dpr=1&w=136&h=136&fr=1"
+                  class="block object-contain max-w-16 rounded-xl"
+                  :src="nft.image_url"
                   alt=""
                 />
-                <p class="font-bold text-slate-900 dark:text-slate-100">
-                  Kanpai Pandas<img
+                <p class="font-bold text-slate-900 dark:text-slate-100 flex">
+                  {{ nft.name }}
+                  <img
                     src="@/assets/verified.svg"
                     alt="tick"
-                    class="max-w-5 inline"
+                    class="max-w-5 block pl-1"
                   />
                 </p>
               </div>
             </td>
             <td>
-              <p class="font-bold text-slate-900 dark:text-slate-100">
-                0.97ETH
+              <p class="font-bold text-slate-900 px-3 dark:text-slate-100">
+                {{ nft.stats.floor_price }}{{ nft.stats.floor_price_symbol }}
               </p>
             </td>
             <td
               class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100"
             >
-              178ETH
+              {{ nft.stats.total_volume.toString().slice(0, 7) }}
             </td>
           </tr>
-
-          <!-- <tr class="text-center">
-            <td class="border">Carter</td>
-            <td class="border">34</td>
-            <td class="border">carter@yahoo.com</td>
-            <td class="border">21/21/2012</td>
-          </tr> -->
         </tbody>
       </table>
     </div>
@@ -134,9 +138,70 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import svgComp from "../svgComp.vue";
+import { computed, onMounted, ref } from "vue";
 
-const value = ref("1");
+const nftApiCollection = ref([]);
+
+const select = ref("Blockchain");
+
+const getNftCollection = (chain) => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
+    },
+  };
+
+  fetch(
+    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=25`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      // console.log(response)
+      nftApiCollection.value = response.results;
+      console.log(nftApiCollection.value);
+    })
+    .catch((err) => console.error(err));
+};
+onMounted(() => {
+  getNftCollection("eth-main");
+});
+
+const collectionChains = computed(() => {
+  return [
+    {
+      name: "eth-main",
+      action: () => {
+        getNftCollection("eth-main");
+        select.value = "eth-main";
+      },
+    },
+    {
+      name: "arbitrum-main",
+      action: () => {
+        getNftCollection("arbitrum-main");
+        select.value = "arbitrum-main";
+      },
+    },
+    {
+      name: "optimism-main",
+      action: () => {
+        getNftCollection("optimism-main");
+        select.value = "optimism-main";
+      },
+    },
+    {
+      name: "poly-main",
+      action: () => {
+        getNftCollection("poly-main");
+        select.value = "poly-main";
+      },
+    },
+  ];
+});
 </script>
 
 <style></style>
