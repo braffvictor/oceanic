@@ -10,12 +10,15 @@
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-         url(https://i.seadn.io/gcs/files/4f627345f3a6a7718d447fd148052ee1.png?w=500&auto=format);
+         url(${nftApiCollection[0].image_url});
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         transition: all linear 300ms`"
-        ></div>
+          v-if="nftApiCollection && nftApiCollection.length > 0"
+        >
+          <!-- url(https://i.seadn.io/gcs/files/4f627345f3a6a7718d447fd148052ee1.png?w=500&auto=format);-->
+        </div>
 
         <div
           class="h-full md:rounded-xl p-4 px-8 py-16 md:py-8 md:px-12 absolute top-0 text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
@@ -73,16 +76,23 @@
                 background-repeat: no-repeat;`"
             >
               <img
-                src="https://i.seadn.io/gcs/files/4f627345f3a6a7718d447fd148052ee1.png?w=500&auto=format"
+                :src="nftApiCollection[0].image_url"
+                v-if="nftApiCollection && nftApiCollection.length > 0"
                 alt=""
                 class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center"
               />
-              <p class="text-green-400 text-left mt-2">
-                Solaan Monkey Business
+              <p
+                class="text-green-400 text-left mt-2"
+                v-if="nftApiCollection && nftApiCollection.length > 0"
+              >
+                {{ nftApiCollection[0].name }}
               </p>
-              <div class="flex justify-between">
-                <p>SMB #1695</p>
-                <p>380</p>
+              <div
+                class="flex justify-between"
+                v-if="nftApiCollection && nftApiCollection.length > 0"
+              >
+                <p>{{ nftApiCollection[0].key }}</p>
+                <p>{{ nftApiCollection[0].stats.num_owners }}</p>
               </div>
             </div>
           </div>
@@ -102,7 +112,7 @@ import DButton from "@/components/utils/DButton.vue";
 import bigTab from "@/components/tables/bigTab.vue";
 import svgComp from "@/components/svgComp.vue";
 // @ is an alias to /src
-import { inject, ref, watch } from "vue";
+import { inject, onMounted, ref, watch } from "vue";
 
 const value = ref("1");
 watch(value, () => {
@@ -119,6 +129,34 @@ const lightShade2 = ref(
   "rgba(255, 255, 255, 0.216), rgba(255, 255, 255, 0.216)"
 );
 const darkShade2 = ref("rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)");
+
+// for nft
+const nftApiCollection = ref([]);
+
+const getNftCollection = (chain) => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
+    },
+  };
+
+  fetch(
+    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=25`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      // console.log(response)
+      nftApiCollection.value = response.results;
+      console.log(nftApiCollection.value);
+    })
+    .catch((err) => console.error(err));
+};
+onMounted(() => {
+  getNftCollection("eth-main");
+});
 </script>
 
 <style>

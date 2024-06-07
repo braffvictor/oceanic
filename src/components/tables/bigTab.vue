@@ -3,34 +3,10 @@
     class="h-screen bg-white dark:bg-slate-900 pt-5 pb-32 w-full md:px-8 mt-20 px-4 transit"
   >
     <div class="flex items-center gap-x-5">
-      <p class="dark:text-slate-100 inline">Trending Collection</p>
+      <p class="dark:text-slate-100 inline">NFTs Collection</p>
 
-      <div class="inline ml-2 relative group">
-        <div
-          class="border flex cursor-pointer gap-x-7 px-1 justify-between w-40 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-green-200 hover:border-green-400 dark:hover:bg-green-500 dark:hover:border-green-300 transit"
-        >
-          <p class="block select-none">{{ select }}</p>
-
-          <p>
-            <svg-comp
-              icon="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
-              class="group-hover:rotate-90 transit"
-            />
-          </p>
-        </div>
-        <div
-          class="absolute flex flex-col divide-y w-full overflow-hidden shadow-xl rounded-2xl bg-slate-50 dark:bg-slate-800 transit hidden group-hover:block"
-        >
-          <p
-            v-for="chain in collectionChains"
-            :key="chain.name"
-            class="text-slate-900 px-3 py-1 dark:text-slate-100 hover:bg-green-200 cursor-pointer dark:hover:bg-green-500"
-            @click="chain.action"
-          >
-            {{ chain.name }}
-          </p>
-        </div>
-      </div>
+      <!-- drop down menu component -->
+      <d-drop-down :title="select" :children="collectionChains" />
     </div>
 
     <div class="flex gap-4 overflow-auto">
@@ -107,11 +83,11 @@
               <div class="flex items-center justify-start gap-x-3">
                 <img
                   class="block object-contain max-w-16 rounded-xl"
-                  :src="nft.image_url"
+                  :src="nft.large_image_url"
                   alt=""
                 />
                 <p class="font-bold text-slate-900 dark:text-slate-100 flex">
-                  {{ nft.name }}
+                  {{ nft.name.slice(0, 7) }}
                   <img
                     src="@/assets/verified.svg"
                     alt="tick"
@@ -138,8 +114,8 @@
 </template>
 
 <script setup>
-import svgComp from "../svgComp.vue";
 import { computed, onMounted, ref } from "vue";
+import DDropDown from "../utils/DDropDown.vue";
 
 const nftApiCollection = ref([]);
 
