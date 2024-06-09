@@ -19,7 +19,7 @@
         v-for="child in children"
         :key="child.name"
         class="text-slate-900 px-3 py-1 dark:text-slate-100 hover:bg-green-200 cursor-pointer dark:hover:bg-green-500"
-        @click="child.action ? child.action : () => {}"
+        @click="child.action ? child.action() : () => {}"
       >
         {{ child.name }}
       </p>
