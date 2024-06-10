@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
     <section class="h-svh">
-      <main class="md:mt-9 md:px-8 relative h-full -mt-4">
+      <main class="md:px-8 relative h-full -mt-4">
         <!-- div with just image -->
 
         <div
@@ -85,13 +85,23 @@
                 class="text-green-400 text-left mt-2"
                 v-if="nftApiCollection && nftApiCollection.length > 0"
               >
-                {{ nftApiCollection[0].name }}
+                {{
+                  nftApiCollection[0].name.length > 15
+                    ? nftApiCollection[0].name.slice(0, 15) + "..."
+                    : nftApiCollection[0].name
+                }}
               </p>
               <div
                 class="flex justify-between"
                 v-if="nftApiCollection && nftApiCollection.length > 0"
               >
-                <p>{{ nftApiCollection[0].key }}</p>
+                <p>
+                  {{
+                    nftApiCollection[0].key.length > 15
+                      ? nftApiCollection[0].key.slice(0, 15) + "..."
+                      : nftApiCollection[0].key
+                  }}
+                </p>
                 <p>{{ nftApiCollection[0].stats.num_owners }}</p>
               </div>
             </div>
@@ -103,7 +113,63 @@
     <!-- for the large table -->
     <big-tab />
 
-    <div class="h-screen"></div>
+    <!-- nft cards collection swipes -->
+    <section class="h-screen md:mt-12 mt-8">
+      <main class="px-4 md:px-8">
+        <p class="font-bold text-lg md:text-xl dark:text-slate-100">
+          Notable Collection
+        </p>
+
+        <!-- nft cards -->
+        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+          <template #cards>
+            <swiper-slide v-for="nft in nftApiCollection" :key="nft.name">
+              <div class="">
+                <div
+                  class="rounded-2xl hover:-translate-y-2 group shadow-lg min-w-52 min-h-72 max-w-52 max-h-72 bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
+                >
+                  <div class="min-h-36 max-h-36 w-full overflow-hidden">
+                    <img
+                      :src="nft.image_url"
+                      alt=""
+                      class="object-fit group-hover:scale-110 transit"
+                    />
+                  </div>
+                  <div class="px-3 mt-3">
+                    <p
+                      class="font-bold text-slate-900 dark:text-slate-100 flex"
+                    >
+                      {{
+                        nft.name.length > 14
+                          ? nft.name.slice(0, 14) + "..."
+                          : nft.name
+                      }}
+                      <img
+                        src="@/assets/verified.svg"
+                        alt="tick"
+                        class="max-w-5 block pl-1"
+                      />
+                    </p>
+                    <div
+                      class="flex justify-between text-slate-900 font-bold dark:text-slate-100 mt-5"
+                    >
+                      <div>
+                        <p class="text-gray-400 font-light">Floor</p>
+                        <p>0.004 ETH</p>
+                      </div>
+                      <div>
+                        <p class="text-gray-400 font-light">Volume</p>
+                        <p>54 ETH</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+          </template>
+        </swiping-cards>
+      </main>
+    </section>
   </div>
 </template>
 
@@ -111,8 +177,10 @@
 import DButton from "@/components/utils/DButton.vue";
 import bigTab from "@/components/tables/bigTab.vue";
 import svgComp from "@/components/svgComp.vue";
+
 // @ is an alias to /src
 import { inject, onMounted, ref, watch } from "vue";
+import SwipingCards from "@/components/swipingCards.vue";
 
 const value = ref("1");
 watch(value, () => {
@@ -150,13 +218,27 @@ const getNftCollection = (chain) => {
     .then((response) => {
       // console.log(response)
       nftApiCollection.value = response.results;
-      console.log(nftApiCollection.value);
     })
     .catch((err) => console.error(err));
 };
 onMounted(() => {
   getNftCollection("eth-main");
 });
+</script>
+
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import Swiper styles
+import "swiper/css";
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+};
 </script>
 
 <style>

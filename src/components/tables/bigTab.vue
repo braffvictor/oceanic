@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-screen bg-white dark:bg-slate-900 pt-5 pb-32 w-full md:px-8 mt-20 px-4 transit"
+    class="h-auto min-h-96 bg-white dark:bg-slate-900 pt-5 w-full md:px-8 mt-20 px-4 transit"
   >
     <div class="flex items-center gap-x-5">
       <p class="dark:text-slate-100 inline">NFTs Collection</p>
@@ -138,7 +138,6 @@ const getNftCollection = (chain) => {
     .then((response) => {
       // console.log(response)
       nftApiCollection.value = response.results;
-      console.log(nftApiCollection.value);
     })
     .catch((err) => console.error(err));
 };
