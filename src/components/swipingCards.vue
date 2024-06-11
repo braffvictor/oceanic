@@ -15,7 +15,7 @@
     :allow-slide-prev="true"
     @breakpoint="screenSizing"
   >
-    <slot name="cards"></slot>
+    <slot name="cards" class="cursor-grab"></slot>
   </swiper>
 </template>
 <script>

@@ -42,14 +42,13 @@
               <!-- login and registration button -->
               <div class="flex mt-4 gap-x-2">
                 <d-button
-                  to="/about"
                   type="outlined"
-                  class="border-slate-700 active:!bg-slate-50 text-center dark:border-slate-100 px-4 !text-slate-700 dark:!text-slate-100 hover:!bg-slate-50 dark:hover:!bg-slate-900 !bg-green-200 hover:scale-105 hover:-translate-y-2"
+                  class="border-green-400 !text-green-400 active:!bg-green-300 dark:active:!bg-green-400"
                   >Login</d-button
                 >
                 <d-button
                   type="elevated"
-                  class="bg-green-400 dark:bg-green-500 shadow-green-300 hover:scale-105 hover:-translate-y-2 dark:shadow-green-400 active:!bg-green-300"
+                  class="shadow-green-400 bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
                 />
               </div>
             </div>
@@ -79,7 +78,7 @@
                 :src="nftApiCollection[0].image_url"
                 v-if="nftApiCollection && nftApiCollection.length > 0"
                 alt=""
-                class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center"
+                class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center min-h-60 max-h-60 md:min-h-80 md:max-h-80"
               />
               <p
                 class="text-green-400 text-left mt-2"
@@ -272,6 +271,44 @@
         </swiping-cards>
       </main>
     </section>
+
+    <section class="h-auto mt-5 p-7 md:p-12">
+      <main
+        class="grid md:grid-cols-2 items-center bg-slate-50 dark:bg-slate-800 transit rounded-2xl md:p-12 p-8"
+      >
+        <div class="w-full">
+          <p
+            class="shining md:uppercase text-3xl md:text-4xl text-left font-extrabold"
+          >
+            Create, Sell & Collect NFTs At Oceanic
+          </p>
+          <p class="text-gray-400 mt-5">
+            Created with the collaboration of over 60 of the world's best Nuron
+            Artists.
+          </p>
+
+          <div class="flex mt-8 gap-x-5 justify-center md:justify-start">
+            <d-button
+              type="outlined"
+              class="border-green-400 !text-green-400 active:!bg-green-300 dark:active:!bg-green-400"
+              >Login</d-button
+            >
+            <d-button
+              type="elevated"
+              class="shadow-green-400 bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
+            />
+          </div>
+        </div>
+        <div class="rounded-xl text-center mx-auto mt-8 md:mt-0">
+          <img
+            src="https://solanart.io/solanart-logo-black.svg"
+            alt=""
+            width="300"
+            class="animate__animated animate__tada animate__delay-5s animate__repeat-3 animate__slow"
+          />
+        </div>
+      </main>
+    </section>
   </div>
 </template>
 
@@ -280,6 +317,7 @@ import DButton from "@/components/utils/DButton.vue";
 import homeCard from "@/components/cards/homeCard.vue";
 import bigTab from "@/components/tables/bigTab.vue";
 import svgComp from "@/components/svgComp.vue";
+import "animate.css";
 
 // @ is an alias to /src
 import { computed, inject, onMounted, ref, watch } from "vue";
