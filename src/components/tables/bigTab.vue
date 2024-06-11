@@ -56,7 +56,11 @@
             <td
               class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100"
             >
-              {{ nft.stats.total_volume.toString().slice(0, 7) }}
+              {{
+                nft.stats.total_volume
+                  ? nft.stats.total_volume.toString().slice(0, 7)
+                  : "0"
+              }}
             </td>
           </tr>
         </tbody>

@@ -28,7 +28,7 @@
         />
         <!-- Site name -->
         <p
-          class="inline-block text-slate-800 dark:text-slate-50 text-xl font-semibold"
+          class="inline-block text-slate-800 dark:text-slate-50 text-xl font-semibold transit"
         >
           Oceanic
         </p>
