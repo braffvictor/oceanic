@@ -265,7 +265,7 @@
           <template #cards>
             <swiper-slide v-for="learn in learnNft" :key="learn.name">
               <!-- for home nft cards -->
-              <home-card :nft="learn" />
+              <home-card :nft="learn" :learn="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -296,6 +296,7 @@
             <d-button
               type="elevated"
               class="shadow-green-400 bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
+              to="/collection/red"
             />
           </div>
         </div>
