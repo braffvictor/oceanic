@@ -83,22 +83,23 @@
         >
         <!-- the search item bar -->
         <div
-          class="mt-2 p-2 flex bg-gray-200 md:w-2/3 dark:text-slate-100 text-slate-900 overflow-hidden dark:bg-slate-700 dark:caret-slate-100 h-11 justify-self-start inline-block align-start rounded-2xl indent-5 hover:ring-green-400 hover:ring-1 outline-none transit"
+          class="mt-2 p-2 flex bg-gray-200 md:w-2/3 dark:text-slate-100 text-slate-900 overflow-hidden dark:bg-slate-700 dark:caret-slate-100 h-11 justify-self-start inline-block align-start rounded-2xl indent-5 has-[:focus]:ring-green-400 has-[:focus]:ring-1 outline-none transit"
         >
           <SvgComp
             icon="M10.5,4 C6.91015,4 4,6.91015 4,10.5 C4,14.0899 6.91015,17 10.5,17 C14.0899,17 17,14.0899 17,10.5 C17,6.91015 14.0899,4 10.5,4 Z M2,10.5 C2,5.80558 5.80558,2 10.5,2 C15.1944,2 19,5.80558 19,10.5 C19,12.4869 18.3183,14.3145 17.176,15.7618 L20.8284,19.4142 C21.2189,19.8047 21.2189,20.4379 20.8284,20.8284 C20.4379,21.2189 19.8047,21.2189 19.4142,20.8284 L15.7618,17.176 C14.3145,18.3183 12.4869,19 10.5,19 C5.80558,19 2,15.1944 2,10.5 Z M9.5,7 C9.5,6.44772 9.94772,6 10.5,6 C12.9853,6 15,8.01472 15,10.5 C15,11.0523 14.5523,11.5 14,11.5 C13.4477,11.5 13,11.0523 13,10.5 C13,9.11929 11.8807,8 10.5,8 C9.94772,8 9.5,7.55228 9.5,7 Z"
           />
           <input
             type="text"
+            v-model="searchName"
             placeholder="Search Nft..."
             class="w-full bg-transparent outline-none ml-2"
           />
         </div>
 
-        <div>
+        <div class="text-center mx-auto flex justify-center">
           <div
-            class="grid grid-cols-2 md:grid-cols-5 mt-7 gap-3"
-            v-if="nftApiCollection.length > 0"
+            class="grid grid-cols-2 justify-center items-center md:grid-cols-5 mt-7 gap-6 text-center mx-auto"
+            v-if="collectionNfts.length > 0"
           >
             <HomeCard
               v-for="nft in collectionNfts.slice(0, 20)"
@@ -120,36 +121,9 @@ import DButton from "@/components/utils/DButton.vue";
 import { onMounted, ref } from "vue";
 
 const detailed = ref(false);
+const searchName = ref("");
 
-const nftApiCollection = ref([]);
-
-const getNftCollection = (chain) => {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
-    },
-  };
-
-  fetch(
-    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=25`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      // console.log(response)
-      nftApiCollection.value = response.results;
-      nftApiCollection.value.forEach((nft) => {
-        nft.action = "red";
-      });
-
-      // console.log(nftApiCollection.value);
-    })
-    .catch((err) => console.error(err));
-};
 onMounted(() => {
-  getNftCollection("eth-main");
   specificCollectionNfts();
 });
 const collectionNfts = ref([]);
@@ -175,6 +149,11 @@ const specificCollectionNfts = () => {
         };
       });
       // console.log(collectionNfts.value);
+      const filterCollection = collectionNfts.value.filter((nft) => {
+        return nft.name.includes("19947");
+      });
+
+      console.log(filterCollection);
     })
     .catch((err) => console.error(err));
 };
