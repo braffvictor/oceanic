@@ -51,10 +51,10 @@
       </div>
       <div
         v-if="nft && nft.action"
-        class="bg-green-400 p-1 pb-5 dark:bg-green-500 items-center w-full flex divide-x h-14 justify-around translate-y-24 md:translate-y-32 group-hover:md:translate-y-16 group-hover:translate-y-10 group-hover:h-14 overflow-hidden transit"
+        class="bg-green-400 p-1 pb-5 dark:bg-green-500 items-center w-full flex divide-x divide-slate-900 dark:divide-slate-100 h-14 justify-around translate-y-24 md:translate-y-32 group-hover:md:translate-y-16 group-hover:translate-y-10 group-hover:h-14 overflow-hidden transit"
       >
         <p
-          class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md"
+          class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full"
         >
           <!-- use for price data for deduct function -->
           <!-- {{ nft && nft.stats.floor_price

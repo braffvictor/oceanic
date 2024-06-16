@@ -99,10 +99,10 @@
         <div class="text-center mx-auto flex justify-center">
           <div
             class="grid grid-cols-2 justify-center items-center md:grid-cols-5 mt-7 gap-6 text-center mx-auto"
-            v-if="collectionNfts.length > 0"
+            v-if="filterCollection.length > 0"
           >
             <HomeCard
-              v-for="nft in collectionNfts.slice(0, 20)"
+              v-for="nft in filterCollection"
               :key="nft.name"
               :nft="nft"
               :card-size="'min-w-40 min-h-64 max-w-40 max-h-64 md:min-w-56 md:min-h-72 md:max-w-56 md:max-h-72'"
@@ -118,7 +118,7 @@
 import HomeCard from "@/components/cards/homeCard.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 const detailed = ref(false);
 const searchName = ref("");
@@ -127,6 +127,7 @@ onMounted(() => {
   specificCollectionNfts();
 });
 const collectionNfts = ref([]);
+const filterCollection = ref([]);
 const specificCollectionNfts = () => {
   const options = {
     method: "GET",
@@ -148,14 +149,19 @@ const specificCollectionNfts = () => {
           floor_price_symbol: "ETH",
         };
       });
-      // console.log(collectionNfts.value);
-      const filterCollection = collectionNfts.value.filter((nft) => {
-        return nft.name.includes("19947");
-      });
 
-      console.log(filterCollection);
+      filterCollection.value = collectionNfts.value;
     })
     .catch((err) => console.error(err));
+
+  watch(searchName, () => {
+    filterCollection.value = collectionNfts.value.filter((nft) => {
+      return (
+        nft.name.includes(searchName.value) ||
+        nft.name.toLowerCase().includes(searchName.value)
+      );
+    });
+  });
 };
 </script>
 
