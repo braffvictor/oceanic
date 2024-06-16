@@ -127,7 +127,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -148,7 +148,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -169,7 +169,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -189,7 +189,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -209,7 +209,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -230,7 +230,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -249,7 +249,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" />
+              <home-card :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -365,6 +365,7 @@ const getNftCollection = (chain) => {
 };
 onMounted(() => {
   getNftCollection("eth-main");
+  window.scrollTo(0, 0);
 });
 
 const learnNft = computed(() => {
@@ -399,7 +400,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/css";
-
 export default {
   components: {
     Swiper,

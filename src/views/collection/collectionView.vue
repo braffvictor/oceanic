@@ -1,25 +1,30 @@
 <template>
   <div class="transit">
     <section
-      class="flex items-end p-4 md:p-8 bg-[url('https://i.seadn.io/gae/WRcl2YH8E3_7884mcJ0DRN7STGqA8xZQKd-0MFmPftlxUR6i1xB9todMXRW2M6SIpXKAZ842UqKDm1UrkKG8nr7l9NjCkIw-GLQSFQ')] min-h-96 bg-no-repeat bg-center bg-cover -mt-20"
+      :class="`flex items-end p-4 md:p-8 min-h-96 -mt-20 `"
+      :style="`background-image : url(${
+        banner && banner
+      }); background-position: center; background-size : cover; background-repeat: no-repeat`"
     >
       <main class="w-full">
         <div class="flex flex-col md:flex-row md:justify-between">
           <div>
             <img
-              src="https://i.seadn.io/gae/_R4fuC4QGYd14-KwX2bD1wf-AWjDF2VMabfqWFJhIgiN2FnAUpnD5PLdJORrhQ8gly7KcjhQZZpuzYVPF7CDSzsqmDh97z84j2On?w=500&auto=format"
+              :src="image && image"
               class="rounded-xl min-w-24 max-w-24"
               alt=""
             />
             <p class="mt-3 md:mt-5 font-bold text-slate-100 text-2xl">
-              Mocaverse<img
+              {{ collectionHeader && collectionHeader.name
+              }}<img
                 src="@/assets/verified.svg"
                 alt="tick"
                 class="max-w-5 inline pl-1"
               />
             </p>
             <p class="text-gray-300">
-              mocaverse<img
+              {{ route.params.id
+              }}<img
                 src="@/assets/verified.svg"
                 alt="tick"
                 class="max-w-5 inline pl-1"
@@ -28,14 +33,28 @@
           </div>
 
           <div class="flex flex-row gap-x-3 items-end">
-            <div
-              v-for="n in 3"
-              :key="n"
+            <!-- <div
+              v-for="perk in [
+                {
+                  text: 'Max Ranked',
+                  num: collectionHeader && collectionHeader.rarity.max_rank,
+                },
+                {
+                  text: 'Token Score',
+                  num:
+                    collectionHeader && collectionHeader.rarity.tokens_scored,
+                },
+                {
+                  text: 'Total Supply',
+                  num: collectionHeader && collectionHeader.total_supply,
+                },
+              ]"
+              :key="perk.total_supply"
               class="text-slate-100 text-sm font-semibold md:font-bold md:text-lg"
             >
-              <p>33 ETH</p>
-              <p class="font-light text-xs">Total Volume</p>
-            </div>
+              <p>{{ perk.num }}</p>
+              <p class="font-light text-xs">{{ perk.text }}</p>
+            </div> -->
           </div>
         </div>
       </main>
@@ -47,10 +66,7 @@
         :class="detailed ? 'line-clamp-none' : 'line-clamp-2'"
         @click="detailed = !detailed"
       >
-        BEANZ are a small species that sprouts from the dirt in the garden. They
-        make for a great sidekick to an Azuki, although some like to kick it
-        alone. They're earnestly driven by the desire to help. However, certain
-        BEANZ feel a calling to pave their own path...
+        {{ collectionHeader && collectionHeader.description }}
       </p>
       <p class="text-slate-900 dark:text-slate-100 text-md md:text-lg mt-3">
         Items <strong>15.5K</strong> · Created <strong>May 2024</strong> ·
@@ -119,15 +135,52 @@ import HomeCard from "@/components/cards/homeCard.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const detailed = ref(false);
+const banner = ref("");
+const image = ref("");
 const searchName = ref("");
 
 onMounted(() => {
+  specificCollectionDetails();
   specificCollectionNfts();
+  window.scrollTo(0, 0);
 });
+const collectionHeader = ref(null);
 const collectionNfts = ref([]);
 const filterCollection = ref([]);
+
+const specificCollectionDetails = () => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-api-key": "6db12e6a6438461e9e3755c8b8930c21",
+    },
+  };
+
+  fetch(`https://api.opensea.io/api/v2/collections/${route.params.id}`, options)
+    .then((response) => response.json())
+    .then((response) => {
+      collectionHeader.value = response;
+      console.log(collectionHeader.value);
+
+      banner.value = collectionHeader.value.banner_image_url.slice(
+        0,
+        collectionHeader.value.banner_image_url.indexOf("?")
+      );
+
+      image.value = collectionHeader.value.image_url.slice(
+        0,
+        collectionHeader.value.image_url.indexOf("?")
+      );
+    })
+    .catch((err) => console.error(err));
+};
+
 const specificCollectionNfts = () => {
   const options = {
     method: "GET",
@@ -137,7 +190,10 @@ const specificCollectionNfts = () => {
     },
   };
 
-  fetch("https://api.opensea.io/api/v2/collection/beanzofficial/nfts", options)
+  fetch(
+    `https://api.opensea.io/api/v2/collection/${route.params.id}/nfts`,
+    options
+  )
     .then((response) => response.json())
     .then((response) => {
       collectionNfts.value = response.nfts;

@@ -2,6 +2,7 @@
   <div class="">
     <div
       :class="cardSize"
+      @click="to ? $router.push(`/collection/${nft && nft.key}`) : () => {}"
       class="rounded-2xl hover:-translate-y-2 group shadow-lg bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
     >
       <div class="min-h-36 max-h-36 w-full overflow-hidden">
@@ -90,6 +91,10 @@ const props = defineProps({
   cardSize: {
     type: String,
     default: "min-w-56 min-h-72 max-w-56 max-h-72",
+  },
+  to: {
+    type: Boolean,
+    default: false,
   },
 });
 
