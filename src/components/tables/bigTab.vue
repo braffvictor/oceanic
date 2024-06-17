@@ -28,6 +28,7 @@
           <tr
             class="text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transit"
             v-for="(nft, n) in nftApiCollection.slice(0, 5)"
+            @click="$router.push(`/collection/${nft.key}`)"
             :key="nft.contracts[0].contract_address"
           >
             <td class="p-4 rounded-l-xl">{{ n + 1 }}</td>
@@ -80,6 +81,7 @@
           <tr
             class="text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transit"
             v-for="(nft, n) in nftApiCollection.slice(5, 10)"
+            @click="$router.push(`/collection/${nft.key}`)"
             :key="nft.contracts[0].contract_address"
           >
             <td class="p-4 rounded-l-xl">{{ n + 6 }}</td>

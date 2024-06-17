@@ -14,9 +14,7 @@
               class="rounded-xl min-w-24 max-w-24"
               alt=""
             />
-            <p
-              class="mt-3 md:mt-5 font-bold text-slate-900 dark:text-slate-100 text-2xl"
-            >
+            <p class="mt-3 md:mt-5 font-bold text-slate-400 text-2xl">
               {{ collectionHeader && collectionHeader.name
               }}<img
                 src="@/assets/verified.svg"
@@ -90,10 +88,14 @@
         Created
         <strong>{{ collectionHeader && collectionHeader.created_date }}</strong>
         · Category
-        <strong>{{ collectionHeader && collectionHeader.category }}</strong> ·
-        Chain
+        <strong>{{ collectionHeader && collectionHeader.category }}</strong>
+        · Chain
         <strong class="capitalize">
           {{ collectionHeader && collectionHeader.contracts[0].chain }}</strong
+        >
+        · Total Supply
+        <strong class="capitalize">
+          {{ collectionHeader && collectionHeader.total_supply }}</strong
         >
       </p>
 
@@ -118,8 +120,7 @@
         <div
           class="h-3 w-3 mt-5 animate-pulse rounded-full bg-green-400 dark:bg-green-500 inline-block"
         ></div>
-        Total Supply
-        <strong>{{ collectionHeader && collectionHeader.total_supply }}</strong>
+        Live
 
         <!-- the search item bar -->
         <div
