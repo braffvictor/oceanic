@@ -3,9 +3,12 @@
     <div
       :class="cardSize"
       @click="to ? $router.push(`/collection/${nft && nft.key}`) : () => {}"
-      class="rounded-2xl hover:-translate-y-2 group shadow-lg bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
+      class="rounded-2xl hover:-translate-y-2 group shadow-lg relative bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
     >
-      <div class="min-h-36 max-h-36 w-full overflow-hidden">
+      <div
+        class="min-h-36 max-h-36 w-full overflow-hidden"
+        @click="nft && nft.action ? checkAction() : () => {}"
+      >
         <img
           :src="nft && nft.image_url"
           alt=""
@@ -52,10 +55,10 @@
       </div>
       <div
         v-if="nft && nft.action"
-        class="bg-green-400 p-1 pb-5 dark:bg-green-500 items-center w-full flex divide-x divide-slate-900 dark:divide-slate-100 h-14 justify-around translate-y-24 md:translate-y-32 group-hover:md:translate-y-16 group-hover:translate-y-10 group-hover:h-14 overflow-hidden transit"
+        class="bg-green-400 p-1 pb-5 dark:bg-green-500 items-center w-full flex divide-x divide-slate-900 dark:divide-slate-100 h-14 justify-around absolute -bottom-20 group-hover:-bottom-3 overflow-hidden transit"
       >
         <p
-          class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full"
+          class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full py-3"
         >
           <!-- use for price data for deduct function -->
           <!-- {{ nft && nft.stats.floor_price
@@ -76,6 +79,10 @@
 
 <script setup>
 import svgComp from "../svgComp.vue";
+
+function checkAction() {
+  console.log("actioning");
+}
 
 const props = defineProps({
   nft: {

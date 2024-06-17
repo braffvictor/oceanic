@@ -7,14 +7,16 @@
       }); background-position: center; background-size : cover; background-repeat: no-repeat`"
     >
       <main class="w-full">
-        <div class="flex flex-col md:flex-row md:justify-between">
+        <div class="flex w-full justify-between">
           <div>
             <img
               :src="image && image"
               class="rounded-xl min-w-24 max-w-24"
               alt=""
             />
-            <p class="mt-3 md:mt-5 font-bold text-slate-100 text-2xl">
+            <p
+              class="mt-3 md:mt-5 font-bold text-slate-900 dark:text-slate-100 text-2xl"
+            >
               {{ collectionHeader && collectionHeader.name
               }}<img
                 src="@/assets/verified.svg"
@@ -22,7 +24,7 @@
                 class="max-w-5 inline pl-1"
               />
             </p>
-            <p class="text-gray-300">
+            <p class="text-gray-300 dark:text-slate-100">
               {{ route.params.id
               }}<img
                 src="@/assets/verified.svg"
@@ -33,6 +35,22 @@
           </div>
 
           <div class="flex flex-row gap-x-3 items-end">
+            <div
+              class="font-semibold text-slate-900 dark:text-slate-100 flex items-center"
+            >
+              <svg-comp
+                icon="M9,2 C7.89543,2 7,2.89543 7,4 L7,6 L9,6 L9,4 L20,4 L20,15 L18,15 L18,17 L20,17 C21.1046,17 22,16.1046 22,15 L22,4 C22,2.89543 21.1046,2 20,2 L9,2 Z M4,7 C2.89543,7 2,7.89543 2,9 L2,20 C2,21.1046 2.89543,22 4,22 L15,22 C16.1046,22 17,21.1046 17,20 L17,9 C17,7.89543 16.1046,7 15,7 L4,7 Z"
+              />
+              <p>
+                {{
+                  (collectionHeader &&
+                    collectionHeader.contracts[0].address.slice(0, 4)) +
+                  "...." +
+                  (collectionHeader &&
+                    collectionHeader.contracts[0].address.slice(38))
+                }}
+              </p>
+            </div>
             <!-- <div
               v-for="perk in [
                 {
@@ -69,8 +87,14 @@
         {{ collectionHeader && collectionHeader.description }}
       </p>
       <p class="text-slate-900 dark:text-slate-100 text-md md:text-lg mt-3">
-        Items <strong>15.5K</strong> · Created <strong>May 2024</strong> ·
-        Category <strong>Gaming</strong> · Chain <strong>Blast</strong>
+        Created
+        <strong>{{ collectionHeader && collectionHeader.created_date }}</strong>
+        · Category
+        <strong>{{ collectionHeader && collectionHeader.category }}</strong> ·
+        Chain
+        <strong class="capitalize">
+          {{ collectionHeader && collectionHeader.contracts[0].chain }}</strong
+        >
       </p>
 
       <!-- the button to control component -->
@@ -94,9 +118,9 @@
         <div
           class="h-3 w-3 mt-5 animate-pulse rounded-full bg-green-400 dark:bg-green-500 inline-block"
         ></div>
-        <span class="ml-2 text-slate-900 dark:text-slate-100"
-          >Live 15,508 results</span
-        >
+        Total Supply
+        <strong>{{ collectionHeader && collectionHeader.total_supply }}</strong>
+
         <!-- the search item bar -->
         <div
           class="mt-2 p-2 flex bg-gray-200 md:w-2/3 dark:text-slate-100 text-slate-900 overflow-hidden dark:bg-slate-700 dark:caret-slate-100 h-11 justify-self-start inline-block align-start rounded-2xl indent-5 has-[:focus]:ring-green-400 has-[:focus]:ring-1 outline-none transit"
@@ -107,7 +131,7 @@
           <input
             type="text"
             v-model="searchName"
-            placeholder="Search Nft..."
+            placeholder="Search NFTs..."
             class="w-full bg-transparent outline-none ml-2"
           />
         </div>
@@ -166,7 +190,7 @@ const specificCollectionDetails = () => {
     .then((response) => response.json())
     .then((response) => {
       collectionHeader.value = response;
-      console.log(collectionHeader.value);
+      // console.log(collectionHeader.value);
 
       banner.value = collectionHeader.value.banner_image_url.slice(
         0,
@@ -191,7 +215,7 @@ const specificCollectionNfts = () => {
   };
 
   fetch(
-    `https://api.opensea.io/api/v2/collection/${route.params.id}/nfts`,
+    `https://api.opensea.io/api/v2/collection/${route.params.id}/nfts?limit=200`,
     options
   )
     .then((response) => response.json())
@@ -201,7 +225,7 @@ const specificCollectionNfts = () => {
       collectionNfts.value.forEach((nft) => {
         nft.action = "red";
         nft.stats = {
-          floor_price: "0.0034",
+          floor_price: (Math.random() * 0.5).toString(),
           floor_price_symbol: "ETH",
         };
       });
