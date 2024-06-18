@@ -53,9 +53,12 @@
           </div>
         </div>
       </div>
+
+      <!-- for collection nft with action div -->
       <div
         v-if="nft && nft.action"
         class="bg-green-400 p-1 pb-5 dark:bg-green-500 items-center w-full flex divide-x divide-slate-900 dark:divide-slate-100 h-14 justify-around absolute -bottom-20 group-hover:-bottom-3 overflow-hidden transit"
+        @click="getNft(nft && nft)"
       >
         <p
           class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full py-3"
@@ -80,8 +83,8 @@
 <script setup>
 import svgComp from "../svgComp.vue";
 
-function checkAction() {
-  console.log("actioning");
+function getNft(nft) {
+  console.log(nft);
 }
 
 const props = defineProps({

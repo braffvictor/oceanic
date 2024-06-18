@@ -34,7 +34,12 @@
 
           <div class="flex flex-row gap-x-3 items-end">
             <div
-              class="font-semibold text-slate-900 dark:text-slate-100 flex items-center"
+              class="font-semibold text-slate-900 dark:text-slate-100 flex items-center cursor-pointer"
+              @click="
+                copyContract(
+                  collectionHeader && collectionHeader.contracts[0].address
+                )
+              "
             >
               <svg-comp
                 icon="M9,2 C7.89543,2 7,2.89543 7,4 L7,6 L9,6 L9,4 L20,4 L20,15 L18,15 L18,17 L20,17 C21.1046,17 22,16.1046 22,15 L22,4 C22,2.89543 21.1046,2 20,2 L9,2 Z M4,7 C2.89543,7 2,7.89543 2,9 L2,20 C2,21.1046 2.89543,22 4,22 L15,22 C16.1046,22 17,21.1046 17,20 L17,9 C17,7.89543 16.1046,7 15,7 L4,7 Z"
@@ -149,6 +154,23 @@
               :card-size="'min-w-40 min-h-64 max-w-40 max-h-64 md:min-w-56 md:min-h-72 md:max-w-56 md:max-h-72'"
             />
           </div>
+
+          <div v-else class="min-h-screen mt-10 text-center mx-auto">
+            <div class="mx-auto text-center flex justify-center">
+              <img
+                src="@/assets/not-found.png"
+                width="200"
+                class="mt-5 block"
+              />
+            </div>
+            <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
+              No NFTs found for
+              <span class="text-green-500">{{
+                searchName ? `${searchName} in` : ""
+              }}</span>
+              "{{ collectionHeader && collectionHeader.name }}" Collection
+            </p>
+          </div>
         </div>
       </section>
     </section>
@@ -174,6 +196,11 @@ onMounted(() => {
   specificCollectionNfts();
   window.scrollTo(0, 0);
 });
+
+function copyContract(contractAddress) {
+  navigator.clipboard.writeText(contractAddress);
+  alert("Copied Text");
+}
 const collectionHeader = ref(null);
 const collectionNfts = ref([]);
 const filterCollection = ref([]);
