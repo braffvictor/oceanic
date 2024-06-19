@@ -1,14 +1,11 @@
 <template>
-  <div class="">
+  <div class="select-none">
     <div
       :class="cardSize"
       @click="to ? $router.push(`/collection/${nft && nft.key}`) : () => {}"
       class="rounded-2xl hover:-translate-y-2 group shadow-lg relative bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
     >
-      <div
-        class="min-h-36 max-h-36 w-full overflow-hidden"
-        @click="nft && nft.action ? checkAction() : () => {}"
-      >
+      <div class="min-h-36 max-h-36 w-full overflow-hidden">
         <img
           :src="nft && nft.image_url"
           alt=""
