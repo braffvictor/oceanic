@@ -68,7 +68,7 @@
         </tbody>
         <tbody v-else>
           <tr class="font-bold">
-            <td class="columns-4 w-full">
+            <td class="columns-4 row-span-4 w-full">
               <p>Loading Events...</p>
             </td>
           </tr>

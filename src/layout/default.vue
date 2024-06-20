@@ -313,7 +313,7 @@
     <!-- footer section -->
     <section
       @click="show = false"
-      class="bg-gradient-to-t transit from-green-400 to-white dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
+      class="bg-gradient-to-t transit from-green-400 to-slate-50 dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
     >
       <main class="px-5 py-5 md:px-8">
         <div class="grid md:grid-cols-2 gap-y-4">

@@ -116,6 +116,8 @@ const specificCollectionNfts = () => {
         };
       });
 
+      console.log(collectionNfts.value[0]);
+
       filterCollection.value = collectionNfts.value;
       loading.value = false;
     })
