@@ -44,9 +44,9 @@
         />
 
         <d-search-bar
-          :filter-search="filterSearch.slice(0, 5)"
+          :filter-search="filterSearch"
           :search-collection="searchCollection"
-          class="hidden group-focus-within:block h-auto overflow-hidden"
+          class="hidden group-focus-within:block max-h-96 h-auto overflow-y-auto scrolls"
         />
       </div>
       <!-- nav button -->
@@ -91,7 +91,7 @@
           <d-search-bar
             :filter-search="filterSearch"
             :search-collection="searchCollection"
-            class="fixed inset-1 h-96 w-[22rem] text-left hidden group-focus-within:inline overflow-hidden z-10"
+            class="fixed inset-1 h-96 w-[22rem] text-left hidden group-focus-within:inline overflow-scroll z-10"
           >
             <input
               type="text"
@@ -591,7 +591,7 @@ const getNftCollection = (chain) => {
   };
 
   fetch(
-    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=72`,
+    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=100`,
     options
   )
     .then((response) => response.json())
@@ -627,5 +627,28 @@ const filterSearch = computed(() => {
 
 .darkT {
   background: rgba(15, 23, 42, 0.321);
+}
+
+.scrolls::-webkit-scrollbar {
+  width: 100%;
+  height: 0%;
+}
+.scrolls::-webkit-scrollbar-track {
+  background-color: rgba(180, 140, 252, 0.1);
+  border-radius: 100%;
+}
+.scrolls::-webkit-scrollbar-thumb {
+  background: rgba(180, 140, 252, 0.1);
+  border-radius: 100%;
+}
+.scrolls::-webkit-scrollbar-corner {
+  border-radius: 100%;
+  background: rgba(180, 140, 252, 0.1);
+}
+.scrolls {
+  transition: all 1s;
+}
+.scrolling {
+  transition: all 1s;
 }
 </style>

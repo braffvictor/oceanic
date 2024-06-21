@@ -47,9 +47,16 @@
     </section>
 
     <section v-else>
-      <p class="text-slate-900 dark:text-slate-100 font-thin text-center">
-        {{ searchCollection }} Collection Not Found...
+      <p class="text-slate-900 dark:text-slate-100 font-light text-center">
+        Oops!...
+        <span class="font-semibold text-green-500">{{ searchCollection }}</span>
+        Collection Can't Be Not Found Temporarily...
       </p>
+      <div class="mt-3 text-center mx-auto">
+        <div class="mx-auto text-center flex justify-center">
+          <img src="@/assets/not-found.png" width="170" class="mt-5 block" />
+        </div>
+      </div>
     </section>
   </div>
 </template>
