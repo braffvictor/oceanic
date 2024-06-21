@@ -110,13 +110,12 @@ const specificCollectionNfts = () => {
 
       collectionNfts.value.forEach((nft) => {
         nft.action = "red";
+        nft.cart = false;
         nft.stats = {
           floor_price: (Math.random() * 0.5).toString(),
           floor_price_symbol: "ETH",
         };
       });
-
-      console.log(collectionNfts.value[0]);
 
       filterCollection.value = collectionNfts.value;
       loading.value = false;
