@@ -13,7 +13,10 @@
       "
     >
       <!-- for logo -->
-      <div class="inline-flex items-center gap-x-2">
+      <div
+        class="inline-flex items-center gap-x-2 cursor-pointer"
+        @click="$router.push('/')"
+      >
         <img
           src="https://solanart.io/solanart-logo-black.svg"
           class="max-w-7"
@@ -37,6 +40,7 @@
       <!-- search bar -->
       <div class="w-full ml-8 hidden md:block relative transit group">
         <input
+          @click="searchBar = true"
           type="text"
           v-model="searchCollection"
           placeholder="Search Collection, NFTs..."
@@ -44,9 +48,11 @@
         />
 
         <d-search-bar
+          @closeSearchBar="searchBar = false"
+          v-if="searchBar == true"
           :filter-search="filterSearch"
           :search-collection="searchCollection"
-          class="hidden group-focus-within:block max-h-96 h-auto overflow-y-auto scrolls"
+          class="hidden group-focus-within:block max-h-96 h-auto overflow-y-auto scrollsx"
         />
       </div>
       <!-- nav button -->
@@ -85,20 +91,24 @@
         <!-- search icon -->
         <button class="block md:hidden group">
           <svg-comp
+            @click="searchBar = true"
             Sclass="active:stroke-green-400"
             icon="M10.5,4 C6.91015,4 4,6.91015 4,10.5 C4,14.0899 6.91015,17 10.5,17 C14.0899,17 17,14.0899 17,10.5 C17,6.91015 14.0899,4 10.5,4 Z M2,10.5 C2,5.80558 5.80558,2 10.5,2 C15.1944,2 19,5.80558 19,10.5 C19,12.4869 18.3183,14.3145 17.176,15.7618 L20.8284,19.4142 C21.2189,19.8047 21.2189,20.4379 20.8284,20.8284 C20.4379,21.2189 19.8047,21.2189 19.4142,20.8284 L15.7618,17.176 C14.3145,18.3183 12.4869,19 10.5,19 C5.80558,19 2,15.1944 2,10.5 Z M9.5,7 C9.5,6.44772 9.94772,6 10.5,6 C12.9853,6 15,8.01472 15,10.5 C15,11.0523 14.5523,11.5 14,11.5 C13.4477,11.5 13,11.0523 13,10.5 C13,9.11929 11.8807,8 10.5,8 C9.94772,8 9.5,7.55228 9.5,7 Z"
           />
           <d-search-bar
+            @closeSearchBar="searchBar = false"
+            v-if="searchBar == true"
             :filter-search="filterSearch"
             :search-collection="searchCollection"
-            class="fixed inset-1 h-96 w-[22rem] text-left hidden group-focus-within:inline overflow-scroll z-10"
+            class="fixed inset-1 h-96 w-[22rem] text-left group-focus-within:inline overflow-scroll z-10"
           >
             <input
               type="text"
               v-model="searchCollection"
               placeholder="Search Collection, NFTs..."
-              class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-full h-9 justify-self-start inline-block align-start rounded-xl indent-5 focus:ring-green-400 focus:ring-1 outline-none transit mb-3"
-          /></d-search-bar>
+              class="fixed bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-11/12 h-10 justify-self-start inline-block align-start rounded-xl indent-5 focus:ring-green-400 focus:ring-1 outline-none transit" />
+            <div class="mb-12"></div
+          ></d-search-bar>
         </button>
 
         <!-- Cart icon -->
@@ -326,11 +336,11 @@
       </div>
     </div>
 
-    <router-view class="pt-20" @click="show = false" />
+    <router-view class="pt-20" @click="(show = false), (searchBar = false)" />
 
     <!-- footer section -->
     <section
-      @click="show = false"
+      @click="(show = false), (searchBar = false)"
       class="bg-gradient-to-t transit from-green-400 to-slate-50 dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
     >
       <main class="px-5 py-5 md:px-8">
@@ -576,6 +586,8 @@ const dropLinks = computed(() => {
     },
   ];
 });
+
+const searchBar = ref(false);
 
 // using local storage nfts
 const searchCollection = ref("");

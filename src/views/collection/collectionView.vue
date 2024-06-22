@@ -23,7 +23,7 @@
               />
             </p>
             <p class="text-gray-300 dark:text-slate-100">
-              {{ route.params.id
+              {{ routeParams
               }}<img
                 src="@/assets/verified.svg"
                 alt="tick"
@@ -166,7 +166,10 @@ const detailed = ref(false);
 const banner = ref("");
 const image = ref("");
 
+const routeParams = ref(route.params.id);
 onMounted(() => {
+  console.log("red");
+  routeParams.value = route.params.id;
   specificCollectionDetails();
   window.scrollTo(0, 0);
 });
@@ -187,7 +190,10 @@ const specificCollectionDetails = () => {
     },
   };
 
-  fetch(`https://api.opensea.io/api/v2/collections/${route.params.id}`, options)
+  fetch(
+    `https://api.opensea.io/api/v2/collections/${routeParams.value}`,
+    options
+  )
     .then((response) => response.json())
     .then((response) => {
       collectionHeader.value = response;

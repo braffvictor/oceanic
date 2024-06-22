@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute bg-slate-50 dark:bg-slate-800 mt-1 rounded-xl shadow-lg p-4 w-full transit"
+    class="absolute bg-slate-50 dark:bg-slate-800 mt-1 rounded-xl shadow-lg p-4 w-screen left-0 transit"
   >
     <slot></slot>
     <p
@@ -9,11 +9,13 @@
     >
       Collections
     </p>
-    <section v-if="filterSearch.length > 0">
-      <main
-        class="flex mt-1 justify-self-auto w-full gap-x-3 items-center"
+    <section v-if="filterSearch.length > 0" class="mt-1">
+      <router-link
+        :to="`/collection/${nft.key}`"
+        class="flex justify-self-auto w-full gap-x-3 gap-y-2 hover:bg-slate-200 dark:hover:bg-slate-700 items-center p-3 transit rounded-xl"
         v-for="nft in filterSearch"
-        :key="nft.contracts[0].contract_address || nft.name"
+        :key="nft.name"
+        @click="$emit('closeSearchBar')"
       >
         <div class="col-span-1">
           <img :src="nft.image_url" class="rounded-xl" width="40" alt="" />
@@ -43,7 +45,7 @@
             }}
           </p>
         </div>
-      </main>
+      </router-link>
     </section>
 
     <section v-else>
