@@ -23,7 +23,7 @@
               />
             </p>
             <p class="text-gray-300 dark:text-slate-100">
-              {{ routeParams
+              {{ route.params.id
               }}<img
                 src="@/assets/verified.svg"
                 alt="tick"
@@ -166,11 +166,9 @@ const detailed = ref(false);
 const banner = ref("");
 const image = ref("");
 
-const routeParams = ref(route.params.id);
 onMounted(() => {
-  console.log("red");
-  routeParams.value = route.params.id;
-  specificCollectionDetails();
+  // console.log("red");
+  specificCollectionDetails(route.params.id);
   window.scrollTo(0, 0);
 });
 
@@ -181,7 +179,7 @@ function copyContract(contractAddress) {
 const collectionHeader = ref(null);
 
 // for top header display details
-const specificCollectionDetails = () => {
+const specificCollectionDetails = (paramsID) => {
   const options = {
     method: "GET",
     headers: {
@@ -190,10 +188,7 @@ const specificCollectionDetails = () => {
     },
   };
 
-  fetch(
-    `https://api.opensea.io/api/v2/collections/${routeParams.value}`,
-    options
-  )
+  fetch(`https://api.opensea.io/api/v2/collections/${paramsID}`, options)
     .then((response) => response.json())
     .then((response) => {
       collectionHeader.value = response;
@@ -211,6 +206,11 @@ const specificCollectionDetails = () => {
     })
     .catch((err) => console.error(err));
 };
+
+watch(route, () => {
+  specificCollectionDetails(route.params.id);
+  console.log("changing route");
+});
 </script>
 
 <style scoped></style>

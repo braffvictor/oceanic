@@ -77,21 +77,20 @@ const props = defineProps({
 });
 
 const loading = ref(true);
+const route = useRoute();
 
 onMounted(() => {
-  specificCollectionNfts();
+  specificCollectionNfts(route.params.id);
   // setTimeout(() => {
 
   // }, 3000);
 });
 
-const route = useRoute();
-
 const searchName = ref("");
 
 const collectionNfts = ref([]);
 const filterCollection = ref([]);
-const specificCollectionNfts = () => {
+const specificCollectionNfts = (routeParams) => {
   const options = {
     method: "GET",
     headers: {
@@ -101,7 +100,7 @@ const specificCollectionNfts = () => {
   };
 
   fetch(
-    `https://api.opensea.io/api/v2/collection/${route.params.id}/nfts?limit=200`,
+    `https://api.opensea.io/api/v2/collection/${routeParams}/nfts?limit=200`,
     options
   )
     .then((response) => response.json())
@@ -131,6 +130,11 @@ watch(searchName, () => {
       nft.name.toLowerCase().includes(searchName.value)
     );
   });
+});
+
+watch(route, () => {
+  specificCollectionNfts(route.params.id);
+  console.log("fetching nfts");
 });
 </script>
 
