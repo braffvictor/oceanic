@@ -52,7 +52,7 @@
           v-if="searchBar == true"
           :filter-search="filterSearch"
           :search-collection="searchCollection"
-          class="hidden group-focus-within:block max-h-96 h-auto w-[27.5em] overflow-y-auto scrolls"
+          class="hidden group-focus-within:block max-h-96 h-auto w-[27em] overflow-y-auto scrolls mx-auto"
         />
       </div>
       <!-- nav button -->
@@ -100,7 +100,7 @@
             v-if="searchBar == true"
             :filter-search="filterSearch"
             :search-collection="searchCollection"
-            class="fixed inset-1 h-96 w-[23em] mx-auto text-center group-focus-within:inline overflow-scroll z-10"
+            class="fixed inset-1 h-96 w-[23em] mx-auto text-left group-focus-within:inline overflow-scroll z-10"
           >
             <input
               type="text"
@@ -532,8 +532,7 @@ function closeMenu(to) {
 // });
 
 //get local storage watchlist nfts
-const localNfts =
-  ref(JSON.parse(localStorage.getItem("watchList")).length) || 0;
+const localNfts = ref("2");
 
 const themeState = ref(localStorage.getItem("theme"));
 //change theme function

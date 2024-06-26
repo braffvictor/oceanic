@@ -116,10 +116,6 @@ const getNft = () => {
     const newList = [nft, ...watchList];
     localStorage.setItem("watchList", JSON.stringify(newList));
   }
-
-  window.addEventListener("storage", () => {
-    console.log("adding to storage");
-  });
 };
 </script>
 

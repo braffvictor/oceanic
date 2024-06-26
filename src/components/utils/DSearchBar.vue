@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute bg-slate-100 dark:bg-slate-800 mt-1 rounded-3xl shadow-lg p-4 w-screen left-0 transit"
+    class="absolute bg-slate-100 dark:bg-slate-800 mt-1 rounded-3xl shadow-lg p-4 w-11/12 left-0 transit"
   >
     <slot></slot>
     <p
