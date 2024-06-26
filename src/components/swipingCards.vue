@@ -40,7 +40,7 @@ export default {
   setup() {
     const screenSize = ref(window.screen.width);
     watch(screenSize, () => {
-      console.log(screenSize.value);
+      // console.log(screenSize.value);
     });
 
     console.log(screenSize.value);
@@ -48,15 +48,15 @@ export default {
       //   console.log(swiper);
     };
     const onSlideChange = () => {
-      console.log("slide change");
+      // console.log("slide change");
     };
     const ending = () => {
-      console.log("ended");
+      // console.log("ended");
     };
 
     const screenSizing = (swiper, options) => {
-      console.log(swiper);
-      console.log(options);
+      // console.log(swiper);
+      // console.log(options);
     };
     return {
       onSwiper,
