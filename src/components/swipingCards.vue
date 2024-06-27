@@ -43,7 +43,6 @@ export default {
       // console.log(screenSize.value);
     });
 
-    console.log(screenSize.value);
     const onSwiper = (swiper) => {
       //   console.log(swiper);
     };

@@ -532,14 +532,22 @@ function closeMenu(to) {
 // });
 
 //get local storage watchlist nfts
-const localNfts = ref("2");
+const localNfts = ref("0");
 
+let checkStorage = localStorage.getItem("watchList")
+  ? JSON.parse(localStorage.getItem("watchList")).length
+  : 0;
+localNfts.value = checkStorage;
 const themeState = ref(localStorage.getItem("theme"));
 //change theme function
 function changeTheme(theme) {
   localStorage.setItem("theme", theme);
   themeState.value = localStorage.getItem("theme");
-  localNfts.value = JSON.parse(localStorage.getItem("watchList")).length || 0;
+
+  let checkStorage = localStorage.getItem("watchList")
+    ? JSON.parse(localStorage.getItem("watchList")).length
+    : 0;
+  localNfts.value = checkStorage;
 }
 
 //for injecting and sharing the value of themeState througout the default children
