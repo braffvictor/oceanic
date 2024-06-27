@@ -58,7 +58,11 @@
       >
         <p
           class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full py-3"
-          @click="$router.push('/collection/item/red')"
+          @click="
+            $router.push(
+              `/collection/item/${nft && nft.identifier}?key=${route.params.id}`
+            )
+          "
         >
           <!-- use for price data for deduct function -->
           <!-- {{ nft && nft.stats.floor_price
@@ -78,7 +82,10 @@
 </template>
 
 <script setup>
+import { useRoute } from "vue-router";
 import svgComp from "../svgComp.vue";
+
+const route = useRoute();
 
 const props = defineProps({
   nft: {
