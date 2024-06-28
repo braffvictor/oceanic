@@ -31,13 +31,12 @@
           >
             {{ nftDetails && nftDetails.name }}
           </p>
-          <p class="mt-2 font-light text-slate-900 dark:text-slate-100">
-            Owned by voberoi
+          <p class="text-slate-900 mt-2 dark:text-slate-100">
+            Category : {{ collectionHeader && collectionHeader.category }}
           </p>
-
-          <span class="text-slate-900 dark:text-slate-100"> 12</span>
-          <span class="text-slate-900 dark:text-slate-100"> 12</span>
-          <span class="text-slate-900 dark:text-slate-100"> 12</span>
+          <p class="mt-2 text-slate-900 dark:text-slate-100">
+            Created : {{ collectionHeader && collectionHeader.created_date }}
+          </p>
 
           <div
             class="border-gray-300 dark:border-gray-600 border transit rounded-xl p-3 md:p-5 mt-4 dark:bg-slate-800"
@@ -132,7 +131,11 @@
         </div>
         <div class="mx-auto text-center transit mt-2" v-if="description">
           <p class="text-center text-slate-900 dark:text-slate-100">
-            {{ nftDetails && nftDetails.description }}
+            {{
+              nftDetails && nftDetails.description
+                ? nftDetails && nftDetails.description
+                : collectionHeader && collectionHeader.description
+            }}
           </p>
         </div>
       </div>
@@ -180,8 +183,13 @@
     >
       <p class="mx-3 text-slate-900 dark:text-slate-100">
         Collection Activities
+        {{ contract }}
       </p>
-      <CollectionActivities />
+      <CollectionActivities
+        :contractAddress="
+          collectionHeader && collectionHeader.contracts[0].address
+        "
+      />
     </div>
   </div>
 </template>
@@ -194,13 +202,12 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
 
-const activeBtn = ref("items");
-
 const listing = ref(false);
 const description = ref(false);
 const details = ref(false);
 
 const image = ref("");
+const contract = ref("");
 
 onMounted(() => {
   // console.log("red");
@@ -226,6 +233,9 @@ const specificCollectionDetails = (routeParams) => {
     .then((response) => {
       collectionHeader.value = response;
       console.log(collectionHeader.value);
+
+      contract.value = collectionHeader.value.contracts[0].address;
+      console.log(contract.value);
 
       image.value = collectionHeader.value.image_url.slice(
         0,

@@ -254,16 +254,16 @@
           </div>
 
           <!-- children -->
-          <router-link
+          <div
             class="block mt-2 h-0 opacity-0 group-hover:opacity-100 scale-y-0 group-hover:scale-y-100 group-hover:h-full transition-transform ease-in-out duration-300"
             v-if="links.children"
-            to="/"
           >
-            <div
+            <router-link
               class="flex items-center my-2"
               v-for="link in links.children"
               :key="link.name"
               @click="show = false"
+              :to="link.to"
             >
               <p class="ml-2">
                 <svg
@@ -312,8 +312,8 @@
                 </svg>
               </p>
               <p class="dark:text-slate-100 text-slate-900">{{ link.name }}</p>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
         </main>
       </div>
 
@@ -428,6 +428,7 @@
               <d-button
                 v-for="link in links.children"
                 :key="link.name"
+                :to="link.to"
                 type="filled"
                 class="rounded-sm block w-full font-light !transition-all !duration-200 !ease-in-out hover:font-semibold"
                 >{{ link.name }}</d-button
@@ -559,20 +560,20 @@ const dropLinks = computed(() => {
       title: "Market Place",
       children: [
         {
-          name: "Collection",
-          to: "",
+          name: "Collections",
+          to: "/AllCollection",
         },
         {
           name: "Random NFTs",
-          to: "",
+          to: "/",
         },
         {
           name: "Drops",
-          to: "",
+          to: "/",
         },
         {
           name: "Rankings",
-          to: "",
+          to: "/",
         },
       ],
     },
@@ -581,15 +582,15 @@ const dropLinks = computed(() => {
       children: [
         {
           name: "What is an NFT",
-          to: "",
+          to: "/",
         },
         {
           name: "How to create an NFT",
-          to: "",
+          to: "/",
         },
         {
           name: "How to purchased an NFT",
-          to: "",
+          to: "/",
         },
       ],
     },

@@ -27,6 +27,11 @@ const routes = [
         name: "Dynamic Collection Item",
         component: () => import("../views/collection/itemView.vue"),
       },
+      {
+        path: "/allCollection",
+        name: "All Collection",
+        component: () => import("../views/allCollection.vue"),
+      },
     ],
   },
 ];

@@ -81,13 +81,22 @@
 <script setup>
 import { onMounted, ref } from "vue";
 
+const props = defineProps({
+  contractAddress: {
+    type: String,
+    default: "",
+  },
+});
+
 const events = ref([]);
 
 onMounted(() => {
-  getTransferEventofCollection();
+  getTransferEventofCollection(props.contractAddress);
 });
 
-function getTransferEventofCollection() {
+console.log(props.contractAddress);
+
+function getTransferEventofCollection(contractAddress) {
   const options = {
     method: "GET",
     headers: {
@@ -97,7 +106,7 @@ function getTransferEventofCollection() {
   };
 
   fetch(
-    "https://api.blockspan.com/v1/transfers/contract/0x409a26244cb47c0cf894d91a9cab6e9ca79009af?chain=eth-main&page_size=50",
+    `https://api.blockspan.com/v1/transfers/contract/${contractAddress}?chain=eth-main&page_size=50`,
     options
   )
     .then((response) => response.json())

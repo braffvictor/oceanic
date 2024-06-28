@@ -18,7 +18,7 @@
       <input
         type="text"
         v-model="searchName"
-        placeholder="Search NFTs..."
+        placeholder="Search Item..."
         class="w-full bg-transparent outline-none ml-2"
       />
     </div>

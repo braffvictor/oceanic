@@ -144,7 +144,10 @@
         :headerName="collectionHeader && collectionHeader.name"
       />
 
-      <collection-activities v-if="activeBtn == 'activity'" />
+      <collection-activities
+        v-if="activeBtn == 'activity'"
+        :contractAddress="collectionHeader?.contracts[0].address"
+      />
     </section>
   </div>
 </template>
