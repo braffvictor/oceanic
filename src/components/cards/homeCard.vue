@@ -60,7 +60,9 @@
           class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full py-3"
           @click="
             $router.push(
-              `/collection/item/${nft && nft.identifier}?key=${route.params.id}`
+              `/collection/item/${route.params.id}?identifier=${
+                nft && nft.identifier
+              }`
             )
           "
         >

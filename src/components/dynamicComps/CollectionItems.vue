@@ -111,7 +111,7 @@ const specificCollectionNfts = (routeParams) => {
         nft.action = "red";
         nft.cart = false;
         nft.stats = {
-          floor_price: (Math.random() * 0.5).toString(),
+          floor_price: (Number(nft.identifier) / 4000).toString(),
           floor_price_symbol: "ETH",
         };
       });
