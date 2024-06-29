@@ -32,7 +32,10 @@
             {{ nftDetails && nftDetails.name }}
           </p>
           <p class="text-slate-900 mt-2 dark:text-slate-100">
-            Category : {{ collectionHeader && collectionHeader.category }}
+            Category :
+            <span class="uppercase">{{
+              collectionHeader && collectionHeader.category
+            }}</span>
           </p>
           <p class="mt-2 text-slate-900 dark:text-slate-100">
             Created : {{ collectionHeader && collectionHeader.created_date }}
@@ -183,12 +186,11 @@
     >
       <p class="mx-3 text-slate-900 dark:text-slate-100">
         Collection Activities
-        {{ contract }}
       </p>
+
       <CollectionActivities
-        :contractAddress="
-          collectionHeader && collectionHeader.contracts[0].address
-        "
+        :contract-address="contract ? contract : ''"
+        v-if="loading == true"
       />
     </div>
   </div>
@@ -208,12 +210,15 @@ const details = ref(false);
 
 const image = ref("");
 const contract = ref("");
-
+const loading = ref(false);
 onMounted(() => {
   // console.log("red");
   specificCollectionDetails(route.params.id);
   specificCollectionNfts(route.params.id);
   window.scrollTo(0, 0);
+  setTimeout(() => {
+    loading.value = true;
+  }, 1000);
 });
 
 const collectionHeader = ref(null);
@@ -300,7 +305,7 @@ const detailsOfNft = computed(() => {
     },
     {
       text: "Token ID",
-      data: nftDetails.value && nftDetails.value.identifier,
+      data: nftDetails.value && nftDetails.value.identifier.slice(0, 4),
     },
     {
       text: "Token Standard",

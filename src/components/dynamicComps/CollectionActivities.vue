@@ -9,7 +9,7 @@
             <th class="border-b p-3">id</th>
             <th class="border-b p-3">Token</th>
             <th class="border-b p-3">Type</th>
-            <th class="border-b text-left">Price</th>
+            <th class="border-b">Price</th>
             <th class="border-b">Quantity</th>
             <th class="border-b">From</th>
             <th class="border-b">To</th>
@@ -93,8 +93,6 @@ const events = ref([]);
 onMounted(() => {
   getTransferEventofCollection(props.contractAddress);
 });
-
-console.log(props.contractAddress);
 
 function getTransferEventofCollection(contractAddress) {
   const options = {

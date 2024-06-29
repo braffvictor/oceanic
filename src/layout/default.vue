@@ -561,7 +561,7 @@ const dropLinks = computed(() => {
       children: [
         {
           name: "Collections",
-          to: "/AllCollection",
+          to: "/collections",
         },
         {
           name: "Random NFTs",
@@ -572,8 +572,8 @@ const dropLinks = computed(() => {
           to: "/",
         },
         {
-          name: "Rankings",
-          to: "/",
+          name: "Activities",
+          to: "/activities",
         },
       ],
     },

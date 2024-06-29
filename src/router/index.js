@@ -28,11 +28,21 @@ const routes = [
         component: () => import("../views/collection/itemView.vue"),
       },
       {
-        path: "/allCollection",
+        path: "/collections",
         name: "All Collection",
         component: () => import("../views/allCollection.vue"),
       },
+      {
+        path: "/Activities",
+        name: "All Activities",
+        component: () => import("../views/allActivities.vue"),
+      },
     ],
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "error-page",
+    component: () => import("../views/error/errorPage.vue"),
   },
 ];
 
