@@ -37,6 +37,11 @@ const routes = [
         name: "All Activities",
         component: () => import("../views/allActivities.vue"),
       },
+      {
+        path: "/learn/what-are-nfts",
+        name: "What Are NFTs",
+        component: () => import("../views/learn/what-are-nfts.vue"),
+      },
     ],
   },
   {

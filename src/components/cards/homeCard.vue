@@ -2,7 +2,7 @@
   <div class="select-none">
     <div
       :class="cardSize"
-      @click="to ? $router.push(`/collection/${nft && nft.key}`) : () => {}"
+      @click="checkRoute()"
       class="rounded-2xl hover:-translate-y-2 group shadow-lg relative bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
     >
       <div class="min-h-36 max-h-36 w-full overflow-hidden">
@@ -84,6 +84,7 @@
 </template>
 
 <script setup>
+import router from "@/router";
 import { useRoute } from "vue-router";
 import svgComp from "../svgComp.vue";
 
@@ -108,6 +109,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  routeName: {
+    type: String,
+    default: "",
+  },
 });
 
 const getNft = () => {
@@ -126,6 +131,16 @@ const getNft = () => {
     localStorage.setItem("watchList", JSON.stringify(newList));
   }
 };
+
+function checkRoute() {
+  if (props.learn) {
+    router.push(`${props.routeName}`);
+  } else if (props.to) {
+    router.push(`/collection/${props.nft && props.nft.key}`);
+  } else {
+    () => {};
+  }
+}
 </script>
 
 <style></style>

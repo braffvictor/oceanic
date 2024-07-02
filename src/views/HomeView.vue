@@ -265,7 +265,7 @@
           <template #cards>
             <swiper-slide v-for="learn in learnNft" :key="learn.name">
               <!-- for home nft cards -->
-              <home-card :nft="learn" :learn="true" />
+              <home-card :nft="learn" :learn="true" :route-name="learn.route" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -360,6 +360,16 @@ const getNftCollection = (chain) => {
     .then((response) => {
       // console.log(response)
       nftApiCollection.value = response.results;
+      const red = (nftApiCollection.value = nftApiCollection.value.filter(
+        (nft) => {
+          return (
+            nft.contracts[0].contract_address != null ||
+            nft.contracts[0].contract_address != undefined
+          );
+        }
+      ));
+
+      console.log(red);
     })
     .catch((err) => console.error(err));
 };
@@ -374,21 +384,25 @@ const learnNft = computed(() => {
       name: "What is an NFT",
       image_url:
         "https://opensea.io/static/images/learn-center//what-is-nft.png",
+      route: "/learn/what-are-nfts",
     },
     {
       name: "How to create an NFT",
       image_url:
         "https://opensea.io/static/images/learn-center//how-to-create-nft.png",
+      route: "/learn/how-to-create-nfts",
     },
     {
       name: "What is a crypto wallet",
       image_url:
         "https://opensea.io/static/images/learn-center//what-is-crypto-wallet.png",
+      route: "/learn/what-is-a-crypto-wallet",
     },
     {
       name: "About Oceanic",
       image_url:
         "https://i.pinimg.com/736x/fc/98/08/fc9808ed756f6b11956c3983ae5412c6.jpg",
+      route: "/learn/about-us",
     },
   ];
 });

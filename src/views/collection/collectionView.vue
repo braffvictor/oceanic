@@ -37,7 +37,9 @@
               class="font-semibold text-slate-900 dark:text-slate-100 flex items-center cursor-pointer"
               @click="
                 copyContract(
-                  collectionHeader && collectionHeader.contracts[0].address
+                  collectionHeader && collectionHeader.contracts[0]?.address
+                    ? collectionHeader && collectionHeader.contracts[0]?.address
+                    : 'Contract Address Unavailable'
                 )
               "
             >
@@ -45,13 +47,13 @@
                 icon="M9,2 C7.89543,2 7,2.89543 7,4 L7,6 L9,6 L9,4 L20,4 L20,15 L18,15 L18,17 L20,17 C21.1046,17 22,16.1046 22,15 L22,4 C22,2.89543 21.1046,2 20,2 L9,2 Z M4,7 C2.89543,7 2,7.89543 2,9 L2,20 C2,21.1046 2.89543,22 4,22 L15,22 C16.1046,22 17,21.1046 17,20 L17,9 C17,7.89543 16.1046,7 15,7 L4,7 Z"
               />
               <p>
-                {{
+                <!-- {{
                   (collectionHeader &&
                     collectionHeader.contracts[0].address.slice(0, 4)) +
                   "...." +
                   (collectionHeader &&
                     collectionHeader.contracts[0].address.slice(38))
-                }}
+                }} -->
               </p>
             </div>
             <!-- <div
@@ -96,8 +98,8 @@
         <strong>{{ collectionHeader && collectionHeader.category }}</strong>
         · Chain
         <strong class="capitalize">
-          {{ collectionHeader && collectionHeader.contracts[0].chain }}</strong
-        >
+          {{ collectionHeader && collectionHeader.contracts[0]?.chain }}
+        </strong>
         · Total Supply
         <strong class="capitalize">
           {{ collectionHeader && collectionHeader.total_supply }}</strong
@@ -146,7 +148,7 @@
 
       <collection-activities
         v-if="activeBtn == 'activity'"
-        :contractAddress="collectionHeader?.contracts[0].address"
+        :contractAddress="collectionHeader?.contracts[0]?.address"
       />
     </section>
   </div>
@@ -206,6 +208,8 @@ const specificCollectionDetails = (paramsID) => {
         0,
         collectionHeader.value.image_url.indexOf("?")
       );
+
+      console.log(collectionHeader.value);
     })
     .catch((err) => console.error(err));
 };
