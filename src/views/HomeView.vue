@@ -324,11 +324,6 @@ import "animate.css";
 import { computed, inject, onMounted, ref, watch } from "vue";
 import SwipingCards from "@/components/swipingCards.vue";
 
-const value = ref("1");
-watch(value, () => {
-  console.log(value.value);
-});
-
 const theme = inject("theme");
 
 const darkShade = ref("rgba(0, 0, 0, 0.247), #0e182f 90%");

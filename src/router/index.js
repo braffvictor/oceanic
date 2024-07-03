@@ -42,6 +42,11 @@ const routes = [
         name: "What Are NFTs",
         component: () => import("../views/learn/what-are-nfts.vue"),
       },
+      {
+        path: "/learn/how-to-create-nfts",
+        name: "How To Create NFTs",
+        component: () => import("../views/learn/how-to-create-nfts.vue"),
+      },
     ],
   },
   {

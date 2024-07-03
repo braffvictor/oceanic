@@ -184,56 +184,164 @@
           />
         </div>
 
-        <section class="h-auto mt-5 p-7 md:p-12">
-          <main
-            class="grid md:grid-cols-2 items-center bg-slate-50 dark:bg-slate-800 transit rounded-2xl md:p-12 p-8"
-          >
-            <div class="w-full">
-              <p
-                class="shining md:uppercase text-3xl md:text-4xl text-left font-extrabold"
-              >
-                Create, Sell & Collect NFTs At Oceanic
-              </p>
-              <p class="text-gray-400 mt-5">
-                Created with the collaboration of over 60 of the world's best
-                Nuron Artists.
-              </p>
+        <p class="font-bold text-2xl mt-5">
+          Trading Card NFTs and Digital Collectibles
+        </p>
+        <p class="mt-2">
+          NFTs bring some extra oomph to your traditional collectibles. Instead
+          of a physical basketball trading card that sits in a binder under your
+          bed, you can collect dynamic NFTs from the NBA’s collection “The
+          Association,” where each card changes based on that player and team’s
+          performance.
+        </p>
 
-              <div class="flex mt-8 gap-x-5 justify-center md:justify-start">
-                <d-button
-                  type="outlined"
-                  class="border-green-400 !text-green-400 active:!bg-green-300 dark:active:!bg-green-400"
-                  >Login</d-button
-                >
-                <d-button
-                  type="elevated"
-                  class="shadow-green-400 bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
-                  to="/collection/red"
-                />
-              </div>
-            </div>
-            <div class="rounded-xl text-center mx-auto mt-8 md:mt-0">
-              <img
-                src="https://solanart.io/solanart-logo-black.svg"
-                alt=""
-                width="300"
-                class="animate__animated animate__tada animate__delay-5s animate__repeat-3 animate__slow"
+        <!-- for newsletter -->
+        <main class="mt-5">
+          <div
+            class="bg-gray-100 p-3 md:p-6 dark:bg-gray-700 relative p-3 rounded-3xl transit"
+          >
+            <img
+              src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
+              alt=""
+            />
+            <p class="text-2xl mt-7 font-semibold">
+              Sign up for our newsletter
+            </p>
+            <p class="text-lg">
+              Join our newsletter to get web3 news, updates, interviews, and
+              deep dives all in one place.
+            </p>
+            <div class="my-3 flex">
+              <input
+                type="text"
+                placeholder="Your Email Address"
+                class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-800 dark:caret-slate-100 md:w-9/12 w-8/12 h-12 justify-self-start inline-block align-start rounded-lg indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
               />
+              <d-button
+                class="w-4/12 md:w-3/12 text-center h-12 ml-3 bg-green-400 dark:bg-green-500 dark:!text-slate-900 !text-slate-100"
+                type="filled"
+                >Sign Up</d-button
+              >
             </div>
-          </main>
-        </section>
+          </div>
+        </main>
+
+        <!-- more writeups -->
+        <p class="font-bold text-2xl mt-5">Photography NFTs</p>
+        <p class="mt-2">
+          A photography NFT is a unique digital asset that represents a specific
+          photograph or artwork. It is stored and recorded on a blockchain, a
+          decentralized, immutable digital ledger technology.
+        </p>
+        <p class="mt-2">
+          Photography NFTs are stored and transferred digitally, allowing them
+          to be easily shared and displayed online. The ownership and
+          authenticity of a photography NFT is verified and recorded on the
+          blockchain, allowing it to be easily transferred between users.
+        </p>
+        <p class="mt-2">
+          NFTs offer a way for photographers and artists to sell and distribute
+          their work in a digital format, while also providing collectors with a
+          unique and verifiable digital item.
+        </p>
+        <p class="mt-2">
+          Justin Aversano made headlines with his Twin Flames collection, a
+          collection of 100 twin portraits. Aversano drew inspiration from his
+          relationship with his fraternal twin for this collection. The “Twin
+          Flames” collection became known as the first major NFT photography
+          collection of its kind and catapulted Aversano into one of the world's
+          highest-selling photographers.
+        </p>
+
+        <!--twin photographic image -->
+        <div
+          class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden shadow-lg shadow-gray-400"
+        >
+          <img
+            src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fca26aba82126617d12e5_6459908abbc5b1e6e1e2d5ac_Screenshot%25202023-05-08%2520at%25205.14.54%2520PM.png"
+            alt=""
+          />
+        </div>
+
+        <p class="mt-10 italic font-semibold">And so much more...</p>
       </div>
+    </section>
+    <section class="h-auto mt-5">
+      <main class="ml-4 md:mx-8">
+        <p class="font-bold text-lg md:text-xl dark:text-slate-100">
+          Featured NFT Articles
+        </p>
+
+        <!-- nft cards -->
+        <swiping-cards class="py-5">
+          <template #cards>
+            <swiper-slide v-for="learn in learnNft" :key="learn.name">
+              <!-- for home nft cards -->
+              <home-card :nft="learn" :learn="true" :route-name="learn.route" />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
+      </main>
     </section>
   </div>
 </template>
 
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
-import { onMounted } from "vue";
+import homeCard from "@/components/cards/homeCard.vue";
+import SwipingCards from "@/components/swipingCards.vue";
+import { computed, onMounted } from "vue";
 
 onMounted(() => {
+  // to save scroll screen position
   window.scrollTo(0, 0);
+  // document.addEventListener("DOMContentLoaded", function (event) {
+  //   var scrollpos = localStorage.getItem("scrollpos");
+  //   if (scrollpos) window.scrollTo(0, scrollpos);
+  // });
+  // window.onbeforeunload = function (e) {
+  //   localStorage.setItem("scrollpos", window.scrollY);
+  // };
+  // Add additional true parameter to force reload, but without restoring the position.
+  // document.location.reload(true)
 });
+
+const learnNft = computed(() => {
+  return [
+    {
+      name: "How to create an NFT",
+      image_url:
+        "https://opensea.io/static/images/learn-center//how-to-create-nft.png",
+      route: "/learn/how-to-create-nfts",
+    },
+    {
+      name: "What is a crypto wallet",
+      image_url:
+        "https://opensea.io/static/images/learn-center//what-is-crypto-wallet.png",
+      route: "/learn/what-is-a-crypto-wallet",
+    },
+    {
+      name: "About Oceanic",
+      image_url:
+        "https://i.pinimg.com/736x/fc/98/08/fc9808ed756f6b11956c3983ae5412c6.jpg",
+      route: "/learn/about-us",
+    },
+  ];
+});
+</script>
+
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import Swiper styles
+import "swiper/css";
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+};
 </script>
 
 <style>

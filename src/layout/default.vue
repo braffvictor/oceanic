@@ -582,11 +582,11 @@ const dropLinks = computed(() => {
       children: [
         {
           name: "What is an NFT",
-          to: "/",
+          to: "/learn/what-are-nfts",
         },
         {
           name: "How to create an NFT",
-          to: "/",
+          to: "/learn/how-to-create-nfts",
         },
         {
           name: "How to purchased an NFT",
