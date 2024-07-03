@@ -1,21 +1,15 @@
-const themeState = localStorage.getItem("theme");
-
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,
   pwa: {
-    themeColor:
-      themeState == "light" || themeState == null ? "#4ADE80" : "#1ED661",
-    msTileColor:
-      themeState == "light" || themeState == null ? "#4ADE80" : "#1ED661",
+    themeColor: "#4ADE80",
+    msTileColor: "#4ADE80",
     appleMobileWebAppCache: "yes",
     manifestOptions: {
-      background_color:
-        themeState == "light" || themeState == null ? "#4ADE80" : "#1ED661",
+      background_color: "#4ADE80",
       name: "Oceanic",
       short_name: "Oceanic",
-      theme_color:
-        themeState == "light" || themeState == null ? "#4ADE80" : "#1ED661",
+      theme_color: "#4ADE80",
     },
   },
 });
