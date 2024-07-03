@@ -388,10 +388,16 @@ const learnNft = computed(() => {
       route: "/learn/how-to-create-nfts",
     },
     {
-      name: "What is a crypto wallet",
+      name: "What is web3",
       image_url:
-        "https://opensea.io/static/images/learn-center//what-is-crypto-wallet.png",
-      route: "/learn/what-is-a-crypto-wallet",
+        "https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5c538f6e7736ab8f4_63d1a70e2fe07c7f11a6b195_637bb7c970c23116e14990d1_What%252520is%252520Web3-p-1080.png",
+      route: "/learn/what-is-web3",
+    },
+    {
+      name: "What is a Blockchain",
+      image_url:
+        "https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5ef66bd821c0c477a_63d1a70f914ea5352493efb5_637eb7b98b0e8434b165a1b1_What%252520is%252520a%252520blockchain.png",
+      route: "/learn/what-is-a-blockchain",
     },
     {
       name: "About Oceanic",

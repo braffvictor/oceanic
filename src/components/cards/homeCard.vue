@@ -3,7 +3,7 @@
     <div
       :class="cardSize"
       @click="checkRoute()"
-      class="rounded-2xl hover:-translate-y-2 group shadow-lg relative bg-slate-50 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
+      class="rounded-2xl hover:-translate-y-2 group shadow-lg relative bg-slate-50 active:bg-slate-200 dark:active:bg-slate-700 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
     >
       <div class="min-h-36 max-h-36 w-full overflow-hidden">
         <img

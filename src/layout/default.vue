@@ -589,8 +589,16 @@ const dropLinks = computed(() => {
           to: "/learn/how-to-create-nfts",
         },
         {
-          name: "How to purchased an NFT",
-          to: "/",
+          name: "What is a blockchain",
+          to: "/learn/what-is-a-blockchain",
+        },
+        {
+          name: "What is web3",
+          to: "/learn/what-is-web3",
+        },
+        {
+          name: "About Us",
+          to: "/learn/About Us",
         },
       ],
     },

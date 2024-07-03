@@ -47,6 +47,16 @@ const routes = [
         name: "How To Create NFTs",
         component: () => import("../views/learn/how-to-create-nfts.vue"),
       },
+      {
+        path: "/learn/what-is-a-blockchain",
+        name: "What Is A Blockchain",
+        component: () => import("../views/learn/what-is-a-blockchain.vue"),
+      },
+      {
+        path: "/learn/what-is-web3",
+        name: "What Is A Web3",
+        component: () => import("../views/learn/what-is-web3.vue"),
+      },
     ],
   },
   {
