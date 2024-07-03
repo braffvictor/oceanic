@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gradient-to-b from-green-100 transit via-purple-100 to-slate-50 dark:from-green-300 dark:to-slate-900 min-h-screen to-100%%"
+    class="bg-gradient-to-b from-green-100 transit via-purple-100 to-slate-50 dark:from-emerald-600 dark:to-slate-900 min-h-screen to-100%%"
   >
     <section
       class="mx-auto transit text-center md:text-left text-slate-900 dark:text-slate-50 p-2 w-11/12 md:w-7/12"
@@ -229,6 +229,11 @@
 
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>
 
 <style>
