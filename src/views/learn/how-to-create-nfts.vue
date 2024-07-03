@@ -384,12 +384,6 @@ const learnNft = computed(() => {
         "https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5c538f6e7736ab8f4_63d1a70e2fe07c7f11a6b195_637bb7c970c23116e14990d1_What%252520is%252520Web3-p-1080.png",
       route: "/learn/what-is-web3",
     },
-    {
-      name: "About Oceanic",
-      image_url:
-        "https://i.pinimg.com/736x/fc/98/08/fc9808ed756f6b11956c3983ae5412c6.jpg",
-      route: "/learn/about-us",
-    },
   ];
 });
 </script>

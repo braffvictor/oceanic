@@ -413,13 +413,6 @@ const learnNft = computed(() => {
         "https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5ef66bd821c0c477a_63d1a70f914ea5352493efb5_637eb7b98b0e8434b165a1b1_What%252520is%252520a%252520blockchain.png",
       route: "/learn/what-is-a-crypto-wallet",
     },
-
-    {
-      name: "About Oceanic",
-      image_url:
-        "https://i.pinimg.com/736x/fc/98/08/fc9808ed756f6b11956c3983ae5412c6.jpg",
-      route: "/learn/about-us",
-    },
   ];
 });
 </script>
