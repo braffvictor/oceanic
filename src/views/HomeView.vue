@@ -113,7 +113,7 @@
     <big-tab />
 
     <!-- nft cards collection swipes -->
-    <section class="h-auto md:mt-12 mt-8">
+    <section class="h-auto md:mt-12 mt-8 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">
           Notable Collection
@@ -134,7 +134,7 @@
       </main>
     </section>
 
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">
           Top Collector Buys Today
@@ -155,7 +155,7 @@
       </main>
     </section>
 
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">
           Trending in PFPs
@@ -175,7 +175,7 @@
         </swiping-cards>
       </main>
     </section>
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">
           Trending in Ranks
@@ -195,7 +195,7 @@
         </swiping-cards>
       </main>
     </section>
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">
           Trending in Artist
@@ -216,7 +216,7 @@
       </main>
     </section>
 
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">
           Trending in Artworks
@@ -237,7 +237,7 @@
       </main>
     </section>
 
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">Explore</p>
 
@@ -256,7 +256,7 @@
       </main>
     </section>
 
-    <section class="h-auto mt-5">
+    <section class="h-auto mt-5 min-h-72">
       <main class="ml-4 md:mx-8">
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">NFT 101</p>
 
@@ -272,7 +272,7 @@
       </main>
     </section>
 
-    <section class="h-auto mt-5 p-7 md:p-12">
+    <section class="h-auto mt-5 min-h-72 p-7 md:p-12">
       <main
         class="grid md:grid-cols-2 items-center bg-slate-50 dark:bg-slate-800 transit rounded-2xl md:p-12 p-8"
       >
