@@ -155,7 +155,6 @@
 </template>
 
 <script setup>
-import HomeCard from "@/components/cards/homeCard.vue";
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";

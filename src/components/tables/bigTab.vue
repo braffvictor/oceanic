@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-auto min-h-96 bg-white dark:bg-slate-900 pt-5 w-full md:px-8 mt-20 md:mt-0 px-4 transit"
+    class="h-auto min-h-96 bg-white dark:bg-slate-900 pt-5 w-full md:px-8 mt-28 md:mt-0 px-4 transit"
   >
     <div class="flex items-center gap-x-5">
       <p class="dark:text-slate-100 inline">NFTs Collection</p>

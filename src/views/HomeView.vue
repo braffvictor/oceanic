@@ -21,22 +21,21 @@
         </div>
 
         <div
-          class="h-full md:rounded-xl p-4 px-8 py-16 md:py-8 md:px-12 absolute top-0 text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
+          class="h-full md:rounded-xl p-4 px-8 py-12 md:py-8 md:px-12 absolute top-0 text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
         >
           <div class="grid md:grid-cols-2">
             <div>
               <p
                 class="text-5xl md:text-7xl font-semibold dark:text-slate-100 text-slate-900 transit"
               >
-                Trade NFTs<br />at
-                <span class="shining uppercase font-semibold">Lowest</span>
-                <br />cost
+                <span class="shining uppercase font-semibold">Oceanic</span>
+                - <br />Discover, collect and trade NFTs
               </p>
               <p
-                class="dark:text-slate-100 text-slate-900 md:text-2xl my-5 md:my-10"
+                class="dark:text-slate-100 text-slate-900 md:text-2xl my-5 md:my-10 text-sm"
               >
-                Buy or sell NFTs and save in fees. The lowest-fee marketplace on
-                Solana.
+                Get quick and easy access to digital collectibles and explore,
+                buy and sell NFTs...
               </p>
 
               <!-- login and registration button -->
@@ -127,7 +126,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -148,7 +147,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -169,7 +168,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -189,7 +188,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -209,7 +208,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -230,7 +229,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -249,7 +248,7 @@
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <home-card :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -265,7 +264,7 @@
           <template #cards>
             <swiper-slide v-for="learn in learnNft" :key="learn.name">
               <!-- for home nft cards -->
-              <home-card :nft="learn" :learn="true" :route-name="learn.route" />
+              <NftCard :nft="learn" :learn="true" :route-name="learn.route" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -315,7 +314,7 @@
 
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
-import homeCard from "@/components/cards/homeCard.vue";
+import NftCard from "@/components/cards/nftCard.vue";
 import bigTab from "@/components/tables/bigTab.vue";
 import svgComp from "@/components/svgComp.vue";
 import "animate.css";

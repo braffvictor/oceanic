@@ -28,7 +28,7 @@
         class="grid grid-cols-2 justify-center items-center md:grid-cols-5 mt-7 gap-6 text-center mx-auto"
         v-if="filterCollection.length > 0"
       >
-        <HomeCard
+        <nftCard
           v-for="nft in filterCollection"
           :key="nft.name"
           :nft="nft"
@@ -65,7 +65,7 @@
 <script setup>
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import HomeCard from "@/components/cards/homeCard.vue";
+import nftCard from "@/components/cards/nftCard.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 

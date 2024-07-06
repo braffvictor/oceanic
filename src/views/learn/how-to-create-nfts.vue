@@ -334,7 +334,7 @@
           <template #cards>
             <swiper-slide v-for="learn in learnNft" :key="learn.name">
               <!-- for home nft cards -->
-              <home-card :nft="learn" :learn="true" :route-name="learn.route" />
+              <nft-card :nft="learn" :learn="true" :route-name="learn.route" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -345,7 +345,7 @@
 
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
-import homeCard from "@/components/cards/homeCard.vue";
+import NftCard from "@/components/cards/nftCard.vue";
 import SwipingCards from "@/components/swipingCards.vue";
 import { computed, onMounted } from "vue";
 
@@ -394,6 +394,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/css";
+import NftCard from "@/components/cards/nftCard.vue";
 export default {
   components: {
     Swiper,

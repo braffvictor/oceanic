@@ -2,7 +2,7 @@
   <div class="bg-slate-50 dark:bg-slate-900 min-h-screen transit px-5 md:px-7">
     <main class="mt-10 text-slate-900 dark:text-slate-100">
       <section class="">
-        <p class="text-3xl md:text-6xl font-bold">
+        <p class="text-3xl md:text-5xl font-bold">
           Building an open digital economy
         </p>
         <p class="font-light mt-3">
@@ -23,7 +23,7 @@
           developers to build rich, integrated marketplaces for their digital
           items.
         </p>
-        <div class="py-7 px-7">
+        <div class="py-14 px-7">
           <img
             class="mx-auto text-center"
             src="https://static.opensea.io/about/All-NFT-Categories-Illustration.svg"
@@ -47,6 +47,75 @@
               <p class="text-sm md:text-lg">{{ perk.text }}</p>
             </div>
           </div>
+        </main>
+
+        <!-- story section -->
+        <main class="mt-14">
+          <p class="text-center font-bold text-2xl md:text-5xl">Our story</p>
+          <p class="text-center font-light text-lg mt-1">
+            Navigating the uncharted waters of non-fungible tokens
+          </p>
+
+          <section class="mt-5 md:flex items-center gap-x-5">
+            <!-- image -->
+            <div>
+              <img src="https://static.opensea.io/about/founders.png" alt="" />
+            </div>
+
+            <!-- writeup -->
+            <div class="md:w-1/2">
+              <p class="font-light mt-3">
+                In 2017 the world witnessed the birth of CryptoKitties. For the
+                first time, the world experienced a decentralized application
+                built on blockchains but targetted towards a mainstream
+                audience.
+              </p>
+              <p class="font-light mt-3">
+                While CryptoKitties felt like a toy to many, it represented a
+                dramatic shift in how we interact with items in the digital
+                world. While previous digital items lived on company servers,
+                blockchain-native items lived on shared, public blockchains
+                owned by no single party. They could be viewed anywhere,
+                exchanged openly, and truly owned in a way that was never before
+                possible in the digital world.
+              </p>
+              <p class="font-light mt-3">
+                Fascinated by the movement that was forming, Devin Finzer and
+                Alex Atallah joined early adopter communities in Discord and
+                started talking to users. With the OpenSea beta launch in
+                December 2017, the first open marketplace for any non-fungible
+                token on the Ethereum blockchain was bor
+              </p>
+              <p class="font-light mt-3">
+                Today, we’re proud to remain the largest general marketplace for
+                user-owned digital items, supporting multiple blockchains, with
+                the broadest set of categories and the best prices for new
+                emerging digital item classes.
+              </p>
+              <p class="font-light mt-3">
+                As a company, we’re thrilled to be at the center of this growing
+                industry, and will continue to invest in our core infrastructure
+                as we build the most accessible marketplace for buyers, sellers,
+                and creators.
+              </p>
+            </div>
+          </section>
+        </main>
+
+        <!-- investors logo section -->
+        <main class="py-12">
+          <p class="text-center font-bold text-2xl md:text-5xl">
+            Backed by top firms & industry leaders
+          </p>
+          <p class="text-center mt-1 font-light text-lg">
+            who are helping us pave the way towards a brand new digital economy
+          </p>
+
+          <section class="flex mt-4 flex-wrap gap-7 justify-center">
+            <div class="" v-for="logo in investorsLogos" :key="logo.img">
+              <img :src="logo.img" alt="Investors Logo" width="180" />
+            </div>
+          </section>
         </main>
       </section>
     </main>
@@ -77,6 +146,41 @@ const perks = computed(() => {
       image: "https://static.opensea.io/about/icon-money.svg",
       name: "$20B+",
       text: "Volume",
+    },
+  ];
+});
+
+const investorsLogos = computed(() => {
+  return [
+    {
+      img: "https://static.opensea.io/about/vc-andressen-horowitz.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-coinbase.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-ycombinator.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-trust-wallet.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-quantstamp.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-blockstack.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-NFTKred.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-founders-fund.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-blockchain-capital.svg",
+    },
+    {
+      img: "https://static.opensea.io/about/vc-pascal-capital.svg",
     },
   ];
 });

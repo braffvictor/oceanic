@@ -5,7 +5,7 @@
     <p class="text-2xl md:text-3xl font-bold">All Events</p>
     <div class="flex text-lg md:text-xl font-light mt-3 justify-between">
       <p>Event Type</p>
-      <DDropDown :title="event" :children="eventBtns" />
+      <DDropDown class="md:hidden" :title="event" :children="eventBtns" />
     </div>
     <div class="flex mt-3 gap-x-6 hidden md:block">
       <DButton
