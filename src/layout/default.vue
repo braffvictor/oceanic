@@ -112,7 +112,7 @@
         </button>
 
         <!-- Cart icon -->
-        <button class="relative">
+        <button class="relative" @click="cartList = !cartList">
           <p
             class="bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs top-0 right-0 absolute px-1"
           >
@@ -463,6 +463,91 @@
     </section>
     <!-- todo the translation widget -->
     <!-- <div class="gtranslate_wrapper"></div> -->
+
+    <!-- todo cart List -->
+    <section v-if="cartList">
+      <aside
+        class="inset-0 fixed top-0 left-0 z-20 backdrop-blur-md grid md:grid-cols-3 md:px-3"
+      >
+        <div
+          class="text-slate-900 w-screen md:w-auto dark:text-slate-100 pt-4 mt-16 md:mt-20 px-4 col-start-3 bg-slate-100 dark:bg-slate-800 md:rounded-xl"
+        >
+          <!-- top text and close icon -->
+          <div class="flex justify-between my-2">
+            <p class="font-semibold text-xl md:text-2xl">Your Cart</p>
+            <!-- close icon -->
+            <button @click="cartList = false">
+              <svg-comp
+                Sclass="active:stroke-red-500"
+                icon="M12,14.1215 L17.3032,19.4248 C17.889,20.0106 18.8388,20.0106 19.4246,19.4248 C20.0104,18.839 20.0104,17.8893 19.4246,17.3035 L14.1213,12.0002 L19.4246,6.6969 C20.0104,6.11112 20.0104,5.16137 19.4246,4.57558 C18.8388,3.9898 17.889,3.9898 17.3032,4.57558 L12,9.87888 L6.69665,4.57557 C6.11086,3.98978 5.16111,3.98978 4.57533,4.57557 C3.98954,5.16136 3.98954,6.1111 4.57533,6.69689 L9.87863,12.0002 L4.57533,17.3035 C3.98954,17.8893 3.98954,18.839 4.57533,19.4248 C5.16111,20.0106 6.11086,20.0106 6.69665,19.4248 L12,14.1215 Z"
+              />
+            </button>
+          </div>
+
+          <!-- divider -->
+          <div
+            class="border-b border w-full"
+            :class="
+              themeState == 'light' || themeState == null
+                ? 'whiteT border-b-gray-200'
+                : 'darkT border-b-gray-600'
+            "
+          ></div>
+
+          <div class="flex justify-between mt-3 text-lg mt-3">
+            <p class="font-semibold">1 item</p>
+            <p class="font-semibold">Clear all</p>
+          </div>
+
+          <!-- carted nfts List -->
+          <main
+            class="flex items-center gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-2 rounded-xl transit group"
+          >
+            <div class="rounded-xl overflow-hidden">
+              <img
+                src="https://i.seadn.io/gae/qZkHTXsg5bS4HQItw906r7yurvM92GM1HEhYd_danN7sEqaILDo_rNqQ15u2ASmPjzs1RXM778m3rQ9dmieHgydQmI-k15-0cAlBzw?auto=format&dpr=1&w=512"
+                alt=""
+                width="100"
+              />
+            </div>
+            <div>
+              <p class="font-semibold text-slate-900 dark:text-slate-100 flex">
+                The Randoms #3233
+              </p>
+              <p class="font-light text-slate-900 dark:text-slate-100 flex">
+                The Randoms Nft
+                <img
+                  src="@/assets/verified.svg"
+                  alt="tick"
+                  class="max-w-5 block pl-1"
+                />
+              </p>
+            </div>
+            <div class="group-hover:hidden">
+              <p class="font-light text-gray-400 flex">0.051234ETH</p>
+            </div>
+            <div class="group-hover:block hidden">
+              <button>
+                <svg-comp
+                  Sclass="active:stroke-red-500"
+                  icon="M12,14.1215 L17.3032,19.4248 C17.889,20.0106 18.8388,20.0106 19.4246,19.4248 C20.0104,18.839 20.0104,17.8893 19.4246,17.3035 L14.1213,12.0002 L19.4246,6.6969 C20.0104,6.11112 20.0104,5.16137 19.4246,4.57558 C18.8388,3.9898 17.889,3.9898 17.3032,4.57558 L12,9.87888 L6.69665,4.57557 C6.11086,3.98978 5.16111,3.98978 4.57533,4.57557 C3.98954,5.16136 3.98954,6.1111 4.57533,6.69689 L9.87863,12.0002 L4.57533,17.3035 C3.98954,17.8893 3.98954,18.839 4.57533,19.4248 C5.16111,20.0106 6.11086,20.0106 6.69665,19.4248 L12,14.1215 Z"
+                />
+              </button>
+            </div>
+          </main>
+
+          <!-- divider -->
+          <div
+            class="border-b border w-full mt-4"
+            :class="
+              themeState == 'light' || themeState == null
+                ? 'whiteT border-b-gray-200'
+                : 'darkT border-b-gray-600'
+            "
+          ></div>
+        </div>
+      </aside>
+    </section>
   </div>
 </template>
 
@@ -520,6 +605,7 @@ useHead({
 
 //for controlling the drop down nav
 const show = ref(false);
+const cartList = ref(false);
 
 //chaning the route....and closing the nav bar
 function closeMenu(to) {
