@@ -476,7 +476,7 @@
           <div class="flex justify-between my-2">
             <p class="font-semibold text-xl md:text-2xl">Your Cart</p>
             <!-- close icon -->
-            <button @click="cartList = false">
+            <button @click="(cartList = false), (num = 1)">
               <svg-comp
                 Sclass="active:stroke-red-500"
                 icon="M12,14.1215 L17.3032,19.4248 C17.889,20.0106 18.8388,20.0106 19.4246,19.4248 C20.0104,18.839 20.0104,17.8893 19.4246,17.3035 L14.1213,12.0002 L19.4246,6.6969 C20.0104,6.11112 20.0104,5.16137 19.4246,4.57558 C18.8388,3.9898 17.889,3.9898 17.3032,4.57558 L12,9.87888 L6.69665,4.57557 C6.11086,3.98978 5.16111,3.98978 4.57533,4.57557 C3.98954,5.16136 3.98954,6.1111 4.57533,6.69689 L9.87863,12.0002 L4.57533,17.3035 C3.98954,17.8893 3.98954,18.839 4.57533,19.4248 C5.16111,20.0106 6.11086,20.0106 6.69665,19.4248 L12,14.1215 Z"
@@ -501,7 +501,10 @@
 
           <!-- carted nfts List -->
           <main
-            class="flex items-center gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-2 rounded-xl transit group"
+            class="flex items-center gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-2 rounded-xl transit group overflow-auto"
+            v-for="n in num"
+            @click="num++"
+            :key="n"
           >
             <div class="rounded-xl overflow-hidden">
               <img
@@ -558,6 +561,8 @@ import DSearchBar from "@/components/utils/DSearchBar.vue";
 import router from "@/router";
 import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref, watch } from "vue";
+
+const num = ref(1);
 
 onMounted(() => {
   getNftCollection("eth-main");
