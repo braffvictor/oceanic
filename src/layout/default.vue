@@ -465,12 +465,16 @@
     <!-- <div class="gtranslate_wrapper"></div> -->
 
     <!-- todo cart List -->
-    <section v-if="cartList">
+    <section
+      v-if="cartList"
+      class="transit inset-0 fixed overflow-auto top-0 left-0 z-20 min-h-screen h-auto scrolls"
+      @click="show = false"
+    >
       <aside
-        class="inset-0 fixed top-0 left-0 z-20 backdrop-blur-md grid md:grid-cols-3 md:px-3"
+        class="backdrop-blur-md grid md:grid-cols-3 md:px-3 transit min-h-screen h-auto scrolls"
       >
         <div
-          class="text-slate-900 w-screen md:w-auto dark:text-slate-100 pt-4 mt-16 md:mt-20 px-4 col-start-3 bg-slate-100 dark:bg-slate-800 md:rounded-xl"
+          class="text-slate-900 transit w-screen md:w-auto dark:text-slate-100 pt-4 mt-16 md:mt-20 px-4 col-start-3 bg-slate-100 dark:bg-slate-800 md:rounded-xl"
         >
           <!-- top text and close icon -->
           <div class="flex justify-between my-2">
@@ -501,7 +505,7 @@
 
           <!-- carted nfts List -->
           <main
-            class="flex items-center gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-2 rounded-xl transit group overflow-auto"
+            class="flex items-center justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-2 rounded-xl transit group overflow-auto"
             v-for="n in num"
             @click="num++"
             :key="n"
@@ -509,6 +513,7 @@
             <div class="rounded-xl overflow-hidden">
               <img
                 src="https://i.seadn.io/gae/qZkHTXsg5bS4HQItw906r7yurvM92GM1HEhYd_danN7sEqaILDo_rNqQ15u2ASmPjzs1RXM778m3rQ9dmieHgydQmI-k15-0cAlBzw?auto=format&dpr=1&w=512"
+                class="transit"
                 alt=""
                 width="100"
               />
@@ -527,9 +532,11 @@
               </p>
             </div>
             <div class="group-hover:hidden">
-              <p class="font-light text-gray-400 flex">0.051234ETH</p>
+              <p class="font-light text-gray-400 flex">0.0234ETH</p>
             </div>
-            <div class="group-hover:block hidden">
+            <div
+              class="group-hover:block hidden px-5 md:px-4 float-end text-right"
+            >
               <button>
                 <svg-comp
                   Sclass="active:stroke-red-500"
@@ -548,6 +555,23 @@
                 : 'darkT border-b-gray-600'
             "
           ></div>
+
+          <!-- total price of all carted nfts -->
+          <div class="flex justify-between mt-4">
+            <p class="font-semibold">Total Price</p>
+            <div class="font-semibold">
+              <p class="font-semibold">0.0035ETH</p>
+              <p class="font-thin text-slate-400">$10.36</p>
+            </div>
+          </div>
+
+          <div class="w-full mt-4 mb-6">
+            <d-button
+              type="elevated"
+              class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
+              >Complete purchase</d-button
+            >
+          </div>
         </div>
       </aside>
     </section>

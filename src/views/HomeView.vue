@@ -32,7 +32,7 @@
                 - <br />Discover, collect and trade NFTs
               </p>
               <p
-                class="dark:text-slate-100 text-slate-900 md:text-2xl my-5 md:my-10 text-sm"
+                class="dark:text-slate-100 text-slate-900 md:text-2xl font-light my-5 md:my-10 text-sm"
               >
                 Get quick and easy access to digital collectibles and explore,
                 buy and sell NFTs...
