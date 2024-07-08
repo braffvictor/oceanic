@@ -32,8 +32,21 @@
         ></div>
 
         <div class="flex justify-between mt-3 text-lg mt-3">
-          <p class="font-semibold">1 item</p>
-          <p class="font-semibold">Clear all</p>
+          <p class="font-semibold">
+            {{
+              cartedNfts && cartedNfts.length > 0
+                ? cartedNfts && cartedNfts.length
+                : "0"
+            }}
+            item{{ cartedNfts && cartedNfts.length > 1 ? "s" : "" }}
+          </p>
+          <p
+            class="font-semibold active:text-green-600 active:text-lg active:scale-95 transit"
+            @click="clearList"
+            v-if="cartedNfts && cartedNfts.length > 0"
+          >
+            Clear all
+          </p>
         </div>
 
         <!-- todo carted nfts List -->
@@ -117,8 +130,11 @@ const props = defineProps({
   },
 });
 
-const cartedNfts = JSON.parse(localStorage.getItem("watchList")) || [];
-console.log(cartedNfts[0]);
+let cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
+function clearList() {
+  localStorage.removeItem("watchList");
+  cartedNfts.value = ref(JSON.parse(localStorage.getItem("watchList")) || []);
+}
 
 const num = ref(1);
 </script>

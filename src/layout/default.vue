@@ -114,9 +114,10 @@
         <!-- Cart icon -->
         <button class="relative" @click="cartList = !cartList">
           <p
+            v-if="cartedNfts.length > 0"
             class="bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs top-0 right-0 absolute px-1"
           >
-            {{ localNfts }}
+            {{ cartedNfts.length }}
           </p>
           <svg-comp
             Sclass="active:stroke-green-400"
@@ -483,7 +484,7 @@ import router from "@/router";
 import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref, watch } from "vue";
 
-const num = ref(1);
+const cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
 
 onMounted(() => {
   getNftCollection("eth-main");
@@ -545,22 +546,12 @@ function closeMenu(to) {
 // });
 
 //get local storage watchlist nfts
-const localNfts = ref("0");
 
-let checkStorage = localStorage.getItem("watchList")
-  ? JSON.parse(localStorage.getItem("watchList")).length
-  : 0;
-localNfts.value = checkStorage;
 const themeState = ref(localStorage.getItem("theme"));
 //change theme function
 function changeTheme(theme) {
   localStorage.setItem("theme", theme);
   themeState.value = localStorage.getItem("theme");
-
-  let checkStorage = localStorage.getItem("watchList")
-    ? JSON.parse(localStorage.getItem("watchList")).length
-    : 0;
-  localNfts.value = checkStorage;
 }
 
 //for injecting and sharing the value of themeState througout the default children
