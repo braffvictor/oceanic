@@ -363,7 +363,7 @@ const getNftCollection = (chain) => {
         }
       ));
 
-      console.log(red);
+      // console.log(red);
     })
     .catch((err) => console.error(err));
 };

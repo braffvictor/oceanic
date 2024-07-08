@@ -48,16 +48,20 @@
             <p
               class="text-2xl md:text-4xl font-semibold text-slate-900 dark:text-slate-100"
             >
-              {{ nftDetails && nftDetails.stats.floor_price.slice(0, 5) }}ETH
+              {{
+                nftDetails && nftDetails.stats.floor_eth.toString().slice(0, 5)
+              }}ETH
               <span class="text-sm text-gray-400"
                 >${{
-                  (
-                    Number(
-                      nftDetails && nftDetails.stats.floor_price.slice(0, 5)
-                    ) * 3446.74
-                  )
+                  nftDetails &&
+                  nftDetails.stats.floor_price
                     .toLocaleString()
-                    .slice(0, 7)
+                    .slice(
+                      0,
+                      (nftDetails && nftDetails.stats.floor_price)
+                        .toLocaleString()
+                        .indexOf(".")
+                    ) + ".00"
                 }}</span
               >
             </p>
@@ -65,7 +69,8 @@
               <DButton class="w-full" type="outlined" :to="route.fullPath"
                 >Buy Now For
                 {{
-                  nftDetails && nftDetails.stats.floor_price.slice(0, 5)
+                  nftDetails &&
+                  nftDetails.stats.floor_eth.toString().slice(0, 5)
                 }}ETH</DButton
               >
               <DButton class="w-full" :to="route.fullPath"
@@ -274,7 +279,8 @@ const specificCollectionNfts = (routeParams) => {
         nft.action = "red";
         nft.cart = false;
         nft.stats = {
-          floor_price: (Number(nft.identifier) / 4000).toString(),
+          floor_price: (Number(nft.identifier) / 4000) * 3037.97,
+          floor_eth: Number(nft.identifier) / 4000,
           floor_price_symbol: "ETH",
         };
       });
@@ -282,7 +288,6 @@ const specificCollectionNfts = (routeParams) => {
       nftDetails.value = collectionNfts.value.find(
         (nft) => nft.identifier == route.query.identifier
       );
-      console.log(nftDetails.value, "is the nft");
     })
     .catch((err) => console.error(err));
 };
