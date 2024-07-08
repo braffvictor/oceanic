@@ -60,7 +60,7 @@
               </p>
             </div>
             <div class="group-hover:hidden">
-              <p class="font-light text-gray-400 flex">{{ cart.category }}</p>
+              <p class="font-light text-gray-400 flex">{{ cart.identifier }}</p>
             </div>
             <div
               class="group-hover:block hidden px-5 md:px-4 float-end text-right"
