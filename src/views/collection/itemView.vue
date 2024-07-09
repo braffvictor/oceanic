@@ -73,7 +73,10 @@
                   nftDetails.stats.floor_eth.toString().slice(0, 5)
                 }}ETH</DButton
               >
-              <DButton class="w-full" :to="route.fullPath"
+              <DButton
+                class="w-full"
+                :to="route.fullPath"
+                @click="cartNft(nftDetails && nftDetails)"
                 >Cart {{ nftDetails && nftDetails.name }}</DButton
               >
             </div>
@@ -277,7 +280,6 @@ const specificCollectionNfts = (routeParams) => {
 
       collectionNfts.value.forEach((nft) => {
         nft.action = "red";
-        nft.cart = false;
         nft.stats = {
           floor_price: (Number(nft.identifier) / 4000) * 3037.97,
           floor_eth: Number(nft.identifier) / 4000,
@@ -296,6 +298,21 @@ watch(route, () => {
   specificCollectionDetails(route.params.id);
   console.log("changing route");
 });
+
+function cartNft(nftDetails) {
+  const cartedNfts = JSON.parse(localStorage.getItem("watchList") || []);
+
+  if (cartedNfts && cartedNfts.length > 0) {
+    const nft = cartedNfts.find((cart) => nftDetails.name == cart.name);
+
+    if (nft) {
+      alert("Nft already exist");
+    } else {
+      const newList = [nftDetails, ...cartedNfts];
+      localStorage.setItem("watchList", JSON.stringify(newList));
+    }
+  }
+}
 
 const detailsOfNft = computed(() => {
   return [

@@ -69,7 +69,7 @@
           <!-- use for price data for deduct function -->
           <!-- {{ nft && nft.stats.floor_price
           }}{{ nft && nft.stats.floor_price_symbol }} -->
-          Buy At {{ nft && nft.stats.floor_price.slice(0, 5)
+          Buy At {{ nft && nft.stats.floor_eth.toLocaleString().slice(0, 5)
           }}{{ nft && nft.stats.floor_price_symbol }}
         </p>
         <div class="px-2" @click="getNft">
