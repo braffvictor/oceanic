@@ -332,6 +332,7 @@
       <div class="flex mt-3 ml-10 gap-x-2">
         <d-button
           type="outlined"
+          @click="(form = true), (show = false)"
           class="border-green-500 px-4 !text-green-400 dark:!text-green-500 active:!bg-green-200"
           >Login</d-button
         >
@@ -472,6 +473,13 @@
       @closeSearchBar="(searchBar = false), (show = false)"
       v-if="cartList == true"
     />
+
+    <!-- register/login comp -->
+    <d-auth
+      :theme-state="themeState"
+      v-if="form == true"
+      @closeForm="form = false"
+    />
   </div>
 </template>
 
@@ -479,12 +487,15 @@
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import DCartList from "@/components/utils/DCartList.vue";
+import DAuth from "@/components/utils/DAuth.vue";
 import DSearchBar from "@/components/utils/DSearchBar.vue";
 import router from "@/router";
 import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref, watch } from "vue";
 
 const cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
+
+const userName = ref("");
 
 onMounted(() => {
   getNftCollection("eth-main");
@@ -533,6 +544,7 @@ useHead({
 //for controlling the drop down nav
 const show = ref(false);
 const cartList = ref(false);
+const form = ref(false);
 
 //chaning the route....and closing the nav bar
 function closeMenu(to) {

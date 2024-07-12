@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
+    //for default layout and subpages
     component: () => import("../layout/default.vue"),
     name: "default",
     path: "/",
@@ -59,10 +60,31 @@ const routes = [
       },
     ],
   },
+
+  //for error page
   {
     path: "/:pathMatch(.*)*",
     name: "error-page",
     component: () => import("../views/error/errorPage.vue"),
+  },
+
+  //for authentication layout and subpages
+  {
+    path: "/auth",
+    component: () => import("../layout/authLayout.vue"),
+    name: "auth",
+    children: [
+      {
+        path: "/register",
+        name: "Register",
+        component: () => import("../views/auth/register.vue"),
+      },
+      {
+        path: "/login",
+        name: "Login",
+        component: () => import("../views/auth/login.vue"),
+      },
+    ],
   },
 ];
 

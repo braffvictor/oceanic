@@ -106,7 +106,7 @@
             <p class="font-semibold">Total Price</p>
             <div class="font-semibold">
               <p class="font-semibold">{{ totalETH.toFixed(3) }}ETH</p>
-              <p class="font-thin text-slate-400">
+              <p class="font-light text-slate-400">
                 ${{
                   totalPrice
                     .toLocaleString()

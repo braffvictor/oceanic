@@ -1,5 +1,7 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
+    <!-- form -->
+    <d-auth :themeState="theme" @closeForm="form = false" v-if="form == true" />
     <section class="h-svh">
       <main class="md:px-8 relative h-full -mt-4 md:mt-8">
         <!-- div with just image -->
@@ -43,6 +45,7 @@
                 <d-button
                   type="outlined"
                   class="border-green-400 !text-green-400 active:!bg-green-300 dark:active:!bg-green-400"
+                  @click="form = true"
                   >Login</d-button
                 >
                 <d-button
@@ -313,6 +316,7 @@
 </template>
 
 <script setup>
+import DAuth from "@/components/utils/DAuth.vue";
 import DButton from "@/components/utils/DButton.vue";
 import NftCard from "@/components/cards/nftCard.vue";
 import bigTab from "@/components/tables/bigTab.vue";
@@ -322,6 +326,9 @@ import "animate.css";
 // @ is an alias to /src
 import { computed, inject, onMounted, ref, watch } from "vue";
 import SwipingCards from "@/components/swipingCards.vue";
+
+//for controlling form
+const form = ref(false);
 
 const theme = inject("theme");
 

@@ -66,18 +66,21 @@
               >
             </p>
             <div class="flex gap-4 mt-3">
-              <DButton class="w-full" type="outlined" :to="route.fullPath"
+              <d-button
+                class="w-full active:!bg-slate-300 dark:active:!bg-slate-600"
+                type="outlined"
+                :to="route.fullPath"
                 >Buy Now For
                 {{
                   nftDetails &&
                   nftDetails.stats.floor_eth.toString().slice(0, 5)
-                }}ETH</DButton
+                }}ETH</d-button
               >
-              <DButton
-                class="w-full"
+              <d-button
+                class="w-full active:!bg-slate-600 dark:active:bg-slate-600"
                 :to="route.fullPath"
                 @click="cartNft(nftDetails && nftDetails)"
-                >Cart {{ nftDetails && nftDetails.name }}</DButton
+                >Cart {{ nftDetails && nftDetails.name }}</d-button
               >
             </div>
           </div>
@@ -300,17 +303,15 @@ watch(route, () => {
 });
 
 function cartNft(nftDetails) {
-  const cartedNfts = JSON.parse(localStorage.getItem("watchList") || []);
+  const cartedNfts = JSON.parse(localStorage.getItem("watchList")) || [];
 
-  if (cartedNfts && cartedNfts.length > 0) {
-    const nft = cartedNfts.find((cart) => nftDetails.name == cart.name);
+  const nft = cartedNfts.find((cart) => nftDetails.name == cart.name);
 
-    if (nft) {
-      alert("Nft already exist");
-    } else {
-      const newList = [nftDetails, ...cartedNfts];
-      localStorage.setItem("watchList", JSON.stringify(newList));
-    }
+  if (nft) {
+    alert("Nft already exist");
+  } else {
+    const newList = [nftDetails, ...cartedNfts];
+    localStorage.setItem("watchList", JSON.stringify(newList));
   }
 }
 
