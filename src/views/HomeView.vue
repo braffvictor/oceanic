@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
     <!-- form -->
-    <d-auth :themeState="theme" @closeForm="form = false" v-if="form == true" />
+    <d-auth :themeState="theme" @closeForm="form = false" :form="form" />
     <section class="h-svh">
       <main class="md:px-8 relative h-full -mt-4 md:mt-8">
         <!-- div with just image -->

@@ -1,12 +1,13 @@
 <template>
   <main
-    class="inset-0 fixed z-20 backdrop-blur-md top-0 left-0 min-h-screen h-auto"
+    class="inset-0 fixed z-20 backdrop-blur-md top-0 left-0 min-h-screen h-auto transition-all ease-in-out duration-700"
+    :class="form ? '-translate-y-0 ' : 'translate-y-full opacity-0'"
     @click.self="$emit('closeForm')"
   >
-    <section class="flex justify-center mt-32">
+    <section class="flex justify-center mt-32" @click.self="$emit('closeForm')">
       <!-- container form -->
       <div
-        class="w-11/12 md:w-5/12 rounded-2xl p-4 !backdrop-blur-xl"
+        class="w-11/12 md:w-5/12 rounded-2xl p-4 !backdrop-blur-xl transit"
         :class="
           themeState == 'light' || themeState == null
             ? 'whiteT border-b-gray-200'
@@ -113,6 +114,9 @@ import svgComp from "@/components/svgComp.vue";
 const props = defineProps({
   themeState: {
     default: null,
+  },
+  form: {
+    default: false,
   },
 });
 </script>
