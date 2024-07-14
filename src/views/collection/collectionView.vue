@@ -15,7 +15,7 @@
               alt=""
             />
             <p class="mt-3 md:mt-5 font-bold text-slate-400 text-2xl">
-              {{ collectionHeader && collectionHeader.name
+              {{ collectionHeader && collectionHeader?.name
               }}<img
                 src="@/assets/verified.svg"
                 alt="tick"
@@ -37,8 +37,9 @@
               class="font-semibold text-slate-900 dark:text-slate-100 flex items-center cursor-pointer"
               @click="
                 copyContract(
-                  collectionHeader && collectionHeader.contracts[0]?.address
-                    ? collectionHeader && collectionHeader.contracts[0]?.address
+                  collectionHeader && collectionHeader?.contracts[0]?.address
+                    ? collectionHeader &&
+                        collectionHeader?.contracts[0]?.address
                     : 'Contract Address Unavailable'
                 )
               "
@@ -49,10 +50,10 @@
               <p>
                 <!-- {{
                   (collectionHeader &&
-                    collectionHeader.contracts[0].address.slice(0, 4)) +
+                    collectionHeader?.contracts[0].address.slice(0, 4)) +
                   "...." +
                   (collectionHeader &&
-                    collectionHeader.contracts[0].address.slice(38))
+                    collectionHeader?.contracts[0].address.slice(38))
                 }} -->
               </p>
             </div>
@@ -60,16 +61,16 @@
               v-for="perk in [
                 {
                   text: 'Max Ranked',
-                  num: collectionHeader && collectionHeader.rarity.max_rank,
+                  num: collectionHeader && collectionHeader?.rarity.max_rank,
                 },
                 {
                   text: 'Token Score',
                   num:
-                    collectionHeader && collectionHeader.rarity.tokens_scored,
+                    collectionHeader && collectionHeader?.rarity.tokens_scored,
                 },
                 {
                   text: 'Total Supply',
-                  num: collectionHeader && collectionHeader.total_supply,
+                  num: collectionHeader && collectionHeader?.total_supply,
                 },
               ]"
               :key="perk.total_supply"
@@ -91,20 +92,22 @@
         :class="detailed ? 'line-clamp-none' : 'line-clamp-2'"
         @click="detailed = !detailed"
       >
-        {{ collectionHeader && collectionHeader.description }}
+        {{ collectionHeader && collectionHeader?.description }}
       </p>
       <p class="text-slate-900 dark:text-slate-100 text-md md:text-lg mt-3">
         Created
-        <strong>{{ collectionHeader && collectionHeader.created_date }}</strong>
+        <strong>{{
+          collectionHeader && collectionHeader?.created_date
+        }}</strong>
         · Category
-        <strong>{{ collectionHeader && collectionHeader.category }}</strong>
+        <strong>{{ collectionHeader && collectionHeader?.category }}</strong>
         · Chain
         <strong class="capitalize">
-          {{ collectionHeader && collectionHeader.contracts[0]?.chain }}
+          {{ collectionHeader && collectionHeader?.contracts[0]?.chain }}
         </strong>
         · Total Supply
         <strong class="capitalize">
-          {{ collectionHeader && collectionHeader.total_supply }}</strong
+          {{ collectionHeader && collectionHeader?.total_supply }}</strong
         >
       </p>
 
@@ -145,7 +148,7 @@
       <!-- the items components -->
       <CollectionItems
         v-if="activeBtn == 'items'"
-        :headerName="collectionHeader && collectionHeader.name"
+        :headerName="collectionHeader && collectionHeader?.name"
       />
 
       <collection-activities
