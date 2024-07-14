@@ -611,10 +611,10 @@ const dropLinks = computed(() => {
           name: "What is web3",
           to: "/learn/what-is-web3",
         },
-        {
-          name: "About Us",
-          to: "/learn/About Us",
-        },
+        // {
+        //   name: "About Us",
+        //   to: "/learn/About Us",
+        // },
       ],
     },
     {

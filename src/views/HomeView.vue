@@ -1,7 +1,12 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
     <!-- form -->
-    <d-auth :themeState="theme" @closeForm="form = false" :form="form" />
+    <d-auth
+      :themeState="theme"
+      @closeForm="form = false"
+      :form="form"
+      :type="type"
+    />
     <section class="h-svh">
       <main class="md:px-8 relative h-full -mt-4 md:mt-8">
         <!-- div with just image -->
@@ -45,13 +50,15 @@
                 <d-button
                   type="outlined"
                   class="border-green-400 !text-green-400 active:!bg-green-300 dark:active:!bg-green-400"
-                  @click="form = true"
-                  >Login</d-button
+                  @click="(form = true), (type = 'registration')"
+                  >Sign Up</d-button
                 >
                 <d-button
                   type="elevated"
                   class="shadow-green-400 bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
-                />
+                  @click="(form = true), (type = 'login')"
+                  >Login</d-button
+                >
               </div>
             </div>
 
@@ -329,6 +336,7 @@ import SwipingCards from "@/components/swipingCards.vue";
 
 //for controlling form
 const form = ref(false);
+const type = ref("registration");
 
 const theme = inject("theme");
 
