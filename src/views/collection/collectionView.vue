@@ -1,7 +1,7 @@
 <template>
   <div class="transit">
     <section
-      :class="`flex items-end p-4 md:p-8 min-h-96 -mt-20 `"
+      :class="`flex items-end p-4 pb-10 md:p-8 min-h-96 -mt-20 `"
       :style="`background-image : url(${
         banner && banner
       }); background-position: center; background-size : cover; background-repeat: no-repeat`"
