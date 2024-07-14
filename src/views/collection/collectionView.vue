@@ -83,7 +83,9 @@
       </main>
     </section>
 
-    <section class="p-4 md:p-8 bg-slate-50 dark:bg-slate-900 transit">
+    <section
+      class="p-4 md:p-8 bg-slate-50 dark:bg-slate-900 transit rounded-tr-3xl rounded-tl-3xl overflow-none -mt-6"
+    >
       <p
         class="text-slate-900 dark:text-slate-100 text-md md:text-lg transit"
         :class="detailed ? 'line-clamp-none' : 'line-clamp-2'"
