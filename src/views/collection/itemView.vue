@@ -193,7 +193,7 @@
     </section>
 
     <div
-      class="border-gray-300 cursor-pointer dark:border-gray-600 border rounded-xl transit p-4 mx-2 mt-4 mb-6"
+      class="border-gray-300 cursor-pointer dark:border-gray-600 border rounded-xl transit p-4 mx-2 mt-4 pb-6"
     >
       <p class="mx-3 text-slate-900 dark:text-slate-100">
         Collection Activities

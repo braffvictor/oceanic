@@ -1,5 +1,5 @@
 <template>
-  <div class="transit">
+  <div class="transit pb-7">
     <section
       :class="`flex items-end p-4 pb-10 md:p-8 min-h-96 -mt-20 `"
       :style="`background-image : url(${

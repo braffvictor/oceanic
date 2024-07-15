@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-11/12 md:w-5/12 rounded-2xl p-4 !backdrop-blur-xl transit"
+    class="w-11/12 md:w-5/12 rounded-2xl p-4 !backdrop-blur-xl transit z-10"
     :class="
       themeState == 'light' || themeState == null
         ? 'whiteT border-b-gray-200'

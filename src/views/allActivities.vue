@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900 px-3 md:px-7 transit mb-7"
+    class="text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900 px-3 md:px-7 transit pb-7"
   >
     <p class="text-2xl md:text-3xl font-bold">All Events</p>
     <div class="flex text-lg md:text-xl font-light mt-3 justify-between">

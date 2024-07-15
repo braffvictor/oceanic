@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-50 dark:bg-slate-900 px-5 md:px-7 transit mb-7">
+  <div class="bg-slate-50 dark:bg-slate-900 px-5 md:px-7 transit pb-7">
     <p
       class="text-2xl md:text-4xl py-5 md:py-8 font-bold text-slate-900 dark:text-slate-100"
     >
