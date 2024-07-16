@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-slate-50 dark:bg-slate-900 min-h-screen transit px-5 md:px-7">
+  <div
+    class="bg-slate-50 dark:bg-slate-900 min-h-screen transit px-5 md:px-7 relative"
+  >
     <main class="mt-10 text-slate-900 dark:text-slate-100">
       <section class="">
         <p class="text-3xl md:text-5xl font-bold">
@@ -119,11 +121,17 @@
         </main>
       </section>
     </main>
+
+    <DButton class="rounded-xl" :loading="true"> </DButton>
   </div>
 </template>
 
 <script setup>
+import SvgComp from "@/components/svgComp.vue";
+import DButton from "@/components/utils/DButton.vue";
 import { computed } from "vue";
+
+// import warning from '@/assets/svg.'
 
 const perks = computed(() => {
   return [

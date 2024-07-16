@@ -474,12 +474,13 @@
       v-if="cartList == true"
     />
 
-    <!-- register/login comp -->
-    <d-auth
-      :theme-state="themeState"
-      v-if="form == true"
-      @closeForm="form = false"
-    />
+    <d-button
+      class="rounded-full fixed right-0 bottom-0 mb-10 mr-10"
+      @click="showAlert = !showAlert"
+      >Show</d-button
+    >
+    <!-- todo alert comp -->
+    <d-alert v-if="showAlert" />
   </div>
 </template>
 
@@ -492,9 +493,11 @@ import DSearchBar from "@/components/utils/DSearchBar.vue";
 import router from "@/router";
 import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref, watch } from "vue";
+import DAlert from "@/components/utils/DAlert.vue";
 
 const cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
 
+const showAlert = ref(false);
 const userName = ref("");
 
 onMounted(() => {

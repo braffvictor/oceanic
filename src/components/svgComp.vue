@@ -7,7 +7,7 @@
       strokeWidth="{1.5}"
       stroke="currentColor"
       :class="Sclass"
-      class="min-w-7 max-w-7 transit dark:stroke-slate-200 stroke-[1.1px] stroke-slate-900"
+      class="min-w-7 max-w-7 transit dark:stroke-slate-200 stroke-[1.1px] stroke-slate-900 active:!scale-90"
     >
       <path strokeLinecap="round" strokeLinejoin="round" :d="icon" />
     </svg>

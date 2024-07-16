@@ -90,7 +90,10 @@
       <div class="w-full mt-6 mb-6">
         <d-button
           type="elevated"
-          class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
+          :loading="loading"
+          :disabled="false"
+          @click="setLoading"
+          class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 !text-slate-900 dark:!text-slate-100 active:!bg-green-300"
           >Register</d-button
         >
       </div>
@@ -101,6 +104,16 @@
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
 import svgComp from "@/components/svgComp.vue";
+import { ref } from "vue";
+
+let loading = ref(false);
+function setLoading() {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 4000);
+}
+
 const props = defineProps({
   themeState: {
     default: null,
