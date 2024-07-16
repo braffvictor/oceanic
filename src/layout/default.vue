@@ -480,7 +480,13 @@
       >Show</d-button
     >
     <!-- todo alert comp -->
-    <d-alert v-if="showAlert" />
+    <d-alert
+      :class="
+        showAlert
+          ? 'scale-100 ease-in-out duration-700 opacity-100 '
+          : '-translate-y-full md:translate-x-full md:-translate-y-0 opacity-0 scale-0 ease-in-out duration-700'
+      "
+    />
   </div>
 </template>
 
