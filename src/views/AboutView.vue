@@ -5,6 +5,7 @@
     <main class="mt-10 text-slate-900 dark:text-slate-100">
       <section class="">
         <p class="text-3xl md:text-5xl font-bold">
+          <!-- {{ authentications.user }} -->
           Building an open digital economy
         </p>
         <p class="font-light mt-3">
@@ -122,16 +123,31 @@
       </section>
     </main>
 
-    <DButton class="rounded-xl" :loading="true"> </DButton>
+    <DButton
+      class="rounded-xl !bg-green-500"
+      :loading="false"
+      @click="authentication.changeUser()"
+    >
+    </DButton>
   </div>
 </template>
 
 <script setup>
+import { useAuthentication, userAuth } from "@/stores/authentication";
+import { userflow } from "@/stores/userflow";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed } from "vue";
 
 // import warning from '@/assets/svg.'
+const userflo = userflow();
+console.log(userflo.cartList);
+
+const authentication = useAuthentication();
+const auth = userAuth();
+
+console.log(authentication.user);
+console.log(auth.user);
 
 const perks = computed(() => {
   return [

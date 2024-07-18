@@ -133,6 +133,9 @@
 </template>
 
 <script setup>
+// stores
+import { userflow } from "@/stores/userflow";
+
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { onMounted, ref } from "vue";
@@ -148,6 +151,7 @@ const props = defineProps({
 });
 
 let cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
+const userflowing = userflow();
 
 //to round up the total amount
 let totalETH = ref(0);
@@ -170,6 +174,9 @@ console.log(cartedNfts.value[0]);
 function clearList() {
   localStorage.removeItem("watchList");
   cartedNfts.value = ref(JSON.parse(localStorage.getItem("watchList")) || []);
+  userflowing.checkLocalStorage(
+    JSON.parse(localStorage.getItem("watchList") || "[]")?.length
+  );
 }
 
 const removeNft = (nft) => {
@@ -179,6 +186,9 @@ const removeNft = (nft) => {
   localStorage.setItem("watchList", JSON.stringify(newArr));
   cartedNfts.value = JSON.parse(localStorage.getItem("watchList")) || [];
   checkAmount();
+  userflowing.checkLocalStorage(
+    JSON.parse(localStorage.getItem("watchList") || "[]")?.length
+  );
 };
 </script>
 

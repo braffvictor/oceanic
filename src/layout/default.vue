@@ -114,10 +114,10 @@
         <!-- Cart icon -->
         <button class="relative" @click="cartList = !cartList">
           <p
-            v-if="cartedNfts.length > 0"
+            v-if="userflowing.cartList > 0"
             class="bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs top-0 right-0 absolute px-1"
           >
-            {{ cartedNfts.length }}
+            {{ userflowing.cartList }}
           </p>
           <svg-comp
             Sclass="active:stroke-green-400"
@@ -474,23 +474,15 @@
       v-if="cartList == true"
     />
 
-    <d-button
-      class="rounded-full fixed right-0 bottom-0 mb-10 mr-10"
-      @click="showAlert = !showAlert"
-      >Show</d-button
-    >
     <!-- todo alert comp -->
-    <d-alert
-      :class="
-        showAlert
-          ? 'scale-100 ease-in-out duration-700 opacity-100 '
-          : '-translate-y-full md:translate-x-full md:-translate-y-0 opacity-0 scale-0 ease-in-out duration-700'
-      "
-    />
+    <d-alert />
   </div>
 </template>
 
 <script setup>
+// stores
+import { userflow } from "@/stores/userflow";
+
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import DCartList from "@/components/utils/DCartList.vue";
@@ -501,13 +493,14 @@ import { useHead } from "@vueuse/head";
 import { computed, onMounted, provide, ref, watch } from "vue";
 import DAlert from "@/components/utils/DAlert.vue";
 
-const cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
-
+const userflowing = userflow();
 const showAlert = ref(false);
 const userName = ref("");
 
 onMounted(() => {
-  getNftCollection("eth-main");
+  userflowing.getAllNfts();
+
+  // getNftCollection("eth-main");
   window.scrollTo(0, 0);
   // window.gtranslateSettings = {
   //   default_language: "en",
@@ -641,39 +634,9 @@ const searchBar = ref(false);
 
 // using local storage nfts
 const searchCollection = ref("");
-const nftApiCollection = ref([]);
 
-const getNftCollection = (chain) => {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
-    },
-  };
-
-  fetch(
-    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=100`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      // console.log(response)
-      nftApiCollection.value = response.results;
-
-      nftApiCollection.value.forEach((nft) => {
-        nft.action = "red";
-        nft.cart = false;
-        nft.stats = {
-          floor_price: (Math.random() * 0.5).toString(),
-          floor_price_symbol: "ETH",
-        };
-      });
-    })
-    .catch((err) => console.error(err));
-};
 const filterSearch = computed(() => {
-  return nftApiCollection.value.filter((collection) => {
+  return userflowing.nfts.filter((collection) => {
     return (
       collection.name.includes(searchCollection.value) ||
       collection.name.toLowerCase().includes(searchCollection.value)

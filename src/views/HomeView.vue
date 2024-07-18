@@ -1,6 +1,7 @@
 <template>
   <div class="bg-white h-auto dark:bg-slate-900 transit font-mono">
     <!-- form -->
+
     <d-auth
       :themeState="theme"
       @closeForm="form = false"
@@ -17,12 +18,12 @@
             to bottom,
            ${theme == 'light' || theme == null ? lightShade : darkShade}
           ),
-         url(${nftApiCollection[0].image_url});
+         url(${userflowing.nfts[0].image_url});
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         transition: all linear 300ms`"
-          v-if="nftApiCollection && nftApiCollection.length > 0"
+          v-if="userflowing.nfts && userflowing.nfts.length > 0"
         >
           <!-- url(https://i.seadn.io/gcs/files/4f627345f3a6a7718d447fd148052ee1.png?w=500&auto=format);-->
         </div>
@@ -30,7 +31,7 @@
         <div
           class="h-full md:rounded-xl p-4 px-8 py-12 md:py-8 md:px-12 absolute top-0 text-slate-100 w-[100%] md:w-[95%] backdrop-blur-lg"
         >
-          <div class="grid md:grid-cols-2">
+          <div class="grid md:grid-cols-2 items-center justify-center">
             <div>
               <p
                 class="text-5xl md:text-7xl font-semibold dark:text-slate-100 text-slate-900 transit"
@@ -84,33 +85,33 @@
                 background-repeat: no-repeat;`"
             >
               <img
-                :src="nftApiCollection[0].image_url"
-                v-if="nftApiCollection && nftApiCollection.length > 0"
+                :src="userflowing.nfts[0].image_url"
+                v-if="userflowing.nfts && userflowing.nfts.length > 0"
                 alt=""
                 class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center min-h-60 max-h-60 md:min-h-80 md:max-h-80"
               />
               <p
                 class="text-green-400 text-left mt-2"
-                v-if="nftApiCollection && nftApiCollection.length > 0"
+                v-if="userflowing.nfts && userflowing.nfts.length > 0"
               >
                 {{
-                  nftApiCollection[0].name.length > 15
-                    ? nftApiCollection[0].name.slice(0, 15) + "..."
-                    : nftApiCollection[0].name
+                  userflowing.nfts[0].name.length > 15
+                    ? userflowing.nfts[0].name.slice(0, 15) + "..."
+                    : userflowing.nfts[0].name
                 }}
               </p>
               <div
                 class="flex justify-between"
-                v-if="nftApiCollection && nftApiCollection.length > 0"
+                v-if="userflowing.nfts && userflowing.nfts.length > 0"
               >
                 <p>
                   {{
-                    nftApiCollection[0].key.length > 15
-                      ? nftApiCollection[0].key.slice(0, 15) + "..."
-                      : nftApiCollection[0].key
+                    userflowing.nfts[0].key.length > 15
+                      ? userflowing.nfts[0].key.slice(0, 15) + "..."
+                      : userflowing.nfts[0].key
                   }}
                 </p>
-                <p>{{ nftApiCollection[0].stats.num_owners }}</p>
+                <p>{{ userflowing.nfts[0].stats.num_owners }}</p>
               </div>
             </div>
           </div>
@@ -129,14 +130,14 @@
         </p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(0, 10)"
+              v-for="nft in userflowing.nfts.slice(0, 10)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -150,14 +151,14 @@
         </p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(11, 20)"
+              v-for="nft in userflowing.nfts.slice(11, 20)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -171,14 +172,14 @@
         </p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(21, 30)"
+              v-for="nft in userflowing.nfts.slice(21, 30)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -191,14 +192,14 @@
         </p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(31, 40)"
+              v-for="nft in userflowing.nfts.slice(31, 40)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -211,14 +212,14 @@
         </p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(41, 50)"
+              v-for="nft in userflowing.nfts.slice(41, 50)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -232,14 +233,14 @@
         </p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(51, 60)"
+              v-for="nft in userflowing.nfts.slice(51, 60)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -251,14 +252,14 @@
         <p class="font-bold text-lg md:text-xl dark:text-slate-100">Explore</p>
 
         <!-- nft cards -->
-        <swiping-cards class="py-5" v-if="nftApiCollection.length > 0">
+        <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
           <template #cards>
             <swiper-slide
-              v-for="nft in nftApiCollection.slice(61, 70)"
+              v-for="nft in userflowing.nfts.slice(61, 70)"
               :key="nft.name"
             >
               <!-- for home nft cards -->
-              <NftCard :nft="nft" :to="true" />
+              <NftCard :nft="nft" :to="true" :action="false" />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -323,6 +324,9 @@
 </template>
 
 <script setup>
+// stores
+import { userflow } from "@/stores/userflow";
+
 import DAuth from "@/components/utils/DAuth.vue";
 import DButton from "@/components/utils/DButton.vue";
 import NftCard from "@/components/cards/nftCard.vue";
@@ -350,40 +354,9 @@ const lightShade2 = ref(
 const darkShade2 = ref("rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)");
 
 // for nft
-const nftApiCollection = ref([]);
+const userflowing = userflow();
 
-const getNftCollection = (chain) => {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
-    },
-  };
-
-  fetch(
-    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=72`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      // console.log(response)
-      nftApiCollection.value = response.results;
-      const red = (nftApiCollection.value = nftApiCollection.value.filter(
-        (nft) => {
-          return (
-            nft.contracts[0].contract_address != null ||
-            nft.contracts[0].contract_address != undefined
-          );
-        }
-      ));
-
-      // console.log(red);
-    })
-    .catch((err) => console.error(err));
-};
 onMounted(() => {
-  getNftCollection("eth-main");
   window.scrollTo(0, 0);
 });
 

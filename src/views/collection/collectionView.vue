@@ -1,7 +1,7 @@
 <template>
-  <div class="transit pb-7">
+  <div class="transit">
     <section
-      :class="`flex items-end p-4 pb-10 md:p-8 min-h-96 -mt-20 `"
+      :class="`flex items-end p-4 pb-10 md:p-8 min-h-[470px] -mt-20 `"
       :style="`background-image : url(${
         banner && banner
       }); background-position: center; background-size : cover; background-repeat: no-repeat`"
@@ -166,6 +166,10 @@ import DButton from "@/components/utils/DButton.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import CollectionItems from "@/components/dynamicComps/CollectionItems.vue";
+import { userflow } from "@/stores/userflow";
+
+const user = userflow();
+console.log(user.cartList, "is the length");
 
 const route = useRoute();
 
@@ -213,7 +217,7 @@ const specificCollectionDetails = (paramsID) => {
         collectionHeader.value.image_url.indexOf("?")
       );
 
-      console.log(collectionHeader.value);
+      // console.log(collectionHeader.value);
     })
     .catch((err) => console.error(err));
 };

@@ -26,12 +26,13 @@
     <div class="text-center mx-auto flex justify-center">
       <div
         class="grid grid-cols-2 justify-center items-center md:grid-cols-5 mt-7 gap-6 text-center mx-auto"
-        v-if="filterCollection.length > 0"
+        v-if="filterCollection && filterCollection.length > 0"
       >
         <nftCard
           v-for="nft in filterCollection"
           :key="nft.name"
           :nft="nft"
+          :action="true"
           :card-size="'min-w-40 min-h-64 max-w-40 max-h-64 md:min-w-56 md:min-h-72 md:max-w-56 md:max-h-72'"
         />
       </div>
@@ -118,6 +119,7 @@ const specificCollectionNfts = (routeParams) => {
 
       filterCollection.value = collectionNfts.value;
       loading.value = false;
+      // console.log(filterCollection.value, "is the array");
     })
     .catch((err) => console.error(err));
 };

@@ -29,23 +29,19 @@
 
         <div
           class="flex justify-between text-slate-900 font-bold dark:text-slate-100 mt-5"
-          v-if="!learn && !nft.action && nft.stats"
+          v-if="!learn && !action && nft.stats"
         >
-          <div v-if="!learn && nft && !nft.action">
+          <div v-if="!learn && nft && !action">
             <p class="text-gray-400 font-light">Floor</p>
             <p>
-              {{ nft && nft.stats.floor_price
+              {{ nft && nft.stats.floor_price.slice(0, 5)
               }}{{ nft && nft.stats.floor_price_symbol }}
             </p>
           </div>
-          <div v-if="!learn && nft && !nft.action">
+          <div v-if="!learn && nft && !action">
             <p class="text-gray-400 font-light">Volume</p>
             <p>
-              {{
-                nft && nft.stats.total_volume
-                  ? nft && nft.stats.total_volume.toString().slice(0, 7)
-                  : "0"
-              }}
+              {{ (Number(nft && nft.stats.floor_price) * 6000).toFixed(0) }}
             </p>
           </div>
         </div>
@@ -53,7 +49,7 @@
 
       <!-- for collection nft with action div -->
       <div
-        v-if="nft && nft.action"
+        v-if="nft && action"
         class="bg-green-400 p-1 pb-5 dark:bg-green-500 items-center w-full flex divide-x divide-slate-900 dark:divide-slate-100 h-14 justify-around absolute -bottom-20 group-hover:-bottom-3 overflow-hidden transit"
       >
         <p
@@ -69,7 +65,8 @@
           <!-- use for price data for deduct function -->
           <!-- {{ nft && nft.stats.floor_price
           }}{{ nft && nft.stats.floor_price_symbol }} -->
-          Buy At {{ nft && nft.stats.floor_eth.toLocaleString().slice(0, 5)
+          Buy At
+          {{ nft && Number(nft.stats.floor_eth).toLocaleString().slice(0, 5)
           }}{{ nft && nft.stats.floor_price_symbol }}
         </p>
         <div class="px-2" @click="getNft">
@@ -84,6 +81,7 @@
 </template>
 
 <script setup>
+import { userflow } from "@/stores/userflow";
 import router from "@/router";
 import { useRoute } from "vue-router";
 import svgComp from "../svgComp.vue";
@@ -101,6 +99,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  action: {
+    type: Boolean,
+    default: false,
+  },
   cardSize: {
     type: String,
     default: "min-w-56 min-h-72 max-w-56 max-h-72",
@@ -115,6 +117,9 @@ const props = defineProps({
   },
 });
 
+// let userflowCartList = userflow().cartList;
+const userflowing = userflow();
+
 const getNft = () => {
   const { nft } = props;
   if (!nft) return;
@@ -124,11 +129,30 @@ const getNft = () => {
   const nftExist = watchList.find((el) => el.name === nft.name);
 
   if (nftExist) {
-    console.log("Already exist");
-    alert(`${nft.name} already exist`);
+    // console.log("Already exist");
+    userflowing.initAlert({
+      message: `${nft.name} Already Exist in Your Cart List`,
+      is: true,
+      type: "error",
+      timer: 6000,
+      close: true,
+    });
   } else {
     const newList = [nft, ...watchList];
     localStorage.setItem("watchList", JSON.stringify(newList));
+    // userflowCartList = JSON.parse(localStorage.getItem("watchList")).length;
+
+    userflowing.checkLocalStorage(
+      JSON.parse(localStorage.getItem("watchList")).length
+    );
+
+    userflowing.initAlert({
+      message: `${nft.name} Added To Your Cart List`,
+      is: true,
+      type: "info",
+      timer: 6000,
+      close: true,
+    });
   }
 };
 

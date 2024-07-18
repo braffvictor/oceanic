@@ -208,12 +208,14 @@
 </template>
 
 <script setup>
+import { userflow } from "@/stores/userflow";
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
+const userflowing = userflow();
 
 const listing = ref(false);
 const description = ref(false);
@@ -248,10 +250,10 @@ const specificCollectionDetails = (routeParams) => {
     .then((response) => response.json())
     .then((response) => {
       collectionHeader.value = response;
-      console.log(collectionHeader.value);
+      // console.log(collectionHeader.value);
 
       contract.value = collectionHeader.value.contracts[0].address;
-      console.log(contract.value);
+      // console.log(contract.value);
 
       image.value = collectionHeader.value.image_url.slice(
         0,
@@ -308,10 +310,25 @@ function cartNft(nftDetails) {
   const nft = cartedNfts.find((cart) => nftDetails.name == cart.name);
 
   if (nft) {
-    alert("Nft already exist");
+    userflowing.initAlert({
+      message: `${nftDetails.name} Already Exist in Your Cart List`,
+      is: true,
+      type: "error",
+      timer: 6000,
+      close: true,
+    });
   } else {
     const newList = [nftDetails, ...cartedNfts];
     localStorage.setItem("watchList", JSON.stringify(newList));
+    userflowing.checkLocalStorage(newList.length);
+
+    userflowing.initAlert({
+      message: `${nftDetails.name} Added To Your Cart List`,
+      is: true,
+      type: "info",
+      timer: 6000,
+      close: true,
+    });
   }
 }
 

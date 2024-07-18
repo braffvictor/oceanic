@@ -23,11 +23,11 @@
         </thead>
         <tbody
           class="rounded-2xl"
-          v-if="nftApiCollection && nftApiCollection.length > 0"
+          v-if="userflowing.nfts && userflowing.nfts.length > 0"
         >
           <tr
             class="text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transit"
-            v-for="(nft, n) in nftApiCollection.slice(0, 5)"
+            v-for="(nft, n) in userflowing.nfts.slice(0, 5)"
             @click="$router.push(`/collection/${nft.key}`)"
             :key="nft.contracts[0].contract_address"
           >
@@ -51,17 +51,14 @@
             </td>
             <td>
               <p class="font-bold text-slate-900 px-3 dark:text-slate-100">
-                {{ nft.stats.floor_price }}{{ nft.stats.floor_price_symbol }}
+                {{ nft.stats.floor_price.slice(0, 5)
+                }}{{ nft.stats.floor_price_symbol }}
               </p>
             </td>
             <td
               class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100"
             >
-              {{
-                nft.stats.total_volume
-                  ? nft.stats.total_volume.toString().slice(0, 7)
-                  : "0"
-              }}
+              {{ (Number(nft && nft.stats.floor_price) * 6000).toFixed(0) }}
             </td>
           </tr>
         </tbody>
@@ -84,10 +81,10 @@
             <th class="border-b">Volume</th>
           </tr>
         </thead>
-        <tbody class="rounded-2xl" v-if="nftApiCollection.length > 0">
+        <tbody class="rounded-2xl" v-if="userflowing.nfts.length > 0">
           <tr
             class="text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transit"
-            v-for="(nft, n) in nftApiCollection.slice(5, 10)"
+            v-for="(nft, n) in userflowing.nfts.slice(5, 10)"
             @click="$router.push(`/collection/${nft.key}`)"
             :key="nft.contracts[0].contract_address"
           >
@@ -111,13 +108,14 @@
             </td>
             <td>
               <p class="font-bold text-slate-900 px-3 dark:text-slate-100">
-                {{ nft.stats.floor_price }}{{ nft.stats.floor_price_symbol }}
+                {{ nft.stats.floor_price.slice(0, 5)
+                }}{{ nft.stats.floor_price_symbol }}
               </p>
             </td>
             <td
               class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100"
             >
-              {{ nft.stats.total_volume.toString().slice(0, 7) }}
+              {{ (Number(nft && nft.stats.floor_price) * 6000).toFixed(0) }}
             </td>
           </tr>
         </tbody>
@@ -127,35 +125,19 @@
 </template>
 
 <script setup>
+// stores
+import { userflow } from "@/stores/userflow";
+
 import { computed, onMounted, ref } from "vue";
 import DDropDown from "../utils/DDropDown.vue";
 
 const nftApiCollection = ref([]);
+const userflowing = userflow();
 
 const select = ref("Blockchain");
 
-const getNftCollection = (chain) => {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
-    },
-  };
-
-  fetch(
-    `https://api.blockspan.com/v1/exchanges/collections?chain=${chain}&exchange=opensea&page_size=25`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      // console.log(response)
-      nftApiCollection.value = response.results;
-    })
-    .catch((err) => console.error(err));
-};
 onMounted(() => {
-  getNftCollection("eth-main");
+  // getNftCollection("eth-main");
 });
 
 const collectionChains = computed(() => {
@@ -163,28 +145,28 @@ const collectionChains = computed(() => {
     {
       name: "eth-main",
       action: () => {
-        getNftCollection("eth-main");
+        userflowing.getAllNfts("eth-main");
         select.value = "eth-main";
       },
     },
     {
       name: "arbitrum-main",
       action: () => {
-        getNftCollection("arbitrum-main");
+        userflowing.getAllNfts("arbitrum-main");
         select.value = "arbitrum-main";
       },
     },
     {
       name: "optimism-main",
       action: () => {
-        getNftCollection("optimism-main");
+        userflowing.getAllNfts("optimism-main");
         select.value = "optimism-main";
       },
     },
     {
       name: "poly-main",
       action: () => {
-        getNftCollection("poly-main");
+        userflowing.getAllNfts("poly-main");
         select.value = "poly-main";
       },
     },
