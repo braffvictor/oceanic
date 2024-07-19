@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
 export const userflow = defineStore("userflow", {
   state: () => ({
@@ -17,6 +18,7 @@ export const userflow = defineStore("userflow", {
   //getters functions
   getters: {
     getAlert: (state) => state.alert,
+    getNfts: (state) => state.nfts,
   },
 
   actions: {
@@ -81,4 +83,48 @@ export const userflow = defineStore("userflow", {
         .catch((err) => console.error(err));
     },
   },
+});
+
+export const composeFlow = defineStore("composeflow", () => {
+  const nfts = ref([]);
+
+  function getAllNft(chain) {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
+      },
+    };
+
+    fetch(
+      `https://api.blockspan.com/v1/exchanges/collections?chain=${
+        chain || "eth-main"
+      }&exchange=opensea&page_size=100`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response)
+        nfts.value = response.results;
+
+        nfts.value.forEach((nft) => {
+          nft.action = true;
+          nft.stats = {
+            floor_price: (Math.random() * 0.5).toString(),
+            floor_price_symbol: "ETH",
+          };
+        });
+
+        nfts.value = nfts.value.filter((nft) => {
+          return (
+            nft.contracts[0].contract_address != null ||
+            nft.contracts[0].contract_address != undefined
+          );
+        });
+      })
+      .catch((err) => console.error(err));
+  }
+
+  return { getAllNft, nfts };
 });

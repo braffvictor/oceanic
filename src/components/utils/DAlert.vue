@@ -1,6 +1,6 @@
 <template>
   <main
-    class="pb-6 fixed top-7 left-0 md:top-10 z-40 md:right-0 md:left-2/3 mx-0 text-center md:text-left"
+    class="pb-6 fixed top-7 left-0 md:top-10 z-40 md:right-0 md:left-2/3 mx-0 text-center md:text-left min-w-screen md:min-w-auto"
     :class="
       userflowing.alert.is
         ? 'scale-100 ease-in-out duration-700 opacity-100 '
