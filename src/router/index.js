@@ -61,6 +61,19 @@ const routes = [
     ],
   },
 
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: () => import("@/layout/dashboard"),
+    children: [
+      {
+        path: "/dashboard/home",
+        name: "home",
+        component: () => import("@/views/dashboard/home.vue"),
+      },
+    ],
+  },
+
   //for error page
   {
     path: "/:pathMatch(.*)*",

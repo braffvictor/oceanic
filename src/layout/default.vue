@@ -115,7 +115,7 @@
         <button class="relative" @click="cartList = !cartList">
           <p
             v-if="userflowing.cartList > 0"
-            class="bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs top-0 right-0 absolute px-1"
+            class="bg-green-400 z-10 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs top-0 right-0 absolute px-1"
           >
             {{ userflowing.cartList }}
           </p>
