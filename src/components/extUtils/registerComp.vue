@@ -28,8 +28,8 @@
     </p>
 
     <!-- textfield -->
-    <form action="" class="">
-      <section class="mt-3">
+    <section class="mt-3">
+      <form action="" class="">
         <!-- the username -->
         <div
           class="flex border-b border-b-slate-900 dark:border-b-slate-100 items-center bg-transparent h-11 w-full dark:text-slate-100 text-slate-900 overflow-hidden dark:caret-slate-100 justify-self-start align-start indent-5 gap-2 has-[:focus]:border-b-green-500 outline-none transit group"
@@ -40,16 +40,22 @@
           />
           <input
             type="text"
+            required
             class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none"
             placeholder="Username"
+            @keyup="checkUsername"
             v-model="username"
           />
         </div>
         <p
-          class="text-xs text-red-500 transit mt-3"
-          :class="errorUsername ? 'scale-y-100 transit' : 'scale-y-0 transit'"
+          class="text-xs text-red-500 transit mt-3 text-center"
+          :class="
+            usernameError
+              ? 'scale-y-100 transit animate__animated animate__shakeX'
+              : 'scale-y-0 transit '
+          "
         >
-          {{ errorUsername }}
+          {{ usernameError }}
         </p>
 
         <!-- the email -->
@@ -64,9 +70,20 @@
             type="text"
             class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none peer-fo"
             placeholder="Email"
+            @keyup="checkEmail"
             v-model="email"
           />
         </div>
+        <p
+          class="text-xs text-red-500 transit mt-3 text-center"
+          :class="
+            emailError
+              ? 'scale-y-100 transit animate__animated animate__shakeX'
+              : 'scale-y-0 transit'
+          "
+        >
+          {{ emailError }}
+        </p>
 
         <!-- the password -->
         <div
@@ -79,6 +96,7 @@
           <input
             class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none"
             placeholder="Password"
+            @keyup="checkPassword"
             :type="passwordType ? 'text' : 'password'"
             v-model="password"
           />
@@ -99,19 +117,31 @@
             Sclass="group-has-[:focus]:stroke-green-500 active:stroke-green-400 !min-w-8"
           />
         </div>
+        <p
+          class="text-xs text-red-500 transit mt-3 text-center"
+          :class="
+            passwordError
+              ? 'scale-y-100 transit animate__animated animate__shakeX'
+              : 'scale-y-0 transit'
+          "
+        >
+          {{ passwordError }}
+        </p>
 
         <div class="w-full mt-6 mb-6">
-          <d-button
-            type="elevated"
-            :loading="loading"
-            :disabled="false"
-            @click="setLoading"
-            class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 !text-slate-900 dark:!text-slate-100 active:!bg-green-300"
-            >Register</d-button
-          >
+          <button type="submit" class="w-full">
+            <d-button
+              type="elevated"
+              :loading="loading"
+              :disabled="false"
+              @click="setLoading"
+              class="shadow-green-400 dark:shadow-green-500 w-full bg-green-400 dark:bg-green-500 !text-slate-900 dark:!text-slate-100 active:!bg-green-300"
+              >Register</d-button
+            >
+          </button>
         </div>
-      </section>
-    </form>
+      </form>
+    </section>
   </div>
 </template>
 
@@ -119,25 +149,62 @@
 import DButton from "@/components/utils/DButton.vue";
 import svgComp from "@/components/svgComp.vue";
 import { ref, watch } from "vue";
-
-const username = ref("");
-const errorUsername = ref("");
-
-watch(username, () => {
-  console.log(username.value.length);
-  if (username.value.length < 10) {
-    errorUsername.value = "Username is required";
-  } else {
-    errorUsername.value = "";
-  }
-});
-const email = ref("");
-const password = ref("");
+// import "animate.css";
 
 const passwordType = ref(false);
 
+const username = ref("");
+const usernameError = ref("");
+const email = ref("");
+const emailError = ref("");
+const password = ref("");
+const passwordError = ref("");
+
+function checkUsername() {
+  if (username.value != "") {
+    usernameError.value = "";
+    return true;
+  } else {
+    usernameError.value = "Username is required";
+    return false;
+  }
+}
+
+function checkEmail() {
+  if (email.value != "") {
+    emailError.value = "";
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!regex.test(email.value)) {
+      emailError.value = "Email must be valid";
+      return false;
+    }
+    return true;
+  } else {
+    emailError.value = "Email is required";
+    return false;
+  }
+}
+function checkPassword() {
+  if (password.value != "") {
+    passwordError.value = "";
+    return true;
+  } else {
+    passwordError.value = "Password is required";
+    return false;
+  }
+}
+
 let loading = ref(false);
 function setLoading() {
+  checkEmail();
+  checkPassword();
+  checkUsername();
+  if (checkEmail() && checkPassword() && checkUsername()) {
+    console.log("submitting");
+  } else {
+    console.log("not submitting");
+  }
+
   loading.value = true;
   setTimeout(() => {
     loading.value = false;
