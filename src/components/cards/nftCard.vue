@@ -131,7 +131,7 @@ const getNft = () => {
   if (nftExist) {
     // console.log("Already exist");
     userflowing.initAlert({
-      message: `${nft.name} Already Exist in Your Cart List`,
+      message: `${nft.name} Already Added in Your Cart List`,
       is: true,
       type: "error",
       timer: 6000,

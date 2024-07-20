@@ -192,18 +192,20 @@
       </div>
     </section>
 
-    <div
-      class="border-gray-300 cursor-pointer dark:border-gray-600 dark:bg-slate-800 border rounded-xl transit p-4 mx-2 mt-4 pb-6"
-    >
-      <p class="mx-3 text-slate-900 dark:text-slate-100">
-        Collection Activities
-      </p>
+    <main class="pb-20">
+      <div
+        class="border-gray-300 cursor-pointer dark:border-gray-600 dark:bg-slate-800 border rounded-xl transit p-4 mx-2 mt-4"
+      >
+        <p class="mx-3 text-slate-900 dark:text-slate-100">
+          Collection Activities
+        </p>
 
-      <CollectionActivities
-        :contract-address="contract ? contract : ''"
-        v-if="loading == true"
-      />
-    </div>
+        <CollectionActivities
+          :contract-address="contract ? contract : ''"
+          v-if="loading == true"
+        />
+      </div>
+    </main>
   </div>
 </template>
 
@@ -311,7 +313,7 @@ function cartNft(nftDetails) {
 
   if (nft) {
     userflowing.initAlert({
-      message: `${nftDetails.name} Already Exist in Your Cart List`,
+      message: `${nftDetails.name} Already Added in Your Cart List`,
       is: true,
       type: "error",
       timer: 6000,

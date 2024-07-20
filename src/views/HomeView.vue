@@ -301,12 +301,13 @@
             <d-button
               type="outlined"
               class="border-green-400 !text-green-400 active:!bg-green-300 dark:active:!bg-green-400"
+              @click="(form = true), (type = 'login')"
               >Login</d-button
             >
             <d-button
               type="elevated"
               class="shadow-green-400 bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
-              to="/collection/red"
+              @click="(form = true), (type = 'registration')"
             />
           </div>
         </div>

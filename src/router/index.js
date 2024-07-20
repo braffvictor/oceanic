@@ -67,25 +67,6 @@ const routes = [
     name: "error-page",
     component: () => import("../views/error/errorPage.vue"),
   },
-
-  //for authentication layout and subpages
-  {
-    path: "/auth",
-    component: () => import("../layout/authLayout.vue"),
-    name: "auth",
-    children: [
-      {
-        path: "/register",
-        name: "Register",
-        component: () => import("../views/auth/register.vue"),
-      },
-      {
-        path: "/login",
-        name: "Login",
-        component: () => import("../views/auth/login.vue"),
-      },
-    ],
-  },
 ];
 
 const router = createRouter({

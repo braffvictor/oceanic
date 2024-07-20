@@ -136,8 +136,26 @@ watch(searchName, () => {
 
 watch(route, () => {
   specificCollectionNfts(route.params.id);
-  console.log("fetching nfts");
+  // console.log("fetching nfts");
 });
 </script>
 
-<style></style>
+<style>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s ease-in-out;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px), translateY(20px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>

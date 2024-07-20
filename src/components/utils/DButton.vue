@@ -59,8 +59,7 @@
   <router-link
     v-else-if="(type && disabled) || (!type && disabled)"
     :to="to"
-    class="p-3 rounded-2xl !cursor-not-allowed select-none pointer-events-none w-full dark:!text-slate-100 active:!scale-90 !text-slate-900 transit text-center inline-block bg-gray-500 dark:bg-gray-400 flex justify-center gap-x-2 !min-h-11 items-center"
-    @click="consoling"
+    class="p-3 rounded-2xl !cursor-not-allowed select-none pointer-events-none w-full dark:!text-slate-100 active:!scale-90 !text-slate-900 transit text-center inline-block !bg-gray-500 dark:!bg-gray-400 flex justify-center gap-x-2 !min-h-11 items-center"
   >
     <svg-comp
       v-if="!loading"
@@ -77,10 +76,6 @@
 <script setup>
 import { defineProps, ref } from "vue";
 import SvgComp from "../svgComp.vue";
-
-function consoling() {
-  console.log("pointer event");
-}
 
 const props = defineProps({
   type: {
