@@ -343,7 +343,9 @@
       </div>
     </div>
 
-    <router-view class="pt-20" @click="(show = false), (searchBar = false)" />
+    <main>
+      <router-view class="pt-20" @click="(show = false), (searchBar = false)" />
+    </main>
 
     <!-- footer section -->
     <section

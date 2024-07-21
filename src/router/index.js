@@ -4,13 +4,13 @@ import HomeView from "../views/HomeView.vue";
 const routes = [
   {
     //for default layout and subpages
-    component: () => import("../layout/default.vue"),
+    component: () => import("@/layout/default"),
     name: "default",
     path: "/",
     children: [
       {
         path: "/",
-        name: "home",
+        name: "home view",
         component: HomeView,
       },
       {

@@ -1,23 +1,37 @@
 <template>
   <div
-    class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-[200vh] relative flex justify-around gap-x-6"
+    class="transit font-mono bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-[200vh] relative flex justify-around"
     :class="themeState == 'light' || themeState == null ? '' : 'dark'"
   >
-    <!-- side nav bar for pc -->
+    <DButton
+      type="elevated"
+      class="fixed bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 bottom-0 right-0 mb-10 mr-10"
+      v-if="themeState == 'dark'"
+      @click="changeTheme('light')"
+      >Change</DButton
+    >
+    <DButton
+      type="elevated"
+      class="fixed bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 bottom-0 right-0 mb-10 mr-10"
+      v-if="themeState == 'light' || themeState == null"
+      @click="changeTheme('dark')"
+      >Change</DButton
+    >
 
-    <div
+    <!-- side nav bar for pc -->
+    <section
       class="h-auto hidden md:block bg-slate-100 dark:bg-slate-950 left-0 px-4 top-0 border-r border-gray-200 dark:border-gray-600"
       :class="drawer ? 'w-56 transit' : 'w-24 transit'"
     >
       <!-- toggle drawer button -->
       <button
         @click="drawer = !drawer"
-        class="my-4 fixed top-64 rounded-full border flex justify-center items-center transit backdrop-blur-md cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 z-30"
+        class="my-4 fixed top-64 rounded-full border flex justify-center items-center transit backdrop-blur-sm cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 z-30"
         :class="[
           themeState == 'light' || themeState == null
             ? 'whiteT border-gray-200'
             : 'darkT border-gray-600',
-          drawer ? 'left-40' : 'left-16',
+          drawer ? 'left-44' : 'left-[74px]',
         ]"
       >
         <SvgComp
@@ -28,11 +42,11 @@
       </button>
 
       <!-- nav content -->
-      <!-- first content -->
       <div
         class="h-screen fixed top-0 left-0 px-4"
         :class="drawer ? 'w-44 transit' : 'w-20 transit'"
       >
+        <!-- first content -->
         <div
           class="justify-center items-center gap-x-2 cursor-pointer mt-7 mb-3"
           @click="$router.push('/')"
@@ -45,7 +59,7 @@
           />
           <img
             src="https://solanart.io/solanart-logo.svg"
-            class="max-w-9"
+            class="max-w-9 mx-auto text-center"
             alt=""
             v-if="themeState != 'light' && themeState != null"
           />
@@ -61,6 +75,7 @@
             Oceanic
           </p>
         </div>
+
         <!-- divider -->
         <div
           class="border-b border w-full"
@@ -95,9 +110,7 @@
             />
             <p
               :class="
-                drawer
-                  ? 'scale-x-100 transit opacity-100'
-                  : 'scale-x-0 opacity-0 transit'
+                drawer ? 'transit opacity-100' : 'scale-x-0 opacity-0 transit'
               "
               class="group-active:text-green-500 transit capitalize font-medium"
             >
@@ -106,25 +119,34 @@
           </DButton>
         </main>
       </div>
-    </div>
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-      tempora architecto officia non inventore asperiores quia obcaecati ullam,
-      deserunt, similique sunt praesentium excepturi saepe? red
-    </div>
+    </section>
+
+    <!-- children routerview -->
+    <section class="w-full md:mt-2 p-4 md:p-6">
+      <router-view />
+    </section>
 
     <!-- bottom nav bar for mobile -->
     <section
-      class="fixed h-16 w-full bottom-0 dark:bg-slate-900 bg-slate-100 border-opacity-100 md:hidden"
+      class="fixed h-16 w-full bottom-0 dark:bg-slate-900 bg-slate-100 border-opacity-100 md:hidden transit"
     >
+      <!-- divider -->
+      <div
+        class="border-b border w-full opacity-30"
+        :class="
+          themeState == 'light' || themeState == null
+            ? 'whiteT border-b-gray-200'
+            : 'darkT border-b-gray-600'
+        "
+      ></div>
       <main class="flex h-full w-full items-center justify-evenly">
         <DButton
           v-for="link in links"
           :key="link.text"
-          class="flex flex-col items-center group rounded-none"
+          class="flex flex-col items-center group rounded-none z-10"
           :class="
             route.name == link.text
-              ? '!bg-green-500 !shadow-md !shadow-green-500 -mt-2 transit rounded-t-md'
+              ? '!bg-green-400 !shadow-md !shadow-green-400 dark:!bg-green-500 dark:!shadow-green-500 -mt-2 transit rounded-t-md'
               : ' dark:!bg-slate-900 !bg-slate-100 mt-1'
           "
         >
@@ -169,7 +191,7 @@ const links = computed(() => {
     },
     {
       icon: "M8.41799 3.25089C8.69867 2.65917 9.30155 2.25 10 2.25H14C14.6984 2.25 15.3013 2.65917 15.582 3.25089C16.2655 3.25586 16.7983 3.28724 17.2738 3.47309C17.842 3.69516 18.3362 4.07266 18.6999 4.56242C19.0668 5.0565 19.2391 5.68979 19.4762 6.56144L20.2181 9.28272L20.4985 10.124C20.5065 10.1339 20.5144 10.1438 20.5222 10.1539C21.4231 11.3076 20.9941 13.0235 20.1362 16.4553C19.5905 18.638 19.3176 19.7293 18.5039 20.3647C17.6901 21.0001 16.5652 21.0001 14.3153 21.0001H9.68462C7.43476 21.0001 6.30983 21.0001 5.49605 20.3647C4.68227 19.7293 4.40943 18.638 3.86376 16.4553C3.00581 13.0235 2.57684 11.3076 3.47767 10.1539C3.48555 10.1438 3.4935 10.1338 3.50152 10.1239L3.7819 9.28271L4.52384 6.56145C4.76092 5.6898 4.93316 5.0565 5.30009 4.56242C5.66381 4.07266 6.15802 3.69516 6.72621 3.4731C7.20175 3.28724 7.73447 3.25586 8.41799 3.25089ZM8.41951 4.75231C7.75763 4.759 7.49204 4.78427 7.27224 4.87018C6.96629 4.98976 6.70018 5.19303 6.50433 5.45674C6.32822 5.69388 6.22488 6.0252 5.93398 7.09206L5.36442 9.18091C6.38451 9.00012 7.77753 9.00012 9.68462 9.00012H14.3153C16.2224 9.00012 17.6155 9.00012 18.6356 9.18092L18.066 7.09206C17.7751 6.0252 17.6718 5.69388 17.4957 5.45674C17.2998 5.19303 17.0337 4.98976 16.7278 4.87018C16.508 4.78427 16.2424 4.759 15.5805 4.75231C15.2992 5.3423 14.6972 5.75 14 5.75H10C9.30281 5.75 8.70084 5.3423 8.41951 4.75231Z",
-      text: "Cart List",
+      text: "Cart ",
     },
     {
       icon: "M16.0724 4.02447C15.1063 3.04182 13.7429 2.5 12.152 2.5C10.5611 2.5 9.19773 3.04182 8.23167 4.02447C7.26636 5.00636 6.73644 6.38891 6.73644 8C6.73644 10.169 7.68081 11.567 8.8496 12.4062C9.07675 12.5692 9.3115 12.7107 9.54832 12.8327C8.24215 13.1916 7.18158 13.8173 6.31809 14.5934C4.95272 15.8205 4.10647 17.3993 3.53633 18.813C3.43305 19.0691 3.55693 19.3604 3.81304 19.4637C4.06914 19.567 4.36047 19.4431 4.46375 19.187C5.00642 17.8414 5.78146 16.4202 6.98653 15.3371C8.1795 14.265 9.82009 13.5 12.152 13.5C14.332 13.5 15.9058 14.1685 17.074 15.1279C18.252 16.0953 19.0453 17.3816 19.6137 18.6532C19.9929 19.5016 19.3274 20.5 18.2827 20.5H6.74488C6.46874 20.5 6.24488 20.7239 6.24488 21C6.24488 21.2761 6.46874 21.5 6.74488 21.5H18.2827C19.9348 21.5 21.2479 19.8588 20.5267 18.2452C19.9232 16.8952 19.0504 15.4569 17.7087 14.3551C16.9123 13.7011 15.9603 13.1737 14.8203 12.8507C15.43 12.5136 15.9312 12.0662 16.33 11.5591C17.1929 10.462 17.5676 9.10016 17.5676 8C17.5676 6.38891 17.0377 5.00636 16.0724 4.02447ZM15.3593 4.72553C16.1144 5.49364 16.5676 6.61109 16.5676 8C16.5676 8.89984 16.2541 10.038 15.544 10.9409C14.8475 11.8265 13.7607 12.5 12.152 12.5C11.5014 12.5 10.3789 12.2731 9.43284 11.5938C8.51251 10.933 7.73644 9.83102 7.73644 8C7.73644 6.61109 8.18963 5.49364 8.94477 4.72553C9.69916 3.95818 10.7935 3.5 12.152 3.5C13.5105 3.5 14.6049 3.95818 15.3593 4.72553Z",
