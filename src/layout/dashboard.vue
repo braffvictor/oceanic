@@ -88,13 +88,14 @@
 
         <!-- other nav links -->
         <main
-          class="flex flex-col h-full w-full gap-y-10 mt-10 mx-auto text-center"
+          class="flex flex-col h-full w-full gap-y-6 mt-10 mx-auto text-center"
           :class="drawer ? 'items-start' : 'items-center'"
         >
           <DButton
             type="elevated"
             v-for="link in links"
             :key="link.icon"
+            :to="link.to"
             class="flex group shadow-none text-green-500 rounded-lg !p-2 w-full"
             :class="[
               drawer ? 'gap-x-3 justify-start' : 'justify-center',
@@ -167,10 +168,16 @@
 </template>
 
 <script setup>
+//stores
+import { userflow } from "@/stores/userflow";
+
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, provide, ref } from "vue";
 import { useRoute } from "vue-router";
+
+const userflowing = userflow();
+userflowing.getAllNfts();
 
 const route = useRoute();
 

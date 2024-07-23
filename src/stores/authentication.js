@@ -1,8 +1,8 @@
 import router from "@/router";
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { userflow } from "./userflow";
 
-export const useAuthentication = defineStore("authentication", {
+export const authentication = defineStore("authentication", {
   state: () => ({
     user: "regex expression",
     loading: {
@@ -14,14 +14,16 @@ export const useAuthentication = defineStore("authentication", {
     getUser: (state) => state.user,
   },
   actions: {
-    changeUser() {
-      console.log("User Changing");
+    registerUser(payload) {
+      const userflowing = userflow();
+      userflowing.initAlert({
+        message: "Successfully Registered",
+        timer: 4000,
+        is: true,
+        type: "success",
+        close: false,
+      });
+      console.log(payload);
     },
   },
-});
-
-export const userAuth = defineStore("auth", () => {
-  const user = ref("registration expression");
-
-  return { user };
 });

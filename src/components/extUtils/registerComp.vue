@@ -149,10 +149,15 @@
 </template>
 
 <script setup>
+// stores
+import { authentication } from "@/stores/authentication";
+
 import DButton from "@/components/utils/DButton.vue";
 import svgComp from "@/components/svgComp.vue";
 import { ref, watch } from "vue";
 // import "animate.css";
+
+const useAuthentication = authentication();
 
 const passwordType = ref(false);
 
@@ -203,7 +208,12 @@ function setLoading() {
   checkPassword();
   checkUsername();
   if (checkEmail() && checkPassword() && checkUsername()) {
-    console.log("submitting");
+    const payload = {
+      email: email.value,
+      password: password.value,
+      username: username.value,
+    };
+    useAuthentication.registerUser(payload);
   } else {
     console.log("not submitting");
   }

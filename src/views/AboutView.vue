@@ -123,17 +123,12 @@
       </section>
     </main>
 
-    <DButton
-      class="rounded-xl !bg-green-500"
-      :loading="false"
-      @click="authentication.changeUser()"
-    >
-    </DButton>
+    <DButton class="rounded-xl !bg-green-500" :loading="false"> </DButton>
   </div>
 </template>
 
 <script setup>
-import { useAuthentication, userAuth } from "@/stores/authentication";
+import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
@@ -142,12 +137,6 @@ import { computed } from "vue";
 // import warning from '@/assets/svg.'
 const userflo = userflow();
 console.log(userflo.cartList);
-
-const authentication = useAuthentication();
-const auth = userAuth();
-
-console.log(authentication.user);
-console.log(auth.user);
 
 const perks = computed(() => {
   return [

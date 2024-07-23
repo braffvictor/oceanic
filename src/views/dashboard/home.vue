@@ -71,7 +71,7 @@
     <section class="mt-5">
       <p class="text-semibold">Hot Collection🔥</p>
 
-      <section class="mt-3">
+      <section class="mt-3" v-if="collections.length > 5">
         <main
           class="flex items-center cursor-pointer justify-between gap-y-5 md:justify-start gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 p-2 rounded-xl transit group overflow-auto min-h-24"
           v-for="collection in collections.slice(0, 5)"
@@ -121,11 +121,21 @@
           </div>
         </main>
       </section>
+
+      <div v-else class="min-h-screen mt-10 text-center mx-auto">
+        <div class="mx-auto text-center flex justify-center">
+          <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
+        </div>
+        <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
+          Loading Collections...
+        </p>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
+// stores
 import { userflow } from "@/stores/userflow";
 
 import wave1 from "@/assets/wave1.png";
@@ -140,7 +150,7 @@ const rando = Math.round(Math.random() * 3);
 
 const userflowing = userflow();
 const theme = inject("theme");
-userflowing.getAllNfts();
+
 const collections = computed(() => {
   return userflowing.getNfts;
 });
