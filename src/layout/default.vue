@@ -360,12 +360,14 @@
                 src="https://solanart.io/solanart-logo-black.svg"
                 class="md:max-w-10 max-w-8 block"
                 v-if="themeState != 'dark'"
+                @click="$router.push('/dashboard/home')"
                 alt=""
               />
               <img
                 src="https://solanart.io/solanart-logo.svg"
                 class="max-w-10 max-w-8 block"
                 alt=""
+                @click="$router.push('/dashboard/home')"
                 v-if="themeState != 'light' && themeState != null"
               />
               <p

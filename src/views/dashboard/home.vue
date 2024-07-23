@@ -30,7 +30,7 @@
             <div>
               <SvgComp
                 icon="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm11.814-7.581a1 1 0 0 0-1.628 0l-5 7a1 1 0 0 0 0 1.162l5 7a1 1 0 0 0 1.628 0l5-7a1 1 0 0 0 0-1.162l-5-7zM12 12.923 9.693 12 12 11.077l2.307.923-2.307.923zm.371 2.005 1.832-.732L12 17.279l-2.203-3.083 1.832.732a1 1 0 0 0 .742 0zM12 6.72 9.797 9.804l1.832-.732a1 1 0 0 1 .742 0l1.832.732L12 6.72z"
-                Sclass="min-w-12"
+                Sclass="min-w-[41px]"
                 class="min-w-12"
               />
             </div>
@@ -52,8 +52,8 @@
       <!-- <p class="font-semibold text-center text-lg md:text-xl">Shortcuts</p> -->
       <div class="flex flex-wrap justify-center items-center mt-2 gap-2">
         <div
-          class="rounded-xl h-20 w-18 md:w-40 md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
-          v-for="(cuts, n) in shortcuts"
+          class="rounded-xl h-20 w-24 md:w-40 md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
+          v-for="n in 3"
           :key="n"
         >
           <div class="flex flex-col justify-center items-center !p-2 gap-2">
@@ -89,12 +89,20 @@
             <p
               class="font-semibold text-slate-900 dark:text-slate-100 text-sm md:text-lg"
             >
-              {{ collection.name.slice(0, 20) + "..." }}
+              {{
+                collection.name.length >= 25
+                  ? collection.name.slice(0, 25) + "..."
+                  : collection.name
+              }}
             </p>
             <p
               class="font-thin text-xs opacity-50 text-slate-900 dark:text-slate-100 md:text-sm"
             >
-              {{ collection.key }}
+              {{
+                collection.key.length >= 20
+                  ? collection.key.slice(0, 20) + "..."
+                  : collection.key
+              }}
               <img
                 src="@/assets/verified.svg"
                 alt="tick"
@@ -103,7 +111,7 @@
             </p>
           </div>
 
-          <div class="px-5 md:px-4 float-end w-full text-right">
+          <div class="float-end w-full text-right">
             <button>
               <svg-comp
                 Sclass="active:stroke-red-500 -rotate-90"
