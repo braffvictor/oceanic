@@ -1,7 +1,7 @@
 <template>
   <div class="md:w-10/12 mx-auto">
     <main
-      class="sticky pt-4 pb-3 top-0 z-10 bg-slate-100 dark:bg-slate-900 transit"
+      class="sticky pt-4 pb-3 top-0 z-10 bg-slate-50 dark:bg-slate-900 transit"
     >
       <div class="flex items-center justify-between">
         <p class="text-gray-400 text-sm md:text-lg">Welcome,</p>
