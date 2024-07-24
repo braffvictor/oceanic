@@ -12,7 +12,7 @@
           >
             <img
               src="@/assets/svg/lightmode.svg"
-              class="max-w-6"
+              class="max-w-5"
               alt="light Mode"
             />
           </button>
@@ -22,7 +22,7 @@
           >
             <img
               src="@/assets/svg/darkmode.svg"
-              class="max-w-6 transform -rotate-45"
+              class="max-w-5 transform -rotate-45"
               alt="dark mode"
             /></button
           >🔔
