@@ -1,5 +1,5 @@
 <template>
-  <div>This is the deposit page</div>
+  <div class="h-screen">This is the deposit page</div>
 </template>
 
 <script setup></script>

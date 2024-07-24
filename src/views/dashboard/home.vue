@@ -1,6 +1,8 @@
 <template>
   <div class="md:w-10/12 mx-auto">
-    <main class="">
+    <main
+      class="sticky pt-4 pb-3 top-0 z-10 bg-slate-100 dark:bg-slate-900 transit"
+    >
       <div class="flex items-center justify-between">
         <p class="text-gray-400 text-sm md:text-lg">Welcome,</p>
         <p class="text-lg">🔔</p>
@@ -73,7 +75,7 @@
 
       <section class="mt-3" v-if="collections.length > 5">
         <main
-          class="flex items-center cursor-pointer justify-between gap-y-5 md:justify-start gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 p-2 rounded-xl transit group overflow-auto min-h-24"
+          class="flex items-center border-2 border-slate-200 dark:border-slate-700 my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 p-2 rounded-xl transit group overflow-auto min-h-24"
           v-for="collection in collections.slice(0, 5)"
           :key="collection.name"
         >
@@ -143,7 +145,11 @@ import wave2 from "@/assets/wave2.png";
 import wave4 from "@/assets/wave4.png";
 import wave5 from "@/assets/wave5.png";
 import SvgComp from "@/components/svgComp.vue";
-import { computed, inject, ref } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 
 const waving = ref([wave1, wave2, wave4, wave5]);
 const rando = Math.round(Math.random() * 3);

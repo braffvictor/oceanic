@@ -1,6 +1,6 @@
 <template>
   <div
-    class="transit font-mono bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-[200vh] relative flex justify-around"
+    class="transit font-mono bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-auto pb-16 relative flex justify-around"
     :class="themeState == 'light' || themeState == null ? '' : 'dark'"
   >
     <DButton
@@ -123,7 +123,7 @@
     </section>
 
     <!-- children routerview -->
-    <section class="w-full md:mt-2 p-4 md:p-6">
+    <section class="w-full md:mt-2 px-4 md:p-6">
       <router-view />
     </section>
 
