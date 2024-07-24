@@ -211,7 +211,7 @@ const links = computed(() => {
 });
 
 const themeState = ref(localStorage.getItem("theme"));
-provide("theme", themeState.value);
+const theme = provide("theme", themeState);
 //change theme function
 function changeTheme(theme) {
   localStorage.setItem("theme", theme);

@@ -5,7 +5,28 @@
     >
       <div class="flex items-center justify-between">
         <p class="text-gray-400 text-sm md:text-lg">Welcome,</p>
-        <p class="text-lg">🔔</p>
+        <p class="text-lg flex items-center">
+          <button
+            v-if="theme != 'light' && theme != null"
+            class="p-2 rounded-lg transit active:animate-spin"
+          >
+            <img
+              src="@/assets/svg/lightmode.svg"
+              class="max-w-6"
+              alt="light Mode"
+            />
+          </button>
+          <button
+            v-if="theme != 'dark'"
+            class="p-2 rounded-lg transit active:animate-ping relative"
+          >
+            <img
+              src="@/assets/svg/darkmode.svg"
+              class="max-w-6 transform -rotate-45"
+              alt="dark mode"
+            /></button
+          >🔔
+        </p>
       </div>
       <p
         class="text-lg md:text-2xl font-semibold text-slate-900 dark:text-slate-100"
@@ -145,7 +166,7 @@ import wave2 from "@/assets/wave2.png";
 import wave4 from "@/assets/wave4.png";
 import wave5 from "@/assets/wave5.png";
 import SvgComp from "@/components/svgComp.vue";
-import { computed, inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted, ref, watch } from "vue";
 
 onMounted(() => {
   window.scrollTo(0, 0);
