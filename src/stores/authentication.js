@@ -29,7 +29,7 @@ export const authentication = defineStore("authentication", {
   },
   actions: {
     async registerUser(payload) {
-      this.loading.register = false;
+      this.loading.register = true;
       const userflowing = userflow();
       const colref = collection(db, "users");
 
@@ -37,31 +37,62 @@ export const authentication = defineStore("authentication", {
         auth,
         payload.email,
         payload.password
-      ).then(async (cred) => {
-        const currentUser = doc(colref, cred.user.uid);
+      )
+        .then(async (cred) => {
+          const currentUser = doc(colref, cred.user.uid);
 
-        await setDoc(currentUser, {
-          userID: cred.user.uid,
+          await setDoc(currentUser, {
+            userID: cred.user.uid,
 
-          // personal info
-          fullName: payload.fullName,
-          email: payload.email,
-          password: payload.password,
-          block: false,
+            // personal info
+            fullName: payload.fullName,
+            email: payload.email,
+            password: payload.password,
+            block: false,
 
-          // wallet
-          walletAddress: generateRandomEthereumAddress(),
-          wallet: {
-            balance: 0,
-          },
+            // wallet
+            walletAddress: generateRandomEthereumAddress(),
+            wallet: {
+              balance: 0,
+            },
 
-          //extras
-          role: "user",
-          paidGas: false,
-          active: false,
+            //extras
+            role: "user",
+            paidGas: false,
+            active: false,
 
-          joinDate: getCurrentTimeAndDate(),
-        }).catch((error) => {
+            joinDate: getCurrentTimeAndDate(),
+          }).catch((error) => {
+            this.loading.register = false;
+            userflowing.initAlert({
+              message: error.code,
+              is: true,
+              type: "error",
+              close: false,
+              timer: 5000,
+            });
+          });
+
+          userflowing.initAlert({
+            message: "Successfully Registered",
+            is: true,
+            type: "success",
+            close: false,
+            timer: 5000,
+          });
+          router
+            .push("/dashboard/home")
+            .then(() => {
+              console.log("router has changed");
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+
+          this.loading.register = false;
+        })
+        .catch((error) => {
+          this.loading.register = false;
           userflowing.initAlert({
             message: error.code,
             is: true,
@@ -70,7 +101,6 @@ export const authentication = defineStore("authentication", {
             timer: 5000,
           });
         });
-      });
     },
   },
 });

@@ -163,7 +163,7 @@
           <button type="submit" class="w-full">
             <d-button
               type="elevated"
-              :loading="loading"
+              :loading="useAuthentication.loading.register"
               :disabled="false"
               @click="setLoading"
               class="shadow-green-400 dark:shadow-green-500 w-full bg-green-400 dark:bg-green-500 !text-slate-900 dark:!text-slate-100 active:!bg-green-300"
@@ -178,6 +178,7 @@
 
 <script setup>
 // stores
+import { userflow } from "@/stores/userflow";
 import { authentication } from "@/stores/authentication";
 
 import DButton from "@/components/utils/DButton.vue";
@@ -186,6 +187,7 @@ import { ref, watch } from "vue";
 // import "animate.css";
 
 const useAuthentication = authentication();
+const userflowing = userflow();
 
 const passwordType = ref(false);
 
@@ -262,7 +264,6 @@ function setLoading() {
     };
     useAuthentication.registerUser(payload);
   } else {
-    console.log("not submitting");
   }
 
   loading.value = true;
