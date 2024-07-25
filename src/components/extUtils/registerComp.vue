@@ -30,6 +30,34 @@
     <!-- textfield -->
     <section class="mt-3">
       <form action="" class="">
+        <!-- the fullName -->
+        <div
+          class="flex border-b border-b-slate-900 dark:border-b-slate-100 items-center bg-transparent h-11 w-full dark:text-slate-100 text-slate-900 overflow-hidden dark:caret-slate-100 justify-self-start align-start indent-5 gap-2 has-[:focus]:border-b-green-500 outline-none transit group"
+        >
+          <svg-comp
+            icon="M16.0724 4.02447C15.1063 3.04182 13.7429 2.5 12.152 2.5C10.5611 2.5 9.19773 3.04182 8.23167 4.02447C7.26636 5.00636 6.73644 6.38891 6.73644 8C6.73644 10.169 7.68081 11.567 8.8496 12.4062C9.07675 12.5692 9.3115 12.7107 9.54832 12.8327C8.24215 13.1916 7.18158 13.8173 6.31809 14.5934C4.95272 15.8205 4.10647 17.3993 3.53633 18.813C3.43305 19.0691 3.55693 19.3604 3.81304 19.4637C4.06914 19.567 4.36047 19.4431 4.46375 19.187C5.00642 17.8414 5.78146 16.4202 6.98653 15.3371C8.1795 14.265 9.82009 13.5 12.152 13.5C14.332 13.5 15.9058 14.1685 17.074 15.1279C18.252 16.0953 19.0453 17.3816 19.6137 18.6532C19.9929 19.5016 19.3274 20.5 18.2827 20.5H6.74488C6.46874 20.5 6.24488 20.7239 6.24488 21C6.24488 21.2761 6.46874 21.5 6.74488 21.5H18.2827C19.9348 21.5 21.2479 19.8588 20.5267 18.2452C19.9232 16.8952 19.0504 15.4569 17.7087 14.3551C16.9123 13.7011 15.9603 13.1737 14.8203 12.8507C15.43 12.5136 15.9312 12.0662 16.33 11.5591C17.1929 10.462 17.5676 9.10016 17.5676 8C17.5676 6.38891 17.0377 5.00636 16.0724 4.02447ZM15.3593 4.72553C16.1144 5.49364 16.5676 6.61109 16.5676 8C16.5676 8.89984 16.2541 10.038 15.544 10.9409C14.8475 11.8265 13.7607 12.5 12.152 12.5C11.5014 12.5 10.3789 12.2731 9.43284 11.5938C8.51251 10.933 7.73644 9.83102 7.73644 8C7.73644 6.61109 8.18963 5.49364 8.94477 4.72553C9.69916 3.95818 10.7935 3.5 12.152 3.5C13.5105 3.5 14.6049 3.95818 15.3593 4.72553Z"
+            Sclass="group-has-[:focus]:stroke-green-500"
+          />
+          <input
+            type="text"
+            required
+            class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none"
+            placeholder="FullName"
+            @keyup="checkFullname"
+            v-model="fullName"
+          />
+        </div>
+        <p
+          class="text-xs text-red-500 transit mt-3 text-center"
+          :class="
+            fullNameError
+              ? 'scale-y-100 transit animate__animated animate__shakeX'
+              : 'scale-y-0 transit '
+          "
+        >
+          {{ fullNameError }}
+        </p>
+
         <!-- the username -->
         <div
           class="flex border-b border-b-slate-900 dark:border-b-slate-100 items-center bg-transparent h-11 w-full dark:text-slate-100 text-slate-900 overflow-hidden dark:caret-slate-100 justify-self-start align-start indent-5 gap-2 has-[:focus]:border-b-green-500 outline-none transit group"
@@ -161,12 +189,24 @@ const useAuthentication = authentication();
 
 const passwordType = ref(false);
 
+const fullName = ref("");
+const fullNameError = ref("");
 const username = ref("");
 const usernameError = ref("");
 const email = ref("");
 const emailError = ref("");
 const password = ref("");
 const passwordError = ref("");
+
+function checkFullname() {
+  if (fullName.value != "") {
+    fullNameError.value = "";
+    return true;
+  } else {
+    fullNameError.value = "FullName is required";
+    return false;
+  }
+}
 
 function checkUsername() {
   if (username.value != "") {
@@ -195,6 +235,10 @@ function checkEmail() {
 function checkPassword() {
   if (password.value != "") {
     passwordError.value = "";
+    if (password.value.length < 6) {
+      passwordError.value = "Password should be at least 6 characters";
+      return false;
+    }
     return true;
   } else {
     passwordError.value = "Password is required";
@@ -207,8 +251,11 @@ function setLoading() {
   checkEmail();
   checkPassword();
   checkUsername();
-  if (checkEmail() && checkPassword() && checkUsername()) {
+  checkFullname();
+
+  if (checkEmail() && checkPassword() && checkUsername() && checkFullname()) {
     const payload = {
+      fullName: fullName.value,
       email: email.value,
       password: password.value,
       username: username.value,

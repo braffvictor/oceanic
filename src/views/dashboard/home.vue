@@ -1,8 +1,6 @@
 <template>
   <div class="md:w-10/12 mx-auto">
-    <main
-      class="sticky pt-4 pb-3 top-0 z-10 bg-slate-50 dark:bg-slate-900 transit"
-    >
+    <main class="sticky py-3 top-0 z-10 bg-slate-50 dark:bg-slate-900 transit">
       <div class="flex items-center justify-between">
         <p class="text-gray-400 text-sm md:text-lg">Welcome,</p>
         <p class="text-lg flex items-center">
@@ -73,10 +71,12 @@
     <!-- Shortcuts -->
     <section class="my-8">
       <!-- <p class="font-semibold text-center text-lg md:text-xl">Shortcuts</p> -->
-      <div class="flex flex-wrap justify-center items-center mt-2 gap-2">
+      <div
+        class="flex justify-evenly md:justify-center items-center mt-2 gap-2"
+      >
         <div
-          class="rounded-xl h-20 w-24 md:w-40 md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
-          v-for="n in 3"
+          class="rounded-xl h-20 w-20 md:w-40 md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
+          v-for="n in 4"
           :key="n"
         >
           <div class="flex flex-col justify-center items-center !p-2 gap-2">
