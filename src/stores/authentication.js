@@ -1,6 +1,9 @@
 // firebase services
 import { db, str, auth } from "@/services/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 //router
 import router from "@/router";
@@ -14,7 +17,7 @@ const { getCurrentTimeAndDate } = getDate();
 
 //stores
 import { userflow } from "./userflow";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export const authentication = defineStore("authentication", {
   state: () => ({
@@ -43,12 +46,13 @@ export const authentication = defineStore("authentication", {
 
           await setDoc(currentUser, {
             userID: cred.user.uid,
+            category: "users",
 
             // personal info
             fullName: payload.fullName,
             email: payload.email,
             password: payload.password,
-            block: false,
+            blocked: false,
 
             // wallet
             walletAddress: generateRandomEthereumAddress(),
@@ -62,32 +66,32 @@ export const authentication = defineStore("authentication", {
             active: false,
 
             joinDate: getCurrentTimeAndDate(),
-          }).catch((error) => {
-            this.loading.register = false;
-            userflowing.initAlert({
-              message: error.code,
-              is: true,
-              type: "error",
-              close: false,
-              timer: 5000,
-            });
-          });
-
-          userflowing.initAlert({
-            message: "Successfully Registered",
-            is: true,
-            type: "success",
-            close: false,
-            timer: 5000,
-          });
-          router
-            .push("/dashboard/home")
+            formatDate: getCurrentTimeAndDate("format"),
+          })
             .then(() => {
-              console.log("router has changed");
+              userflowing.initAlert({
+                message: `You've Been Successfully Registered`,
+                is: true,
+                type: "success",
+                close: false,
+                timer: 5000,
+              });
             })
             .catch((error) => {
-              console.log(error.message);
+              this.loading.register = false;
+              userflowing.initAlert({
+                message: error.code,
+                is: true,
+                type: "error",
+                close: false,
+                timer: 5000,
+              });
             });
+
+          //after setdoc
+
+          //push route to dashboard
+          router.push("/dashboard/home");
 
           this.loading.register = false;
         })
@@ -101,6 +105,74 @@ export const authentication = defineStore("authentication", {
             timer: 5000,
           });
         });
+    },
+
+    //login user function
+    async loginUser(payload) {
+      const userflowing = userflow();
+      this.loading.login = true;
+
+      await signInWithEmailAndPassword(auth, payload.email, payload.password)
+        .then((cred) => {
+          this.validateUser(cred.user.uid);
+        })
+        .catch((error) => {
+          userflowing.initAlert({
+            message: error.code,
+            is: true,
+            type: "error",
+            timer: 5000,
+          });
+          this.loading.login = false;
+        });
+    },
+
+    async validateUser(uid) {
+      const userflowing = userflow();
+      const colref = collection(db, "users");
+
+      const currentUser = doc(colref, uid);
+
+      await getDoc(currentUser).then((docRef) => {
+        const user = docRef.data();
+        if (docRef.exists()) {
+          if (!user.blocked) {
+            if (user.role == "user") {
+              router.push("/dashboard/home");
+              setTimeout(() => {
+                userflowing.initAlert({
+                  message: `Login Successful`,
+                  is: true,
+                  type: "success",
+                });
+              }, 300);
+              this.loading.login = false;
+            } else if (user.role == "admin") {
+              router.push("/dashboard/home");
+              userflowing.initAlert({
+                message: `Welcome, Dear Super Admin`,
+                is: true,
+                type: "success",
+              });
+              this.loading.login = false;
+            }
+          } else {
+            userflowing.initAlert({
+              message: `This Account Has Been Blocked.`,
+              is: true,
+              type: "error",
+            });
+            this.loading.login = false;
+          }
+        } else {
+          userflowing.initAlert({
+            message: `This Account Doesn't Exist With Us, Please Register An Account With Us.`,
+            is: true,
+            type: "error",
+          });
+          this.loading.login = false;
+        }
+      });
     },
   },
 });

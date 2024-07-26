@@ -29,7 +29,7 @@
 
     <!-- textfield -->
     <section class="mt-3">
-      <form action="" class="">
+      <form @submit.prevent="submit">
         <!-- the fullName -->
         <div
           class="flex border-b border-b-slate-900 dark:border-b-slate-100 items-center bg-transparent h-11 w-full dark:text-slate-100 text-slate-900 overflow-hidden dark:caret-slate-100 justify-self-start align-start indent-5 gap-2 has-[:focus]:border-b-green-500 outline-none transit group"

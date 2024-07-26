@@ -129,7 +129,7 @@
               <img
                 src="@/assets/verified.svg"
                 alt="tick"
-                class="max-w-5 inline pl-1"
+                class="max-w-5 inline"
               />
             </p>
           </div>

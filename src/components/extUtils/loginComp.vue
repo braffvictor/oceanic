@@ -29,7 +29,7 @@
 
     <!-- textfields -->
     <section class="mt-3">
-      <form action="">
+      <form @submit.prevent="submit">
         <!-- the email -->
         <div
           class="mt-4 flex border-b border-b-slate-900 dark:border-b-slate-100 items-center bg-transparent h-11 w-full dark:text-slate-100 text-slate-900 overflow-hidden dark:caret-slate-100 justify-self-start align-start indent-5 gap-2 has-[:focus]:border-b-green-500 outline-none transit group"
@@ -104,14 +104,15 @@
         </p>
 
         <div class="w-full mt-6 mb-6">
-          <button class="w-full" type="submit"></button>
-          <d-button
-            type="elevated"
-            :loading="loading"
-            @click="setLoading"
-            class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 dark:shadow-green-500 text-slate-800 dark:!text-slate-100 active:!bg-green-300"
-            >Login</d-button
-          >
+          <button class="w-full" type="submit">
+            <d-button
+              type="elevated"
+              :loading="loading"
+              @click="submit"
+              class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 dark:shadow-green-500 text-slate-800 dark:!text-slate-100 active:!bg-green-300"
+              >Login</d-button
+            >
+          </button>
         </div>
       </form>
     </section>
@@ -119,9 +120,19 @@
 </template>
 
 <script setup>
+//stores
+import { authentication } from "@/stores/authentication";
+
 import DButton from "@/components/utils/DButton.vue";
 import svgComp from "@/components/svgComp.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+
+const useAuthentication = authentication();
+
+const loading = computed(() => {
+  return useAuthentication.loading.login;
+});
+
 const props = defineProps({
   themeState: {
     default: null,
@@ -152,6 +163,10 @@ function checkEmail() {
 function checkPassword() {
   if (password.value != "") {
     passwordError.value = "";
+    if (password.value.length < 6) {
+      passwordError.value = "Password should be at least 6 characters";
+      return false;
+    }
     return true;
   } else {
     passwordError.value = "Password is required";
@@ -159,20 +174,17 @@ function checkPassword() {
   }
 }
 
-let loading = ref(false);
-function setLoading() {
+function submit() {
   checkEmail();
   checkPassword();
   if (checkEmail() && checkPassword()) {
-    console.log("submitting");
+    const payload = {
+      email: email.value,
+      password: password.value,
+    };
+    useAuthentication.loginUser(payload);
   } else {
-    console.log("not submitting");
   }
-
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 4000);
 }
 </script>
 

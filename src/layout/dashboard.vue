@@ -1,6 +1,6 @@
 <template>
   <div
-    class="transit font-mono bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-auto pb-16 relative flex justify-around"
+    class="transit font-mono bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-auto pb-16 md:pb-0 relative flex justify-around"
     :class="themeState == 'light' || themeState == null ? '' : 'dark'"
   >
     <DButton
@@ -96,7 +96,7 @@
             v-for="link in links"
             :key="link.icon"
             :to="link.to"
-            class="flex group shadow-none text-green-500 rounded-lg !p-2 w-full"
+            class="flex group shadow-none text-green-500 rounded-lg !p-2 w-full relative"
             :class="[
               drawer ? 'gap-x-3 justify-start' : 'justify-center',
               route.name == link.text
@@ -104,11 +104,19 @@
                 : '',
             ]"
           >
-            <SvgComp
-              Sclass="group-active:stroke-green-500 transit"
-              class=""
-              :icon="link.icon"
-            />
+            <div class="relative">
+              <p
+                v-if="userflowing.cartList > 0 && link.text == 'Cart'"
+                class="bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs -top-2 -right-2 absolute px-1"
+              >
+                {{ userflowing.cartList }}
+              </p>
+              <SvgComp
+                Sclass="group-active:stroke-green-500 transit"
+                class=""
+                :icon="link.icon"
+              />
+            </div>
             <p
               :class="
                 drawer ? 'transit opacity-100' : 'scale-x-0 opacity-0 transit'
@@ -145,13 +153,19 @@
           v-for="link in links"
           :to="link.to"
           :key="link.text"
-          class="flex flex-col items-center group rounded-none z-10 w-full"
+          class="flex flex-col items-center group rounded-none z-10 w-full relative"
           :class="
             route.name == link.text
               ? '!bg-green-400 !shadow-md !shadow-green-400 dark:!bg-green-500 dark:!shadow-green-500 -mt-2 transit rounded-t-md'
               : ' dark:!bg-slate-900 !bg-slate-100 mt-1'
           "
         >
+          <p
+            v-if="userflowing.cartList > 0 && link.text == 'Cart'"
+            class="bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 font-bold rounded-3xl text-xs top-1 right-3 absolute px-1"
+          >
+            {{ userflowing.cartList }}
+          </p>
           <SvgComp
             Sclass="group-active:!stroke-green-500 dark:active:!stroke-green-500"
             :icon="link.icon"
@@ -164,6 +178,9 @@
         </DButton>
       </main>
     </section>
+
+    <!-- todo alert comp -->
+    <DAlert />
   </div>
 </template>
 
@@ -175,6 +192,7 @@ import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, provide, ref } from "vue";
 import { useRoute } from "vue-router";
+import DAlert from "@/components/utils/DAlert.vue";
 
 const userflowing = userflow();
 userflowing.getAllNfts();
@@ -201,10 +219,10 @@ const links = computed(() => {
     },
     {
       icon: "M8.41799 3.25089C8.69867 2.65917 9.30155 2.25 10 2.25H14C14.6984 2.25 15.3013 2.65917 15.582 3.25089C16.2655 3.25586 16.7983 3.28724 17.2738 3.47309C17.842 3.69516 18.3362 4.07266 18.6999 4.56242C19.0668 5.0565 19.2391 5.68979 19.4762 6.56144L20.2181 9.28272L20.4985 10.124C20.5065 10.1339 20.5144 10.1438 20.5222 10.1539C21.4231 11.3076 20.9941 13.0235 20.1362 16.4553C19.5905 18.638 19.3176 19.7293 18.5039 20.3647C17.6901 21.0001 16.5652 21.0001 14.3153 21.0001H9.68462C7.43476 21.0001 6.30983 21.0001 5.49605 20.3647C4.68227 19.7293 4.40943 18.638 3.86376 16.4553C3.00581 13.0235 2.57684 11.3076 3.47767 10.1539C3.48555 10.1438 3.4935 10.1338 3.50152 10.1239L3.7819 9.28271L4.52384 6.56145C4.76092 5.6898 4.93316 5.0565 5.30009 4.56242C5.66381 4.07266 6.15802 3.69516 6.72621 3.4731C7.20175 3.28724 7.73447 3.25586 8.41799 3.25089ZM8.41951 4.75231C7.75763 4.759 7.49204 4.78427 7.27224 4.87018C6.96629 4.98976 6.70018 5.19303 6.50433 5.45674C6.32822 5.69388 6.22488 6.0252 5.93398 7.09206L5.36442 9.18091C6.38451 9.00012 7.77753 9.00012 9.68462 9.00012H14.3153C16.2224 9.00012 17.6155 9.00012 18.6356 9.18092L18.066 7.09206C17.7751 6.0252 17.6718 5.69388 17.4957 5.45674C17.2998 5.19303 17.0337 4.98976 16.7278 4.87018C16.508 4.78427 16.2424 4.759 15.5805 4.75231C15.2992 5.3423 14.6972 5.75 14 5.75H10C9.30281 5.75 8.70084 5.3423 8.41951 4.75231Z",
-      text: "Cart ",
+      text: "Cart",
     },
     {
-      icon: "M16.0724 4.02447C15.1063 3.04182 13.7429 2.5 12.152 2.5C10.5611 2.5 9.19773 3.04182 8.23167 4.02447C7.26636 5.00636 6.73644 6.38891 6.73644 8C6.73644 10.169 7.68081 11.567 8.8496 12.4062C9.07675 12.5692 9.3115 12.7107 9.54832 12.8327C8.24215 13.1916 7.18158 13.8173 6.31809 14.5934C4.95272 15.8205 4.10647 17.3993 3.53633 18.813C3.43305 19.0691 3.55693 19.3604 3.81304 19.4637C4.06914 19.567 4.36047 19.4431 4.46375 19.187C5.00642 17.8414 5.78146 16.4202 6.98653 15.3371C8.1795 14.265 9.82009 13.5 12.152 13.5C14.332 13.5 15.9058 14.1685 17.074 15.1279C18.252 16.0953 19.0453 17.3816 19.6137 18.6532C19.9929 19.5016 19.3274 20.5 18.2827 20.5H6.74488C6.46874 20.5 6.24488 20.7239 6.24488 21C6.24488 21.2761 6.46874 21.5 6.74488 21.5H18.2827C19.9348 21.5 21.2479 19.8588 20.5267 18.2452C19.9232 16.8952 19.0504 15.4569 17.7087 14.3551C16.9123 13.7011 15.9603 13.1737 14.8203 12.8507C15.43 12.5136 15.9312 12.0662 16.33 11.5591C17.1929 10.462 17.5676 9.10016 17.5676 8C17.5676 6.38891 17.0377 5.00636 16.0724 4.02447ZM15.3593 4.72553C16.1144 5.49364 16.5676 6.61109 16.5676 8C16.5676 8.89984 16.2541 10.038 15.544 10.9409C14.8475 11.8265 13.7607 12.5 12.152 12.5C11.5014 12.5 10.3789 12.2731 9.43284 11.5938C8.51251 10.933 7.73644 9.83102 7.73644 8C7.73644 6.61109 8.18963 5.49364 8.94477 4.72553C9.69916 3.95818 10.7935 3.5 12.152 3.5C13.5105 3.5 14.6049 3.95818 15.3593 4.72553Z",
+      icon: "M16.5 7.063C16.5 10.258 14.57 13 12 13c-2.572 0-4.5-2.742-4.5-5.938C7.5 3.868 9.16 2 12 2s4.5 1.867 4.5 5.063zM4.102 20.142C4.487 20.6 6.145 22 12 22c5.855 0 7.512-1.4 7.898-1.857a.416.416 0 0 0 .09-.317C19.9 18.944 19.106 15 12 15s-7.9 3.944-7.989 4.826a.416.416 0 0 0 .091.317z",
       text: "Profile",
     },
   ];

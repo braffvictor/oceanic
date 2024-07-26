@@ -161,9 +161,11 @@
 
     <!--todo top navigation drawer -->
     <div
-      class="w-[100vw] fixed z-30 top-0 border-b transition-all ease-linear duration-1000 !overflow-hidden backdrop-blur-md transit"
+      class="w-[100vw] fixed z-30 top-0 border-b transition-all ease-linear duration-1000 !overflow-hidden transit"
       :class="[
-        show ? 'min-h-[58%] md:min-h-[70%] h-auto pb-3' : 'h-0',
+        show
+          ? 'h-[59%] md:h-[70%]  backdrop-blur-md'
+          : 'h-0 !backdrop-blur-xl border-b-0',
         themeState == 'light' || themeState == null
           ? 'whiteT border-b-gray-200'
           : 'darkT border-b-gray-600',
@@ -319,17 +321,17 @@
       </div>
 
       <!-- divider -->
-      <div
+      <!-- <div
         class="border-b w-full"
         :class="
           themeState == 'light' || themeState == null
             ? 'whiteT border-b-gray-200'
             : 'darkT border-b-gray-600'
         "
-      ></div>
+      ></div> -->
 
       <!-- login and registration button -->
-      <div class="flex mt-3 ml-10 gap-x-2">
+      <!-- <div class="flex mt-3 ml-10 gap-x-2">
         <d-button
           type="outlined"
           @click="(form = true), (show = false)"
@@ -340,7 +342,7 @@
           type="elevated"
           class="bg-green-400 dark:bg-green-500 shadow-green-300 dark:shadow-green-400 active:!bg-green-200"
         />
-      </div>
+      </div> -->
     </div>
 
     <main>
