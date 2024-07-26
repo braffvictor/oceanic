@@ -75,7 +75,7 @@
         class="flex justify-evenly md:justify-center items-center mt-2 gap-2"
       >
         <div
-          class="rounded-xl h-20 w-20 md:w-40 md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
+          class="rounded-xl h-20 w-20 active:scale-75 select-none transit md:w-64 md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
           v-for="quick in quickLinks"
           :key="quick.text"
         >
@@ -100,7 +100,7 @@
       </div>
     </section>
 
-    <section class="mt-5">
+    <section class="mt-5 select-none">
       <p class="text-semibold">Hot Collection🔥</p>
 
       <section class="mt-3" v-if="collections.length > 5">
