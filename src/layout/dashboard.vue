@@ -99,7 +99,7 @@
             class="flex group shadow-none text-green-500 rounded-lg !p-2 w-full relative"
             :class="[
               drawer ? 'gap-x-3 justify-start' : 'justify-center',
-              route.name == link.text
+              route.name.includes(link.text)
                 ? '!bg-green-500 !shadow-md !shadow-green-500'
                 : '',
             ]"
@@ -155,7 +155,7 @@
           :key="link.text"
           class="flex flex-col items-center group rounded-none z-10 w-full relative"
           :class="
-            route.name == link.text
+            route.name.includes(link.text)
               ? '!bg-green-400 !shadow-md !shadow-green-400 dark:!bg-green-500 dark:!shadow-green-500 -mt-2 transit rounded-t-md'
               : ' dark:!bg-slate-900 !bg-slate-100 mt-1'
           "

@@ -45,7 +45,7 @@ const rando = Math.round(Math.random() * 3);
 const props = defineProps({
   text: {
     type: String,
-    default: "ETH Address",
+    default: "ETH Address:",
   },
   data: {
     type: String,

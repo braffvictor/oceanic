@@ -74,7 +74,12 @@ const routes = [
       {
         path: "/dashboard/deposit",
         name: "deposit",
-        component: () => import("@/views/dashboard/deposit.vue"),
+        component: () => import("@/views/dashboard/deposit/index.vue"),
+      },
+      {
+        path: "/dashboard/deposit/:id",
+        name: "dynamic deposit",
+        component: () => import("@/views/dashboard/deposit/wallet.vue"),
       },
     ],
   },
