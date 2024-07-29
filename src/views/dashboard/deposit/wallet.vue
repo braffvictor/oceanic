@@ -44,6 +44,32 @@
             <p class="opacity-85 font-semibold break-words">
               KJJjhJHlhLHbHJHhklJLBUIghjHy685tgiI76tgibkT6885rfuv
             </p>
+
+            <div
+              class="mt-2 p-3 rounded-xl bg-gray-200 dark:text-slate-100 text-slate-900 overflow-hidden dark:bg-slate-700 caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:ring-green-400 has-[:focus]:ring-1 outline-none transit relative z-0 flex items-center justify-between overflow-hidden"
+            >
+              <div>
+                <SvgComp
+                  icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
+                  Sclass="max-w-4"
+                  class="min-w-5"
+                />
+              </div>
+              <input
+                type="tel"
+                name="amount"
+                id="amount"
+                class="block py-2.5 px-0 w-full ml-4 mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="amount"
+                class="peer-focus:font-medium left-12 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-12"
+                >Deposit Amount in (ETH)</label
+              >
+              <!-- class="absolute block top-2 text-gray-400 peer-focus:top-0 peer-focus:text-xs left-10 text-left peer-focus:left-8 transit" -->
+            </div>
           </div>
         </div>
       </section>
@@ -54,9 +80,11 @@
 <script setup>
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject } from "vue";
+import { inject, ref } from "vue";
 
 const theme = inject("theme");
+
+const amount = ref("");
 </script>
 
 <style></style>

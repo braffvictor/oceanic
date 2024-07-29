@@ -131,7 +131,7 @@
     </section>
 
     <!-- children routerview -->
-    <section class="w-full md:mt-2 px-4 md:p-6">
+    <section class="w-full px-4 md:px-6 md:py-4">
       <router-view />
     </section>
 

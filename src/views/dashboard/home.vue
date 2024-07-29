@@ -103,8 +103,8 @@ import { userflow } from "@/stores/userflow";
 //components
 import BalanceCard from "@/components/cards/balanceCard.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
-import SvgComp from "@/components/svgComp.vue";
 
+import SvgComp from "@/components/svgComp.vue";
 import upload from "@/assets/png/mint.png";
 import explore from "@/assets/png/explore.png";
 import minted from "@/assets/png/minted.png";
