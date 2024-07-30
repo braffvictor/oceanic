@@ -55,39 +55,44 @@
               KJJjhJHlhLHbHJHhklJLBUIghjHy685tgiI76tgibkT6885rfuv
             </p>
           </div>
-          <div
-            class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
-          >
-            <div>
-              <SvgComp
-                icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
-                Sclass="group-has-[:focus]:stroke-green-500"
-                class=""
-              />
+
+          <!-- form like -->
+          <section class="px-4">
+            <!-- the amount paid in ethereum -->
+            <div
+              class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+            >
+              <div>
+                <SvgComp
+                  icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
+                  Sclass="group-has-[:focus]:stroke-green-500"
+                  class=""
+                />
+              </div>
+              <div class="relative w-full">
+                <input
+                  type="number"
+                  name="amount"
+                  v-model="amount"
+                  id="amount"
+                  class="block px-0 w-full mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  for="amount"
+                  class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
+                  >Deposit Amount in (ETH)</label
+                >
+              </div>
             </div>
-            <div class="relative w-full">
-              <input
-                type="number"
-                name="amount"
-                v-model="amount"
-                id="amount"
-                class="block px-0 w-full mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
-                placeholder=" "
-                required
-              />
-              <label
-                for="amount"
-                class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
-                >Deposit Amount in (ETH)</label
-              >
-            </div>
-          </div>
-          <p
-            class="mt-1 text-xs font-light font-sans text-center"
-            :class="amount ? ' transit' : 'scale-y-0 transit '"
-          >
-            Dollar Conversion : {{ convertAmount }}
-          </p>
+            <p
+              class="mt-1 text-xs font-light font-sans text-center"
+              :class="amount ? ' transit' : 'scale-y-0 transit '"
+            >
+              Dollar Conversion : {{ convertAmount }}
+            </p>
+          </section>
         </div>
       </section>
     </main>
