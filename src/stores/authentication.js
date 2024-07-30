@@ -64,6 +64,7 @@ export const authentication = defineStore("authentication", {
             role: "user",
             paidGas: false,
             active: false,
+            verified: false,
 
             joinDate: getCurrentTimeAndDate(),
             formatDate: getCurrentTimeAndDate("format"),
