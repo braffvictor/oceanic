@@ -243,7 +243,7 @@ function submit() {
   checkAmount();
   checkPhoto();
 
-  if (checkAmount && checkPhoto()) {
+  if (checkAmount() && checkPhoto()) {
     console.log("Deposit successfull");
   } else {
     console.log("Deposit unsuccessful");
