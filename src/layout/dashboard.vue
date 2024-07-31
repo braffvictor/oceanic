@@ -5,7 +5,7 @@
   >
     <DButton
       type="elevated"
-      class="fixed bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 bottom-0 right-0 mb-20 mr-10"
+      class="fixed bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 z-50 bottom-0 right-0 mb-20 mr-10"
       v-if="themeState == 'dark'"
       @click="changeTheme('light')"
       >Change</DButton
