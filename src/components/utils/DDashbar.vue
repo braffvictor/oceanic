@@ -1,6 +1,6 @@
 <template>
   <main class="sticky py-4 top-0 z-10 bg-slate-50 dark:bg-slate-900 transit">
-    <div class="flex items-start justify-between">
+    <div class="flex items-center justify-between">
       <slot>
         <div class="text-gray-400 text-sm md:text-lg">
           Welcome,
@@ -13,7 +13,7 @@
       </slot>
 
       <!-- essentials -->
-      <p class="text-lg flex items-center">
+      <p class="text-lg flex items-center min-h-10">
         <button
           v-if="theme != 'light' && theme != null"
           class="p-2 rounded-lg transit active:animate-spin"

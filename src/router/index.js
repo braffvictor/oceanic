@@ -81,6 +81,16 @@ const routes = [
         name: "dynamic deposit",
         component: () => import("@/views/dashboard/deposit/wallet.vue"),
       },
+      {
+        path: "/dashboard/withdraw",
+        name: "withdraw",
+        component: () => import("@/views/dashboard/withdraw/index.vue"),
+      },
+      {
+        path: "/dashboard/withdraw/:id",
+        name: "dynamic withdraw",
+        component: () => import("@/views/dashboard/withdraw/request.vue"),
+      },
     ],
   },
 
