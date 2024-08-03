@@ -10,6 +10,7 @@
           Current Balance
         </p>
         <p class="font-bold md:text-4xl text-2xl">3.56ETH</p>
+        <p class="text-xs md:text-sm opacity-70">$3,090.00</p>
       </div>
 
       <div>

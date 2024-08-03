@@ -91,6 +91,11 @@ const routes = [
         name: "dynamic withdraw",
         component: () => import("@/views/dashboard/withdraw/request.vue"),
       },
+      {
+        path: "/dashboard/cartlist",
+        name: "cart",
+        component: () => import("@/views/dashboard/cartList.vue"),
+      },
     ],
   },
 

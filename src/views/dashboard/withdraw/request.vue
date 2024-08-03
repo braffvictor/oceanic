@@ -247,7 +247,7 @@ function checkAmount() {
 
 function checkCrypto() {
   if (!crypto.value) {
-    errorCrypto.value = "Crypto Currency is required";
+    errorCrypto.value = `Crypto Currency is required`;
     return false;
   } else {
     errorCrypto.value = "";
@@ -257,7 +257,7 @@ function checkCrypto() {
 
 function checkAddress() {
   if (!address.value) {
-    errorAddress.value = "Wallet Address is required";
+    errorAddress.value = `${crypto.value} Address is required`;
     return false;
   } else {
     errorAddress.value = "";
@@ -267,7 +267,7 @@ function checkAddress() {
 
 function checkNetwork() {
   if (!network.value) {
-    errorNetwork.value = "Wallet Network is required";
+    errorNetwork.value = `${crypto.value} Network is required`;
     return false;
   } else {
     errorNetwork.value = "";
