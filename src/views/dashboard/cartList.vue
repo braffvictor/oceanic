@@ -56,21 +56,29 @@
       <div v-if="cartedNfts && cartedNfts.length > 0">
         <TransitionGroup name="list">
           <main
-            class="flex items-center cursor-pointer justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-2 rounded-xl transit group overflow-auto"
+            class="flex min-h-24 items-center cursor-pointer justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-3 rounded-xl transit group overflow-visible"
             v-for="cart in cartedNfts"
             :key="cart.name"
           >
             <div class="rounded-xl overflow-hidden">
               <img :src="cart.image_url" class="transit" alt="" width="100" />
             </div>
-            <div>
+            <div class="w-full">
               <p
-                class="font-semibold text-slate-900 dark:text-slate-100 text-sm"
+                class="font-semibold text-slate-900 dark:text-slate-100 text-sm md:"
               >
-                {{ cart.name }}
+                {{
+                  cart.name.length >= 25
+                    ? cart.name.slice(0, 25) + "..."
+                    : cart.name
+                }}
               </p>
               <p class="font-light text-slate-900 dark:text-slate-100">
-                {{ cart.collection }}
+                {{
+                  cart.collection.length >= 20
+                    ? cart.collection.slice(0, 20) + "..."
+                    : cart.collection
+                }}
                 <img
                   src="@/assets/verified.svg"
                   alt="tick"
@@ -78,20 +86,24 @@
                 />
               </p>
             </div>
-            <div class="group-hover:hidden">
+            <!-- <div class="group-hover:hidden">
               <p class="font-light text-gray-400 flex">
                 {{ cart.stats.floor_eth.toFixed(3) }}ETH
               </p>
-            </div>
-            <div
-              class="group-hover:block hidden px-5 md:px-4 float-end text-right"
-            >
-              <button @click="removeNft(cart)">
-                <svg-comp
-                  Sclass="active:stroke-red-500"
-                  icon="M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"
-                />
-              </button>
+            </div> -->
+            <div class="mx-auto text-center md:px-4 relative group">
+              <svg-comp
+                icon="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8 13C8.55228 13 9 12.5523 9 12C9 11.4477 8.55228 11 8 11C7.44772 11 7 11.4477 7 12C7 12.5523 7.44772 13 8 13ZM12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13ZM16 13C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11C15.4477 11 15 11.4477 15 12C15 12.5523 15.4477 13 16 13Z"
+                class="mx-auto text-center w-full peer md:p-4 p-2"
+                Sclass="mx-auto text-center"
+              />
+              <!-- options for nft menu -->
+              <div
+                class="absolute h-auto -left-10 md:left-4 transit top-10 md:text-base text-sm md:text- font-normal z-20 w-24 rounded-xl bg-slate-100 dark:bg-slate-800 flex flex-col divide-y p-1 scale-y-0 peer-hover:scale-y-100 -translate-y-full divide-slate-900 dark:divide-slate-100 divide-opacity-20 dark:divide-opacity-45 peer-hover:-translate-y-0 md:translate-y-0 opacity-0 peer-hover:opacity-100 peer-hover:block py-2 hover:scale-100 hover:-translate-y-0"
+              >
+                <p class="p-1 hover:bg-red-500">Buy NFT</p>
+                <p class="p-1 text-red-500" @click="removeNft(cart)">Delete</p>
+              </div>
             </div>
           </main>
 
@@ -141,6 +153,7 @@ import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { inject, onMounted, ref } from "vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
+import { collection } from "firebase/firestore";
 
 onMounted(() => {
   checkAmount();

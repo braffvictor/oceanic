@@ -13,7 +13,7 @@
       </slot>
 
       <!-- essentials -->
-      <p class="text-lg flex items-center min-h-10">
+      <p class="text-lg flex items-center min-h-10 min-w-16">
         <button
           v-if="theme != 'light' && theme != null"
           class="p-2 rounded-lg transit active:animate-spin"
