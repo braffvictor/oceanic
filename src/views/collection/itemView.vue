@@ -12,7 +12,7 @@
           </p>
           <img
             :src="nftDetails && nftDetails.image_url"
-            alt=""
+            :alt="nftDetails && nftDetails.name"
             width="500"
             class="object-cover"
           />
