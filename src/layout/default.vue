@@ -351,6 +351,7 @@
 
     <!-- footer section -->
     <section
+      v-if="$route.name == 'home view' || $route.name == 'About'"
       @click="(show = false), (searchBar = false)"
       class="bg-gradient-to-t transit from-green-400 to-slate-50 dark:bg-gradient-to-t dark:from-green-500 dark:to-slate-900 text-slate-900 dark:text-slate-100"
     >

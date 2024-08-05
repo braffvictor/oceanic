@@ -28,14 +28,8 @@
             <td class="py-4">
               <p class="capitalize font-light">{{ event.transfer_type }}</p>
             </td>
-            <td
-              class="font-light text-slate-900 dark:text-slate-100"
-              v-for="price in event.price || [
-                { price: '0.001', price_currency: 'WETH' },
-              ]"
-              :key="price.id"
-            >
-              {{ price.price || "0.001" }}{{ price.price_currency || "WETH" }}
+            <td class="font-light px-4 text-slate-900 dark:text-slate-100">
+              {{ (Number(event.id) / 4000).toLocaleString() }}ETH
             </td>
             <td class="font-light px-4 text-slate-900 dark:text-slate-100">
               {{ event.quantity }}
@@ -110,6 +104,8 @@ function getTransferEventofCollection(contractAddress) {
     .then((response) => response.json())
     .then((response) => {
       events.value = response.results;
+
+      console.log(events.value[0]);
     })
     .catch((err) => console.error(err));
 }
