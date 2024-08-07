@@ -96,6 +96,11 @@ const routes = [
         name: "cart",
         component: () => import("@/views/dashboard/cartList.vue"),
       },
+      {
+        path: "/dashboard/profile",
+        name: "profile",
+        component: () => import("@/views/dashboard/profile/index.vue"),
+      },
     ],
   },
 

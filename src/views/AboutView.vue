@@ -123,7 +123,26 @@
       </section>
     </main>
 
-    <DButton class="rounded-xl !bg-green-500" :loading="false"> </DButton>
+    <DButton @click="spliting" class="rounded-xl !bg-green-500" :loading="false"
+      >split
+    </DButton>
+
+    <div class="mt-4">
+      <input
+        type="text"
+        class="h-11 border w-80 bg-transparent"
+        v-model="firstName"
+        placeholder="first name"
+      />
+      <input
+        type="text"
+        v-model="lastName"
+        class="h-11 border ml-3 w-80 bg-transparent"
+        placeholder="last name"
+      />
+    </div>
+
+    <p class="font-bold">{{ fullName }}</p>
   </div>
 </template>
 
@@ -132,11 +151,27 @@ import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 // import warning from '@/assets/svg.'
-const userflo = userflow();
-console.log(userflo.cartList);
+const firstName = ref("");
+const lastName = ref("");
+
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`;
+});
+
+function spliting() {
+  const split = fullName.value.split(" ");
+
+  let abrv = "";
+
+  split.forEach((val) => {
+    abrv += val[0];
+  });
+
+  console.log(abrv);
+}
 
 const perks = computed(() => {
   return [
