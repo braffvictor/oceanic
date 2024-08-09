@@ -22,10 +22,13 @@
             v-for="quick in quickLinks"
             :key="quick.text"
           >
-            <div class="flex flex-col justify-center items-center !p-2 gap-2">
+            <router-link
+              class="flex flex-col justify-center items-center !p-2 gap-2"
+              :to="quick.to"
+            >
               <img :src="quick.img" width="40" alt="" />
               <p class="text-xs bg-green-">{{ quick.text }}</p>
-            </div>
+            </router-link>
           </div>
         </div>
       </section>
@@ -136,6 +139,7 @@ const quickLinks = computed(() => {
     {
       img: upload,
       text: "Upload...",
+      to: "/dashboard/upload",
     },
     {
       img: explore,

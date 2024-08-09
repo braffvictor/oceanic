@@ -131,8 +131,8 @@
     </section>
 
     <!-- children routerview -->
-    <section class="w-full px-4 md:px-6 md:py-4">
-      <router-view />
+    <section class="w-full">
+      <router-view class="w-full px-4 md:py-4" />
     </section>
 
     <!-- bottom nav bar for mobile -->

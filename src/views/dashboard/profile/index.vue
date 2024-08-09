@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-auto pb-10">
     <main class="md:w-10/12 mx-auto">
       <DDashbar>
         <div class="w-full flex justify-between items-center">
@@ -59,11 +59,19 @@
               Personal Details
             </p>
             <div
-              class="rounded-xl transit bg-slate-100 dark:bg-slate-800 h-auto w-full shadow text-left p-4 md:p-8 *:mb-3"
+              class="rounded-xl transit bg-slate-100 dark:bg-slate-800 h-auto w-full shadow text-left p-4"
             >
-              <p>Name : David Swae</p>
-              <p>Email : dave@gmail.com</p>
-              <p>Username : swaedavid</p>
+              <p>Name: David Swae</p>
+              <p class="my-2">Email: dave@gmail.com</p>
+              <p>Username: swaedavid</p>
+            </div>
+
+            <div class="mt-4 rounded-xl">
+              <DButton
+                class="w-full bg-red-500 text-white !shadow-red-500"
+                type="elevated"
+                >Log Out</DButton
+              >
             </div>
           </section>
         </main>

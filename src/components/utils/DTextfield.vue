@@ -1,0 +1,79 @@
+<template>
+  <div>
+    <section
+      class="bg-transparent dark:bg-slate-800 dark:p-2 group mt-2 rounded-tl-lg rounded-tr-lg dark:border-b-gray-600 border-b-gray-400 border-b dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+    >
+      <div v-if="icon">
+        <SvgComp
+          :icon="iconType"
+          Sclass="group-has-[:focus]:stroke-green-500"
+          class=""
+        />
+      </div>
+      <div class="relative w-full">
+        <input
+          :type="inputType"
+          :name="name"
+          :id="name"
+          v-model="input"
+          @keyup="$emit('emitInput', input)"
+          class="block px-0 w-full pt-3 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
+          placeholder=" "
+          required
+        />
+        <label
+          :for="name"
+          class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
+          >{{ label }}</label
+        >
+      </div>
+    </section>
+    <p
+      class="text-xs text-red-500 transit mt-3 text-center"
+      :class="
+        err
+          ? 'scale-y-100 transit animate__animated animate__shakeX'
+          : 'scale-y-0 transit'
+      "
+    >
+      {{ err }}
+    </p>
+  </div>
+</template>
+
+<script setup>
+import SvgComp from "@/components/svgComp.vue";
+import { ref } from "vue";
+
+const input = ref("");
+
+const props = defineProps({
+  icon: {
+    type: Boolean,
+    default: false,
+  },
+  iconType: {
+    type: String,
+    default:
+      "M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z",
+  },
+  label: {
+    type: String,
+    default: "Label?",
+  },
+  inputType: {
+    type: String,
+    default: "text",
+  },
+  name: {
+    type: String,
+    default: "name",
+  },
+  err: {
+    type: String,
+    default: "",
+  },
+});
+</script>
+
+<style></style>
