@@ -1,13 +1,12 @@
 <template>
   <div class="relative">
     <main
-      class="group mt-2 dark:p-2 rounded-tl-lg rounded-tr-lg dark:border-b-gray-600 border-b-gray-400 border-b bg-transparent dark:bg-slate-800 dark:text-slate-100 text-slate-900 caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-b-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+      class="group mt-2 dark:p-2 rounded-tl-lg z-0 rounded-tr-lg dark:border-b-gray-600 border-b-gray-400 border-b bg-transparent dark:bg-slate-800 dark:text-slate-100 text-slate-900 caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-b-green-500 outline-none transit relative flex items-center gap-x-3"
       @click="$emit('openMenu')"
     >
-      <!-- @keyup="checkCrypto()" -->
-      <div class="w-full">
+      <div class="w-full relative">
         <input
-          class="cursor-pointer placeholder:text-gray-500 placeholder:text-sm dark:placeholder:text-gray-400 bg-transparent outline-none w-full"
+          class="cursor-pointer placeholder:text-gray-500 placeholder:text-sm dark:placeholder:text-gray-400 text-sm bg-transparent outline-none w-full"
           type="text"
           v-model="input"
           :name="name"
@@ -35,7 +34,7 @@
     <!-- list of avaibable cryptoCurrencies -->
     <main
       v-if="lists.length > 0"
-      class="absolute w-full -top-1 left-0 z-0 shadow-md bg-slate-100 dark:bg-slate-800 rounded-lg transit overflow-hidden"
+      class="absolute w-full -top-1 left-0 z-0 shadow-md bg-slate-100 dark:bg-slate-800 rounded-lg transit overflow-hidden z-20"
       :class="
         show ? 'transit h-auto py-1 ' : 'h-0 py-0 overflow-hidden opacity-0'
       "

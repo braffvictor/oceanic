@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen transit bg-gradient-to-b from-slate-50 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95%"
+    class="min-h-screen transit bg-gradient-to-b md:bg-gradient-to-br md:from-slate-100 md:to-green-300 from-45% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-50 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95%"
   >
     <DDashbar
       class="md:w-10/12 mx-auto bg-transparent backdrop-blur-md dark:bg-transparent"
@@ -61,12 +61,18 @@
             name="category"
             placeholder="Category Your NFT Belong In"
           />
+
+          <DFileinput
+            label="NFT"
+            :err="nftPhotoError"
+            @emitPhoto="(photo) => (nftPhoto = photo)"
+          />
         </form>
 
         <DButton
           class="mt-5"
           type="outlined"
-          @click="checkFullName(), checkCategory()"
+          @click="checkFullName(), checkCategory(), checkPhoto()"
           >Check composable</DButton
         >
       </section>
@@ -83,9 +89,10 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import DTextfield from "@/components/utils/DTextfield.vue";
 import DButton from "@/components/utils/DButton.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { computed, inject, ref } from "vue";
 import DDropList from "@/components/utils/DDropList.vue";
+import DFileinput from "@/components/utils/DFileinput.vue";
 
+import { computed, inject, ref } from "vue";
 const show = ref(false);
 
 const theme = inject("theme");
@@ -94,6 +101,8 @@ const fullName = ref("");
 const fullNameError = ref("");
 const category = ref("");
 const categoryError = ref("");
+const nftPhoto = ref(null);
+const nftPhotoError = ref("");
 
 const checkFullName = (model) =>
   checkInput("FullName", fullName, fullNameError, "text");
@@ -101,6 +110,8 @@ const checkFullName = (model) =>
 
 const checkCategory = (model) =>
   checkInput("Category", category, categoryError, "text");
+
+const checkPhoto = (model) => checkInput("Photo", nftPhoto, nftPhotoError);
 
 const categories = computed(() => {
   return [
