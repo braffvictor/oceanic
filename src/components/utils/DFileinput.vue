@@ -4,7 +4,7 @@
     <section class="pb-4">
       <label
         :for="name"
-        class="group mt-2 p-1 dark:bg-slate-800 rounded-tl-lg rounded-tr-lg dark:p-2 dark:border-gray-600 border-b border-gray-400 bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+        class="group hover:border-b-gray-700 dark:hover:border-b-gray-600 dark:hover:bg-slate-700 mt-2 p-1 dark:bg-slate-800 rounded-tl-lg rounded-tr-lg dark:p-2 dark:border-gray-600 border-b border-gray-400 bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
       >
         <div v-if="icon">
           <SvgComp

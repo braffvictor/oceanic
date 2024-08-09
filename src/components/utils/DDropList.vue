@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <main
-      class="group mt-2 dark:p-2 rounded-tl-lg z-0 rounded-tr-lg dark:border-b-gray-600 border-b-gray-400 border-b bg-transparent dark:bg-slate-800 dark:text-slate-100 text-slate-900 caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-b-green-500 outline-none transit relative flex items-center gap-x-3"
+      class="group hover:border-b-gray-700 dark:hover:border-b-gray-600 dark:hover:bg-slate-700 mt-2 dark:p-2 rounded-tl-lg z-0 rounded-tr-lg dark:border-b-gray-600 border-b-gray-400 border-b bg-transparent dark:bg-slate-800 dark:text-slate-100 text-slate-900 caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-b-green-500 outline-none transit relative flex items-center gap-x-3"
       @click="$emit('openMenu')"
     >
       <div class="w-full relative">
