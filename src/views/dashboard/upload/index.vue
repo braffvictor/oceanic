@@ -50,9 +50,23 @@
             :err="fullNameError"
             label="Item Name/id"
           />
+
+          <DDropList
+            @openMenu="show = true"
+            @closeMenu="show = false"
+            :err="categoryError"
+            :show="show"
+            @emitInput="(input) => (category = input)"
+            :lists="categories"
+            name="category"
+            placeholder="Category Your NFT Belong In"
+          />
         </form>
 
-        <DButton class="mt-5" type="outlined" @click="checkFullName"
+        <DButton
+          class="mt-5"
+          type="outlined"
+          @click="checkFullName(), checkCategory()"
           >Check composable</DButton
         >
       </section>
@@ -69,16 +83,47 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import DTextfield from "@/components/utils/DTextfield.vue";
 import DButton from "@/components/utils/DButton.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject, ref } from "vue";
+import { computed, inject, ref } from "vue";
+import DDropList from "@/components/utils/DDropList.vue";
+
+const show = ref(false);
 
 const theme = inject("theme");
 
 const fullName = ref("");
 const fullNameError = ref("");
+const category = ref("");
+const categoryError = ref("");
 
 const checkFullName = (model) =>
   checkInput("FullName", fullName, fullNameError, "text");
 // console.log(model);
+
+const checkCategory = (model) =>
+  checkInput("Category", category, categoryError, "text");
+
+const categories = computed(() => {
+  return [
+    {
+      name: "Art",
+    },
+    {
+      name: "Music",
+    },
+    {
+      name: "PFP",
+    },
+    {
+      name: "Sport",
+    },
+    {
+      name: "Collectible",
+    },
+    {
+      name: "Photography",
+    },
+  ];
+});
 </script>
 
 <style></style>

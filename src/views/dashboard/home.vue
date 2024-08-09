@@ -23,7 +23,7 @@
             :key="quick.text"
           >
             <router-link
-              class="flex flex-col justify-center items-center !p-2 gap-2"
+              class="flex w-full flex-col justify-center items-center !p-2 gap-2"
               :to="quick.to"
             >
               <img :src="quick.img" width="40" alt="" />

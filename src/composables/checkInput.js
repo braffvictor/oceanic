@@ -1,4 +1,5 @@
 export function checkInput(name, data, err, type) {
+  console.log(data.value);
   if (data.value != "") {
     err.value = "";
     return true;

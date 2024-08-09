@@ -30,11 +30,7 @@
     </section>
     <p
       class="text-xs text-red-500 transit mt-3 text-center"
-      :class="
-        err
-          ? 'scale-y-100 transit animate__animated animate__shakeX'
-          : 'scale-y-0 transit'
-      "
+      :class="err ? 'transit ' : 'scale-y-0 transit'"
     >
       {{ err }}
     </p>
