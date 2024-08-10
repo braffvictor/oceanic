@@ -1,8 +1,19 @@
 <template>
   <div class="relative">
     <main
-      class="group hover:border-b-gray-700 dark:hover:border-b-gray-600 dark:hover:bg-slate-700 mt-2 dark:p-2 rounded-tl-lg z-0 rounded-tr-lg dark:border-b-gray-600 border-b-gray-400 border-b bg-transparent dark:bg-slate-800 dark:text-slate-100 text-slate-900 caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-b-green-500 outline-none transit relative flex items-center gap-x-3"
+      class="group mt-2 dark:p-2 z-0 dark:text-slate-100 text-slate-900 caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-b-green-500 outline-none transit relative flex items-center gap-x-3"
       @click="$emit('openMenu')"
+      :class="[
+        !type || type == 'default'
+          ? 'bg-transparent hover:border-b-gray-700 dark:hover:border-b-gray-400 dark:border-b-gray-600 border-b-gray-400 border-b hov'
+          : '',
+        type == 'outlined'
+          ? 'rounded-lg dark:border-gray-600 border bg-transparent hover:border-gray-500 border-gray-400 dark:hover:border-slate-400 p-2'
+          : '',
+        type == 'filled'
+          ? 'bg-slate-200 dark:bg-slate-900 rounded-tl-lg rounded-tr-lg border-b dark:border-b-gray-600 hover:border-b-gray-600 dark:hover:border-b-gray-400 border-b-gray-400 dark:hover:bg-slate-800 hover:bg-slate-200 p-2'
+          : '',
+      ]"
     >
       <div class="w-full relative">
         <input
@@ -34,7 +45,7 @@
     <!-- list of avaibable cryptoCurrencies -->
     <main
       v-if="lists.length > 0"
-      class="absolute w-full -top-1 left-0 z-0 shadow-md bg-slate-100 dark:bg-slate-800 rounded-lg transit overflow-hidden z-20"
+      class="absolute w-full -top-1 left-0 shadow-md bg-slate-100 dark:bg-slate-800 rounded-lg transit overflow-hidden z-10"
       :class="
         show ? 'transit h-auto py-1 ' : 'h-0 py-0 overflow-hidden opacity-0'
       "
@@ -61,6 +72,10 @@ import { computed, inject, ref } from "vue";
 const input = ref("");
 
 const props = defineProps({
+  type: {
+    type: String,
+    default: "",
+  },
   show: {
     type: Boolean,
     default: false,

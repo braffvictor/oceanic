@@ -137,7 +137,7 @@
 
     <!-- bottom nav bar for mobile -->
     <section
-      class="fixed h-16 w-full bottom-0 dark:bg-slate-900 bg-slate-100 border-opacity-100 md:hidden transit"
+      class="fixed h-16 w-full bottom-0 dark:bg-slate-900 bg-slate-100 border-opacity-100 md:hidden transit z-50"
     >
       <!-- divider -->
       <div

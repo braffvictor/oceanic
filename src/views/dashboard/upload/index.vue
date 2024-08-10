@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen transit bg-gradient-to-b md:bg-gradient-to-br md:from-slate-100 md:to-green-300 from-45% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-50 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95%"
+    class="min-h-screen transit bg-gradient-to-t md:bg-gradient-to-br md:from-slate-100 md:to-green-300 from-30% md:from-50% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-100 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95% via-40%"
   >
     <DDashbar
       class="md:w-10/12 mx-auto bg-transparent backdrop-blur-md dark:bg-transparent"
@@ -24,8 +24,9 @@
         <p class="text-center w-full font-semibold">Mint NFT</p>
       </div>
     </DDashbar>
+
     <main class="md:w-10/12 mx-auto">
-      <section class="w-11/12 mx-auto mt-3">
+      <section class="w-11/12 mx-auto mt-1">
         <p class="font-semibold text-xl md:text-2xl">
           SUBMIT YOUR NFT FOR EVALUATION
         </p>
@@ -39,16 +40,19 @@
             @emitInput="(input) => (fullName = input)"
             :err="fullNameError"
             label="Creator's Name"
+            :type="theme == 'dark' ? 'filled' : 'default'"
           />
           <d-textfield
             @emitInput="(input) => (fullName = input)"
             :err="fullNameError"
             label="Collection Name"
+            :type="theme == 'dark' ? 'filled' : 'default'"
           />
           <d-textfield
             @emitInput="(input) => (fullName = input)"
             :err="fullNameError"
             label="Item Name/id"
+            :type="theme == 'dark' ? 'filled' : 'default'"
           />
 
           <DDropList
@@ -60,12 +64,14 @@
             :lists="categories"
             name="category"
             placeholder="Category Your NFT Belong In"
+            :type="theme == 'dark' ? 'filled' : 'default'"
           />
 
           <DFileinput
             label="NFT"
             :err="nftPhotoError"
             @emitPhoto="(photo) => (nftPhoto = photo)"
+            :type="theme == 'dark' ? 'filled' : 'default'"
           />
         </form>
 
