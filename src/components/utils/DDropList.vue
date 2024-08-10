@@ -11,7 +11,7 @@
           ? 'rounded-lg dark:border-gray-600 border bg-transparent hover:border-gray-500 border-gray-400 dark:hover:border-slate-400 p-2'
           : '',
         type == 'filled'
-          ? 'bg-slate-200 dark:bg-slate-900 rounded-tl-lg rounded-tr-lg border-b dark:border-b-gray-600 hover:border-b-gray-600 dark:hover:border-b-gray-400 border-b-gray-400 dark:hover:bg-slate-800 hover:bg-slate-200 p-2'
+          ? 'bg-slate-200 dark:bg-slate-900 rounded-tl-lg rounded-tr-lg border-b dark:border-b-gray-600 hover:border-b-gray-600  border-b-gray-400 dark:hover:bg-slate-800 hover:bg-slate-200 p-2'
           : '',
       ]"
     >
