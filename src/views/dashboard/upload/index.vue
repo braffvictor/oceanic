@@ -158,7 +158,7 @@
                 }}<SvgComp
                   icon="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16"
                   class="inline cursor-pointer"
-                  Sclass="!stroke-red-500"
+                  Sclass="!stroke-red-400 dark:!stroke-red-500"
                   @click="removeProp(prop)"
                 />
               </p>
@@ -166,7 +166,7 @@
           </div>
 
           <DTextarea
-            class="mt-6"
+            class="mt-4"
             @emitInput="(input) => ((description = input), checkDescription())"
             label="Description"
             :type="theme == 'dark' ? 'filled' : 'default'"
