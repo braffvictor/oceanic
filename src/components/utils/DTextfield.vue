@@ -27,9 +27,7 @@
           :name="name"
           :id="name"
           v-model="input"
-          @keyup.space="
-            chips ? ($emit('emitProps', input), (input = '')) : () => {}
-          "
+          @keyup.self="emitProperties()"
           @keyup="$emit('emitInput', input)"
           class="block px-0 w-full pt-3 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
           placeholder=" "
@@ -56,6 +54,14 @@ import SvgComp from "@/components/svgComp.vue";
 import { ref } from "vue";
 
 const input = ref("");
+const emit = defineEmits(["emitProps", "emitInput"]);
+
+function emitProperties() {
+  if (props.chips && input.value.includes(" ") && input.value.length > 1) {
+    emit("emitProps", input);
+    input.value = "";
+  }
+}
 
 const props = defineProps({
   type: {

@@ -141,7 +141,7 @@
           />
 
           <DTextfield
-            @emitProps="(input) => props.push(input)"
+            @emitProps="(input) => props.push(input.value.trim())"
             :label="`Properties(${props.length}), Press Space To List.`"
             :chips="true"
             :err="propsError"
@@ -150,7 +150,7 @@
           <div class="flex flex-wrap gap-2 mt-2">
             <TransitionGroup name="list">
               <p
-                class="capitalize shadow-sm shadow-green-400 border border-green-400 text-sm font-thin flex items-center justify-between rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4"
+                class="capitalize shadow-sm select-none shadow-green-400 border border-green-400 text-sm font-thin flex items-center justify-between rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4"
                 v-for="prop in props"
                 :key="prop"
               >
@@ -211,14 +211,14 @@ import DButton from "@/components/utils/DButton.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DDropList from "@/components/utils/DDropList.vue";
 import DTextarea from "@/components/utils/DTextarea.vue";
-
 import { computed, inject, ref } from "vue";
 
 const props = ref([]);
+const propsError = ref("");
+
 function removeProp(prop) {
   props.value = props.value.filter((item) => item != prop);
 }
-const propsError = ref("");
 
 const show = ref(false);
 
