@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen transit bg-gradient-to-t md:bg-gradient-to-br md:from-slate-100 md:to-green-300 from-30% md:from-50% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-100 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95% via-40%"
+    class="min-h-[150vh] pb-12 transit bg-gradient-to-t md:bg-gradient-to-br md:from-slate-100 md:to-green-300 from-30% md:from-50% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-100 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95% via-40%"
   >
     <DDashbar
       class="md:w-10/12 mx-auto bg-transparent backdrop-blur-md dark:bg-transparent"
@@ -35,85 +35,96 @@
           FIRST UPLOAD
         </p>
 
-        <label
-          for="dropzone-file"
-          class="flex flex-col items-center justify-center transit py-9 w-full border border-gray-300 border-dashed rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
-        >
-          <div class="mb-3 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              v-if="!proof"
-              viewBox="0 0 40 40"
-              fill="none"
-            >
-              <g id="Upload 02">
-                <path
-                  id="icon"
-                  d="M16.296 25.3935L19.9997 21.6667L23.7034 25.3935M19.9997 35V21.759M10.7404 27.3611H9.855C6.253 27.3611 3.33301 24.4411 3.33301 20.8391C3.33301 17.2371 6.253 14.3171 9.855 14.3171V14.3171C10.344 14.3171 10.736 13.9195 10.7816 13.4326C11.2243 8.70174 15.1824 5 19.9997 5C25.1134 5 29.2589 9.1714 29.2589 14.3171H30.1444C33.7463 14.3171 36.6663 17.2371 36.6663 20.8391C36.6663 24.4411 33.7463 27.3611 30.1444 27.3611H29.2589"
-                  stroke="#22c55e"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </g>
-            </svg>
-
-            <!-- the image proof displayed -->
-            <div
-              class="mx-auto text-center mt-5 text-slate-900 dark:text-slate-100"
-              v-if="proof"
-            >
-              <div
-                class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
+        <form action="" class="mt-4">
+          <label
+            for="dropzone-file"
+            class="flex flex-col items-center justify-center transit py-6 mt-4 mb-3 w-full border border-gray-300 border-dashed rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
+          >
+            <div class="mb-3 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                v-if="!proof"
+                viewBox="0 0 40 40"
+                fill="none"
               >
-                <img
-                  :src="proof"
-                  alt=""
-                  width="300"
-                  class="mx-auto text-center"
-                />
+                <g id="Upload 02">
+                  <path
+                    id="icon"
+                    d="M16.296 25.3935L19.9997 21.6667L23.7034 25.3935M19.9997 35V21.759M10.7404 27.3611H9.855C6.253 27.3611 3.33301 24.4411 3.33301 20.8391C3.33301 17.2371 6.253 14.3171 9.855 14.3171V14.3171C10.344 14.3171 10.736 13.9195 10.7816 13.4326C11.2243 8.70174 15.1824 5 19.9997 5C25.1134 5 29.2589 9.1714 29.2589 14.3171H30.1444C33.7463 14.3171 36.6663 17.2371 36.6663 20.8391C36.6663 24.4411 33.7463 27.3611 30.1444 27.3611H29.2589"
+                    stroke="#22c55e"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </g>
+              </svg>
+
+              <!-- the image proof displayed -->
+              <div
+                class="mx-auto text-center mt-5 text-slate-900 dark:text-slate-100"
+                v-if="proof"
+              >
+                <div
+                  class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
+                >
+                  <img
+                    :src="proof"
+                    alt=""
+                    width="300"
+                    class="mx-auto text-center"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div v-if="!proof">
-            <h4
-              class="text-center text-slate-900 dark:text-slate-100 text-sm font-medium leading-snug"
-            >
-              Upload your NFT Image Here
-            </h4>
-            <h2
-              class="text-center text-gray-400 text-xs font-normal leading-4 mb-1"
-            >
-              PNG, JPG or PDF, smaller than 15MB
-            </h2>
-          </div>
-          <input
-            id="dropzone-file"
-            type="file"
-            class="hidden"
-            @change="(event) => ((photo = event.target.files[0]), checkImage())"
-          />
-        </label>
+            <div v-if="!proof">
+              <h4
+                class="text-center text-slate-900 dark:text-slate-100 text-sm font-medium leading-snug"
+              >
+                Upload your NFT Image Here
+              </h4>
+              <h2
+                class="text-center text-gray-400 text-xs font-normal leading-4 mb-1"
+              >
+                PNG, JPG or PDF, smaller than 15MB
+              </h2>
+            </div>
+            <input
+              id="dropzone-file"
+              type="file"
+              class="hidden"
+              @change="
+                (event) => (
+                  (photo = event.target.files[0]), checkImage(), checkPhoto()
+                )
+              "
+            />
+          </label>
+          <p
+            class="text-xs text-red-500 transit mb-2 text-center"
+            :class="photoError ? 'transit ' : 'scale-y-0 transit'"
+          >
+            {{ photoError }}
+          </p>
 
-        <form action="" class="mt-4">
           <d-textfield
-            @emitInput="(input) => (fullName = input)"
-            :err="fullNameError"
+            @emitInput="(input) => ((creator = input), checkCreator())"
+            :err="creatorError"
             label="Creator's Name"
             :type="theme == 'dark' ? 'filled' : 'default'"
+            name="creator"
           />
           <d-textfield
-            @emitInput="(input) => (fullName = input)"
-            :err="fullNameError"
+            @emitInput="(input) => ((collection = input), checkCollection())"
+            :err="collectionError"
             label="Collection Name"
             :type="theme == 'dark' ? 'filled' : 'default'"
           />
           <d-textfield
-            @emitInput="(input) => (fullName = input)"
-            :err="fullNameError"
-            label="Item Name/id"
+            @emitInput="(input) => ((item = input), checkItem())"
+            :err="itemError"
+            label="Item Name"
             :type="theme == 'dark' ? 'filled' : 'default'"
           />
 
@@ -122,30 +133,57 @@
             @closeMenu="show = false"
             :err="categoryError"
             :show="show"
-            @emitInput="(input) => (category = input)"
+            @emitInput="(input) => ((category = input), checkCategory())"
             :lists="categories"
             name="category"
             placeholder="Category Your NFT Belong In"
             :type="theme == 'dark' ? 'filled' : 'default'"
           />
 
-          <DFileinput
-            label="NFT"
-            :err="nftPhotoError"
-            @emitPhoto="(photo) => (nftPhoto = photo)"
+          <DTextfield
+            @emitProps="(input) => props.push(input)"
+            :label="`Properties(${props.length}), Press Space To List.`"
+            :chips="true"
+            :err="propsError"
             :type="theme == 'dark' ? 'filled' : 'default'"
+          />
+          <div class="flex flex-wrap gap-2 mt-2">
+            <TransitionGroup name="list">
+              <p
+                class="capitalize shadow-sm shadow-green-400 border border-green-400 text-sm font-thin flex items-center justify-between rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4"
+                v-for="prop in props"
+                :key="prop"
+              >
+                {{ prop
+                }}<SvgComp
+                  icon="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16"
+                  class="inline cursor-pointer"
+                  Sclass="!stroke-red-500"
+                  @click="removeProp(prop)"
+                />
+              </p>
+            </TransitionGroup>
+          </div>
+
+          <DTextarea
+            class="mt-6"
+            @emitInput="(input) => ((description = input), checkDescription())"
+            label="Description"
+            :type="theme == 'dark' ? 'filled' : 'default'"
+            :err="descriptionError"
           />
         </form>
 
-        <DButton
-          class="mt-5"
-          type="outlined"
-          @click="checkFullName(), checkCategory(), checkPhoto()"
-          >Check composable</DButton
-        >
+        <div class="w-full mt-4 mb-6">
+          <d-button
+            type="elevated"
+            @click="submit"
+            class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
+            >Complete purchase</d-button
+          >
+        </div>
       </section>
     </main>
-    {{ fullName }}
 
     <!-- 
     collection
@@ -156,6 +194,7 @@
     ethereum(default?)
     network(erc-default?)
 
+    generate
     contract address for nft
     id for nft
      -->
@@ -171,13 +210,33 @@ import DTextfield from "@/components/utils/DTextfield.vue";
 import DButton from "@/components/utils/DButton.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DDropList from "@/components/utils/DDropList.vue";
-import DFileinput from "@/components/utils/DFileinput.vue";
+import DTextarea from "@/components/utils/DTextarea.vue";
 
 import { computed, inject, ref } from "vue";
+
+const props = ref([]);
+function removeProp(prop) {
+  props.value = props.value.filter((item) => item != prop);
+}
+const propsError = ref("");
+
 const show = ref(false);
+
+const theme = inject("theme");
 
 const photo = ref(null);
 const proof = ref(null);
+const photoError = ref("");
+const creator = ref("");
+const creatorError = ref("");
+const collection = ref("");
+const collectionError = ref("");
+const item = ref("");
+const itemError = ref("");
+const category = ref("");
+const categoryError = ref("");
+const description = ref("");
+const descriptionError = ref("");
 
 function checkImage() {
   if (photo.value) {
@@ -187,23 +246,23 @@ function checkImage() {
   }
 }
 
-const theme = inject("theme");
+const checkPhoto = () => checkInput("NFT", photo, photoError);
+const checkCreator = () => checkInput("Creator Name", creator, creatorError);
+const checkCollection = () =>
+  checkInput("Collection Name", collection, collectionError);
+const checkItem = () => checkInput("Item Name", item, itemError);
+const checkCategory = () => checkInput("Category", category, categoryError);
+const checkDescription = () =>
+  checkInput("Description", description, descriptionError);
 
-const fullName = ref("");
-const fullNameError = ref("");
-const category = ref("");
-const categoryError = ref("");
-const nftPhoto = ref(null);
-const nftPhotoError = ref("");
-
-const checkFullName = (model) =>
-  checkInput("FullName", fullName, fullNameError, "text");
-// console.log(model);
-
-const checkCategory = (model) =>
-  checkInput("Category", category, categoryError, "text");
-
-const checkPhoto = (model) => checkInput("Photo", nftPhoto, nftPhotoError);
+function submit() {
+  checkCreator();
+  checkCollection();
+  checkItem();
+  checkCategory();
+  checkPhoto();
+  checkDescription();
+}
 
 const categories = computed(() => {
   return [
@@ -229,4 +288,22 @@ const categories = computed(() => {
 });
 </script>
 
-<style></style>
+<style>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px), translateY(20px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>
