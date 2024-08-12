@@ -141,7 +141,7 @@
           />
 
           <DTextfield
-            @emitProps="(input) => props.push(input.value.trim())"
+            @emitProps="(input) => getInput(input)"
             :label="`Properties(${props.length}), Press Space To List.`"
             :chips="true"
             :err="propsError"
@@ -202,6 +202,9 @@
 </template>
 
 <script setup>
+//stores
+import { userflow } from "@/stores/userflow";
+
 // composable
 import { checkInput } from "@/composables/checkInput";
 
@@ -213,12 +216,28 @@ import DDropList from "@/components/utils/DDropList.vue";
 import DTextarea from "@/components/utils/DTextarea.vue";
 import { computed, inject, ref } from "vue";
 
+const userflowing = userflow();
 const props = ref([]);
-const propsError = ref("");
 
+function getInput(input) {
+  const findInput = props.value.find(
+    (chip) => input.value.toLowerCase().trim() == chip
+  );
+  if (findInput) {
+    userflowing.initAlert({
+      is: true,
+      message: "Property Already Listed",
+      type: "info",
+      close: true,
+    });
+  } else {
+    props.value.push(input.value.toLowerCase().trim());
+  }
+}
 function removeProp(prop) {
   props.value = props.value.filter((item) => item != prop);
 }
+const propsError = ref("");
 
 const show = ref(false);
 
