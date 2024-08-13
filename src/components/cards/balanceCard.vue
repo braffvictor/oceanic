@@ -1,7 +1,7 @@
 <template>
   <!-- the balance card -->
   <main
-    class="h-32 md:h-40 mx-auto rounded-3xl w-full md:w-full !bg-green-400 dark:!bg-green-500 p-5 md:p-6 relative text-slate-600 dark:text-slate-200 transit"
+    class="h-32 shadow-sm shadow-green-400 dark:shadow-green-500 md:h-40 mx-auto rounded-3xl w-full md:w-full !bg-green-400 dark:!bg-green-500 p-5 md:p-6 relative text-slate-600 dark:text-slate-200 transit"
     :style="`background: url(${waving[rando]}); background-position: center; background-size : 100%; background-repeat: no-repeat`"
   >
     <section class="flex justify-between items-center">

@@ -22,7 +22,7 @@
         </div>
       </DDashbar>
 
-      <section class="transit mt-3">
+      <section class="transit mt-3 px-3">
         <!-- circle div -->
         <div class="mx-auto text-center">
           <div

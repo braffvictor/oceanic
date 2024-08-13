@@ -22,7 +22,7 @@
     </DDashbar>
 
     <div
-      class="text-slate-900 transit dark:text-slate-100 col-start-3 bg-transparent"
+      class="text-slate-900 transit dark:text-slate-100 col-start-3 bg-transparent px-3"
     >
       <div class="flex justify-between items-center mt-3 text-lg">
         <p class="font-semibold">
@@ -53,10 +53,10 @@
       ></div>
 
       <!-- todo carted nfts List -->
-      <div v-if="cartedNfts && cartedNfts.length > 0">
+      <div v-if="cartedNfts && cartedNfts.length > 0" class="px-3">
         <TransitionGroup name="list">
           <main
-            class="flex min-h-24 items-center cursor-pointer justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 p-3 rounded-xl transit group overflow-visible"
+            class="flex min-h-24 items-center select-none cursor-pointer justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 rounded-xl transit group overflow-visible"
             v-for="cart in cartedNfts"
             :key="cart.name"
           >
@@ -135,7 +135,7 @@
             </div>
           </div>
 
-          <div class="w-full mt-4 mb-6">
+          <div class="w-full mt-4">
             <d-button
               type="elevated"
               class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"

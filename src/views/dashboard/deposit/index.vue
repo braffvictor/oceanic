@@ -24,41 +24,43 @@
 
       <!-- the balance card -->
       <!-- this text and data should be for transaction and normal address should be kept here -->
-      <BalanceCard text="Last Transaction:" data="31 April 2023" />
+      <main class="px-3">
+        <BalanceCard text="Last Transaction:" data="31 April 2023" />
 
-      <section class="mt-3 text-slate-900 dark:text-slate-100">
-        <p class="pl-1" @click="show = !show">Choose Crypto To Deposit In</p>
+        <section class="mt-3 text-slate-900 dark:text-slate-100">
+          <p class="pl-1" @click="show = !show">Choose Crypto To Deposit In</p>
 
-        <main>
-          <section
-            class="rounded-2xl border flex justify-between p-4 mt-2 hover:bg-slate-200 dark:hover:bg-slate-700 transit cursor-pointer dark:border-slate-500"
-            @click="$router.push('/dashboard/deposit/ethereum')"
-          >
-            <div>
-              <p>Ethereum</p>
-              <p class="text-xs opacity-55">ERC20</p>
-            </div>
-            <button>
-              <svg-comp
-                Sclass="active:stroke-red-500 -rotate-90"
-                icon="M7 10L12 15L17 10"
+          <main>
+            <section
+              class="rounded-2xl border flex justify-between p-4 mt-2 hover:bg-slate-200 dark:hover:bg-slate-700 transit cursor-pointer dark:border-slate-500"
+              @click="$router.push('/dashboard/deposit/ethereum')"
+            >
+              <div>
+                <p>Ethereum</p>
+                <p class="text-xs opacity-55">ERC20</p>
+              </div>
+              <button>
+                <svg-comp
+                  Sclass="active:stroke-red-500 -rotate-90"
+                  icon="M7 10L12 15L17 10"
+                />
+              </button>
+            </section>
+          </main>
+
+          <section class="mt-3" v-if="show">
+            <div class="mx-auto text-center">
+              <img
+                src="@/assets/png/empty.png"
+                width="170"
+                alt=""
+                class="mx-auto text-center"
               />
-            </button>
+              <p class="font-light">No Wallet Address Found</p>
+            </div>
           </section>
-        </main>
-
-        <section class="mt-3" v-if="show">
-          <div class="mx-auto text-center">
-            <img
-              src="@/assets/png/empty.png"
-              width="170"
-              alt=""
-              class="mx-auto text-center"
-            />
-            <p class="font-light">No Wallet Address Found</p>
-          </div>
         </section>
-      </section>
+      </main>
     </main>
   </div>
 </template>

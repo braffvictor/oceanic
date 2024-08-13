@@ -21,7 +21,7 @@
     <!-- side nav bar for pc -->
     <section
       class="h-auto hidden md:block bg-slate-100 dark:bg-slate-950 left-0 px-4 top-0 border-r border-gray-200 dark:border-gray-600"
-      :class="drawer ? 'w-56 transit' : 'w-24 transit'"
+      :class="drawer ? 'w-56 transit ' : 'w-24  transit'"
     >
       <!-- toggle drawer button -->
       <button
@@ -31,7 +31,7 @@
           themeState == 'light' || themeState == null
             ? 'whiteT border-gray-200'
             : 'darkT border-gray-600',
-          drawer ? 'left-44' : 'left-[74px]',
+          drawer ? 'left-52' : 'left-[74px]',
         ]"
       >
         <SvgComp
@@ -132,7 +132,7 @@
 
     <!-- children routerview -->
     <section class="w-full">
-      <router-view class="w-full px-4 md:py-4" />
+      <router-view class="w-full md:py-4" />
     </section>
 
     <!-- bottom nav bar for mobile -->

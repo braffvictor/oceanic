@@ -24,9 +24,11 @@
 
       <!-- the balance card -->
       <!-- this text and data should be for transaction and normal address should be kept here -->
-      <BalanceCard text="Last Transaction:" data="31 April 2023" />
+      <div class="px-3">
+        <BalanceCard text="Last Transaction:" data="31 April 2023" />
+      </div>
 
-      <section class="mt-3 text-slate-900 dark:text-slate-100">
+      <section class="mt-3 text-slate-900 dark:text-slate-100 px-3">
         <p class="pl-1">Choose Withdrawal Method</p>
 
         <main>

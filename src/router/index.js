@@ -106,6 +106,11 @@ const routes = [
         name: "home upload",
         component: () => import("@/views/dashboard/upload/index.vue"),
       },
+      {
+        path: "/dashboard/viewAll",
+        name: "home view",
+        component: () => import("@/views/dashboard/viewAll.vue"),
+      },
     ],
   },
 

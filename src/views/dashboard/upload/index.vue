@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-[150vh] pb-12 transit bg-gradient-to-t md:bg-gradient-to-br md:from-slate-100 md:to-green-300 from-30% md:from-50% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-100 via-green-50 to-green-300 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95% via-40%"
+    class="h-auto pb-8 transit bg-gradient-to-t md:bg-gradient-to-br md:from-slate-100 md:to-green-400 from-30% md:from-50% dark:md:from-slate-950 dark:md:to-emerald-900 from-slate-100 via-green-50 to-green-400 dark:from-slate-900 dark:to-emerald-900 dark:to-100% to-95% via-40%"
   >
     <DDashbar
       class="md:w-10/12 mx-auto bg-transparent backdrop-blur-md dark:bg-transparent"
@@ -25,7 +25,7 @@
       </div>
     </DDashbar>
 
-    <main class="md:w-10/12 mx-auto">
+    <main class="md:w-10/12 mx-auto px-2">
       <section class="w-11/12 mx-auto mt-1">
         <p class="font-semibold text-xl md:text-2xl">
           SUBMIT YOUR NFT FOR EVALUATION
@@ -38,14 +38,13 @@
         <form action="" class="mt-4">
           <label
             for="dropzone-file"
-            class="flex flex-col items-center justify-center transit py-6 mt-4 mb-3 w-full border border-gray-300 border-dashed rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
+            class="flex flex-col items-center justify-center transit p-4 md:p-6 mt-4 mb-3 w-full border border-gray-300 border-dotted rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
           >
-            <div class="mb-3 flex items-center justify-center">
+            <div class="mb-3 flex items-center justify-center" v-if="!proof">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
-                v-if="!proof"
                 viewBox="0 0 40 40"
                 fill="none"
               >
@@ -59,22 +58,22 @@
                   />
                 </g>
               </svg>
+            </div>
 
-              <!-- the image proof displayed -->
+            <!-- the image proof displayed -->
+            <div
+              class="mx-auto text-center text-slate-900 dark:text-slate-100"
+              v-if="proof"
+            >
               <div
-                class="mx-auto text-center mt-5 text-slate-900 dark:text-slate-100"
-                v-if="proof"
+                class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
               >
-                <div
-                  class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
-                >
-                  <img
-                    :src="proof"
-                    alt=""
-                    width="300"
-                    class="mx-auto text-center"
-                  />
-                </div>
+                <img
+                  :src="proof"
+                  alt=""
+                  width="500"
+                  class="mx-auto text-center"
+                />
               </div>
             </div>
 
@@ -87,7 +86,7 @@
               <h2
                 class="text-center text-gray-400 text-xs font-normal leading-4 mb-1"
               >
-                PNG, JPG or PDF, smaller than 15MB
+                PNG, JPG or PDF, Gif smaller than 15MB
               </h2>
             </div>
             <input
@@ -147,6 +146,7 @@
             :err="propsError"
             :type="theme == 'dark' ? 'filled' : 'default'"
           />
+          <!--todo to display props -->
           <div class="flex flex-wrap gap-2 mt-2">
             <TransitionGroup name="list">
               <p
@@ -164,6 +164,23 @@
               </p>
             </TransitionGroup>
           </div>
+
+          <d-textfield
+            class="mt-2"
+            @emitInput="(input) => ((bidPrice = input), checkBidPrice())"
+            :err="bidPriceError"
+            label="Bid Price in (ETH)"
+            name="bidprice"
+            inputType="number"
+            :icon="true"
+            :type="theme == 'dark' ? 'filled' : 'default'"
+          />
+          <p
+            class="mt-3 text-xs font-light font-sans text-center"
+            :class="bidPrice ? ' transit' : 'scale-y-0 transit hidden'"
+          >
+            Dollar Conversion : {{ convertAmount }}
+          </p>
 
           <DTextarea
             class="mt-4"
@@ -254,6 +271,14 @@ const item = ref("");
 const itemError = ref("");
 const category = ref("");
 const categoryError = ref("");
+
+const bidPrice = ref("");
+const bidPriceError = ref("");
+const convertAmount = computed(() => {
+  const dollars = Number(bidPrice.value) * 3043;
+  return bidPrice.value ? `$${dollars.toLocaleString()}` : "";
+});
+
 const description = ref("");
 const descriptionError = ref("");
 
@@ -271,6 +296,7 @@ const checkCollection = () =>
   checkInput("Collection Name", collection, collectionError);
 const checkItem = () => checkInput("Item Name", item, itemError);
 const checkCategory = () => checkInput("Category", category, categoryError);
+const checkBidPrice = () => checkInput("Bid Price", bidPrice, bidPriceError);
 const checkDescription = () =>
   checkInput("Description", description, descriptionError);
 
@@ -281,6 +307,32 @@ function submit() {
   checkCategory();
   checkPhoto();
   checkDescription();
+  checkBidPrice();
+
+  if (
+    checkBidPrice() &&
+    checkCategory() &&
+    checkCollection() &&
+    checkDescription() &&
+    checkItem() &&
+    checkPhoto() &&
+    checkCreator()
+  ) {
+    const payload = {
+      bidPrice: bidPrice.value,
+      category: category.value,
+      item: item.value,
+      collection: collection.value,
+      photo: photo.value,
+      creator: creator.value,
+      properties: props.value,
+      convertedAmount: convertAmount.value,
+      description: description.value,
+    };
+    console.log(payload);
+  } else {
+    console.log(false);
+  }
 }
 
 const categories = computed(() => {

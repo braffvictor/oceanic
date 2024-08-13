@@ -1,5 +1,7 @@
 <template>
-  <main class="sticky py-4 top-0 z-10 bg-slate-50 dark:bg-slate-900 transit">
+  <main
+    class="sticky py-4 top-0 px-3 z-10 bg-slate-50 dark:bg-slate-900 transit"
+  >
     <div class="flex items-center justify-between">
       <slot>
         <div class="text-gray-400 text-sm md:text-lg">
