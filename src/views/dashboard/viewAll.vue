@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen w-full">
+  <div class="min-h-screen w-full transit">
     <main class="md:w-11/12 mx-auto">
       <DDashbar>
         <div class="w-full flex justify-between items-center">
@@ -28,7 +28,7 @@
           <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
             <template #cards>
               <swiper-slide
-                v-for="nft in userflowing.nfts.slice(51, 60)"
+                v-for="nft in userflowing.nfts.slice(11, 98)"
                 :key="nft.name"
               >
                 <!-- for home nft cards -->
@@ -38,10 +38,11 @@
           </swiping-cards>
         </main>
 
-        <section class="mt-3 px-3" v-if="collections.length > 5">
+        <p class="px-3 font-semibold">Best Seller🤩</p>
+        <section class="mt-3 px-3" v-if="collections.length > 0">
           <main
-            class="flex items-center my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 bg-slate-200 shadow dark:bg-slate-800 p-2 rounded-xl transit group overflow-auto min-h-24"
-            v-for="collection in collections.slice(0, 5)"
+            class="flex hover:bg-slate-200 dark:hover:bg-slate-700 items-center my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 bg-slate-100 shadow dark:bg-slate-800 p-2 rounded-xl transit group overflow-auto min-h-24"
+            v-for="collection in collections.slice(11, 98)"
             :key="collection.name"
           >
             <div class="rounded-xl overflow-hidden">

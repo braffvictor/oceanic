@@ -1,12 +1,12 @@
 <template>
   <main class="">
     <div
-      class="h-auto mt-5 min-w-56 min-h-[345px] max-w-56 max-h-[345px] w-60 rounded-3xl dark:bg-slate-800 bg-slate-100 p-3 group hover:-translate-y-2 transit dark:active:bg-slate-700 active:bg-slate-200 cursor-pointer shadow"
+      class="h-auto mt-5 min-w-56 min-h-[330px] max-w-56 max-h-[330px] w-60 rounded-3xl dark:bg-slate-800 bg-slate-100 p-3 group hover:-translate-y-2 overflow-hidden transit dark:active:bg-slate-700 active:bg-slate-200 cursor-pointer shadow"
       @click="checkRoute()"
     >
       <img
         :src="nft && nft.image_url"
-        alt=""
+        :alt="nft && nft?.name"
         width="200"
         class="object-contain rounded-3xl mx-auto text-center transit group-hover:-translate-y-3 group-hover:scale-105"
       />
@@ -15,8 +15,8 @@
           <img
             :src="sliceBannerText(nft && nft.banner_image_url)"
             alt=""
-            width="150"
-            class="object-contain rounded-full mx-auto text-center transit"
+            width="100"
+            class="object-contain max-w-12 rounded-full mx-auto text-center transit"
           />
         </div>
         <div class="w-full">
@@ -44,7 +44,7 @@
           </p>
         </div>
 
-        <div class="float-end w-full text-right">
+        <div class="float-end text-right">
           <button>
             <svg-comp
               Sclass="active:stroke-red-500 -rotate-90"
