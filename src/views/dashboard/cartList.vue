@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen md:w-10/12 mx-auto">
+  <main class="min-h-screen md:w-10/12 mx-auto pb-8">
     <DDashbar>
       <div class="w-full flex justify-between items-center">
         <button
