@@ -13,17 +13,17 @@
       <div class="mt-2 py-2 flex gap-x-2 items-center">
         <div>
           <img
-            src="https://i.seadn.io/gae/xNW1W9O2CYUNGS2GeHqv9yHw-wLdSb9uVoc51TL5GSp8yvC2en45pqp5zYFHhRGHZpgHJdagD2QELXwpu01frltG7Nl055aVqDTDSg?w=500&auto=format"
+            :src="sliceBannerText(nft && nft.banner_image_url)"
             alt=""
-            class="rounded-full"
-            width="70"
+            width="150"
+            class="object-contain rounded-full mx-auto text-center transit"
           />
         </div>
-        <div class="w-full border">
+        <div class="w-full">
           <p class="font-bold text-slate-900 dark:text-slate-100">
             {{
-              nft && nft.name?.length > 14 && !learn
-                ? nft && nft.name.slice(0, 14) + "..."
+              nft && nft.name?.length > 8 && !learn
+                ? nft && nft.name.slice(0, 8) + "..."
                 : nft && nft.name
             }}
             <img
@@ -37,8 +37,8 @@
             class="font-thin text-xs opacity-50 text-slate-900 dark:text-slate-100 md:text-sm"
           >
             {{
-              nft && nft.key?.length > 14 && !learn
-                ? nft && nft.key.slice(0, 14) + "..."
+              nft && nft.key?.length > 8 && !learn
+                ? nft && nft.key.slice(0, 8) + "..."
                 : nft && nft.key
             }}
           </p>
@@ -65,6 +65,12 @@ import router from "@/router";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+
+function sliceBannerText(text) {
+  if (text) {
+    return text.slice(0, text.indexOf("?"));
+  }
+}
 
 const props = defineProps({
   nft: {
