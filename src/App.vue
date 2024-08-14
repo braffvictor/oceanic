@@ -10,4 +10,7 @@
 * {
   box-sizing: border-box;
 }
+img {
+  pointer-events: none;
+}
 </style>

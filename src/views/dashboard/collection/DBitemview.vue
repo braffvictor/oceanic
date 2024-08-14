@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-slate-100 dark:bg-slate-900 transit">
+  <div class="bg-slate-100 dark:bg-slate-900 transit font-sans">
     <DDashbar
-      class="-mt-5 mx-auto backdrop-blur-md border-b transit"
+      class="-mt-5 mx-auto backdrop-blur-sm border-b transit"
       :class="
         theme == 'light' || theme == null
           ? 'whiteT border-b-gray-200'
@@ -24,7 +24,9 @@
             icon="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
           />
         </button>
-        <p class="text-center w-full font-semibold"></p>
+        <p class="text-center w-full font-semibold">
+          #{{ nftDetails && nftDetails.identifier.slice(0, 4) }}
+        </p>
       </div>
     </DDashbar>
     <section class="mt-10 px-3">
@@ -41,7 +43,7 @@
             :src="nftDetails && nftDetails.image_url"
             :alt="nftDetails && nftDetails.name"
             width="500"
-            class="object-cover"
+            class="object-cover pointer-events-none"
           />
         </div>
         <div class="rounded-2xl md:w-8/12 w-full p-2">
@@ -260,6 +262,14 @@ onMounted(() => {
   specificCollectionDetails(route.params.id);
   specificCollectionNfts(route.params.id);
   window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    window.scrollTo({
+      top: -10,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, 3);
   setTimeout(() => {
     loading.value = true;
   }, 1000);

@@ -346,7 +346,12 @@
     </div>
 
     <main>
-      <router-view class="pt-20" @click="(show = false), (searchBar = false)" />
+      <Transition>
+        <router-view
+          class="pt-20"
+          @click="(show = false), (searchBar = false)"
+        />
+      </Transition>
     </main>
 
     <!-- footer section -->
@@ -681,5 +686,16 @@ const filterSearch = computed(() => {
 }
 .scrolling {
   transition: all 1s;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.7s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 1;
+  transform: translateY(-15px);
 }
 </style>

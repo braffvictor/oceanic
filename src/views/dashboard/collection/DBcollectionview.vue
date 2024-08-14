@@ -1,7 +1,7 @@
 <template>
-  <div class="transit">
+  <div class="transit font-sans">
     <DDashbar
-      class="mx-auto -mt-5 backdrop-blur-md border-b transit"
+      class="mx-auto -mt-5 backdrop-blur-sm border-b transit"
       :class="
         theme == 'light' || theme == null
           ? 'whiteT border-b-gray-200'

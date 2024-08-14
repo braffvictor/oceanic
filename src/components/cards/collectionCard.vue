@@ -8,7 +8,7 @@
         :src="nft && nft.image_url"
         :alt="nft && nft?.name"
         width="200"
-        class="object-contain rounded-3xl mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
+        class="object-contain rounded-3xl pointer-events-none mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
       />
       <div class="mt-2 py-2 flex gap-x-2 items-center">
         <div>
@@ -16,7 +16,7 @@
             :src="sliceBannerText(nft && nft.banner_image_url)"
             alt=""
             width="100"
-            class="object-contain max-w-12 rounded-full mx-auto text-center transit"
+            class="object-contain max-w-12 rounded-full mx-auto text-center transit pointer-events-none"
           />
         </div>
         <div class="w-full">

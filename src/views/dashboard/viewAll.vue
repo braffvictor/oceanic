@@ -45,6 +45,11 @@
           class="flex hover:bg-slate-200 dark:hover:bg-slate-700 items-center my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 bg-slate-100 shadow dark:bg-slate-800 p-2 rounded-xl transit group overflow-auto min-h-24"
           v-for="collection in collections.slice(11, 98)"
           :key="collection.name"
+          @click="
+            $router.push(
+              `/dashboard/collection/${collection && collection.key}`
+            )
+          "
         >
           <div class="rounded-xl overflow-hidden">
             <img
@@ -112,7 +117,17 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import SwipingCards from "@/components/swipingCards.vue";
 import NftCard from "@/components/cards/nftCard.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { computed, inject } from "vue";
+import { computed, inject, onMounted } from "vue";
+
+onMounted(() => {
+  setTimeout(() => {
+    window.scrollTo({
+      top: -10,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, 3);
+});
 
 const userflowing = userflow();
 

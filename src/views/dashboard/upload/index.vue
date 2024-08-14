@@ -38,7 +38,7 @@
         <form action="" class="mt-4">
           <label
             for="dropzone-file"
-            class="flex flex-col items-center justify-center transit p-4 md:p-6 mt-4 mb-3 w-full border border-gray-300 border-dotted rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
+            class="flex flex-col items-center justify-center transit p-4 md:p-6 mt-4 mb-3 w-full border border-gray-500 dark:border-gray-300 border-dotted rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
           >
             <div class="mb-3 flex items-center justify-center" v-if="!proof">
               <svg

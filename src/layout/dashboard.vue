@@ -132,7 +132,9 @@
 
     <!-- children routerview -->
     <section class="w-full">
-      <router-view class="w-full md:py-4" />
+      <Transition duration="1000">
+        <router-view class="w-full md:py-4" />
+      </Transition>
     </section>
 
     <!-- bottom nav bar for mobile -->
@@ -247,5 +249,16 @@ function changeTheme(theme) {
 
 .darkT {
   background: rgba(15, 23, 42, 0.321);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.7s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0.7;
+  transform: translateY(7px);
 }
 </style>

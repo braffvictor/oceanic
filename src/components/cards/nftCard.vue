@@ -9,7 +9,7 @@
         <img
           :src="nft && nft.image_url"
           alt=""
-          class="object-fit group-hover:scale-110 transit"
+          class="object-fit group-hover:scale-110 transit pointer-events-none"
         />
       </div>
       <div class="px-3 mt-3">

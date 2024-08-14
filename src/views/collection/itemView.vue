@@ -230,7 +230,13 @@ onMounted(() => {
   // console.log("red");
   specificCollectionDetails(route.params.id);
   specificCollectionNfts(route.params.id);
-  window.scrollTo(0, 0);
+  setTimeout(() => {
+    window.scrollTo({
+      top: -10,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, 3);
   setTimeout(() => {
     loading.value = true;
   }, 1000);
