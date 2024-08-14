@@ -1,7 +1,7 @@
 <template>
   <div class="bg-slate-100 dark:bg-slate-900 transit">
     <DDashbar
-      class="md:w-10/12 mx-auto backdrop-blur-md border-b transit"
+      class="-mt-5 mx-auto backdrop-blur-md border-b transit"
       :class="
         theme == 'light' || theme == null
           ? 'whiteT border-b-gray-200'
@@ -27,7 +27,7 @@
         <p class="text-center w-full font-semibold"></p>
       </div>
     </DDashbar>
-    <section class="mt-5 px-3">
+    <section class="mt-10 px-3">
       <main class="flex-col md:flex-row flex gap-5">
         <div
           class="border rounded-2xl overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit"
@@ -219,7 +219,7 @@
       </div>
     </section>
 
-    <main class="pb-20">
+    <main class="pb-8 px-3">
       <div
         class="border-gray-300 cursor-pointer dark:border-gray-600 dark:bg-slate-800 border rounded-xl transit p-4 mx-2 mt-4"
       >
