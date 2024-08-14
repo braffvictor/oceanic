@@ -1,14 +1,14 @@
 <template>
   <main class="">
     <div
-      class="h-auto mt-5 min-w-56 min-h-[330px] max-w-56 max-h-[330px] w-60 rounded-3xl dark:bg-slate-800 bg-slate-100 p-3 group hover:-translate-y-2 overflow-hidden transit dark:active:bg-slate-700 active:bg-slate-200 cursor-pointer shadow"
+      class="h-auto mt-5 min-w-56 min-h-[310px] max-w-56 max-h-[310px] w-60 rounded-3xl dark:bg-slate-800 bg-slate-100 p-3 group hover:-translate-y-2 overflow-hidden transit dark:active:bg-slate-700 active:bg-slate-200 cursor-pointer shadow"
       @click="checkRoute()"
     >
       <img
         :src="nft && nft.image_url"
         :alt="nft && nft?.name"
         width="200"
-        class="object-contain rounded-3xl mx-auto text-center transit group-hover:-translate-y-3 group-hover:scale-105"
+        class="object-contain rounded-3xl mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
       />
       <div class="mt-2 py-2 flex gap-x-2 items-center">
         <div>
@@ -20,7 +20,7 @@
           />
         </div>
         <div class="w-full">
-          <p class="font-bold text-slate-900 dark:text-slate-100">
+          <p class="font-bold text-slate-900 dark:text-slate-100 text-sm">
             {{
               nft && nft.name?.length > 8 && !learn
                 ? nft && nft.name.slice(0, 8) + "..."
@@ -105,7 +105,7 @@ function checkRoute() {
   if (props.learn) {
     router.push(`${props.routeName}`);
   } else if (props.to) {
-    router.push(`/collection/${props.nft && props.nft.key}`);
+    router.push(`/dashboard/collection/${props.nft && props.nft.key}`);
   } else {
     () => {};
   }

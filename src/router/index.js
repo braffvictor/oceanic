@@ -108,8 +108,19 @@ const routes = [
       },
       {
         path: "/dashboard/viewAll",
-        name: "home view",
+        name: "home viewall",
         component: () => import("@/views/dashboard/viewAll.vue"),
+      },
+      {
+        path: "/dashboard/collection/:id",
+        name: "home dashboard Dynamic Collection",
+        component: () =>
+          import("../views/dashboard/collection/DBcollectionview.vue"),
+      },
+      {
+        path: "/dashboard/collection/item/:id",
+        name: "home dashboard Dynamic item",
+        component: () => import("../views/dashboard/collection/DBitemview.vue"),
       },
     ],
   },

@@ -53,10 +53,10 @@
       ></div>
 
       <!-- todo carted nfts List -->
-      <div v-if="cartedNfts && cartedNfts.length > 0" class="px-3">
+      <div v-if="cartedNfts && cartedNfts.length > 0">
         <TransitionGroup name="list">
           <main
-            class="flex min-h-24 items-center select-none cursor-pointer justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 rounded-xl transit group overflow-visible"
+            class="flex min-h-24 px-2 items-center select-none cursor-pointer justify-between z-50 gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 mt-4 rounded-xl transit group overflow-visible"
             v-for="cart in cartedNfts"
             :key="cart.name"
           >
