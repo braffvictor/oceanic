@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 md:px-7 bg-slate-100 dark:bg-slate-900 transit">
+  <div class="bg-slate-100 dark:bg-slate-900 transit">
     <DDashbar
       class="md:w-10/12 mx-auto backdrop-blur-md border-b transit"
       :class="
@@ -27,7 +27,7 @@
         <p class="text-center w-full font-semibold"></p>
       </div>
     </DDashbar>
-    <section class="">
+    <section class="mt-5 px-3">
       <main class="flex-col md:flex-row flex gap-5">
         <div
           class="border rounded-2xl overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit"
@@ -239,6 +239,7 @@
 <script setup>
 import { userflow } from "@/stores/userflow";
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
+import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, inject, onMounted, ref, watch } from "vue";

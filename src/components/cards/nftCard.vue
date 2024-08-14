@@ -54,13 +54,7 @@
       >
         <p
           class="text-slate-900 dark:text-slate-100 transit active:scale-90 text-xs md:text-md select-none w-full py-3"
-          @click="
-            $router.push(
-              `/collection/item/${route.params.id}?identifier=${
-                nft && nft.identifier
-              }`
-            )
-          "
+          @click="gotoItem()"
         >
           <!-- use for price data for deduct function -->
           <!-- {{ nft && nft.stats.floor_price
@@ -115,6 +109,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  dashboard: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // let userflowCartList = userflow().cartList;
@@ -163,6 +161,22 @@ function checkRoute() {
     router.push(`/collection/${props.nft && props.nft.key}`);
   } else {
     () => {};
+  }
+}
+
+function gotoItem() {
+  if (props.dashboard) {
+    router.push(
+      `/dashboard/collection/item/${route.params.id}?identifier=${
+        props.nft && props.nft.identifier
+      }`
+    );
+  } else {
+    router.push(
+      `/collection/item/${route.params.id}?identifier=${
+        props.nft && props.nft.identifier
+      }`
+    );
   }
 }
 </script>

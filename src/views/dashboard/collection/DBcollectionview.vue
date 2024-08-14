@@ -176,6 +176,7 @@
       <CollectionItems
         v-if="activeBtn == 'items'"
         :headerName="collectionHeader && collectionHeader?.name"
+        :dashboard="true"
       />
 
       <collection-activities
