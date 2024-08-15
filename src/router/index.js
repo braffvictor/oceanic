@@ -124,6 +124,11 @@ const routes = [
         name: "home dashboard Dynamic item",
         component: () => import("../views/dashboard/collection/DBitemview.vue"),
       },
+      {
+        path: "/dashboard/explore",
+        name: "home explore",
+        component: () => import("../views/dashboard/explore.vue"),
+      },
     ],
   },
 

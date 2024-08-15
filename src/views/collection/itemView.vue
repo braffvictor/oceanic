@@ -294,8 +294,9 @@ const specificCollectionNfts = (routeParams) => {
       collectionNfts.value.forEach((nft) => {
         nft.action = "red";
         nft.stats = {
-          floor_price: (Number(nft.identifier) / 4000) * 3037.97,
-          floor_eth: Number(nft.identifier) / 4000,
+          floor_price:
+            (Number(nft.identifier.slice(0, 4) || 1500) / 4000) * 3037.97,
+          floor_eth: Number(nft.identifier.slice(0, 4) || 1500) / 4000,
           floor_price_symbol: "ETH",
         };
       });

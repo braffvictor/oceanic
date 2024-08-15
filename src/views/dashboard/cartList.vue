@@ -160,6 +160,9 @@ import { collection } from "firebase/firestore";
 
 onMounted(() => {
   checkAmount();
+  setTimeout(() => {
+    window.scrollTo({ top: -10, left: 0, behavior: "smooth" });
+  }, 3);
 });
 
 const theme = inject("theme");

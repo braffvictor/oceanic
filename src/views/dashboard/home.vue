@@ -133,11 +133,10 @@ import wave5 from "@/assets/wave5.png";
 import { computed, inject, onMounted, ref, watch } from "vue";
 
 onMounted(() => {
-  window.scrollTo(0, 0);
+  setTimeout(() => {
+    window.scrollTo({ top: -10, left: 0, behavior: "smooth" });
+  }, 3);
 });
-
-const waving = ref([wave1, wave2, wave4, wave5]);
-const rando = Math.round(Math.random() * 3);
 
 const userflowing = userflow();
 const theme = inject("theme");
@@ -156,6 +155,7 @@ const quickLinks = computed(() => {
     {
       img: explore,
       text: "Explore",
+      to: "/dashboard/explore",
     },
     {
       img: random,
