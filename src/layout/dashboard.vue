@@ -253,12 +253,12 @@ function changeTheme(theme) {
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.7s ease;
+  transition: all 0.7s ease-in-out;
 }
 
 .v-enter-from,
 .v-leave-to {
-  opacity: 0.7;
-  transform: translateY(7px);
+  opacity: 0.9;
+  transform: translateY(5px);
 }
 </style>

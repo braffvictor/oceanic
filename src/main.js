@@ -7,6 +7,8 @@ import "animate.css";
 import { createHead } from "@vueuse/head";
 import { createPinia } from "pinia";
 
+import "nprogress/nprogress.css";
+
 const head = createHead();
 const pinia = createPinia();
 

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
+import NProgress from "nprogress";
+
 const routes = [
   {
     //for default layout and subpages
@@ -136,6 +138,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((To, From, next) => {
+  NProgress.settings.showSpinner = false;
+  NProgress.start();
+  next();
+});
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
