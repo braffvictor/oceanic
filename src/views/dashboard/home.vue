@@ -37,7 +37,7 @@
         <div class="flex justify-between items-center">
           <p class="font-light">🔥Hot Collection</p>
           <p
-            class="font-semibold flex items-center cursor-pointer active:text-green-500 transit group text-sm"
+            class="font-semibold flex items-center cursor-pointer active:text-green-500 transit group text-sm py-2 pl-2"
             @click.self="$router.push('/dashboard/viewall')"
           >
             View All<SvgComp
