@@ -82,7 +82,9 @@ export const userflow = defineStore("userflow", {
           });
         })
         .then(async () => {
-          await this.initRandomNfts();
+          setTimeout(() => {
+            this.initRandomNfts();
+          }, 2000);
         })
         .catch((err) => {
           this.initAlert({
@@ -100,7 +102,6 @@ export const userflow = defineStore("userflow", {
         let arr = [];
         const options = {
           method: "GET",
-          mode: "no-cors",
           headers: {
             accept: "application/json",
             "x-api-key": "6db12e6a6438461e9e3755c8b8930c21",
@@ -130,11 +131,11 @@ export const userflow = defineStore("userflow", {
               this.randomNfts.push(nft);
             });
 
-            console.log(this.randomNfts);
+            // console.log(this.randomNfts);
           })
           .catch((err) => {
             this.initAlert({
-              is: true,
+              is: false,
               message: err.message,
               type: "error",
               timer: 4000,
@@ -148,7 +149,7 @@ export const userflow = defineStore("userflow", {
           return keys.push(nft.key);
         });
 
-        console.log(keys);
+        // console.log(keys);
         for (let index = 0; index < 100; index++) {
           const rando = Math.abs(Math.round(Math.random() * 90));
           console.log(rando);
