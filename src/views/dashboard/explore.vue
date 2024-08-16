@@ -60,7 +60,7 @@
             <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
           </div>
           <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
-            No NFTs found
+            Searching...
             <span class="text-green-500">{{
               searchName ? `For ${searchName}` : ""
             }}</span>
