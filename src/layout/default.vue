@@ -510,7 +510,7 @@ const showAlert = ref(false);
 const userName = ref("");
 
 onMounted(() => {
-  userflowing.getAllNfts();
+  userflowing.initAllNfts();
   // getNftCollection("eth-main");
   window.scrollTo(0, 0);
   // window.gtranslateSettings = {

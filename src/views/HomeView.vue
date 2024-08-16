@@ -326,7 +326,7 @@
 
 <script setup>
 // stores
-import { userflow, composeFlow } from "@/stores/userflow";
+import { userflow } from "@/stores/userflow";
 
 import DAuth from "@/components/utils/DAuth.vue";
 import DButton from "@/components/utils/DButton.vue";
@@ -357,17 +357,6 @@ const darkShade2 = ref("rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)");
 // for nft
 const userflowing = userflow();
 console.log(userflowing.nfts, "is getting nfts");
-
-const composeflowing = composeFlow();
-const watchNfts = computed(() => {
-  return userflowing.getNfts;
-});
-
-console.log(watchNfts.value);
-
-// watch(watchNfts, () => {
-//   console.log("compose flowing");
-// });
 
 onMounted(() => {
   window.scrollTo(0, 0);

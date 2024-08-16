@@ -145,28 +145,28 @@ const collectionChains = computed(() => {
     {
       name: "eth-main",
       action: () => {
-        userflowing.getAllNfts("eth-main");
+        userflowing.initAllNfts("eth-main");
         select.value = "eth-main";
       },
     },
     {
       name: "arbitrum-main",
       action: () => {
-        userflowing.getAllNfts("arbitrum-main");
+        userflowing.initAllNfts("arbitrum-main");
         select.value = "arbitrum-main";
       },
     },
     {
       name: "optimism-main",
       action: () => {
-        userflowing.getAllNfts("optimism-main");
+        userflowing.initAllNfts("optimism-main");
         select.value = "optimism-main";
       },
     },
     {
       name: "poly-main",
       action: () => {
-        userflowing.getAllNfts("poly-main");
+        userflowing.initAllNfts("poly-main");
         select.value = "poly-main";
       },
     },

@@ -197,7 +197,7 @@ import { useRoute } from "vue-router";
 import DAlert from "@/components/utils/DAlert.vue";
 
 const userflowing = userflow();
-userflowing.getAllNfts();
+userflowing.initAllNfts();
 
 const route = useRoute();
 

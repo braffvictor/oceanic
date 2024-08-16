@@ -18,7 +18,12 @@
           />
         </div>
         <div class="rounded-2xl md:w-8/12 w-full p-2">
-          <p class="text-green-400 dark:text-green-500 font-normal text-lg">
+          <p
+            @click="
+              $router.push(`/collection/${nftDetails && nftDetails.collection}`)
+            "
+            class="text-green-400 dark:text-green-500 font-normal text-lg"
+          >
             {{ nftDetails && nftDetails.collection
             }}<img
               src="@/assets/verified.svg"

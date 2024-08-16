@@ -167,9 +167,9 @@ function checkRoute() {
 function gotoItem() {
   if (props.dashboard) {
     router.push(
-      `/dashboard/collection/item/${route.params.id}?identifier=${
-        props.nft && props.nft.identifier
-      }`
+      `/dashboard/collection/item/${
+        route.params.id ? route.params.id : props.nft && props.nft.key
+      }?identifier=${props.nft && props.nft.identifier}`
     );
   } else {
     router.push(

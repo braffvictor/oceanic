@@ -46,7 +46,14 @@
             class="object-cover pointer-events-none"
           />
         </div>
-        <div class="rounded-2xl md:w-8/12 w-full p-2">
+        <div
+          class="rounded-2xl md:w-8/12 w-full p-2"
+          @click="
+            $router.push(
+              `/dashboard/collection/${nftDetails && nftDetails.collection}`
+            )
+          "
+        >
           <p class="text-green-400 dark:text-green-500 font-normal text-lg">
             {{ nftDetails && nftDetails.collection
             }}<img

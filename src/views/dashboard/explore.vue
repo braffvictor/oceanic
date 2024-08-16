@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen">
+  <section class="min-h-screen pb-8">
     <main class="md:w-10/12 mx-auto">
       <DDashbar>
         <div class="w-full flex justify-between items-center">
@@ -39,14 +39,14 @@
         </div>
       </section>
 
-      <div class="text-center mx-auto flex justify-center">
-        {{ filterCollection.length }}
+      <div class="text-center mx-auto">
         <div
-          class="grid grid-cols-2 justify-center items-center md:grid-cols-5 mt-7 gap-6 text-center mx-auto"
-          v-if="filterCollection && filterCollection.length > 0"
+          class="grid grid-cols-2 sm:grid-cols-3 justify-around items-center md:grid-cols-4 mt-7 px-2"
+          v-if="randomNfts && randomNfts.length > 0"
         >
           <nftCard
-            v-for="nft in filterCollection"
+            v-for="nft in randomNfts"
+            class="mx-auto text-center m-2"
             :key="nft.name"
             :nft="nft"
             :action="true"
@@ -59,12 +59,19 @@
           <div class="mx-auto text-center flex justify-center">
             <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
           </div>
-          <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
-            Searching...
+          <p
+            class="text-slate-900 font-semibold dark:text-slate-100 mt-4"
+            v-if="randomNfts.length == 0 && !searchName"
+          >
+            Loading...
             <span class="text-green-500">{{
               searchName ? `For ${searchName}` : ""
             }}</span>
           </p>
+          <div v-if="randomNfts.length == 0 && searchName">
+            <span class="text-green-500"> {{ searchName }} </span> Item Not
+            Found....
+          </div>
         </div>
       </div>
     </main>
@@ -86,67 +93,22 @@ const theme = inject("theme");
 const userflowing = userflow();
 const searchName = ref("");
 
-const nfts = computed(() => {
-  return userflowing.nfts.map((nft) => {
-    return `${nft.key}`;
+// onMounted(() => {
+//   setTimeout(() => {
+//     userflowing.initRandomNfts();
+//   }, 1500);
+// });
+
+const randomNfts = computed(() => {
+  return userflowing.getRandoms.filter((random) => {
+    return (
+      random &&
+      random.name &&
+      (random?.name.includes(searchName.value) ||
+        random?.name.toLowerCase().includes(searchName.value))
+    );
   });
 });
-
-const filterCollection = ref([]);
-watch(nfts, () => {
-  if (nfts.value.length > 0) {
-    for (let index = 0; index < 20; index++) {
-      const rando = Math.abs(Math.round(Math.random() * 90));
-      console.log(rando);
-      specificCollectionNfts(nfts.value[rando]);
-    }
-  }
-});
-
-const collectionNfts = ref([]);
-
-function specificCollectionNfts(nftkey) {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "x-api-key": "6db12e6a6438461e9e3755c8b8930c21",
-    },
-  };
-
-  fetch(
-    `https://api.opensea.io/api/v2/collection/${nftkey}/nfts?limit=1`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      collectionNfts.value = response.nfts;
-
-      collectionNfts.value.forEach((nft) => {
-        nft.action = "red";
-        nft.stats = {
-          floor_price:
-            (Number(nft.identifier.slice(0, 4) || 1500) / 4000) * 3037.97,
-          floor_eth: Number(nft.identifier.slice(0, 4) || 1500) / 4000,
-          floor_price_symbol: "ETH",
-        };
-      });
-
-      collectionNfts.value.forEach((nft) => {
-        filterCollection.value.push(nft);
-      });
-
-      watch(searchName, () => {
-        filterCollection.value = filterCollection.value.filter(
-          (nft) =>
-            nft.name.includes(searchName.value) ||
-            nft.name.toLowerCase().includes(searchName.value)
-        );
-        console.log(filterCollection.value);
-      });
-    })
-    .catch((err) => console.error(err));
-}
 </script>
 
 <style></style>
