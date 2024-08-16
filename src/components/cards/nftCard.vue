@@ -15,7 +15,7 @@
       <div class="px-3 mt-3">
         <p class="font-bold text-slate-900 dark:text-slate-100">
           {{
-            nft && nft.name.length > 14 && !learn
+            nft && nft.name?.length > 14 && !learn
               ? nft && nft.name.slice(0, 14) + "..."
               : nft && nft.name
           }}
@@ -141,7 +141,7 @@ const getNft = () => {
     // userflowCartList = JSON.parse(localStorage.getItem("watchList")).length;
 
     userflowing.checkLocalStorage(
-      JSON.parse(localStorage.getItem("watchList")).length
+      JSON.parse(localStorage.getItem("watchList"))?.length
     );
 
     userflowing.initAlert({
