@@ -148,7 +148,7 @@ const userflowing = userflow();
 
 const rando = Math.abs(Math.round(Math.random() * 98));
 const randomNft = computed(() => {
-  return userflowing.randomNfts[rando];
+  return userflowing.randomNfts.length > 0 && userflowing.randomNfts[rando];
 });
 
 const theme = inject("theme");
