@@ -53,6 +53,7 @@
             class="flex items-center border-2 border-slate-200 dark:border-slate-700 my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 hover:bg-slate-200 dark:hover:bg-slate-700 p-2 rounded-xl transit group overflow-auto min-h-24"
             v-for="collection in collections.slice(0, 5)"
             :key="collection.name"
+            @click="$router.push(`/dashboard/collection/${collection.key}`)"
           >
             <div class="rounded-xl overflow-hidden">
               <img
