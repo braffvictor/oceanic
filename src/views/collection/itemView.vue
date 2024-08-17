@@ -232,10 +232,9 @@ const details = ref(false);
 const image = ref("");
 const contract = ref("");
 const loading = ref(false);
+
 onBeforeMount(() => {
   // console.log("red");
-  specificCollectionDetails(route.params.id);
-  specificCollectionNfts(route.params.id);
   setTimeout(() => {
     window.scrollTo({
       top: -10,
@@ -251,7 +250,7 @@ onBeforeMount(() => {
 const collectionHeader = ref(null);
 
 // for top header display details
-const specificCollectionDetails = (routeParams) => {
+const specificCollectionDetails = async (routeParams) => {
   const options = {
     method: "GET",
     headers: {
@@ -260,7 +259,10 @@ const specificCollectionDetails = (routeParams) => {
     },
   };
 
-  fetch(`https://api.opensea.io/api/v2/collections/${routeParams}`, options)
+  await fetch(
+    `https://api.opensea.io/api/v2/collections/${routeParams}`,
+    options
+  )
     .then((response) => response.json())
     .then((response) => {
       collectionHeader.value = response;
@@ -284,7 +286,7 @@ const contrac = computed(() => {
 // to search for the nft contract address
 const collectionNfts = ref([]);
 const nftDetails = ref(null);
-const specificCollectionNfts = (routeParams) => {
+const specificCollectionNfts = async (routeParams) => {
   const options = {
     method: "GET",
     headers: {
@@ -293,7 +295,7 @@ const specificCollectionNfts = (routeParams) => {
     },
   };
 
-  fetch(
+  await fetch(
     `https://api.opensea.io/api/v2/collection/${routeParams}/nfts?limit=200`,
     options
   )
@@ -397,6 +399,9 @@ function generateContractAddressWithSeed(seed) {
 
   return address;
 }
+
+specificCollectionDetails(route.params.id);
+specificCollectionNfts(route.params.id);
 </script>
 
 <style></style>

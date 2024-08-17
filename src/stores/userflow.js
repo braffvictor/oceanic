@@ -98,7 +98,7 @@ export const userflow = defineStore("userflow", {
 
     async initRandomNfts() {
       console.log("getting randoms");
-      const specificCollectionNfts = (nftkey) => {
+      const specificCollectionNfts = async (nftkey) => {
         let arr = [];
         const options = {
           method: "GET",
@@ -108,7 +108,7 @@ export const userflow = defineStore("userflow", {
           },
         };
 
-        fetch(
+        await fetch(
           `https://api.opensea.io/api/v2/collection/${nftkey}/nfts?limit=1`,
           options
         )
@@ -131,7 +131,14 @@ export const userflow = defineStore("userflow", {
             });
 
             arr.forEach((nft) => {
-              this.randomNfts.push(nft);
+              if (
+                nft.name &&
+                nft.image_url &&
+                nft.collection &&
+                nft.identifier
+              ) {
+                this.randomNfts.push(nft);
+              }
             });
 
             // console.log(this.randomNfts[0]);
@@ -139,7 +146,7 @@ export const userflow = defineStore("userflow", {
           .catch((err) => {
             this.initAlert({
               is: false,
-              message: err.message,
+              message: "Poor Connection, Please Refresh.",
               type: "error",
               timer: 4000,
             });

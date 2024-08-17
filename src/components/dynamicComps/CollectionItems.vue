@@ -85,18 +85,15 @@ const props = defineProps({
 const loading = ref(true);
 const route = useRoute();
 
-onBeforeMount(() => {
-  specificCollectionNfts(route.params.id);
-  // setTimeout(() => {
+// setTimeout(() => {
 
-  // }, 3000);
-});
+// }, 3000);
 
 const searchName = ref("");
 
 const collectionNfts = ref([]);
 const filterCollection = ref([]);
-const specificCollectionNfts = (routeParams) => {
+const specificCollectionNfts = async (routeParams) => {
   const options = {
     method: "GET",
     headers: {
@@ -105,7 +102,7 @@ const specificCollectionNfts = (routeParams) => {
     },
   };
 
-  fetch(
+  await fetch(
     `https://api.opensea.io/api/v2/collection/${routeParams}/nfts?limit=200`,
     options
   )
@@ -167,6 +164,8 @@ function generateContractAddressWithSeed(seed) {
 
   return address;
 }
+
+specificCollectionNfts(route.params.id);
 </script>
 
 <style>

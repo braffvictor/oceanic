@@ -158,7 +158,6 @@ const image = ref("");
 
 onBeforeMount(() => {
   // console.log("red");
-  specificCollectionDetails(route.params.id);
   window.scrollTo(0, 0);
 });
 
@@ -169,7 +168,7 @@ function copyContract(contractAddress) {
 const collectionHeader = ref(null);
 
 // for top header display details
-const specificCollectionDetails = (paramsID) => {
+const specificCollectionDetails = async (paramsID) => {
   const options = {
     method: "GET",
     headers: {
@@ -178,7 +177,7 @@ const specificCollectionDetails = (paramsID) => {
     },
   };
 
-  fetch(`https://api.opensea.io/api/v2/collections/${paramsID}`, options)
+  await fetch(`https://api.opensea.io/api/v2/collections/${paramsID}`, options)
     .then((response) => response.json())
     .then((response) => {
       collectionHeader.value = response;
@@ -202,6 +201,8 @@ const specificCollectionDetails = (paramsID) => {
 watch(route, () => {
   specificCollectionDetails(route.params.id);
 });
+
+specificCollectionDetails(route.params.id);
 </script>
 
 <style scoped></style>

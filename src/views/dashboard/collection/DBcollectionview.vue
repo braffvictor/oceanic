@@ -188,7 +188,6 @@ const image = ref("");
 
 onBeforeMount(() => {
   // console.log("red");
-  specificCollectionDetails(route.params.id);
   window.scrollTo(0, 0);
 });
 
@@ -233,6 +232,8 @@ watch(route, () => {
   specificCollectionDetails(route.params.id);
   console.log("changing route");
 });
+
+specificCollectionDetails(route.params.id);
 </script>
 
 <style scoped>

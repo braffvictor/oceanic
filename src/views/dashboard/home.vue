@@ -4,7 +4,7 @@
       <!-- for the top bar in dashboard -->
       <DDashbar />
 
-      <section class="mt-5 px-3">
+      <section class="mt-2 px-3">
         <div class="mx-auto">
           <!-- the balance card -->
           <BalanceCard />
@@ -21,6 +21,11 @@
             class="rounded-xl h-20 w-20 shadow-sm active:scale-75 select-none transit md:w-60 cursor-pointer md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
             v-for="quick in quickLinks"
             :key="quick.text"
+            :class="
+              quick.text == 'Random' && !randomNft
+                ? 'pointer-events-none opacity-30 transit'
+                : null
+            "
           >
             <router-link
               class="flex w-full flex-col justify-center items-center !p-2 gap-2"
@@ -140,6 +145,12 @@ onMounted(() => {
 });
 
 const userflowing = userflow();
+
+const rando = Math.abs(Math.round(Math.random() * 98));
+const randomNft = computed(() => {
+  return userflowing.randomNfts[rando];
+});
+
 const theme = inject("theme");
 
 const collections = computed(() => {
@@ -161,6 +172,9 @@ const quickLinks = computed(() => {
     {
       img: random,
       text: "Random",
+      to: `/dashboard/collection/item/${
+        randomNft.value && randomNft.value.collection
+      }?identifier=${randomNft.value && randomNft.value?.identifier}`,
     },
     {
       img: transact,

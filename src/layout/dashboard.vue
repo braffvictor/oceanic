@@ -131,7 +131,7 @@
     </section>
 
     <!-- children routerview -->
-    <section class="w-full">
+    <section class="w-full md:min-w-80">
       <Transition duration="1000">
         <router-view class="w-full md:py-4" />
       </Transition>
@@ -253,12 +253,12 @@ function changeTheme(theme) {
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.7s ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 
 .v-enter-from,
 .v-leave-to {
   opacity: 0.9;
-  transform: translateY(5px);
+  transform: translateY(10px);
 }
 </style>

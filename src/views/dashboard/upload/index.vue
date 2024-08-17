@@ -215,6 +215,8 @@
     transaction hash for purchased nft
     contract address for nft
     id for nft
+
+    when uploading get all or most of the data necessary to match the nfts data fetched
      -->
   </div>
 </template>
