@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 
 const props = defineProps({
   contractAddress: {
@@ -84,7 +84,7 @@ const props = defineProps({
 
 const events = ref([]);
 
-onMounted(() => {
+onBeforeMount(() => {
   getTransferEventofCollection(props.contractAddress);
 });
 

@@ -502,14 +502,14 @@ import DAuth from "@/components/utils/DAuth.vue";
 import DSearchBar from "@/components/utils/DSearchBar.vue";
 import router from "@/router";
 import { useHead } from "@vueuse/head";
-import { computed, onMounted, provide, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, provide, ref, watch } from "vue";
 import DAlert from "@/components/utils/DAlert.vue";
 
 const userflowing = userflow();
 const showAlert = ref(false);
 const userName = ref("");
 
-onMounted(() => {
+onBeforeMount(() => {
   userflowing.initAllNfts();
   // getNftCollection("eth-main");
   window.scrollTo(0, 0);

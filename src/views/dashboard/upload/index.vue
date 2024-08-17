@@ -211,7 +211,8 @@
     ethereum(default?)
     network(erc-default?)
 
-    generate
+    generate ~
+    transaction hash for purchased nft
     contract address for nft
     id for nft
      -->

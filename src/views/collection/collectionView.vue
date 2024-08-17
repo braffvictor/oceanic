@@ -20,6 +20,7 @@
                 src="@/assets/verified.svg"
                 alt="tick"
                 class="max-w-5 inline pl-1"
+                v-if="collectionHeader && collectionHeader?.name"
               />
             </p>
             <p class="text-gray-300 dark:text-slate-100">
@@ -139,7 +140,7 @@
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import CollectionItems from "@/components/dynamicComps/CollectionItems.vue";
 import { userflow } from "@/stores/userflow";
@@ -155,7 +156,7 @@ const detailed = ref(false);
 const banner = ref("");
 const image = ref("");
 
-onMounted(() => {
+onBeforeMount(() => {
   // console.log("red");
   specificCollectionDetails(route.params.id);
   window.scrollTo(0, 0);

@@ -46,19 +46,20 @@
             class="object-cover pointer-events-none"
           />
         </div>
-        <div
-          class="rounded-2xl md:w-8/12 w-full p-2"
-          @click="
-            $router.push(
-              `/dashboard/collection/${nftDetails && nftDetails.collection}`
-            )
-          "
-        >
-          <p class="text-green-400 dark:text-green-500 font-normal text-lg">
-            {{ nftDetails && nftDetails.collection
+        <div class="rounded-2xl md:w-8/12 w-full p-2">
+          <p
+            @click="
+              $router.push(
+                `/dashboard/collection/${nftDetails && nftDetails.collection}`
+              )
+            "
+            class="text-green-400 dark:text-green-500 font-normal text-lg cursor-pointer"
+          >
+            {{ $route.params.id
             }}<img
               src="@/assets/verified.svg"
               alt="tick"
+              v-if="nftDetails && nftDetails.collection"
               class="max-w-5 inline pl-1"
             />
           </p>
@@ -237,8 +238,8 @@
         </p>
 
         <CollectionActivities
-          :contract-address="contract ? contract : ''"
-          v-if="loading == true"
+          :contract-address="contrac ? contrac : ''"
+          v-if="contrac"
         />
       </div>
     </main>
@@ -251,7 +252,7 @@ import CollectionActivities from "@/components/dynamicComps/CollectionActivities
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { computed, inject, onMounted, ref, watch } from "vue";
+import { computed, inject, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
 const theme = inject("theme");
@@ -264,7 +265,7 @@ const details = ref(false);
 const image = ref("");
 const contract = ref("");
 const loading = ref(false);
-onMounted(() => {
+onBeforeMount(() => {
   // console.log("red");
   specificCollectionDetails(route.params.id);
   specificCollectionNfts(route.params.id);
@@ -311,6 +312,10 @@ const specificCollectionDetails = (routeParams) => {
     .catch((err) => console.error(err));
 };
 
+const contrac = computed(() => {
+  return collectionHeader.value?.contracts[0]?.address;
+});
+
 // to search for the nft contract address
 const collectionNfts = ref([]);
 const nftDetails = ref(null);
@@ -333,6 +338,9 @@ const specificCollectionNfts = (routeParams) => {
 
       collectionNfts.value.forEach((nft) => {
         nft.action = "red";
+        nft.contract_address = generateContractAddressWithSeed(
+          nft.identifier || 1500
+        );
         nft.stats = {
           floor_price:
             (Number(nft.identifier.slice(0, 4) || 1500) / 4000) * 3037.97,
@@ -386,11 +394,9 @@ const detailsOfNft = computed(() => {
     {
       text: "Contract Address",
       data:
-        (nftDetails.value && nftDetails.value.contract.slice(0, 5)) +
+        (nftDetails.value && nftDetails.value.contract_address.slice(0, 5)) +
         "...." +
-        (nftDetails.value &&
-          nftDetails.value &&
-          nftDetails.value.contract.slice(10, 15)),
+        (nftDetails.value && nftDetails.value.contract_address.slice(10, 15)),
     },
     {
       text: "Token ID",
@@ -406,6 +412,26 @@ const detailsOfNft = computed(() => {
     },
   ];
 });
+
+function generateContractAddressWithSeed(seed) {
+  const hexChars = "0123456789abcdef";
+  let address = "0x";
+
+  // Simple seed-based random number generator
+  function seededRandom() {
+    seed = parseInt(seed);
+
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  }
+
+  // Generate the address using the seeded random number generator
+  for (let i = 0; i < 40; i++) {
+    address += hexChars[Math.floor(seededRandom() * 16)];
+  }
+
+  return address;
+}
 </script>
 
 <style></style>

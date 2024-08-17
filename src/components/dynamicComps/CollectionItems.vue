@@ -68,7 +68,7 @@
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import nftCard from "@/components/cards/nftCard.vue";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const props = defineProps({
@@ -85,7 +85,7 @@ const props = defineProps({
 const loading = ref(true);
 const route = useRoute();
 
-onMounted(() => {
+onBeforeMount(() => {
   specificCollectionNfts(route.params.id);
   // setTimeout(() => {
 
@@ -115,6 +115,9 @@ const specificCollectionNfts = (routeParams) => {
 
       collectionNfts.value.forEach((nft) => {
         nft.action = "red";
+        nft.contract_address = generateContractAddressWithSeed(
+          nft.identifier || 1500
+        );
         nft.stats = {
           floor_price:
             (Number(nft.identifier.slice(0, 4) || 1500) / 4000) * 3037.97,
@@ -144,6 +147,26 @@ watch(route, () => {
   specificCollectionNfts(route.params.id);
   // console.log("fetching nfts");
 });
+
+function generateContractAddressWithSeed(seed) {
+  const hexChars = "0123456789abcdef";
+  let address = "0x";
+
+  // Simple seed-based random number generator
+  function seededRandom() {
+    seed = parseInt(seed);
+
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  }
+
+  // Generate the address using the seeded random number generator
+  for (let i = 0; i < 40; i++) {
+    address += hexChars[Math.floor(seededRandom() * 16)];
+  }
+
+  return address;
+}
 </script>
 
 <style>

@@ -46,7 +46,7 @@ export const userflow = defineStore("userflow", {
     },
 
     //hydrate site with blockspan nfts
-    initAllNfts(chain) {
+    async initAllNfts(chain) {
       const options = {
         method: "GET",
         headers: {
@@ -55,7 +55,7 @@ export const userflow = defineStore("userflow", {
         },
       };
 
-      fetch(
+      await fetch(
         `https://api.blockspan.com/v1/exchanges/collections?chain=${
           chain || "eth-main"
         }&exchange=opensea&page_size=100`,
@@ -118,6 +118,9 @@ export const userflow = defineStore("userflow", {
 
             arr.forEach((nft) => {
               nft.key = nftkey;
+              nft.contract_address = generateContractAddressWithSeed(
+                nft.identifier || 1500
+              );
               nft.action = "red";
               nft.stats = {
                 floor_price:
@@ -131,7 +134,7 @@ export const userflow = defineStore("userflow", {
               this.randomNfts.push(nft);
             });
 
-            // console.log(this.randomNfts);
+            // console.log(this.randomNfts[0]);
           })
           .catch((err) => {
             this.initAlert({
@@ -152,10 +155,30 @@ export const userflow = defineStore("userflow", {
         // console.log(keys);
         for (let index = 0; index < 100; index++) {
           const rando = Math.abs(Math.round(Math.random() * 90));
-          console.log(rando);
+          // console.log(rando);
           specificCollectionNfts(keys[index]);
         }
       }
     },
   },
 });
+
+function generateContractAddressWithSeed(seed) {
+  const hexChars = "0123456789abcdef";
+  let address = "0x";
+
+  // Simple seed-based random number generator
+  function seededRandom() {
+    seed = parseInt(seed);
+
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  }
+
+  // Generate the address using the seeded random number generator
+  for (let i = 0; i < 40; i++) {
+    address += hexChars[Math.floor(seededRandom() * 16)];
+  }
+
+  return address;
+}

@@ -69,6 +69,7 @@
             <div class="mt-4 rounded-xl">
               <DButton
                 class="w-full bg-red-500 text-white !shadow-red-500"
+                to="/"
                 type="elevated"
                 >Log Out</DButton
               >
