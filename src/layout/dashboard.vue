@@ -1,23 +1,8 @@
 <template>
   <div
     class="transit font-mono bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-auto pb-16 md:pb-0 relative flex justify-around"
-    :class="themeState == 'light' || themeState == null ? '' : 'dark'"
+    :class="themeState == 'light' || !themeState ? '' : 'dark'"
   >
-    <DButton
-      type="elevated"
-      class="fixed bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 z-50 bottom-0 right-0 mb-20 mr-10"
-      v-if="themeState == 'dark'"
-      @click="changeTheme('light')"
-      >Change</DButton
-    >
-    <DButton
-      type="elevated"
-      class="fixed bg-green-400 dark:bg-green-500 text-slate-900 dark:text-slate-100 z-50 bottom-0 right-0 mb-20 mr-10"
-      v-if="themeState == 'light' || themeState == null"
-      @click="changeTheme('dark')"
-      >Change</DButton
-    >
-
     <!-- side nav bar for pc -->
     <section
       class="h-auto hidden md:block bg-slate-100 dark:bg-slate-950 left-0 px-4 top-0 border-r border-gray-200 dark:border-gray-600"
@@ -133,6 +118,7 @@
     <!-- children routerview -->
     <section class="w-full md:min-w-80">
       <Transition duration="1000">
+        <!-- {{ themeState }} -->
         <router-view class="w-full md:py-4" />
       </Transition>
     </section>
@@ -190,11 +176,14 @@
 //stores
 import { userflow } from "@/stores/userflow";
 
+//composables
+
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { computed, provide, ref } from "vue";
+import { computed, provide, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import DAlert from "@/components/utils/DAlert.vue";
+import DDashbar from "@/components/utils/DDashbar.vue";
 
 const userflowing = userflow();
 userflowing.initAllNfts();
@@ -233,13 +222,11 @@ const links = computed(() => {
   ];
 });
 
-const themeState = ref(localStorage.getItem("theme"));
+const themeState = computed(() => {
+  return userflowing.themeState;
+});
+
 const theme = provide("theme", themeState);
-//change theme function
-function changeTheme(theme) {
-  localStorage.setItem("theme", theme);
-  themeState.value = localStorage.getItem("theme");
-}
 </script>
 
 <style>

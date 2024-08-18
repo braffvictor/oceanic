@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 
 export const userflow = defineStore("userflow", {
   state: () => ({
+    themeState: localStorage.getItem("theme"),
     cartList: JSON.parse(localStorage.getItem("watchList") || "[]")?.length,
     nfts: [],
     randomNfts: [],
@@ -17,6 +18,7 @@ export const userflow = defineStore("userflow", {
 
   //getters functions
   getters: {
+    getThemeState: (state) => state.theme,
     getAlert: (state) => state.alert,
     getNfts: (state) => state.nfts,
     getRandoms: (state) => state.randomNfts,
@@ -26,6 +28,10 @@ export const userflow = defineStore("userflow", {
     //local storage function
     checkLocalStorage(length) {
       this.cartList = length;
+    },
+    changeTheme(theme) {
+      localStorage.setItem("theme", theme);
+      this.themeState = localStorage.getItem("theme");
     },
 
     //alert function

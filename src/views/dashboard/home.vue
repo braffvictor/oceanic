@@ -132,10 +132,6 @@ import minted from "@/assets/png/minted.png";
 import transact from "@/assets/png/transfer.png";
 import random from "@/assets/png/rando.png";
 
-import wave1 from "@/assets/wave1.png";
-import wave2 from "@/assets/wave2.png";
-import wave4 from "@/assets/wave4.png";
-import wave5 from "@/assets/wave5.png";
 import { computed, inject, onMounted, ref, watch } from "vue";
 
 onMounted(() => {

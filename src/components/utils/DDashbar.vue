@@ -17,8 +17,11 @@
       <!-- essentials -->
       <p class="text-lg flex items-center min-h-10 min-w-16">
         <button
-          v-if="theme != 'light' && theme != null"
+          v-if="
+            userflowing.themeState != 'light' && userflowing.themeState != null
+          "
           class="p-2 rounded-lg transit active:animate-spin"
+          @click="userflowing.changeTheme('light')"
         >
           <img
             src="@/assets/svg/lightmode.svg"
@@ -27,8 +30,9 @@
           />
         </button>
         <button
-          v-if="theme != 'dark'"
+          v-if="userflowing.themeState != 'dark'"
           class="p-2 rounded-lg transit active:animate-ping relative"
+          @click="userflowing.changeTheme('dark')"
         >
           <img
             src="@/assets/svg/darkmode.svg"
@@ -42,9 +46,12 @@
 </template>
 
 <script setup>
-import { inject } from "vue";
+import { userflow } from "@/stores/userflow";
+import { inject, ref } from "vue";
 
 const theme = inject("theme");
+
+const userflowing = userflow();
 </script>
 
 <style></style>

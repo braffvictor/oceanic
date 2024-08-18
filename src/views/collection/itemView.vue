@@ -23,6 +23,9 @@
               $router.push(`/collection/${nftDetails && nftDetails.collection}`)
             "
             class="text-green-400 dark:text-green-500 font-normal text-lg cursor-pointer"
+            :class="
+              nftDetails && nftDetails.name ? null : 'pointer-events-none'
+            "
           >
             {{ $route.params.id
             }}<img
@@ -329,6 +332,16 @@ watch(route, () => {
 });
 
 function cartNft(nftDetails) {
+  if (nftDetails == null || nftDetails == undefined) {
+    userflowing.initAlert({
+      message: `Carting Error`,
+      is: true,
+      type: "error",
+      timer: 6000,
+      close: true,
+    });
+    return;
+  }
   const cartedNfts = JSON.parse(localStorage.getItem("watchList")) || [];
 
   const nft = cartedNfts.find((cart) => nftDetails.name == cart.name);
