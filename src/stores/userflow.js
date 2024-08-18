@@ -95,7 +95,7 @@ export const userflow = defineStore("userflow", {
         .catch((err) => {
           this.initAlert({
             is: true,
-            message: err.message,
+            message: "Poor Connection, Please Refresh.",
             type: "error",
             timer: 4000,
           });
