@@ -4,12 +4,17 @@
       class="h-auto mt-5 min-w-56 min-h-[310px] max-w-56 max-h-[310px] w-60 rounded-3xl dark:bg-slate-800 bg-slate-100 p-3 group hover:-translate-y-2 overflow-hidden transit dark:active:bg-slate-700 active:bg-slate-200 cursor-pointer shadow"
       @click="checkRoute()"
     >
-      <img
-        :src="nft && nft.image_url"
-        :alt="nft && nft?.name"
-        width="200"
-        class="object-contain rounded-3xl pointer-events-none mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
-      />
+      <div
+        class="mx-auto w-full text-center min-h-[200px] max-h-[200px] overflow-hidden rounded-3xl"
+      >
+        <img
+          :src="nft && nft.image_url"
+          :alt="nft && nft?.name"
+          width="200"
+          height="200"
+          class="object-contain rounded-3xl pointer-events-none mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
+        />
+      </div>
       <div class="mt-2 py-2 flex gap-x-2 items-center">
         <div>
           <img

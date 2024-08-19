@@ -16,7 +16,7 @@
           themeState == 'light' || themeState == null
             ? 'whiteT border-gray-200'
             : 'darkT border-gray-600',
-          drawer ? 'left-52' : 'left-[74px]',
+          drawer ? 'left-[178px]' : 'left-[74px]',
         ]"
       >
         <SvgComp

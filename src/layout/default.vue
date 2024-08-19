@@ -572,11 +572,12 @@ function closeMenu(to) {
 
 //get local storage watchlist nfts
 
-const themeState = ref(localStorage.getItem("theme"));
+const themeState = computed(() => {
+  return userflowing.themeState;
+});
 //change theme function
 function changeTheme(theme) {
-  localStorage.setItem("theme", theme);
-  themeState.value = localStorage.getItem("theme");
+  userflowing.changeTheme(theme);
 }
 
 //for injecting and sharing the value of themeState througout the default children
