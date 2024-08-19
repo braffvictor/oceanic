@@ -124,7 +124,7 @@ import { userflow } from "@/stores/userflow";
 //components
 import BalanceCard from "@/components/cards/balanceCard.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
-
+import vLazyImage from "v-lazy-image";
 import SvgComp from "@/components/svgComp.vue";
 import upload from "@/assets/png/mint.png";
 import explore from "@/assets/png/explore.png";
@@ -183,5 +183,13 @@ const quickLinks = computed(() => {
 <style>
 .fe {
   color: #22c55e;
+}
+
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
 }
 </style>

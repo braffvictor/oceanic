@@ -6,11 +6,13 @@
       class="rounded-2xl hover:-translate-y-2 group shadow-lg relative bg-slate-50 active:bg-slate-200 dark:active:bg-slate-700 dark:bg-slate-800 overflow-hidden transit cursor-pointer"
     >
       <div class="min-h-36 max-h-36 w-full overflow-hidden">
-        <img
+        <!-- <img
           :src="nft && nft.image_url"
           alt=""
           class="object-fit group-hover:scale-110 transit pointer-events-none"
-        />
+        /> -->
+
+        <v-lazy-image :src="nft && nft.image_url" />
       </div>
       <div class="px-3 mt-3">
         <p class="font-bold text-slate-900 dark:text-slate-100">
@@ -79,6 +81,7 @@ import { userflow } from "@/stores/userflow";
 import router from "@/router";
 import { useRoute } from "vue-router";
 import svgComp from "../svgComp.vue";
+import VLazyImage from "v-lazy-image";
 
 const route = useRoute();
 
@@ -181,4 +184,12 @@ function gotoItem() {
 }
 </script>
 
-<style></style>
+<style>
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
+}
+</style>

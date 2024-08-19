@@ -84,10 +84,16 @@
                 background-size: cover;
                 background-repeat: no-repeat;`"
             >
-              <img
+              <!-- <img
                 :src="userflowing.nfts[0].image_url"
                 v-if="userflowing.nfts && userflowing.nfts.length > 0"
+                class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center min-h-60 max-h-60 md:min-h-80 md:max-h-80"
                 alt=""
+              /> -->
+
+              <vLazyImage
+                :src="userflowing.nfts[0].image_url"
+                v-if="userflowing.nfts && userflowing.nfts.length > 0"
                 class="rounded-xl hover:scale-[1.05] hover:-translate-y-5 transit mx-auto text-center min-h-60 max-h-60 md:min-h-80 md:max-h-80"
               />
               <p
@@ -330,6 +336,7 @@ import { userflow } from "@/stores/userflow";
 
 import DAuth from "@/components/utils/DAuth.vue";
 import DButton from "@/components/utils/DButton.vue";
+import vLazyImage from "v-lazy-image";
 import NftCard from "@/components/cards/nftCard.vue";
 import bigTab from "@/components/tables/bigTab.vue";
 import svgComp from "@/components/svgComp.vue";
@@ -444,5 +451,13 @@ export default {
     background-position-x: 200%;
     background-position-y: center;
   }
+}
+
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
 }
 </style>

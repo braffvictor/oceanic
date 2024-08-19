@@ -5,13 +5,18 @@
       @click="checkRoute()"
     >
       <div
-        class="mx-auto w-full text-center min-h-[200px] max-h-[200px] overflow-hidden rounded-3xl"
+        class="mx-auto w-full text-center min-h-[200px] max-h-[200px] overflow-hidden rounded-3xl transit"
       >
-        <img
+        <!-- <img
           :src="nft && nft.image_url"
           :alt="nft && nft?.name"
           width="200"
           height="200"
+          class="object-contain rounded-3xl pointer-events-none mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
+        /> -->
+
+        <v-lazy-image
+          :src="nft && nft.image_url"
           class="object-contain rounded-3xl pointer-events-none mx-auto text-center transit group-hover:-translate-y-1 group-hover:scale-105"
         />
       </div>
@@ -64,8 +69,8 @@
 
 <script setup>
 import SvgComp from "@/components/svgComp.vue";
+import vLazyImage from "v-lazy-image";
 
-import { userflow } from "@/stores/userflow";
 import router from "@/router";
 import { useRoute } from "vue-router";
 
@@ -117,4 +122,12 @@ function checkRoute() {
 }
 </script>
 
-<style></style>
+<style>
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
+}
+</style>

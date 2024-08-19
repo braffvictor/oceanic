@@ -10,11 +10,16 @@
               icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
             />
           </p>
-          <img
+          <!-- <img
             :src="nftDetails && nftDetails.image_url"
             :alt="nftDetails && nftDetails.name"
             width="500"
             class="object-cover"
+          /> -->
+
+          <vLazyImage
+            :src="nftDetails && nftDetails.image_url"
+            class="pointer-events-none"
           />
         </div>
         <div class="rounded-2xl md:w-8/12 w-full p-2">
@@ -219,12 +224,15 @@
 </template>
 
 <script setup>
+//stores
 import { userflow } from "@/stores/userflow";
+
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import vLazyImage from "v-lazy-image";
 const route = useRoute();
 const userflowing = userflow();
 
@@ -417,4 +425,12 @@ specificCollectionDetails(route.params.id);
 specificCollectionNfts(route.params.id);
 </script>
 
-<style></style>
+<style>
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
+}
+</style>
