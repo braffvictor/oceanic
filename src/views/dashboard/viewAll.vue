@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen w-full transit">
-    <main class="md:w-11/12 mx-auto">
+    <main class="md:w-full mx-auto">
       <DDashbar>
         <div class="w-full flex justify-between items-center">
           <button
@@ -23,7 +23,7 @@
       </DDashbar>
 
       <section class="h-auto min-h-72 w-full -mt-8 md:-mt-5">
-        <main class="ml-4 md:mx-8">
+        <main class="ml-4 md:ml-8">
           <!-- nft cards -->
           <swiping-cards class="py-5" v-if="userflowing.nfts.length > 0">
             <template #cards>
@@ -39,71 +39,73 @@
         </main>
       </section>
 
-      <p class="px-3 font-semibold">Best Seller🤩</p>
-      <section class="mt-3 px-3" v-if="collections.length > 0">
-        <main
-          class="flex hover:bg-slate-200 dark:hover:bg-slate-700 items-center my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 bg-slate-100 shadow dark:bg-slate-800 p-2 rounded-xl transit group overflow-auto min-h-24"
-          v-for="collection in collections.slice(11, 98)"
-          :key="collection.name"
-          @click="
-            $router.push(
-              `/dashboard/collection/${collection && collection.key}`
-            )
-          "
-        >
-          <div class="rounded-xl overflow-hidden">
-            <img
-              :src="collection.image_url"
-              class="transit"
-              alt=""
-              width="200"
-            />
-          </div>
-          <div class="w-full">
-            <p
-              class="font-semibold text-slate-900 dark:text-slate-100 text-sm md:text-lg"
-            >
-              {{
-                collection.name.length >= 25
-                  ? collection.name.slice(0, 25) + "..."
-                  : collection.name
-              }}
-            </p>
-            <p
-              class="font-thin text-xs opacity-50 text-slate-900 dark:text-slate-100 md:text-sm"
-            >
-              {{
-                collection.key.length >= 20
-                  ? collection.key.slice(0, 20) + "..."
-                  : collection.key
-              }}
+      <main class="md:w-11/12 mx-auto">
+        <p class="px-3 font-semibold">Best Seller🤩</p>
+        <section class="mt-3 px-3" v-if="collections.length > 0">
+          <main
+            class="flex hover:bg-slate-200 dark:hover:bg-slate-700 items-center my-3 cursor-pointer justify-between gap-y-5 md:justify-start gap-5 bg-slate-100 shadow dark:bg-slate-800 p-2 rounded-xl transit group overflow-auto min-h-24"
+            v-for="collection in collections.slice(11, 98)"
+            :key="collection.name"
+            @click="
+              $router.push(
+                `/dashboard/collection/${collection && collection.key}`
+              )
+            "
+          >
+            <div class="rounded-xl overflow-hidden">
               <img
-                src="@/assets/verified.svg"
-                alt="tick"
-                class="max-w-5 inline"
+                :src="collection.image_url"
+                class="transit"
+                alt=""
+                width="200"
               />
-            </p>
-          </div>
+            </div>
+            <div class="w-full">
+              <p
+                class="font-semibold text-slate-900 dark:text-slate-100 text-sm md:text-lg"
+              >
+                {{
+                  collection.name.length >= 25
+                    ? collection.name.slice(0, 25) + "..."
+                    : collection.name
+                }}
+              </p>
+              <p
+                class="font-thin text-xs opacity-50 text-slate-900 dark:text-slate-100 md:text-sm"
+              >
+                {{
+                  collection.key.length >= 20
+                    ? collection.key.slice(0, 20) + "..."
+                    : collection.key
+                }}
+                <img
+                  src="@/assets/verified.svg"
+                  alt="tick"
+                  class="max-w-5 inline"
+                />
+              </p>
+            </div>
 
-          <div class="float-end w-full text-right">
-            <button>
-              <svg-comp
-                Sclass="active:stroke-red-500 -rotate-90"
-                icon="M7 10L12 15L17 10"
-              />
-            </button>
-          </div>
-        </main>
-      </section>
+            <div class="float-end w-full text-right">
+              <button>
+                <svg-comp
+                  Sclass="active:stroke-red-500 -rotate-90"
+                  icon="M7 10L12 15L17 10"
+                />
+              </button>
+            </div>
+          </main>
+        </section>
 
-      <div v-else class="min-h-screen mt-10 text-center mx-auto">
-        <div class="mx-auto text-center flex justify-center">
-          <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
+        <div v-else class="min-h-screen mt-10 text-center mx-auto">
+          <div class="mx-auto text-center flex justify-center">
+            <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
+          </div>
+          <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
+            Loading Collections...
+          </p>
         </div>
-        <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
-          Loading Collections...
-        </p>
-      </div>
+      </main>
     </main>
   </div>
 </template>

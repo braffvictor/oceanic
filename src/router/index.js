@@ -129,6 +129,11 @@ const routes = [
         name: "home explore",
         component: () => import("../views/dashboard/explore.vue"),
       },
+      {
+        path: "/dashboard/notification",
+        name: "home notification",
+        component: () => import("../views/dashboard/notification.vue"),
+      },
     ],
   },
 

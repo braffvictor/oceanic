@@ -1,36 +1,35 @@
 <template>
   <div class="bg-slate-100 dark:bg-slate-900 font-sans">
-    <section class="md:w-10/12 mx-auto">
-      <DDashbar
-        class="-mt-5 mx-auto backdrop-blur-sm border-b transit"
-        :class="
-          theme == 'light' || theme == null
-            ? 'whiteT border-b-gray-200'
-            : 'darkT border-b-gray-600'
-        "
-      >
-        <div class="w-full flex justify-between items-center">
-          <button
-            @click="$router.go(-1)"
-            class="rounded-full bg-transparent active:scale-75 border flex justify-center items-center transit backdrop-blur-sm cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800"
-            :class="[
-              theme == 'light' || theme == null
-                ? ' border-gray-200'
-                : ' border-gray-600',
-            ]"
-          >
-            <SvgComp
-              Sclass="rotate-180"
-              class="pb-1 pr-1"
-              icon="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
-            />
-          </button>
-          <p class="text-center w-full font-semibold">
-            #{{ nftDetails && nftDetails.identifier.slice(0, 4) }}
-          </p>
-        </div>
-      </DDashbar>
-
+    <DDashbar
+      class="-mt-5 mx-auto backdrop-blur-sm border-b transit"
+      :class="
+        theme == 'light' || theme == null
+          ? 'whiteT border-b-gray-200'
+          : 'darkT border-b-gray-600'
+      "
+    >
+      <div class="w-full flex justify-between items-center">
+        <button
+          @click="$router.go(-1)"
+          class="rounded-full bg-transparent active:scale-75 border flex justify-center items-center transit backdrop-blur-sm cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800"
+          :class="[
+            theme == 'light' || theme == null
+              ? ' border-gray-200'
+              : ' border-gray-600',
+          ]"
+        >
+          <SvgComp
+            Sclass="rotate-180"
+            class="pb-1 pr-1"
+            icon="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+          />
+        </button>
+        <p class="text-center w-full font-semibold">
+          #{{ nftDetails && nftDetails.identifier.slice(0, 4) }}
+        </p>
+      </div>
+    </DDashbar>
+    <section class="md:w-11/12 mx-auto">
       <section class="px-3">
         <main class="flex-col mt-10 md:flex-row flex gap-5">
           <div

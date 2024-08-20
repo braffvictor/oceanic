@@ -187,7 +187,7 @@ function gotoItem() {
 <style>
 .v-lazy-image {
   filter: blur(10px);
-  transition: all 0.7s;
+  transition: all 0.3s;
 }
 .v-lazy-image-loaded {
   filter: blur(0);

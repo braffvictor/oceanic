@@ -15,7 +15,7 @@
       </slot>
 
       <!-- essentials -->
-      <p class="text-lg flex items-center min-h-10 min-w-16">
+      <div class="text-lg flex items-center min-h-10 min-w-16">
         <button
           v-if="
             userflowing.themeState != 'light' && userflowing.themeState != null
@@ -38,9 +38,10 @@
             src="@/assets/svg/darkmode.svg"
             class="max-w-5 transform -rotate-45"
             alt="dark mode"
-          /></button
-        >🔔
-      </p>
+          />
+        </button>
+        <p class="p-1" @click="$router.push('/dashboard/notification')">🔔</p>
+      </div>
     </div>
   </main>
 </template>
