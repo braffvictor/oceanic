@@ -419,7 +419,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .shining {
   text-align: center;
   background: linear-gradient(

@@ -411,7 +411,7 @@ const learnNft = computed(() => {
       name: "What is a Blockchain",
       image_url:
         "https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5ef66bd821c0c477a_63d1a70f914ea5352493efb5_637eb7b98b0e8434b165a1b1_What%252520is%252520a%252520blockchain.png",
-      route: "/learn/what-is-a-crypto-wallet",
+      route: "/learn/what-is-a-blockchain",
     },
   ];
 });
