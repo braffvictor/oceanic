@@ -24,16 +24,20 @@
     <section class="md:w-11/12 mx-auto">
       <main v-for="n in 3" :key="n">
         <div
-          class="flex rounded-xl p-3 justify-start items-start md:items-center"
+          class="flex rounded-xl p-3 justify-start items-start md:items-center gap-x-2"
         >
           <div
-            class="rounded-xl min-w-12 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
+            class="rounded-xl min-w-8 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
           >
-            <img :src="random" width="60" alt="" />
+            <img
+              :src="images(n)"
+              alt=""
+              class="min-w-8 md:min-w-10 md:max-w-10 max-w-8"
+            />
           </div>
           <div class="font-light text-sm md:text-[16px] select-none">
-            Lorem ipsum dolor sit, Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Sit, expedita.
+            Your Deposit of 2.3ETH Has Been Approved.
+            <p class="text-xs opacity-65">02/09/2024</p>
           </div>
         </div>
         <!-- divider -->
@@ -57,6 +61,22 @@ import vLazyImage from "v-lazy-image";
 import SvgComp from "@/components/svgComp.vue";
 import random from "@/assets/png/rando.png";
 import { inject } from "vue";
+
+import info2 from "@/assets/svg/info2.svg";
+import success from "@/assets/svg/success.svg";
+import error from "@/assets/svg/error2.svg";
+
+import icon2 from "@/assets/png/icon2.png";
+
+function images(number) {
+  if (number == 1) {
+    return success;
+  } else if (number == 2) {
+    return info2;
+  } else if (number == 3) {
+    return error;
+  }
+}
 
 const theme = inject("theme");
 </script>

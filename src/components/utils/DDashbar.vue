@@ -40,7 +40,12 @@
             alt="dark mode"
           />
         </button>
-        <p class="p-1" @click="$router.push('/dashboard/notification')">🔔</p>
+        <p
+          class="p-1 cursor-pointer"
+          @click="$router.push('/dashboard/notification')"
+        >
+          🔔
+        </p>
       </div>
     </div>
   </main>

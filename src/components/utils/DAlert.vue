@@ -15,9 +15,8 @@
         class="rounded-full border-2 transit border-white dark:border-slate-800 bg-slate-100 min-w-11 dark:bg-slate-900 shadow-md overflow-hidden"
         :class="alertColors[userflowing.alert.type].shadow"
       >
-        <img
+        <v-lazy-image
           :src="alertColors[userflowing.alert.type].img"
-          alt=""
           class="min-w-10 p-1"
         />
       </button>
@@ -38,6 +37,7 @@
 import { userflow } from "@/stores/userflow";
 
 import SvgComp from "@/components/svgComp.vue";
+import vLazyImage from "v-lazy-image";
 import { reactive, ref } from "vue";
 
 import info from "@/assets/svg/info.svg";
