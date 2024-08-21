@@ -60,13 +60,21 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import vLazyImage from "v-lazy-image";
 import SvgComp from "@/components/svgComp.vue";
 import random from "@/assets/png/rando.png";
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
 
 import info2 from "@/assets/svg/info2.svg";
 import success from "@/assets/svg/success.svg";
 import error from "@/assets/svg/error2.svg";
 
 import icon2 from "@/assets/png/icon2.png";
+
+onMounted(() => {
+  window.scrollTo({
+    top: -10,
+    left: 0,
+    behavior: "smooth",
+  });
+});
 
 function images(number) {
   if (number == 1) {
