@@ -40,10 +40,15 @@
             <td class="p-4 rounded-l-xl">{{ n + 1 }}</td>
             <td class="py-4">
               <div class="flex items-center justify-start gap-x-3">
-                <img
+                <!-- <img
                   class="block object-contain max-w-16 rounded-xl"
                   :src="nft.image_url"
                   alt=""
+                /> -->
+
+                <vLazyImage
+                  :src="nft.image_url"
+                  class="block object-contain max-w-16 rounded-xl"
                 />
                 <p
                   class="font-bold text-slate-900 text-left dark:text-slate-100 flex"
@@ -93,6 +98,7 @@
 import { userflow } from "@/stores/userflow";
 
 import DDropDown from "@/components/utils/DDropDown.vue";
+import vLazyImage from "v-lazy-image";
 import { computed, onMounted, ref } from "vue";
 
 const userflowing = userflow();

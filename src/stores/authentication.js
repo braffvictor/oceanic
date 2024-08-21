@@ -23,8 +23,7 @@ export const authentication = defineStore("authentication", {
   state: () => ({
     user: null,
     loading: {
-      register: false,
-      login: false,
+      auth: false,
     },
   }),
   getters: {
@@ -32,7 +31,7 @@ export const authentication = defineStore("authentication", {
   },
   actions: {
     async registerUser(payload) {
-      this.loading.register = true;
+      this.loading.auth = true;
       const userflowing = userflow();
       const colref = collection(db, "users");
 
@@ -79,7 +78,7 @@ export const authentication = defineStore("authentication", {
               });
             })
             .catch((error) => {
-              this.loading.register = false;
+              this.loading.auth = false;
               userflowing.initAlert({
                 message: error.code,
                 is: true,
@@ -94,10 +93,10 @@ export const authentication = defineStore("authentication", {
           //push route to dashboard
           router.push("/dashboard/home");
 
-          this.loading.register = false;
+          this.loading.auth = false;
         })
         .catch((error) => {
-          this.loading.register = false;
+          this.loading.auth = false;
           userflowing.initAlert({
             message: error.code,
             is: true,
@@ -111,7 +110,7 @@ export const authentication = defineStore("authentication", {
     //login user function
     async loginUser(payload) {
       const userflowing = userflow();
-      this.loading.login = true;
+      this.loading.auth = true;
 
       await signInWithEmailAndPassword(auth, payload.email, payload.password)
         .then((cred) => {
@@ -124,7 +123,7 @@ export const authentication = defineStore("authentication", {
             type: "error",
             timer: 5000,
           });
-          this.loading.login = false;
+          this.loading.auth = false;
         });
     },
 
@@ -147,7 +146,7 @@ export const authentication = defineStore("authentication", {
                   type: "success",
                 });
               }, 300);
-              this.loading.login = false;
+              this.loading.auth = false;
             } else if (user.role == "admin") {
               router.push("/dashboard/home");
               userflowing.initAlert({
@@ -155,7 +154,7 @@ export const authentication = defineStore("authentication", {
                 is: true,
                 type: "success",
               });
-              this.loading.login = false;
+              this.loading.auth = false;
             }
           } else {
             userflowing.initAlert({
@@ -163,7 +162,7 @@ export const authentication = defineStore("authentication", {
               is: true,
               type: "error",
             });
-            this.loading.login = false;
+            this.loading.auth = false;
           }
         } else {
           userflowing.initAlert({
@@ -171,7 +170,7 @@ export const authentication = defineStore("authentication", {
             is: true,
             type: "error",
           });
-          this.loading.login = false;
+          this.loading.auth = false;
         }
       });
     },

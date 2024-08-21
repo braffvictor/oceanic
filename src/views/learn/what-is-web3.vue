@@ -20,7 +20,12 @@
       <div
         class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden shadow-lg shadow-blue-400"
       >
-        <img
+        <!-- <img
+          src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5c538f6e7736ab8f4_63d1a70e2fe07c7f11a6b195_637bb7c970c23116e14990d1_What%252520is%252520Web3-p-1080.png"
+          alt="Web3 Image"
+        /> -->
+
+        <v-lazy-image
           src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe0d5c538f6e7736ab8f4_63d1a70e2fe07c7f11a6b195_637bb7c970c23116e14990d1_What%252520is%252520Web3-p-1080.png"
           alt="Web3 Image"
         />
@@ -202,9 +207,13 @@
           <div
             class="bg-gray-100 p-3 md:p-6 dark:bg-gray-700 relative p-3 rounded-3xl transit"
           >
-            <img
+            <!-- <img
               src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
               alt=""
+            /> -->
+
+            <v-lazy-image
+              src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
             />
             <p class="text-2xl mt-7 font-semibold">
               Sign up for our newsletter
@@ -375,6 +384,7 @@
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
 import nftCard from "@/components/cards/nftCard.vue";
+import vLazyImage from "v-lazy-image";
 import SwipingCards from "@/components/swipingCards.vue";
 import { computed, onMounted } from "vue";
 
@@ -463,5 +473,13 @@ export default {
     background-position-x: 200%;
     background-position-y: center;
   }
+}
+
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
 }
 </style>

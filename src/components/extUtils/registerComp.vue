@@ -163,7 +163,7 @@
           <button type="submit" class="w-full">
             <d-button
               type="elevated"
-              :loading="useAuthentication.loading.register"
+              :loading="loading"
               :disabled="false"
               @click="setLoading"
               class="shadow-green-400 dark:shadow-green-500 w-full bg-green-400 dark:bg-green-500 !text-slate-900 dark:!text-slate-100 active:!bg-green-300"
@@ -183,10 +183,14 @@ import { authentication } from "@/stores/authentication";
 
 import DButton from "@/components/utils/DButton.vue";
 import svgComp from "@/components/svgComp.vue";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 // import "animate.css";
 
 const useAuthentication = authentication();
+
+const loading = computed(() => {
+  return useAuthentication.loading.auth;
+});
 const userflowing = userflow();
 
 const passwordType = ref(false);
@@ -248,7 +252,6 @@ function checkPassword() {
   }
 }
 
-let loading = ref(false);
 function setLoading() {
   checkEmail();
   checkPassword();
@@ -264,12 +267,8 @@ function setLoading() {
     };
     useAuthentication.registerUser(payload);
   } else {
+    console.log("Not valid");
   }
-
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 4000);
 }
 
 const props = defineProps({

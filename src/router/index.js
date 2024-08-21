@@ -134,6 +134,11 @@ const routes = [
         name: "home notification",
         component: () => import("../views/dashboard/notification.vue"),
       },
+      {
+        path: "/dashboard/transactions",
+        name: "home transactions",
+        component: () => import("../views/dashboard/transactions.vue"),
+      },
     ],
   },
 

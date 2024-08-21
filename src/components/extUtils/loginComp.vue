@@ -130,7 +130,7 @@ import { computed, ref } from "vue";
 const useAuthentication = authentication();
 
 const loading = computed(() => {
-  return useAuthentication.loading.login;
+  return useAuthentication.loading.auth;
 });
 
 const props = defineProps({

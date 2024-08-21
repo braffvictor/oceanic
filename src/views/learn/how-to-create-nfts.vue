@@ -20,7 +20,12 @@
       <div
         class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden shadow-lg shadow-blue-400"
       >
-        <img
+        <!-- <img
+          src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe473a8ac8a0416f79c39_63d18c3e6d2cbe47c93734de_6340b9ae4ce758590ca39ae5_HowToCreate_Landing-p-1080.png"
+          alt=""
+        /> -->
+
+        <v-lazy-image
           src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe473a8ac8a0416f79c39_63d18c3e6d2cbe47c93734de_6340b9ae4ce758590ca39ae5_HowToCreate_Landing-p-1080.png"
           alt=""
         />
@@ -117,7 +122,12 @@
           <div
             class="bg-gray-100 p-3 md:p-6 dark:bg-gray-700 relative p-3 rounded-3xl transit"
           >
-            <img
+            <!-- <img
+              src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
+              alt=""
+            /> -->
+
+            <v-lazy-image
               src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
               alt=""
             />
@@ -158,7 +168,12 @@
 
         <!--squiggle image -->
         <div class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden">
-          <img
+          <!-- <img
+            src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/65217fd9e31608b8b68144aa_15518a57.png"
+            alt="Squiggle Image"
+          /> -->
+
+          <v-lazy-image
             src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/65217fd9e31608b8b68144aa_15518a57.png"
             alt="Squiggle Image"
           />
@@ -176,7 +191,12 @@
 
         <!--shoe image -->
         <div class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden">
-          <img
+          <!-- <img
+            src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/65217fd9e31608b8b68144ad_c6b74766.png"
+            alt="Shoe Image"
+          /> -->
+
+          <v-lazy-image
             src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/65217fd9e31608b8b68144ad_c6b74766.png"
             alt="Shoe Image"
           />
@@ -346,6 +366,7 @@
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
 import NftCard from "@/components/cards/nftCard.vue";
+import vLazyImage from "v-lazy-image";
 import SwipingCards from "@/components/swipingCards.vue";
 import { computed, onMounted } from "vue";
 
@@ -435,5 +456,13 @@ export default {
     background-position-x: 200%;
     background-position-y: center;
   }
+}
+
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
 }
 </style>

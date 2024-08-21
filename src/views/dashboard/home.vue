@@ -18,7 +18,7 @@
           class="flex justify-evenly md:justify-center items-center mt-2 gap-2"
         >
           <div
-            class="rounded-xl h-20 w-20 shadow-sm active:scale-75 select-none transit md:w-60 cursor-pointer md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
+            class="rounded-xl h-[88px] w-20 shadow-sm active:scale-75 select-none transit md:w-60 cursor-pointer md:rounded-2xl flex transit items-center justify-center bg-slate-100 dark:bg-slate-800"
             v-for="quick in quickLinks"
             :key="quick.text"
             :class="
@@ -32,7 +32,11 @@
               :to="quick.to"
             >
               <img :src="quick.img" width="40" alt="" />
-              <p class="text-xs bg-green-">{{ quick.text }}</p>
+              <p
+                class="text-[10px] bg-green- break-all hyphens-auto md:text-xs"
+              >
+                {{ quick.text }}
+              </p>
             </router-link>
           </div>
         </div>
@@ -157,7 +161,7 @@ const quickLinks = computed(() => {
   return [
     {
       img: upload,
-      text: "Upload...",
+      text: "Upload NFT",
       to: "/dashboard/upload",
     },
     {
@@ -174,7 +178,8 @@ const quickLinks = computed(() => {
     },
     {
       img: transact,
-      text: "Transac...",
+      text: "Transactions",
+      to: "/dashboard/transactions",
     },
   ];
 });

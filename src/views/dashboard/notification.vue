@@ -36,7 +36,8 @@
             />
           </div>
           <div class="font-light text-sm md:text-[16px] select-none">
-            Your Deposit of 2.3ETH Has Been Approved.
+            Your Top up Was A Success of 2.3ETH Has Been Approved. You can now
+            contact support for further enquires.
             <p class="text-xs opacity-65">02/09/2024</p>
           </div>
         </div>
@@ -46,7 +47,7 @@
           v-if="n != 3"
           :class="
             theme == 'light' || theme == null
-              ? 'whiteT border-b-slate-900'
+              ? 'whiteT border-b-slate-500'
               : 'darkT border-b-slate-100'
           "
         ></div>
@@ -66,6 +67,10 @@ import info2 from "@/assets/svg/info2.svg";
 import success from "@/assets/svg/success.svg";
 import error from "@/assets/svg/error2.svg";
 
+import info from "@/assets/svg/info.svg";
+import warning from "@/assets/svg/warning.svg";
+import check from "@/assets/svg/check.svg";
+
 import icon2 from "@/assets/png/icon2.png";
 
 onMounted(() => {
@@ -78,11 +83,11 @@ onMounted(() => {
 
 function images(number) {
   if (number == 1) {
-    return success;
+    return check;
   } else if (number == 2) {
-    return info2;
+    return info;
   } else if (number == 3) {
-    return error;
+    return warning;
   }
 }
 

@@ -58,7 +58,7 @@
                   `/dashboard/collection/${nftDetails && nftDetails.collection}`
                 )
               "
-              class="text-green-400 dark:text-green-500 font-normal text-lg cursor-pointer"
+              class="text-green-500 font-normal text-lg cursor-pointer"
               :class="
                 nftDetails && nftDetails.name ? null : 'pointer-events-none'
               "

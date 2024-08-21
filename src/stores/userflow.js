@@ -103,7 +103,7 @@ export const userflow = defineStore("userflow", {
     },
 
     async initRandomNfts() {
-      console.log("getting randoms");
+      // console.log("getting randoms");
       const specificCollectionNfts = async (nftkey) => {
         let arr = [];
         const options = {

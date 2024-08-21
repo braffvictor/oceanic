@@ -20,7 +20,12 @@
       <div
         class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden shadow-lg shadow-blue-400"
       >
-        <img
+        <!-- <img
+          src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe4735564be7de6ddfea8_6536e7fdf4c2c7c1471c11e5_64f8b11b97cdc0dfa55475eb_article%25252015-p-1080.png"
+          alt=""
+        /> -->
+
+        <v-lazy-image
           src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fe4735564be7de6ddfea8_6536e7fdf4c2c7c1471c11e5_64f8b11b97cdc0dfa55475eb_article%25252015-p-1080.png"
           alt=""
         />
@@ -178,7 +183,12 @@
         <div
           class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden shadow-lg shadow-lime-200"
         >
-          <img
+          <!-- <img
+            src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/65217fd9e31608b8b68144a0_1d3f3fb08ab19fe6cac4ed9719c9bbdf.png"
+            alt=""
+          /> -->
+
+          <v-lazy-image
             src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/65217fd9e31608b8b68144a0_1d3f3fb08ab19fe6cac4ed9719c9bbdf.png"
             alt=""
           />
@@ -200,7 +210,11 @@
           <div
             class="bg-gray-100 p-3 md:p-6 dark:bg-gray-700 relative p-3 rounded-3xl transit"
           >
-            <img
+            <!-- <img
+              src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
+              alt=""
+            /> -->
+            <v-lazy-image
               src="https://cdn.prod.website-files.com/65217fd9e31608b8b6814195/65217fd9e31608b8b68142ad_Group%202147210707.webp"
               alt=""
             />
@@ -257,7 +271,12 @@
         <div
           class="w-full h-full rounded-3xl mt-4 md:mt-7 overflow-hidden shadow-lg shadow-gray-400"
         >
-          <img
+          <!-- <img
+            src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fca26aba82126617d12e5_6459908abbc5b1e6e1e2d5ac_Screenshot%25202023-05-08%2520at%25205.14.54%2520PM.png"
+            alt=""
+          /> -->
+
+          <v-lazy-image
             src="https://cdn.prod.website-files.com/65217fd9e31608b8b68141ba/653fca26aba82126617d12e5_6459908abbc5b1e6e1e2d5ac_Screenshot%25202023-05-08%2520at%25205.14.54%2520PM.png"
             alt=""
           />
@@ -289,6 +308,7 @@
 <script setup>
 import DButton from "@/components/utils/DButton.vue";
 import nftCard from "@/components/cards/nftCard.vue";
+import vLazyImage from "v-lazy-image";
 import SwipingCards from "@/components/swipingCards.vue";
 import { computed, onMounted } from "vue";
 
@@ -376,5 +396,13 @@ export default {
     background-position-x: 200%;
     background-position-y: center;
   }
+}
+
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
 }
 </style>
