@@ -61,7 +61,13 @@
             :key="cart.name"
           >
             <div class="rounded-xl overflow-hidden">
-              <img :src="cart.image_url" class="transit" alt="" width="100" />
+              <!-- <img :src="cart.image_url" class="transit" alt="" width="100" /> -->
+              <vLazyImage
+                :src="cart.image_url"
+                class="transit"
+                alt=""
+                width="100"
+              />
             </div>
             <div class="w-full">
               <p
@@ -153,6 +159,7 @@
 import { userflow } from "@/stores/userflow";
 
 import SvgComp from "@/components/svgComp.vue";
+import vLazyImage from "v-lazy-image";
 import DButton from "@/components/utils/DButton.vue";
 import { inject, onMounted, ref } from "vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
@@ -160,9 +167,7 @@ import { collection } from "firebase/firestore";
 
 onMounted(() => {
   checkAmount();
-  setTimeout(() => {
-    window.scrollTo({ top: -10, left: 0, behavior: "smooth" });
-  }, 3);
+  window.scrollTo({ top: -10, left: 0, behavior: "smooth" });
 });
 
 const theme = inject("theme");
@@ -250,7 +255,7 @@ const removeNft = (nft) => {
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px), translateY(20px);
+  transform: translateY(20px);
 }
 
 /* ensure leaving items are taken out of layout flow so that moving

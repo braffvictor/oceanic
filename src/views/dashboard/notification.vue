@@ -35,7 +35,9 @@
               class="min-w-8 md:min-w-10 md:max-w-10 max-w-8"
             />
           </div>
-          <div class="font-light text-sm md:text-[16px] select-none">
+          <div
+            class="font-light text-sm md:text-[16px] select-none md:font-extralight"
+          >
             Your Top up Was A Success of 2.3ETH Has Been Approved. You can now
             contact support for further enquires.
             <p class="text-xs opacity-65">02/09/2024</p>

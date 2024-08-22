@@ -139,6 +139,11 @@ const routes = [
         name: "home transactions",
         component: () => import("../views/dashboard/transactions.vue"),
       },
+      {
+        path: "/dashboard/profile/collections",
+        name: "profile collections",
+        component: () => import("../views/dashboard/profile/collections.vue"),
+      },
     ],
   },
 

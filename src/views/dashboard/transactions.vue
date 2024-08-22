@@ -22,14 +22,16 @@
         </div>
       </DDashbar>
 
-      <section class="mt-3 px-3">
+      <section class="px-3">
         <!-- you'll do something about the text and data prop in the balanceCard comp -->
-        <BalanceCard text="Last Transaction:" data="31 April 2023" />
+        <div class="pb-4 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20">
+          <BalanceCard text="Last Transaction:" data="31 April 2023" />
+        </div>
 
         <p class="mt-5">Transactions</p>
-        <main v-for="n in 3" :key="n" class="mt-3 transit">
+        <main v-for="n in 5" :key="n" class="mt-1 transit">
           <div
-            class="flex rounded-xl p-4 md:p-5 justify-start items-center md:items-center gap-x-2 mb-3 bg-slate-100 dark:bg-slate-800 transit"
+            class="flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
           >
             <div
               class="rounded-xl min-w-9 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
@@ -45,7 +47,7 @@
               <p class="text-xs opacity-65">02/09/2024</p>
             </div>
             <div
-              class="text-sm md:text-[16px] select-none font-semibold text-yellow-500"
+              class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500"
             >
               Pending
               <p
@@ -61,15 +63,17 @@
             </div>
           </div>
           <!-- divider -->
-          <div
-            class="border-b w-full opacity-20"
-            v-if="n != 3"
-            :class="
-              theme == 'light' || theme == null
-                ? 'whiteT border-b-slate-500'
-                : 'darkT border-b-slate-100'
-            "
-          ></div>
+          <div class="mx-auto text-center flex justify-center">
+            <div
+              class="border-b w-full opacity-20 mx-4"
+              v-if="n != 5"
+              :class="
+                theme == 'light' || theme == null
+                  ? 'whiteT border-b-slate-500'
+                  : 'darkT border-b-slate-100'
+              "
+            ></div>
+          </div>
         </main>
       </section>
     </div>
@@ -79,8 +83,16 @@
 <script setup>
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
 import BalanceCard from "@/components/cards/balanceCard.vue";
+
+onMounted(() => {
+  window.scrollTo({
+    top: -10,
+    left: 0,
+    behavior: "smooth",
+  });
+});
 
 import credit from "@/assets/svg/credit.svg";
 import debit from "@/assets/svg/debit.svg";

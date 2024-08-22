@@ -216,7 +216,8 @@
     contract address for nft
     id for nft
 
-    when uploading get all or most of the data necessary to match the nfts data fetched
+    when uploading get all or most of the properties in the object from opensea and blockpan necessary to match the nfts data fetched...
+    and use image_url as property name of nft image to match as all will be injected into nftcard or so...
      -->
   </div>
 </template>

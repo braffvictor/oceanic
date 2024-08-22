@@ -74,7 +74,11 @@ import SvgComp from "@/components/svgComp.vue";
 import { inject, onMounted, ref } from "vue";
 
 onMounted(() => {
-  window.scrollTo(0, 0);
+  window.scrollTo({
+    top: -10,
+    left: 0,
+    behavior: "smooth",
+  });
 });
 
 const theme = inject("theme");

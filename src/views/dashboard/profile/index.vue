@@ -36,7 +36,7 @@
           <section
             class="grid grid-cols-2 md:grid-cols-4 justify-center items-center *:w-full gap-2"
           >
-            <DButton type="outlined"
+            <DButton type="outlined" to="/dashboard/profile/collections"
               >Collection
               <p class="text-green-500">0</p>
             </DButton>
@@ -84,10 +84,18 @@
 <script setup>
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
 import DButton from "@/components/utils/DButton.vue";
 
 const theme = inject("theme");
+
+onMounted(() => {
+  window.scrollTo({
+    top: -10,
+    left: 0,
+    behavior: "smooth",
+  });
+});
 </script>
 
 <style></style>

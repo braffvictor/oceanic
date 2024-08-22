@@ -59,6 +59,12 @@
             >
               <div class="rounded-xl overflow-hidden">
                 <img :src="cart.image_url" class="transit" alt="" width="100" />
+                <!-- <vLazyImage
+                  :src="cart.image_url"
+                  class="transit"
+                  alt=""
+                  width="100"
+                /> -->
               </div>
               <div>
                 <p
@@ -138,6 +144,7 @@ import { userflow } from "@/stores/userflow";
 
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
+import vLazyImage from "v-lazy-image";
 import { onMounted, ref } from "vue";
 
 onMounted(() => {
@@ -233,7 +240,7 @@ const removeNft = (nft) => {
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px), translateY(20px);
+  transform: translateY(20px);
 }
 
 /* ensure leaving items are taken out of layout flow so that moving
