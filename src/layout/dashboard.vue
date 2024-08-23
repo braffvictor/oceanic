@@ -175,17 +175,22 @@
 <script setup>
 //stores
 import { userflow } from "@/stores/userflow";
-
+import { authentication } from "@/stores/authentication";
 //composables
 
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
-import { computed, provide, ref, watch } from "vue";
+import { computed, onMounted, provide, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import DAlert from "@/components/utils/DAlert.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 
 const userflowing = userflow();
+const useAuthentication = authentication();
+onMounted(() => {
+  useAuthentication.userWatch();
+});
+
 userflowing.initAllNfts();
 
 const route = useRoute();

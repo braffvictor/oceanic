@@ -2,8 +2,10 @@
 import { db, str, auth } from "@/services/firebase";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 //router
 import router from "@/router";
@@ -17,7 +19,6 @@ const { getCurrentTimeAndDate } = getDate();
 
 //stores
 import { userflow } from "./userflow";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export const authentication = defineStore("authentication", {
   state: () => ({
@@ -171,6 +172,31 @@ export const authentication = defineStore("authentication", {
             type: "error",
           });
           this.loading.auth = false;
+        }
+      });
+    },
+
+    async userWatch() {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          await this.getUserData(user.uid);
+        } else {
+          router.push("/");
+        }
+      });
+    },
+
+    async getUserData(uid) {
+      const colref = collection(db, "users");
+      const currentUser = doc(colref, uid);
+
+      await getDoc(currentUser).then((docRef) => {
+        if (docRef.exists() && !docRef.data().blocked) {
+          this.user = docRef.data();
+          console.log(this.user);
+        } else {
+          router.push("/");
+          this.user = null;
         }
       });
     },

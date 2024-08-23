@@ -9,7 +9,7 @@
           <p
             class="text-lg md:text-2xl font-semibold text-slate-900 dark:text-slate-100"
           >
-            Swae Dave👋
+            {{ user && user.fullName }}👋
           </p>
         </div>
       </slot>
@@ -52,12 +52,17 @@
 </template>
 
 <script setup>
+import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
-import { inject, ref } from "vue";
-
-const theme = inject("theme");
+import { computed, inject, ref } from "vue";
 
 const userflowing = userflow();
+
+const userAuthentication = authentication();
+
+const user = computed(() => {
+  return userAuthentication.user;
+});
 </script>
 
 <style></style>

@@ -98,6 +98,7 @@
             type="text"
             class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none peer-fo"
             placeholder="Email"
+            required
             @keyup="checkEmail"
             v-model="email"
           />
@@ -127,6 +128,7 @@
             placeholder="Password"
             id="password"
             name="password"
+            required
             @keyup="checkPassword"
             :type="passwordType ? 'text' : 'password'"
             v-model="password"

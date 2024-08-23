@@ -9,8 +9,14 @@
         <p class="font-semibold md:text-lg text-sm opacity-65">
           Current Balance
         </p>
-        <p class="font-bold md:text-4xl text-2xl">3.56ETH</p>
-        <p class="text-xs md:text-sm opacity-70">$3,090.00</p>
+        <p class="font-bold md:text-4xl text-2xl">
+          {{ user && user.wallet.balance }}ETH
+        </p>
+        <p class="text-xs md:text-sm opacity-70">
+          ${{
+            user && user.wallet.balance ? user.wallet.balance * 3047.3 : "0.00"
+          }}
+        </p>
       </div>
 
       <div>
@@ -33,15 +39,30 @@
 </template>
 
 <script setup>
+import { authentication } from "@/stores/authentication";
 import wave1 from "@/assets/wave1.png";
 import wave2 from "@/assets/wave2.png";
 import wave4 from "@/assets/wave4.png";
 import wave5 from "@/assets/wave5.png";
 import SvgComp from "@/components/svgComp.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const waving = ref([wave1, wave2, wave4, wave5]);
 const rando = Math.round(Math.random() * 3);
+
+const useAuthentication = authentication();
+
+const user = computed(() => {
+  return useAuthentication.user;
+});
+
+function checkBalance(balance) {
+  if (!balance) {
+    return "0.00";
+  } else {
+    return balance;
+  }
+}
 
 const props = defineProps({
   text: {

@@ -39,10 +39,11 @@
             Sclass="group-has-[:focus]:stroke-green-500"
           />
           <input
-            type="text"
+            type="email"
             class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none peer-fo"
             placeholder="Email"
             @keyup="checkEmail"
+            required
             v-model="email"
           />
         </div>
@@ -72,6 +73,7 @@
             placeholder="Password"
             name="password"
             id="password"
+            required
             @keyup="checkPassword"
             v-model="password"
           />
