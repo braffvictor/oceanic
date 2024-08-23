@@ -109,7 +109,7 @@ const routes = [
         component: () => import("@/views/dashboard/upload/index.vue"),
       },
       {
-        path: "/dashboard/viewAll",
+        path: "/dashboard/view-all",
         name: "home viewall",
         component: () => import("@/views/dashboard/viewAll.vue"),
       },

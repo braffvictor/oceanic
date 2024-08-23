@@ -56,7 +56,7 @@
       </p>
       <div class="mt-3 text-center mx-auto">
         <div class="mx-auto text-center flex justify-center">
-          <img src="@/assets/not-found.png" width="170" class="mt-5 block" />
+          <img src="@/assets/not-found.gif" width="170" class="mt-5 block" />
         </div>
       </div>
     </section>

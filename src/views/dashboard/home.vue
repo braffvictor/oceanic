@@ -47,7 +47,7 @@
           <p class="font-light">🔥Hot Collection</p>
           <p
             class="font-semibold flex items-center cursor-pointer active:text-green-500 transit group text-sm py-2 pl-2"
-            @click.self="$router.push('/dashboard/viewall')"
+            @click.self="$router.push('/dashboard/view-all')"
           >
             View All<SvgComp
               Sclass="group-active:!stroke-green-500"
@@ -111,7 +111,13 @@
 
         <div v-else class="min-h-screen mt-10 text-center mx-auto">
           <div class="mx-auto text-center flex justify-center">
-            <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
+            <!-- <img src="@/assets/not-found.gif" width="200" class="mt-5 block" /> -->
+            <!-- <img
+              src="https://steamuserimages-a.akamaihd.net/ugc/1829040563493991891/74C475FCD2F54226FDE8A6A5583EEC3440DD3242/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%2300&letterbox=true"
+              width="200"
+              class="mt-5 block"
+            /> -->
+            <img src="@/assets/not-found.gif" width="200" class="mt-5 block" />
           </div>
           <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
             Loading Collections...

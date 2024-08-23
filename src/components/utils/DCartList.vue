@@ -58,13 +58,13 @@
               :key="cart.name"
             >
               <div class="rounded-xl overflow-hidden">
-                <img :src="cart.image_url" class="transit" alt="" width="100" />
-                <!-- <vLazyImage
+                <!-- <img :src="cart.image_url" class="transit" alt="" width="100" /> -->
+                <vLazyImage
                   :src="cart.image_url"
                   class="transit"
                   alt=""
                   width="100"
-                /> -->
+                />
               </div>
               <div>
                 <p

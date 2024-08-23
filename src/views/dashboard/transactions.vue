@@ -24,7 +24,9 @@
 
       <section class="px-3">
         <!-- you'll do something about the text and data prop in the balanceCard comp -->
-        <div class="pb-4 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20">
+        <div
+          class="pb-4 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20 transit"
+        >
           <BalanceCard text="Last Transaction:" data="31 April 2023" />
         </div>
 

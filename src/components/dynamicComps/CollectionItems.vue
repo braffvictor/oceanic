@@ -40,7 +40,7 @@
 
       <div v-else class="min-h-screen mt-10 text-center mx-auto">
         <div class="mx-auto text-center flex justify-center">
-          <img src="@/assets/not-found.png" width="200" class="mt-5 block" />
+          <img src="@/assets/not-found.gif" width="200" class="mt-5 block" />
         </div>
         <p
           class="text-slate-900 font-semibold dark:text-slate-100 mt-4"

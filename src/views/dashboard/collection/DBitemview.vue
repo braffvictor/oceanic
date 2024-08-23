@@ -376,7 +376,7 @@ watch(route, () => {
 });
 
 function cartNft(nftDetails) {
-  if (nftDetails == null || nftDetails == undefined) {
+  if (nftDetails == null || nftDetails == undefined || !nftDetails.name) {
     userflowing.initAlert({
       message: `Carting Error`,
       is: true,
