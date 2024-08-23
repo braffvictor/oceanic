@@ -187,9 +187,7 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 
 const userflowing = userflow();
 const useAuthentication = authentication();
-onMounted(() => {
-  useAuthentication.userWatch();
-});
+useAuthentication.userWatch();
 
 userflowing.initAllNfts();
 
