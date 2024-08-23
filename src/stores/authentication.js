@@ -5,7 +5,13 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 
 //router
 import router from "@/router";
@@ -199,7 +205,7 @@ export const authentication = defineStore("authentication", {
       const colref = collection(db, "users");
       const currentUser = doc(colref, uid);
 
-      await getDoc(currentUser).then((docRef) => {
+      onSnapshot(currentUser, (docRef) => {
         if (docRef.exists() && !docRef.data().blocked) {
           this.user = docRef.data();
           console.log(this.user);

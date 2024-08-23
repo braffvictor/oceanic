@@ -3,12 +3,17 @@ import HomeView from "../views/HomeView.vue";
 
 import NProgress from "nprogress";
 
+import { authentication } from "@/stores/authentication";
+
+import auth from "@/middleware/auth";
+
 const routes = [
   {
     //for default layout and subpages
     component: () => import("@/layout/default"),
     name: "default",
     path: "/",
+
     children: [
       {
         path: "/",
@@ -67,6 +72,10 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: () => import("@/layout/dashboard"),
+    // meta: {
+    //   middleware: auth,
+    // },
+
     children: [
       {
         path: "/dashboard/home",
@@ -160,10 +169,26 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((To, From, next) => {
+router.beforeEach((to, from, next) => {
+  const useAuthentication = authentication();
   NProgress.settings.showSpinner = false;
   NProgress.start();
   next();
+
+  // if (!to.meta.middleware) {
+  //   return next();
+  // }
+  // const middleware = to.meta.middleware;
+
+  // const context = {
+  //   to,
+  //   from,
+  //   next,
+  //   store: useAuthentication,
+  // };
+  // middleware({
+  //   ...context,
+  // });
 });
 router.afterEach(() => {
   NProgress.done();
