@@ -43,11 +43,11 @@ export const userflow = defineStore("userflow", {
       this.alert.close = close;
 
       setTimeout(() => {
-        this.alert.is = false;
         this.alert.message = message;
         this.alert.timer = timer || null;
         this.alert.type = type;
         this.alert.close = close || false;
+        this.alert.is = false;
       }, timer || 3000);
     },
 

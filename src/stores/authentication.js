@@ -114,8 +114,8 @@ export const authentication = defineStore("authentication", {
       this.loading.auth = true;
 
       await signInWithEmailAndPassword(auth, payload.email, payload.password)
-        .then((cred) => {
-          this.validateUser(cred.user.uid);
+        .then(async (cred) => {
+          await this.validateUser(cred.user.uid);
         })
         .catch((error) => {
           userflowing.initAlert({
@@ -134,46 +134,55 @@ export const authentication = defineStore("authentication", {
 
       const currentUser = doc(colref, uid);
 
-      await getDoc(currentUser).then((docRef) => {
-        const user = docRef.data();
-        if (docRef.exists()) {
-          if (!user.blocked) {
-            if (user.role == "user") {
-              router.push("/dashboard/home");
-              setTimeout(() => {
+      await getDoc(currentUser)
+        .then((docRef) => {
+          const user = docRef.data();
+          if (docRef.exists()) {
+            if (!user.blocked) {
+              if (user.role == "user") {
+                router.push("/dashboard/home");
+                setTimeout(() => {
+                  userflowing.initAlert({
+                    message: `Login Successful`,
+                    is: true,
+                    type: "success",
+                  });
+                }, 300);
+                this.loading.auth = false;
+              } else if (user.role == "admin") {
+                router.push("/dashboard/home");
                 userflowing.initAlert({
-                  message: `Login Successful`,
+                  message: `Welcome, Dear Super Admin`,
                   is: true,
                   type: "success",
                 });
-              }, 300);
-              this.loading.auth = false;
-            } else if (user.role == "admin") {
-              router.push("/dashboard/home");
+                this.loading.auth = false;
+              }
+            } else {
               userflowing.initAlert({
-                message: `Welcome, Dear Super Admin`,
+                message: `This Account Has Been Blocked.`,
                 is: true,
-                type: "success",
+                type: "error",
               });
               this.loading.auth = false;
             }
           } else {
             userflowing.initAlert({
-              message: `This Account Has Been Blocked.`,
+              message: `This Account Doesn't Exist With Us, Please Register An Account With Us.`,
               is: true,
               type: "error",
             });
             this.loading.auth = false;
           }
-        } else {
+        })
+        .catch((err) => {
+          this.loading.auth = false;
           userflowing.initAlert({
-            message: `This Account Doesn't Exist With Us, Please Register An Account With Us.`,
+            message: err.code,
             is: true,
             type: "error",
           });
-          this.loading.auth = false;
-        }
-      });
+        });
     },
 
     async userWatch() {
