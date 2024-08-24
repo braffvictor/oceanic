@@ -141,12 +141,11 @@ export const authentication = defineStore("authentication", {
       const currentUser = doc(colref, uid);
 
       await getDoc(currentUser)
-        .then((docRef) => {
+        .then(async (docRef) => {
           const user = docRef.data();
           if (docRef.exists()) {
             if (!user.blocked) {
               if (user.role == "user") {
-                router.push("/dashboard/home");
                 setTimeout(() => {
                   userflowing.initAlert({
                     message: `Login Successful`,
@@ -155,6 +154,8 @@ export const authentication = defineStore("authentication", {
                   });
                 }, 300);
                 this.loading.auth = false;
+
+                router.push("/dashboard/home");
               } else if (user.role == "admin") {
                 router.push("/dashboard/home");
                 userflowing.initAlert({

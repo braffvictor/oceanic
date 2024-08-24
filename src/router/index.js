@@ -5,7 +5,10 @@ import NProgress from "nprogress";
 
 import { authentication } from "@/stores/authentication";
 
-import auth from "@/middleware/auth";
+import authWare from "@/middleware/auth";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/services/firebase";
 
 const routes = [
   {
@@ -72,9 +75,9 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: () => import("@/layout/dashboard"),
-    // meta: {
-    //   middleware: auth,
-    // },
+    meta: {
+      middleware: authWare,
+    },
 
     children: [
       {
@@ -173,12 +176,13 @@ router.beforeEach((to, from, next) => {
   const useAuthentication = authentication();
   NProgress.settings.showSpinner = false;
   NProgress.start();
-  next();
+  // next();
 
-  // if (!to.meta.middleware) {
-  //   return next();
-  // }
-  // const middleware = to.meta.middleware;
+  if (!to.meta.middleware) {
+    next();
+    return;
+  }
+  const middleware = to.meta.middleware;
 
   // const context = {
   //   to,
@@ -186,9 +190,23 @@ router.beforeEach((to, from, next) => {
   //   next,
   //   store: useAuthentication,
   // };
-  // middleware({
-  //   ...context,
-  // });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const context = {
+        to,
+        from,
+        next,
+        user: user,
+        store: useAuthentication,
+      };
+      middleware({
+        ...context,
+      });
+    } else {
+      router.push("/");
+    }
+  });
 });
 router.afterEach(() => {
   NProgress.done();

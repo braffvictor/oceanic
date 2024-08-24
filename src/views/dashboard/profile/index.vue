@@ -71,7 +71,7 @@
                 class="w-full bg-red-500 text-white !shadow-red-500"
                 to="/"
                 type="elevated"
-                @click="signOut(auth)"
+                @click="signOuting"
                 >Log Out</DButton
               >
             </div>
@@ -86,11 +86,18 @@
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import { inject, onMounted } from "vue";
-
 import { auth } from "@/services/firebase";
 import { signOut } from "firebase/auth";
 
 import DButton from "@/components/utils/DButton.vue";
+import { authentication } from "@/stores/authentication";
+
+const useAuthentication = authentication();
+
+function signOuting() {
+  signOut(auth);
+  useAuthentication.user = null;
+}
 
 const theme = inject("theme");
 

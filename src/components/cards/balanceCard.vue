@@ -10,11 +10,13 @@
           Current Balance
         </p>
         <p class="font-bold md:text-4xl text-2xl">
-          {{ user && user.wallet.balance }}ETH
+          {{ user && user?.wallet?.balance }}ETH
         </p>
         <p class="text-xs md:text-sm opacity-70">
           ${{
-            user && user.wallet.balance ? user.wallet.balance * 3047.3 : "0.00"
+            user && user?.wallet?.balance
+              ? user?.wallet?.balance * 3047.3
+              : "0.00"
           }}
         </p>
       </div>

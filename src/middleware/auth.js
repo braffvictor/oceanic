@@ -1,15 +1,44 @@
-import { computed } from "vue";
-export default function guest({ next, store, to, from }) {
-  console.log(store);
-  const user = computed(() => {
-    return store.user;
+import { db } from "@/services/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+import { authentication } from "@/stores/authentication";
+import { computed, watch } from "vue";
+export default async function guest({ next, user, to, from, store }) {
+  const useAuthentication = authentication();
+  const currentUserDoc = computed(() => {
+    return useAuthentication.user;
   });
-  console.log(to);
-  console.log(user.value);
-  if (!user.value) {
-    return next({
-      path: "/",
-    });
+  // console.log(currentUser);
+  // console.log(store);
+
+  const currentUser = doc(db, "users", user.uid);
+
+  // console.log(currentUser);
+  if (!currentUserDoc.value) {
+    console.log("using cloud");
+    await getDoc(currentUser)
+      .then((docRef) => {
+        if (!docRef.exists() || docRef.data().blocked) {
+          next({
+            path: "/",
+          });
+        } else {
+          next();
+        }
+      })
+      .catch((err) => {
+        next({
+          path: "/",
+        });
+      });
+  } else {
+    console.log("using store");
+    if (!currentUserDoc.value || currentUserDoc.value?.blocked) {
+      next({
+        path: "/",
+      });
+    } else {
+      next();
+    }
   }
-  return next();
 }
