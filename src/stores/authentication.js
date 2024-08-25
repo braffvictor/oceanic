@@ -56,6 +56,7 @@ export const authentication = defineStore("authentication", {
 
             // personal info
             fullName: payload.fullName,
+            userName: payload.userName,
             email: payload.email,
             password: payload.password,
             blocked: false,
@@ -209,7 +210,7 @@ export const authentication = defineStore("authentication", {
       onSnapshot(currentUser, (docRef) => {
         if (docRef.exists() && !docRef.data().blocked) {
           this.user = docRef.data();
-          console.log(this.user);
+          // console.log(this.user);
         } else {
           router.push("/");
           this.user = null;

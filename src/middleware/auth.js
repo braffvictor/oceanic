@@ -2,10 +2,11 @@ import { db } from "@/services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 import { authentication } from "@/stores/authentication";
-import { computed, watch } from "vue";
+import { computed } from "vue";
+
 export default async function guest({ next, user, to, from, store }) {
   const useAuthentication = authentication();
-  const currentUserDoc = computed(() => {
+  const storeUser = computed(() => {
     return useAuthentication.user;
   });
   // console.log(currentUser);
@@ -14,8 +15,9 @@ export default async function guest({ next, user, to, from, store }) {
   const currentUser = doc(db, "users", user.uid);
 
   // console.log(currentUser);
-  if (!currentUserDoc.value) {
-    console.log("using cloud");
+  if (!storeUser.value) {
+    // console.log("using cloud");
+    //uses firebase document reference to check user auth and blocked status at first load or refresh
     await getDoc(currentUser)
       .then((docRef) => {
         if (!docRef.exists() || docRef.data().blocked) {
@@ -32,8 +34,9 @@ export default async function guest({ next, user, to, from, store }) {
         });
       });
   } else {
-    console.log("using store");
-    if (!currentUserDoc.value || currentUserDoc.value?.blocked) {
+    // console.log("using store");
+    //uses store reference of the user object after being hydrated by firebase....to nav without fetching data from firebase at every route after first load
+    if (!storeUser.value || storeUser.value?.blocked) {
       next({
         path: "/",
       });

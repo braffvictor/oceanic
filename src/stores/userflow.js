@@ -1,4 +1,10 @@
+import { str, db } from "@/services/firebase";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { defineStore } from "pinia";
+
+import { getDate } from "@/composables/getDate";
+const { getCurrentTimeAndDate } = getDate();
 
 export const userflow = defineStore("userflow", {
   state: () => ({
@@ -13,6 +19,10 @@ export const userflow = defineStore("userflow", {
       timer: null,
       type: "success",
       close: true,
+    },
+
+    loading: {
+      upload: false,
     },
   }),
 
@@ -86,10 +96,12 @@ export const userflow = defineStore("userflow", {
               nft.contracts[0].contract_address != undefined
             );
           });
+
+          console.log(this.nfts[0]);
         })
         .then(async () => {
-          setTimeout(() => {
-            this.initRandomNfts();
+          setTimeout(async () => {
+            await this.initRandomNfts();
           }, 2000);
         })
         .catch((err) => {
@@ -146,8 +158,6 @@ export const userflow = defineStore("userflow", {
                 this.randomNfts.push(nft);
               }
             });
-
-            // console.log(this.randomNfts[0]);
           })
           .catch((err) => {
             this.initAlert({
@@ -158,6 +168,10 @@ export const userflow = defineStore("userflow", {
             });
           });
       };
+
+      setTimeout(() => {
+        console.log(this.randomNfts[0]);
+      }, 2000);
 
       const keys = [];
       if (this.getNfts.length > 0) {
@@ -172,6 +186,125 @@ export const userflow = defineStore("userflow", {
           specificCollectionNfts(keys[index]);
         }
       }
+    },
+
+    async photoFN({ photo, uid, path }) {
+      const userflowing = userflow();
+
+      const sliceExt = photo.name.slice(photo.name.lastIndexOf("."));
+      const sliceName = photo.name.slice(0, photo.name.lastIndexOf("."));
+
+      const photoRef = ref(str, `${path}/${sliceName}-${uid}${sliceExt}`);
+      let URL = {};
+      await uploadBytes(photoRef, photo)
+        .then(async () => {
+          await getDownloadURL(photoRef)
+            .then((photoUrl) => {
+              URL.name = photoUrl;
+            })
+            .catch((error) => {
+              userflowing.initAlert({
+                is: true,
+                message: error.code,
+                type: "error",
+                close: false,
+              });
+            });
+        })
+        .catch((error) => {
+          userflowing.initAlert({
+            is: true,
+            message: error.code,
+            type: "error",
+            close: false,
+          });
+        });
+      return URL.name;
+    },
+
+    async uploadFN(payload) {
+      this.loading.upload = true;
+      const userflowing = userflow();
+      const colref = collection(db, "nfts");
+
+      const image_url = await this.photoFN({
+        path: "nfts",
+        uid: payload.userID,
+        photo: payload.image_url,
+      });
+
+      payload.image_url = await image_url;
+
+      console.log(payload);
+
+      await addDoc(colref, payload)
+        .then((docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+        })
+        .then(() => {
+          this.initAlert({
+            is: true,
+            message: `${payload.name} Successfully Uploaded, Awaiting Approval.`,
+            type: "success",
+            close: true,
+            timer: 4500,
+          });
+
+          this.notificationFN({
+            type: "info",
+            message: `You Just Uploaded ${payload.name} NFT, Contact support For More Enquires.`,
+            open: false,
+            fullName: payload.fullName,
+            email: payload.email,
+            uid: payload.userID,
+          });
+          this.loading.upload = false;
+        })
+        .catch((error) => {
+          this.loading.upload = false;
+          userflowing.initAlert({
+            is: true,
+            message: error.code,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async notificationFN({ type, message, uid, open, fullName, email }) {
+      const colref = collection(db, "notifications");
+      const userflowing = userflow();
+
+      await addDoc(colref, {
+        category: "notifications",
+        type: type,
+        message: message,
+        userID: uid,
+        open: open,
+        fullName: fullName,
+        email: email,
+        date: getCurrentTimeAndDate(),
+        formattedDate: getCurrentTimeAndDate("format"),
+      })
+        .then((docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+        })
+        .catch((error) => {
+          userflowing.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
     },
   },
 });

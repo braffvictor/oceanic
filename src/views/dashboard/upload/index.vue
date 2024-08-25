@@ -150,7 +150,7 @@
           <div class="flex flex-wrap gap-2 mt-2">
             <TransitionGroup name="list">
               <p
-                class="capitalize shadow-sm select-none shadow-green-400 border border-green-400 text-sm font-thin flex items-center justify-between rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4"
+                class="capitalize transit dark:shadow-sm select-none shadow-green-400 border border-green-400 text-sm font-thin flex items-center justify-between rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4"
                 v-for="prop in props"
                 :key="prop"
               >
@@ -193,6 +193,7 @@
 
         <div class="w-full mt-4 mb-6">
           <d-button
+            :loading="loading"
             type="elevated"
             @click="submit"
             class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
@@ -211,6 +212,8 @@
     ethereum(default?)
     network(erc-default?)
 
+    todo : the upload price in dollar and the bought price ...should be just number..change it in upload payload to just a number
+
     generate ~
     transaction hash for purchased nft
     contract address for nft
@@ -225,9 +228,11 @@
 <script setup>
 //stores
 import { userflow } from "@/stores/userflow";
+import { authentication } from "@/stores/authentication";
 
 // composable
 import { checkInput } from "@/composables/checkInput";
+import { getDate } from "@/composables/getDate";
 
 import DDashbar from "@/components/utils/DDashbar.vue";
 import DTextfield from "@/components/utils/DTextfield.vue";
@@ -237,7 +242,20 @@ import DDropList from "@/components/utils/DDropList.vue";
 import DTextarea from "@/components/utils/DTextarea.vue";
 import { computed, inject, ref } from "vue";
 
+const useAuthentication = authentication();
+
+const { getCurrentTimeAndDate } = getDate();
+
+const user = computed(() => {
+  return useAuthentication.user;
+});
+
+const loading = computed(() => {
+  return userflowing.loading.upload;
+});
+
 const userflowing = userflow();
+
 const props = ref([]);
 
 function getInput(input) {
@@ -323,17 +341,49 @@ function submit() {
     checkCreator()
   ) {
     const payload = {
-      bidPrice: bidPrice.value,
-      category: category.value,
-      item: item.value,
-      collection: collection.value,
-      photo: photo.value,
       creator: creator.value,
+      chain: "Ethereum",
+      name: item.value,
+      stats: {
+        floor_eth: bidPrice.value,
+        floor_price: convertAmount.value,
+        floor_price_symbol: "ETH",
+      },
+
+      //what category does the nft belongs to
+      nftCategory: category.value,
+      key: user.value && user.value.userName,
+      contract_adddress: generateAddress(),
+      identifier: generateID(),
+
+      collection: collection.value.toLowerCase(),
+      image_url: photo.value,
       properties: props.value,
-      convertedAmount: convertAmount.value,
       description: description.value,
+
+      // Date
+      date: getCurrentTimeAndDate(),
+      formattedDate: getCurrentTimeAndDate("format"),
+      action: true,
+      //the collection in database
+      category: "nfts",
+      status: "pending",
+      type: "upload",
+      userID: user.value && user.value.userID,
+      fullName: user.value && user.value.fullName,
+      email: user.value && user.value.email,
     };
-    console.log(payload);
+    // console.log(payload);
+    userflowing.uploadFN(payload);
+
+    photo.value = null;
+    category.value = "";
+    bidPrice.value = "";
+    props.value = "";
+    description.value = "";
+    creator.value = "";
+    item.value = "";
+    collection.value = "";
   } else {
     console.log(false);
   }
@@ -361,6 +411,27 @@ const categories = computed(() => {
     },
   ];
 });
+
+function generateAddress() {
+  const characters = "abcdef0123456789";
+  const length = 40;
+
+  let contractAddress = "0x";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    contractAddress += characters[randomIndex];
+  }
+
+  // console.log(contractAddress)
+
+  return contractAddress;
+}
+
+function generateID() {
+  let rando = "";
+  rando = Math.abs(Math.round(Math.random() * 4000)).toString();
+  return rando;
+}
 </script>
 
 <style>

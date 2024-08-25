@@ -72,18 +72,18 @@
             class="h-full w-full placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-transparent outline-none"
             placeholder="Username"
             @keyup="checkUsername"
-            v-model="username"
+            v-model="userName"
           />
         </div>
         <p
           class="text-xs text-red-500 transit mt-3 text-center"
           :class="
-            usernameError
+            userNameError
               ? 'scale-y-100 transit animate__animated animate__shakeX'
               : 'scale-y-0 transit '
           "
         >
-          {{ usernameError }}
+          {{ userNameError }}
         </p>
 
         <!-- the email -->
@@ -199,8 +199,8 @@ const passwordType = ref(false);
 
 const fullName = ref("");
 const fullNameError = ref("");
-const username = ref("");
-const usernameError = ref("");
+const userName = ref("");
+const userNameError = ref("");
 const email = ref("");
 const emailError = ref("");
 const password = ref("");
@@ -217,11 +217,11 @@ function checkFullname() {
 }
 
 function checkUsername() {
-  if (username.value != "") {
-    usernameError.value = "";
+  if (userName.value != "") {
+    userNameError.value = "";
     return true;
   } else {
-    usernameError.value = "Username is required";
+    userNameError.value = "Username is required";
     return false;
   }
 }
@@ -265,7 +265,7 @@ function setLoading() {
       fullName: fullName.value,
       email: email.value,
       password: password.value,
-      username: username.value,
+      userName: userName.value,
     };
     useAuthentication.registerUser(payload);
   } else {
