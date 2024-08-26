@@ -13,6 +13,7 @@
         type == 'filled'
           ? 'bg-slate-200 dark:bg-slate-900 rounded-tl-lg rounded-tr-lg border-b dark:border-b-gray-600 hover:border-b-gray-600  border-b-gray-400 dark:hover:bg-slate-800 hover:bg-slate-200 p-2'
           : '',
+        err ? '!border-red-500 !border-b' : '',
       ]"
     >
       <div class="w-full relative">

@@ -12,12 +12,17 @@
         type == 'filled'
           ? 'bg-slate-200 dark:bg-slate-900 rounded-tl-lg rounded-tr-lg border-b dark:border-b-gray-600 hover:border-b-gray-600 border-b-gray-400 dark:hover:bg-slate-800 hover:bg-slate-200 p-2 '
           : '',
+        err ? '!border-red-500 !border-b' : '',
       ]"
     >
       <div v-if="icon">
         <SvgComp
           :icon="iconType"
-          Sclass="group-has-[:focus]:stroke-green-500"
+          :Sclass="
+            err
+              ? 'group-has-[:focus]:stroke-red-500'
+              : 'group-has-[:focus]:stroke-green-500'
+          "
           class=""
         />
       </div>
@@ -36,6 +41,11 @@
         <label
           :for="name"
           class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
+          :class="
+            err
+              ? 'peer-focus:!text-red-500 dark:!peer-focus:text-red-500'
+              : null
+          "
           >{{ label }}</label
         >
       </div>

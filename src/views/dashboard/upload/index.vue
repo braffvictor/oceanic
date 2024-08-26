@@ -35,7 +35,7 @@
           FIRST UPLOAD
         </p>
 
-        <form action="" class="mt-4">
+        <form action="" class="mt-4" @submit="submit">
           <label
             for="dropzone-file"
             class="flex flex-col items-center justify-center transit p-4 md:p-6 mt-4 mb-3 w-full border border-gray-500 dark:border-gray-300 border-dotted rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
@@ -189,17 +189,18 @@
             :type="theme == 'dark' ? 'filled' : 'default'"
             :err="descriptionError"
           />
+          <div class="w-full mt-4 mb-6">
+            <button type="submit" class="w-full">
+              <d-button
+                :loading="loading"
+                type="elevated"
+                @click="submit"
+                class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
+                >Upload {{ item }}</d-button
+              >
+            </button>
+          </div>
         </form>
-
-        <div class="w-full mt-4 mb-6">
-          <d-button
-            :loading="loading"
-            type="elevated"
-            @click="submit"
-            class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
-            >Complete purchase</d-button
-          >
-        </div>
       </section>
     </main>
 
@@ -346,9 +347,11 @@ function submit() {
       name: item.value,
       stats: {
         floor_eth: bidPrice.value,
-        floor_price: convertAmount.value,
+        floor_price: Math.abs(Math.round(bidPrice.value * 3043)),
         floor_price_symbol: "ETH",
       },
+
+      convertAmount: convertAmount.value,
 
       //what category does the nft belongs to
       nftCategory: category.value,
@@ -373,16 +376,16 @@ function submit() {
       fullName: user.value && user.value.fullName,
       email: user.value && user.value.email,
     };
-    // console.log(payload);
-    userflowing.uploadFN(payload);
+    console.log(payload);
+    // userflowing.uploadFN(payload)
 
     photo.value = null;
     category.value = "";
-    bidPrice.value = "";
+    bidPrice.value = 0;
     props.value = "";
     description.value = "";
     creator.value = "";
-    item.value = "";
+    item.value = "red";
     collection.value = "";
   } else {
     console.log(false);
