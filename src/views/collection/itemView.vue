@@ -84,6 +84,7 @@
                 class="w-full active:!bg-slate-300 dark:active:!bg-slate-600"
                 type="outlined"
                 :to="route.fullPath"
+                @click="buyNft()"
                 >Buy Now For
                 {{
                   nftDetails &&
@@ -423,6 +424,15 @@ function generateContractAddressWithSeed(seed) {
 
 specificCollectionDetails(route.params.id);
 specificCollectionNfts(route.params.id);
+
+//buy the nft
+function buyNft(nft) {
+  userflowing.initAlert({
+    is: true,
+    type: "info",
+    message: "Please Log in To Purchase This NFT",
+  });
+}
 </script>
 
 <style>
