@@ -39,6 +39,7 @@
           <label
             for="dropzone-file"
             class="flex flex-col items-center justify-center transit p-4 md:p-6 mt-4 mb-3 w-full border border-gray-500 dark:border-gray-300 border-dotted rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
+            :class="photoError ? 'border-dashed !border-red-500' : null"
           >
             <div class="mb-3 flex items-center justify-center" v-if="!proof">
               <svg
@@ -52,7 +53,7 @@
                   <path
                     id="icon"
                     d="M16.296 25.3935L19.9997 21.6667L23.7034 25.3935M19.9997 35V21.759M10.7404 27.3611H9.855C6.253 27.3611 3.33301 24.4411 3.33301 20.8391C3.33301 17.2371 6.253 14.3171 9.855 14.3171V14.3171C10.344 14.3171 10.736 13.9195 10.7816 13.4326C11.2243 8.70174 15.1824 5 19.9997 5C25.1134 5 29.2589 9.1714 29.2589 14.3171H30.1444C33.7463 14.3171 36.6663 17.2371 36.6663 20.8391C36.6663 24.4411 33.7463 27.3611 30.1444 27.3611H29.2589"
-                    stroke="#22c55e"
+                    :stroke="photoError ? '#df1919' : '#22c55e'"
                     stroke-width="1.6"
                     stroke-linecap="round"
                   />
