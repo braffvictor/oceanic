@@ -1,10 +1,12 @@
-import { str, db } from "@/services/firebase";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { str, db, auth } from "@/services/firebase";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { defineStore } from "pinia";
 
 import { getDate } from "@/composables/getDate";
 const { getCurrentTimeAndDate } = getDate();
+
+import { authentication } from "./authentication";
 
 export const userflow = defineStore("userflow", {
   state: () => ({
@@ -12,6 +14,8 @@ export const userflow = defineStore("userflow", {
     cartList: JSON.parse(localStorage.getItem("watchList") || "[]")?.length,
     nfts: [],
     randomNfts: [],
+
+    notifications: [],
 
     alert: {
       is: false,
@@ -23,6 +27,7 @@ export const userflow = defineStore("userflow", {
 
     loading: {
       upload: false,
+      buy: false,
     },
   }),
 
@@ -59,6 +64,39 @@ export const userflow = defineStore("userflow", {
         this.alert.close = close || false;
         this.alert.is = false;
       }, timer || 3000);
+    },
+
+    async deduction({ amount }) {
+      const colref = collection(db, "users");
+
+      const useAuthentication = authentication();
+      const userID = useAuthentication.user.userID
+        ? useAuthentication.user.userID
+        : auth.currentUser.uid;
+
+      const currentUser = doc(colref, userID);
+
+      await getDoc(currentUser)
+        .then((docRef) => {
+          let newAmount;
+
+          let oldAmount = docRef.data().wallet.balance;
+          if (amount > oldAmount) newAmount = 0;
+          newAmount = oldAmount - amount;
+
+          updateDoc(currentUser, {
+            wallet: {
+              balance: newAmount,
+            },
+          });
+        })
+        .catch((error) => {
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+          });
+        });
     },
 
     //hydrate site with blockspan nfts
@@ -139,7 +177,8 @@ export const userflow = defineStore("userflow", {
               nft.contract_address = generateContractAddressWithSeed(
                 nft.identifier || 1500
               );
-              nft.action = "red";
+              nft.action = true;
+              nft.name = nft.name ? nft.name : "####";
               nft.stats = {
                 floor_price:
                   (Number(nft.identifier.slice(0, 4) || 1500) / 4000) * 3037.97,
@@ -189,8 +228,6 @@ export const userflow = defineStore("userflow", {
     },
 
     async photoFN({ photo, uid, path }) {
-      const userflowing = userflow();
-
       const sliceExt = photo.name.slice(photo.name.lastIndexOf("."));
       const sliceName = photo.name.slice(0, photo.name.lastIndexOf("."));
 
@@ -203,18 +240,18 @@ export const userflow = defineStore("userflow", {
               URL.name = photoUrl;
             })
             .catch((error) => {
-              userflowing.initAlert({
+              this.initAlert({
                 is: true,
-                message: error.code,
+                message: error.message,
                 type: "error",
                 close: false,
               });
             });
         })
         .catch((error) => {
-          userflowing.initAlert({
+          this.initAlert({
             is: true,
-            message: error.code,
+            message: error.message,
             type: "error",
             close: false,
           });
@@ -222,9 +259,54 @@ export const userflow = defineStore("userflow", {
       return URL.name;
     },
 
+    async buyFN(payload) {
+      this.loading.buy = true;
+      const colref = collection(db, "nfts");
+
+      await addDoc(colref, payload)
+        .then(async (docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+
+          //deduct from balance
+          await this.deduction({ amount: payload.stats.floor_eth });
+
+          //to ask on writeup in notification in firebase and popup alert
+          this.initAlert({
+            is: true,
+            message: `${
+              payload.name || "####"
+            } Purchase Successful, Now Added As One of Your Collection.`,
+            type: "success",
+            timer: 4000,
+          });
+
+          await this.notificationFN({
+            type: "success",
+            message: `${payload.name || "####"} Was Purchased`,
+            uid: payload.userID,
+            open: false,
+            fullName: payload.fullName,
+            email: payload.email,
+          });
+          this.loading.buy = false;
+        })
+        .catch((error) => {
+          this.loading.buy = false;
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
     async uploadFN(payload) {
       this.loading.upload = true;
-      const userflowing = userflow();
       const colref = collection(db, "nfts");
 
       const image_url = await this.photoFN({
@@ -266,9 +348,9 @@ export const userflow = defineStore("userflow", {
         })
         .catch((error) => {
           this.loading.upload = false;
-          userflowing.initAlert({
+          this.initAlert({
             is: true,
-            message: error.code,
+            message: error.message,
             type: "error",
             close: false,
           });
@@ -277,7 +359,6 @@ export const userflow = defineStore("userflow", {
 
     async notificationFN({ type, message, uid, open, fullName, email }) {
       const colref = collection(db, "notifications");
-      const userflowing = userflow();
 
       await addDoc(colref, {
         category: "notifications",
@@ -298,7 +379,7 @@ export const userflow = defineStore("userflow", {
           });
         })
         .catch((error) => {
-          userflowing.initAlert({
+          this.initAlert({
             is: true,
             message: error.message,
             type: "error",

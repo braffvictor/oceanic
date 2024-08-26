@@ -117,7 +117,9 @@
                 <d-button
                   class="w-full active:!bg-slate-300 dark:active:!bg-slate-600"
                   type="outlined"
+                  :loading="loading"
                   :to="route.fullPath"
+                  @click="buyNft(nftDetails)"
                   >Buy Now For
                   {{
                     nftDetails &&
@@ -259,17 +261,35 @@
 </template>
 
 <script setup>
+//stores
 import { userflow } from "@/stores/userflow";
+import { authentication } from "@/stores/authentication";
+
+//components
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import vLazyImage from "v-lazy-image";
 import DButton from "@/components/utils/DButton.vue";
+
+//composables
+import { getDate } from "@/composables/getDate";
+
 import { computed, inject, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
 const theme = inject("theme");
+const { getCurrentTimeAndDate } = getDate();
+
 const userflowing = userflow();
+const loading = computed(() => {
+  return userflowing.loading.buy;
+});
+
+const useAuthentication = authentication();
+const user = computed(() => {
+  return useAuthentication.user;
+});
 
 const listing = ref(false);
 const description = ref(false);
@@ -277,7 +297,6 @@ const details = ref(false);
 
 const image = ref("");
 const contract = ref("");
-const loading = ref(false);
 
 onBeforeMount(() => {
   // console.log("red");
@@ -290,9 +309,6 @@ onBeforeMount(() => {
       behavior: "smooth",
     });
   }, 3);
-  setTimeout(() => {
-    loading.value = true;
-  }, 1000);
 });
 
 const collectionHeader = ref(null);
@@ -352,7 +368,9 @@ const specificCollectionNfts = async (routeParams) => {
       collectionNfts.value = response.nfts;
 
       collectionNfts.value.forEach((nft) => {
-        nft.action = "red";
+        nft.action = true;
+        nft.name = nft.name ? nft.name : "####";
+        nft.key = nft.collection;
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500
         );
@@ -375,6 +393,62 @@ watch(route, () => {
   specificCollectionDetails(route.params.id);
 });
 
+//buy the nft
+function buyNft(nft) {
+  if (
+    !nft ||
+    !nft.name ||
+    !collectionHeader.value ||
+    nft.stats.floor_eth < 0.1
+  ) {
+    userflowing.initAlert({
+      message: `An Error Occured`,
+      is: true,
+      type: "error",
+      timer: 6000,
+      close: true,
+    });
+    return;
+  }
+
+  delete nft.display_animation_url;
+  delete nft.is_disabled;
+  delete nft.is_nsfw;
+
+  if (nft.stats.floor_eth >= user.value.wallet.balance) {
+    userflowing.initAlert({
+      message: `You Do Not Have The Sufficient Amount In Your Balance To Purchase ${nft.name}`,
+      is: true,
+      type: "error",
+      timer: 6000,
+      close: true,
+    });
+    return;
+  }
+
+  nft.fullName = user.value && user.value.fullName;
+  nft.email = user.value && user.value.email;
+  nft.userID = user.value && user.value.userID;
+  nft.type = "bought";
+  nft.category = "nfts";
+  nft.status = "pending";
+  nft.date = getCurrentTimeAndDate();
+  nft.formattedDate = getCurrentTimeAndDate("format");
+
+  // using collectionHeader
+  nft.description = nft.description
+    ? nft.description
+    : collectionHeader.value.description;
+  nft.category = collectionHeader.value.category;
+  nft.created_date = collectionHeader.value.created_date;
+
+  // console.log(nft);
+  // console.log(collectionHeader.value);
+
+  userflowing.buyFN(nft);
+}
+
+//to cart the nft
 function cartNft(nftDetails) {
   if (nftDetails == null || nftDetails == undefined || !nftDetails.name) {
     userflowing.initAlert({

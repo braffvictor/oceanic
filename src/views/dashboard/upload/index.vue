@@ -197,7 +197,7 @@
                 type="elevated"
                 @click="submit"
                 class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
-                >Upload {{ item }}</d-button
+                >Mint {{ item }}</d-button
               >
             </button>
           </div>
@@ -367,27 +367,19 @@ function submit() {
 
       // Date
       date: getCurrentTimeAndDate(),
+      created_date: getCurrentTimeAndDate(),
       formattedDate: getCurrentTimeAndDate("format"),
       action: true,
       //the collection in database
       category: "nfts",
       status: "pending",
-      type: "upload",
+      type: "uploaded",
       userID: user.value && user.value.userID,
       fullName: user.value && user.value.fullName,
       email: user.value && user.value.email,
     };
     console.log(payload);
     // userflowing.uploadFN(payload)
-
-    photo.value = null;
-    category.value = "";
-    bidPrice.value = 0;
-    props.value = "";
-    description.value = "";
-    creator.value = "";
-    item.value = "red";
-    collection.value = "";
   } else {
     console.log(false);
   }
