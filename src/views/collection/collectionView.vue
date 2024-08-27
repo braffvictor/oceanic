@@ -126,6 +126,7 @@
       <CollectionItems
         v-if="activeBtn == 'items'"
         :headerName="collectionHeader && collectionHeader?.name"
+        :headerObj="collectionHeader && collectionHeader"
       />
 
       <collection-activities

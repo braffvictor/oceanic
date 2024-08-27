@@ -413,6 +413,7 @@ function buyNft(nft) {
 
   delete nft.display_animation_url;
   delete nft.is_disabled;
+  delete nftDetails.metadata_url;
   delete nft.is_nsfw;
 
   if (nft.stats.floor_eth >= user.value.wallet.balance) {
@@ -450,7 +451,12 @@ function buyNft(nft) {
 
 //to cart the nft
 function cartNft(nftDetails) {
-  if (nftDetails == null || nftDetails == undefined || !nftDetails.name) {
+  if (
+    nftDetails == null ||
+    nftDetails == undefined ||
+    !nftDetails.name ||
+    nftDetails.stats.floor_eth < 0.03
+  ) {
     userflowing.initAlert({
       message: `Carting Error`,
       is: true,
@@ -473,6 +479,27 @@ function cartNft(nftDetails) {
       close: true,
     });
   } else {
+    delete nftDetails.display_animation_url;
+    delete nftDetails.is_disabled;
+    delete nftDetails.metadata_url;
+    delete nftDetails.is_nsfw;
+
+    nftDetails.fullName = user.value && user.value.fullName;
+    nftDetails.email = user.value && user.value.email;
+    nftDetails.userID = user.value && user.value.userID;
+    nftDetails.type = "bought";
+    nftDetails.category = "nfts";
+    nftDetails.status = "pending";
+    nftDetails.date = getCurrentTimeAndDate();
+    nftDetails.formattedDate = getCurrentTimeAndDate("format");
+
+    // using collectionHeader
+    nftDetails.description = nftDetails.description
+      ? nftDetails.description
+      : collectionHeader.value.description;
+    nftDetails.category = collectionHeader.value.category;
+    nftDetails.created_date = collectionHeader.value.created_date;
+
     const newList = [nftDetails, ...cartedNfts];
     localStorage.setItem("watchList", JSON.stringify(newList));
     userflowing.checkLocalStorage(newList.length);

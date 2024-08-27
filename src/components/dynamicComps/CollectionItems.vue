@@ -5,6 +5,7 @@
     ></div>
     <span
       class="text-slate-900 dark:text-slate-100 md:text-md text-sm ml-1 mb-3"
+      @click="headerclick"
       >Live</span
     >
 
@@ -80,6 +81,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  headerObj: {
+    type: Object,
+    default: () => {
+      return {};
+    },
+  },
 });
 
 const loading = ref(true);
@@ -90,6 +97,10 @@ const route = useRoute();
 // }, 3000);
 
 const searchName = ref("");
+
+function headerclick() {
+  console.log(props.headerObj);
+}
 
 const collectionNfts = ref([]);
 const filterCollection = ref([]);
@@ -111,7 +122,19 @@ const specificCollectionNfts = async (routeParams) => {
       collectionNfts.value = response.nfts;
 
       collectionNfts.value.forEach((nft) => {
-        nft.action = "red";
+        delete nft.is_disabled;
+        delete nft.is_nsfw;
+        delete nft.metadata_url;
+        delete nft.display_animation_url;
+
+        nft.action = true;
+        nft.category = props.headerObj.category || "";
+        nft.created_date = props.headerObj.created_date || "";
+        nft.description = nft.description
+          ? nft.description
+          : props.headerObj.description;
+        nft.banner_image_url = props.headerObj.banner_image_url || "";
+        nft.name = nft.name ? nft.name : "####";
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500
         );

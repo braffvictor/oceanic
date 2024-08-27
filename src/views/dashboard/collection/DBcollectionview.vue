@@ -154,6 +154,7 @@
         v-if="activeBtn == 'items'"
         :headerName="collectionHeader && collectionHeader?.name"
         :dashboard="true"
+        :headerObj="collectionHeader && collectionHeader"
       />
 
       <collection-activities

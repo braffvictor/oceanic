@@ -234,8 +234,12 @@ import DButton from "@/components/utils/DButton.vue";
 import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import vLazyImage from "v-lazy-image";
+
+import { getDate } from "@/composables/getDate";
+
 const route = useRoute();
 const userflowing = userflow();
+const { getCurrentTimeAndDate } = getDate();
 
 const listing = ref(false);
 const description = ref(false);
@@ -316,7 +320,8 @@ const specificCollectionNfts = async (routeParams) => {
       collectionNfts.value = response.nfts;
 
       collectionNfts.value.forEach((nft) => {
-        nft.action = "red";
+        nft.action = true;
+        nft.name = nft.name ? nft.name : "####";
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500
         );
@@ -341,7 +346,7 @@ watch(route, () => {
 });
 
 function cartNft(nftDetails) {
-  if (nftDetails == null || nftDetails == undefined) {
+  if (!nftDetails || nftDetails.stats.floor_eth < 0.03) {
     userflowing.initAlert({
       message: `Carting Error`,
       is: true,
@@ -364,6 +369,26 @@ function cartNft(nftDetails) {
       close: true,
     });
   } else {
+    delete nftDetails.display_animation_url;
+    delete nftDetails.metadata_url;
+    delete nftDetails.is_disabled;
+    delete nftDetails.is_nsfw;
+
+    nftDetails.type = "bought";
+    nftDetails.category = "nfts";
+    nftDetails.status = "pending";
+    nftDetails.date = getCurrentTimeAndDate();
+    nftDetails.formattedDate = getCurrentTimeAndDate("format");
+
+    // using collectionHeader
+    nftDetails.description = nftDetails.description
+      ? nftDetails.description
+      : collectionHeader.value.description;
+    nftDetails.category = collectionHeader.value.category;
+    nftDetails.created_date = collectionHeader.value.created_date;
+
+    console.log(nftDetails);
+
     const newList = [nftDetails, ...cartedNfts];
     localStorage.setItem("watchList", JSON.stringify(newList));
     userflowing.checkLocalStorage(newList.length);
@@ -426,11 +451,11 @@ specificCollectionDetails(route.params.id);
 specificCollectionNfts(route.params.id);
 
 //buy the nft
-function buyNft(nft) {
+function buyNft() {
   userflowing.initAlert({
     is: true,
     type: "info",
-    message: "Please Log in To Purchase This NFT",
+    message: "Please Log in To Purchase This NFT.",
   });
 }
 </script>

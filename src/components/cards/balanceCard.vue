@@ -10,7 +10,7 @@
           Current Balance
         </p>
         <p class="font-bold md:text-4xl text-2xl">
-          {{ (user && user.wallet.balance).toFixed(1) }}ETH
+          {{ Number(user && user.wallet.balance).toFixed(1) }}ETH
         </p>
         <p class="text-xs md:text-sm opacity-70">
           ${{

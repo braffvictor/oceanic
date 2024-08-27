@@ -108,7 +108,10 @@
               <div
                 class="absolute shadow-md h-auto -left-10 md:left-4 transit top-10 md:text-base text-sm md:text- font-normal z-20 w-24 rounded-xl bg-slate-100 dark:bg-slate-800 flex flex-col divide-y p-1 scale-y-0 peer-hover:scale-y-100 -translate-y-full divide-slate-900 dark:divide-slate-100 divide-opacity-20 dark:divide-opacity-45 peer-hover:-translate-y-0 md:translate-y-0 opacity-0 peer-hover:opacity-100 gap-y-2 peer-hover:block py-2 hover:scale-100 hover:-translate-y-0 hover:block md:hover:opacity-100"
               >
-                <p class="p-1 active:bg-slate-200 dark:active:bg-slate-700">
+                <p
+                  @click="buyNft(cart)"
+                  class="p-1 active:bg-slate-200 dark:active:bg-slate-700"
+                >
                   Buy
                 </p>
                 <p class="p-1 text-red-500" @click="removeNft(cart)">Remove</p>
@@ -157,11 +160,12 @@
 <script setup>
 // stores
 import { userflow } from "@/stores/userflow";
+import { authentication } from "@/stores/authentication";
 
 import SvgComp from "@/components/svgComp.vue";
 import vLazyImage from "v-lazy-image";
 import DButton from "@/components/utils/DButton.vue";
-import { inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import { collection } from "firebase/firestore";
 
@@ -174,6 +178,11 @@ const theme = inject("theme");
 
 let cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
 const userflowing = userflow();
+const useAuthentication = authentication();
+
+const user = computed(() => {
+  return useAuthentication.user;
+});
 
 //to round up the total amount
 let totalETH = ref(0);
@@ -212,6 +221,25 @@ const removeNft = (nft) => {
     JSON.parse(localStorage.getItem("watchList") || "[]")?.length
   );
 };
+
+function buyNft(cart) {
+  cart.fullName = user.value && user.value.fullName;
+  cart.email = user.value && user.value.email;
+  cart.userID = user.value && user.value.userID;
+
+  userflowing
+    .buyFN(cart)
+    .then(() => {
+      removeNft(cart);
+    })
+    .catch((error) => {
+      userflowing.initAlert({
+        is: true,
+        message: error.message,
+        type: "success",
+      });
+    });
+}
 </script>
 
 <style scoped>
