@@ -369,6 +369,7 @@ const specificCollectionNfts = async (routeParams) => {
 
       collectionNfts.value.forEach((nft) => {
         nft.action = true;
+        //todo generate a random name here instead of ####
         nft.name = nft.name ? nft.name : "####";
         nft.key = nft.collection;
         nft.contract_address = generateContractAddressWithSeed(

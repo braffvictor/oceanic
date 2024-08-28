@@ -1,5 +1,14 @@
 import { str, db, auth } from "@/services/firebase";
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { defineStore } from "pinia";
 
@@ -178,6 +187,7 @@ export const userflow = defineStore("userflow", {
                 nft.identifier || 1500
               );
               nft.action = true;
+              //todo generate a random name here instead of ####
               nft.name = nft.name ? nft.name : "####";
               nft.stats = {
                 floor_price:
@@ -377,6 +387,47 @@ export const userflow = defineStore("userflow", {
           updateDoc(currentUserDoc, {
             id: docRef.id,
           });
+        })
+        .catch((error) => {
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async initUserNotifications() {
+      const useAuthentication = authentication();
+      const colref = collection(db, "notifications");
+
+      const userID = (await useAuthentication.user?.userID)
+        ? useAuthentication.user?.userID
+        : auth.currentUser.uid;
+      const queryCollection = query(
+        colref,
+        where("userID", "==", auth.currentUser.uid)
+      );
+
+      let arr = [];
+      let sorting;
+
+      await getDocs(queryCollection)
+        .then((docRefs) => {
+          if (!docRefs.empty) {
+            docRefs.forEach((docs) => {
+              arr.push(docs.data());
+
+              sorting = arr.sort((a, b) => {
+                return b.formattedDate - a.formattedDate;
+              });
+            });
+            console.log(sorting);
+            this.notifications = sorting;
+          } else {
+            this.notifications = [];
+          }
         })
         .catch((error) => {
           this.initAlert({

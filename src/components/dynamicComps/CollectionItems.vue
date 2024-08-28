@@ -134,6 +134,7 @@ const specificCollectionNfts = async (routeParams) => {
           ? nft.description
           : props.headerObj.description;
         nft.banner_image_url = props.headerObj.banner_image_url || "";
+        //todo generate a random name here instead of ####
         nft.name = nft.name ? nft.name : "####";
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500

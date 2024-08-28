@@ -4,7 +4,7 @@
   <router-link
     v-if="type == 'filled' && !disabled"
     :to="to"
-    class="p-3 !border-none rounded-2xl select-none active:!scale-90 dark:text-white text-center text-slate-900 transit inline-block !min-h-11"
+    class="p-3 !border-none rounded-2xl select-none active:!scale-90 flex justify-center items-center dark:text-white text-center text-slate-900 transit inline-block !min-h-11"
     :class="loading ? 'pointer-events-none' : ''"
   >
     <slot v-if="!loading"> Sign Up </slot>
@@ -18,7 +18,7 @@
   <router-link
     v-else-if="type == 'outlined' && !disabled"
     :to="to"
-    class="p-3 border rounded-2xl select-none active:!scale-90 dark:text-white text-center text-slate-900 transit inline-block !bg-transparent !min-h-11"
+    class="p-3 border rounded-2xl select-none active:!scale-90 dark:text-white text-center text-slate-900 transit flex justify-center items-center inline-block !bg-transparent !min-h-11"
     :class="loading ? 'pointer-events-none' : ''"
   >
     <slot v-if="!loading"> Sign Up </slot>
@@ -32,7 +32,7 @@
   <router-link
     v-else-if="type == 'elevated' && !disabled"
     :to="to"
-    class="p-3 rounded-2xl select-none dark:text-white active:!scale-90 text-slate-900 text-center shadow-md transit inline-block !min-h-11"
+    class="p-3 rounded-2xl select-none dark:text-white active:!scale-90 text-slate-900 text-center flex justify-center items-center shadow-md transit inline-block !min-h-11"
     :class="loading ? 'pointer-events-none' : ''"
   >
     <slot v-if="!loading"> Sign Up </slot>
@@ -45,7 +45,7 @@
   <router-link
     v-else-if="type == '' && !disabled"
     :to="to"
-    class="p-3 rounded-2xl select-none dark:text-slate-900 active:!scale-90 text-slate-100 transit text-center inline-block bg-slate-900 dark:bg-slate-100 !min-h-11"
+    class="p-3 rounded-2xl select-none dark:text-slate-900 flex justify-center items-center active:!scale-90 text-slate-100 transit text-center inline-block bg-slate-900 dark:bg-slate-100 !min-h-11"
     :class="loading ? 'pointer-events-none' : ''"
   >
     <slot v-if="!loading"> Sign Up </slot>

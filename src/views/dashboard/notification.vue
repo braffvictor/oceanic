@@ -21,8 +21,8 @@
       </div>
     </DDashbar>
 
-    <section class="md:w-11/12 mx-auto">
-      <main v-for="n in 3" :key="n">
+    <section class="md:w-11/12 mx-auto" v-if="notifications.length > 0">
+      <main v-for="(notify, n) in notifications" :key="notify.id">
         <div
           class="flex rounded-xl p-3 justify-start items-start md:items-center gap-x-2"
         >
@@ -30,7 +30,7 @@
             class="rounded-xl min-w-8 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
           >
             <img
-              :src="images(n)"
+              :src="checkImage(notify.type)"
               alt=""
               class="min-w-8 md:min-w-10 md:max-w-10 max-w-8"
             />
@@ -38,15 +38,14 @@
           <div
             class="font-light text-sm md:text-[16px] select-none md:font-extralight"
           >
-            Your Top up Was A Success of 2.3ETH Has Been Approved. You can now
-            contact support for further enquires.
-            <p class="text-xs opacity-65">02/09/2024</p>
+            {{ notify.message }}
+            <p class="text-xs opacity-65">{{ notify.date }}</p>
           </div>
         </div>
         <!-- divider -->
         <div
           class="border-b w-full opacity-20"
-          v-if="n != 3"
+          v-if="n != notifications.length"
           :class="
             theme == 'light' || theme == null
               ? 'whiteT border-b-slate-500'
@@ -59,11 +58,14 @@
 </template>
 
 <script setup>
+//store
+import { userflow } from "@/stores/userflow";
+
 import DDashbar from "@/components/utils/DDashbar.vue";
 import vLazyImage from "v-lazy-image";
 import SvgComp from "@/components/svgComp.vue";
 import random from "@/assets/png/rando.png";
-import { inject, onMounted } from "vue";
+import { computed, inject, onMounted } from "vue";
 
 import info2 from "@/assets/svg/info2.svg";
 import success from "@/assets/svg/success.svg";
@@ -75,7 +77,10 @@ import check from "@/assets/svg/check.svg";
 
 import icon2 from "@/assets/png/icon2.png";
 
+const userflowing = userflow();
+
 onMounted(() => {
+  userflowing.initUserNotifications();
   window.scrollTo({
     top: -10,
     left: 0,
@@ -83,12 +88,16 @@ onMounted(() => {
   });
 });
 
-function images(number) {
-  if (number == 1) {
+const notifications = computed(() => {
+  return userflowing.notifications;
+});
+
+function checkImage(type) {
+  if (type == "success") {
     return check;
-  } else if (number == 2) {
+  } else if (type == "info") {
     return info;
-  } else if (number == 3) {
+  } else if (type == "error") {
     return warning;
   }
 }
