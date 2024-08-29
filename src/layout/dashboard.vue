@@ -81,9 +81,9 @@
             v-for="link in links"
             :key="link.icon"
             :to="link.to"
-            class="flex group shadow-none text-green-500 rounded-lg !p-2 w-full relative"
+            class="flex group shadow-none text-green-500 rounded-lg !p-[10px] w-full relative"
             :class="[
-              drawer ? 'gap-x-3 justify-start' : 'justify-center',
+              drawer ? 'gap-x-3 justify-between' : 'justify-between',
               route.name.includes(link.text)
                 ? '!bg-green-400 dark:!bg-green-500 !shadow-md !shadow-green-400 dark:!shadow-green-500'
                 : '',
@@ -104,7 +104,9 @@
             </div>
             <p
               :class="
-                drawer ? 'transit opacity-100' : 'scale-x-0 opacity-0 transit'
+                drawer
+                  ? 'transit opacity-100 w-full text-left'
+                  : 'scale-x-0 opacity-0 transit'
               "
               class="group-active:text-green-500 transit capitalize font-medium"
             >

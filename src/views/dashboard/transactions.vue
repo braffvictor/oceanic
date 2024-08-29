@@ -31,52 +31,94 @@
         </div>
 
         <p class="mt-5">Transactions</p>
-        <main v-for="n in 5" :key="n" class="mt-1 transit">
-          <div
-            class="flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
-          >
+        <section v-if="loading">
+          <main v-for="n in 5" :key="n" class="mt-1 transit">
             <div
-              class="rounded-xl min-w-9 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
+              class="flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
             >
-              <img
-                :src="n % 2 == 0 ? debit : credit"
-                alt=""
-                class="min-w-9 md:min-w-10 md:max-w-10 max-w-8"
-              />
-            </div>
-            <div class="font-light text-sm md:text-[16px] select-none w-full">
-              Your Deposit of 2.3ETH Has Been Approved
-              <p class="text-xs opacity-65">02/09/2024</p>
-            </div>
-            <div
-              class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500"
-            >
-              Pending
-              <p
-                class="text-sm opacity-100"
-                :class="
-                  n % 2 == 0
-                    ? 'text-red-400 dark:text-red-500'
-                    : 'text-green-500'
-                "
+              <div
+                class="rounded-xl min-w-9 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
               >
-                2.45ETH
-              </p>
+                <img
+                  :src="n % 2 == 0 ? debit : credit"
+                  alt=""
+                  class="min-w-9 md:min-w-10 md:max-w-10 max-w-8"
+                />
+              </div>
+              <div class="font-light text-sm md:text-[16px] select-none w-full">
+                Your Deposit of 2.3ETH Has Been Approved
+                <p class="text-xs opacity-65">02/09/2024</p>
+              </div>
+              <div
+                class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500"
+              >
+                Pending
+                <p
+                  class="text-sm opacity-100"
+                  :class="
+                    n % 2 == 0
+                      ? 'text-red-400 dark:text-red-500'
+                      : 'text-green-500'
+                  "
+                >
+                  2.45ETH
+                </p>
+              </div>
             </div>
-          </div>
-          <!-- divider -->
-          <div class="mx-auto text-center flex justify-center">
+            <!-- divider -->
+            <div class="mx-auto text-center flex justify-center">
+              <div
+                class="border-b w-full opacity-20 mx-4"
+                v-if="n != 5"
+                :class="
+                  theme == 'light' || theme == null
+                    ? 'whiteT border-b-slate-500'
+                    : 'darkT border-b-slate-100'
+                "
+              ></div>
+            </div>
+          </main>
+        </section>
+
+        <section v-if="!loading">
+          <main v-for="n in 5" :key="n" class="mt-1 transit">
             <div
-              class="border-b w-full opacity-20 mx-4"
-              v-if="n != 5"
-              :class="
-                theme == 'light' || theme == null
-                  ? 'whiteT border-b-slate-500'
-                  : 'darkT border-b-slate-100'
-              "
-            ></div>
-          </div>
-        </main>
+              class="animate-pulse flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
+            >
+              <div
+                class="rounded-full bg-gray-300 dark:bg-gray-500 min-w-10 md:min-w-12 md:max-w-16 md:h-12 h-10 select-none transit"
+              ></div>
+              <div class="w-full">
+                <p
+                  class="w-32 md:w-8/12 h-5 rounded-xl bg-gray-300 dark:bg-gray-500"
+                ></p>
+                <p
+                  class="opacity-65 h-3 w-24 rounded-xl bg-gray-300 dark:bg-gray-500 mt-3"
+                ></p>
+              </div>
+              <div
+                class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500"
+              >
+                <p class="w-20 h-5 rounded-xl bg-gray-300 dark:bg-gray-500"></p>
+                <p
+                  class="opacity-65 h-3 w-20 rounded-xl bg-gray-300 dark:bg-gray-500 mt-3"
+                ></p>
+              </div>
+            </div>
+            <!-- divider -->
+            <div class="mx-auto text-center flex justify-center">
+              <div
+                class="border-b w-full opacity-20 mx-4"
+                v-if="n != 5"
+                :class="
+                  theme == 'light' || theme == null
+                    ? 'whiteT border-b-slate-500'
+                    : 'darkT border-b-slate-100'
+                "
+              ></div>
+            </div>
+          </main>
+        </section>
       </section>
     </div>
   </main>
@@ -85,10 +127,16 @@
 <script setup>
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject, onMounted } from "vue";
+import { inject, onMounted, ref } from "vue";
 import BalanceCard from "@/components/cards/balanceCard.vue";
 
+const loading = ref(false);
+
 onMounted(() => {
+  setTimeout(() => {
+    loading.value = true;
+  }, 5000);
+
   window.scrollTo({
     top: -10,
     left: 0,

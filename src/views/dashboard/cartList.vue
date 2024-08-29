@@ -146,7 +146,9 @@
 
           <div class="w-full mt-4">
             <d-button
+              :loading="loading"
               type="elevated"
+              @click="BuyAll()"
               class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
               >Complete purchase</d-button
             >
@@ -178,6 +180,10 @@ const theme = inject("theme");
 
 let cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
 const userflowing = userflow();
+const loading = computed(() => {
+  return userflowing.loading.buy;
+});
+
 const useAuthentication = authentication();
 
 const user = computed(() => {
@@ -223,9 +229,34 @@ const removeNft = (nft) => {
 };
 
 function buyNft(cart) {
+  if (!cart || !cart.name || cart.stats.floor_eth < 0.1) {
+    userflowing.initAlert({
+      message: `An Error Occured`,
+      is: true,
+      type: "error",
+      timer: 6000,
+      close: true,
+    });
+    return;
+  }
+
   cart.fullName = user.value && user.value.fullName;
   cart.email = user.value && user.value.email;
   cart.userID = user.value && user.value.userID;
+
+  if (cart.stats.floor_eth >= user.value.wallet.balance) {
+    userflowing.initAlert({
+      message: `You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase "${
+        cart.name
+      }" From The ${
+        cart?.collection.toUpperCase() || cart?.key.toUpperCase()
+      } Collection.`,
+      is: true,
+      type: "error",
+      timer: 5000,
+    });
+    return;
+  }
 
   userflowing
     .buyFN(cart)
@@ -239,6 +270,31 @@ function buyNft(cart) {
         type: "success",
       });
     });
+}
+
+//to buy all the nfts in the cartlist
+function BuyAll() {
+  if (user.value.wallet.balance > totalETH.value) {
+    //todo work on finishing buying one nft before the other
+    // let n = 0;
+    // const nft = cartedNfts.value[n];
+    // if (!nft) {
+    //   return;
+    // }
+    // const interval = setInterval(() => {
+    //   console.log(nft);
+    //   n++;
+    //   console.log(n);
+    //   console.log("nft");
+    // }, 2500);
+  } else {
+    userflowing.initAlert({
+      message: `You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase All These NFTs On Your Cart List.`,
+      is: true,
+      type: "error",
+      timer: 5000,
+    });
+  }
 }
 </script>
 

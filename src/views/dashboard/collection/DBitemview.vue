@@ -419,11 +419,14 @@ function buyNft(nft) {
 
   if (nft.stats.floor_eth >= user.value.wallet.balance) {
     userflowing.initAlert({
-      message: `You Do Not Have The Sufficient Amount In Your Balance To Purchase ${nft.name}`,
+      message: `You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase "${
+        nft.name
+      }" From The ${
+        nft.collection.toUpperCase() || nft.key.toUpperCase()
+      } Collection.`,
       is: true,
       type: "error",
-      timer: 6000,
-      close: true,
+      timer: 5000,
     });
     return;
   }

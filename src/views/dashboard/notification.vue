@@ -45,7 +45,7 @@
         <!-- divider -->
         <div
           class="border-b w-full opacity-20"
-          v-if="n != notifications.length"
+          v-if="n + 1 != notifications.length"
           :class="
             theme == 'light' || theme == null
               ? 'whiteT border-b-slate-500'
@@ -55,19 +55,52 @@
       </main>
     </section>
 
-    <div v-else class="min-h-screen mt-10 text-center mx-auto">
-      <div class="mx-auto text-center flex justify-center">
-        <!-- <img src="@/assets/not-found.gif" width="200" class="mt-5 block" /> -->
-        <!-- <img
-          src="https://steamuserimages-a.akamaihd.net/ugc/1829040563493991891/74C475FCD2F54226FDE8A6A5583EEC3440DD3242/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%2300&letterbox=true"
-          width="200"
+    <div v-else class="min-h-screen text-center md:w-11/12 mx-auto">
+      <section v-if="!loading" class="">
+        <main v-for="n in 5" :key="n">
+          <div
+            class="animate-pulse flex rounded-xl p-3 justify-start items-center md:items-center gap-x-2"
+          >
+            <div
+              class="rounded-full bg-gray-300 dark:bg-gray-500 min-w-10 md:min-w-12 md:max-w-16 md:h-12 h-10 select-none transit"
+            ></div>
+            <div class="w-full">
+              <p
+                class="w-[280px] md:w-8/12 h-5 rounded-xl bg-gray-300 dark:bg-gray-500"
+              ></p>
+              <p
+                class="opacity-65 h-3 w-24 rounded-xl bg-gray-300 dark:bg-gray-500 mt-3"
+              ></p>
+            </div>
+          </div>
+          <!-- divider -->
+          <div
+            class="border-b w-full opacity-20"
+            v-if="n != 5"
+            :class="
+              theme == 'light' || theme == null
+                ? 'whiteT border-b-slate-500'
+                : 'darkT border-b-slate-100'
+            "
+          ></div>
+          <!-- <div class="mx-auto text-center flex justify-center">
+      <img src="@/assets/not-found.gif" width="200" class="mt-5 block" />
+      <img
+      src="https://steamuserimages-a.akamaihd.net/ugc/1829040563493991891/74C475FCD2F54226FDE8A6A5583EEC3440DD3242/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%2300&letterbox=true"
+      width="200"
           class="mt-5 block"
-        /> -->
-        <img src="@/assets/not-found.gif" width="200" class="mt-5 block" />
+          />
+          <img src="@/assets/not-found.gif" width="200" class="mt-5 block" />
+        </div>
+        <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
+          Loading Notifications...
+        </p> -->
+        </main>
+      </section>
+
+      <div v-if="loading">
+        <p class="mt-20 text-center">You Have No Notification Yet.</p>
       </div>
-      <p class="text-slate-900 font-semibold dark:text-slate-100 mt-4">
-        Loading Notifications...
-      </p>
     </div>
   </main>
 </template>
@@ -80,7 +113,7 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import vLazyImage from "v-lazy-image";
 import SvgComp from "@/components/svgComp.vue";
 import random from "@/assets/png/rando.png";
-import { computed, inject, onMounted } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 
 import info2 from "@/assets/svg/info2.svg";
 import success from "@/assets/svg/success.svg";
@@ -94,17 +127,23 @@ import icon2 from "@/assets/png/icon2.png";
 
 const userflowing = userflow();
 
+const loading = ref(false);
+
+const notifications = computed(() => {
+  return userflowing.notifications;
+});
 onMounted(() => {
-  userflowing.initUserNotifications();
+  if (notifications.value.length == 0) userflowing.initUserNotifications();
+
+  setTimeout(() => {
+    loading.value = true;
+  }, 5000);
+
   window.scrollTo({
     top: -10,
     left: 0,
     behavior: "smooth",
   });
-});
-
-const notifications = computed(() => {
-  return userflowing.notifications;
 });
 
 function checkImage(type) {
