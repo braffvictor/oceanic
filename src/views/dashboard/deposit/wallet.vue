@@ -184,6 +184,7 @@
 
             <d-button
               type="elevated"
+              :loading="loading"
               @click="submit"
               class="bg-green-400 dark:bg-green-500 w-full mt-5 shadow-md shadow-green-400 dark:shadow-green-500"
               >Submit</d-button
@@ -198,17 +199,36 @@
 <script setup>
 //stores
 import { userflow } from "@/stores/userflow";
+import { authentication } from "@/stores/authentication";
+
+//composables
+import { getDate } from "@/composables/getDate";
 
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import { computed, inject, onMounted, ref } from "vue";
 import DButton from "@/components/utils/DButton.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
+const userflowing = userflow();
+const useAuthentication = authentication();
+
+const user = computed(() => {
+  return useAuthentication.user;
+});
+
+const loading = computed(() => {
+  return userflowing.loading.deposit;
+});
+
+const { getCurrentTimeAndDate } = getDate();
 
 onMounted(() => {
   window.scrollTo(0, 0);
 });
 
-const userflowing = userflow();
 const theme = inject("theme");
 
 const amount = ref("");
@@ -247,13 +267,40 @@ function submit() {
   checkAmount();
   checkPhoto();
 
-  if (checkAmount() && checkPhoto()) {
-    console.log("Deposit successfull");
+  if (checkAmount() && checkPhoto() && user.value) {
+    const payload = {
+      photo: photo.value,
+      amount: amount.value,
+      convertAmount: convertAmount.value,
+
+      fullName: user.value && user.value.fullName,
+      email: user.value && user.value.email,
+      userID: user.value && user.value.userID,
+      date: getCurrentTimeAndDate(),
+      formattedDate: getCurrentTimeAndDate("format"),
+      status: "pending",
+      category: "deposits",
+      type: "credit",
+
+      // inject after adding wallets to firebase
+      walletAddress: "fasdjtyqoahdfllsfasfnvas",
+      wallet: route.params.id,
+    };
+    console.log(payload);
+    userflowing.depositFN(payload).then(() => {
+      amount.value = "";
+      photo.value = null;
+
+      userflowing.initAlert({
+        is: true,
+        message: `Your Deposit Of ${payload.amount} ETH Is Successful, Awaiting Approval.`,
+        type: "success",
+        timer: 5000,
+      });
+    });
   } else {
     console.log("Deposit unsuccessful");
   }
-  console.log(photo.value);
-  console.log(amount.value);
 }
 
 function checkImage() {

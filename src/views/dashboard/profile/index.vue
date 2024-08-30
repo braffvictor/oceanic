@@ -36,10 +36,14 @@
           <section
             class="grid grid-cols-2 md:grid-cols-4 justify-center items-center *:w-full gap-2"
           >
-            <DButton type="outlined" to="/dashboard/profile/collections"
-              >Collection
-              <p class="text-green-500">0</p>
-            </DButton>
+            <DButton
+              type="outlined"
+              to="/dashboard/profile/collections"
+              class="flex flex-col"
+              ><p>Collection</p>
+              <p class="text-green-500">0</p></DButton
+            >
+
             <DButton type="outlined"
               >Uploaded
               <p class="text-green-500">0</p>

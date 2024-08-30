@@ -37,6 +37,7 @@ export const userflow = defineStore("userflow", {
     loading: {
       upload: false,
       buy: false,
+      deposit: false,
     },
   }),
 
@@ -420,7 +421,7 @@ export const userflow = defineStore("userflow", {
               arr.push(docs.data());
 
               sorting = arr.sort((a, b) => {
-                return b.formattedDate - a.formattedDate;
+                return b.formattedDate.slice(8) - a.formattedDate.slice(8);
               });
             });
             console.log(sorting);
@@ -430,6 +431,41 @@ export const userflow = defineStore("userflow", {
           }
         })
         .catch((error) => {
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async depositFN(payload) {
+      this.loading.deposit = true;
+      const colref = collection(db, "deposits");
+
+      payload.text = "Account Top Up";
+
+      const photo = await this.photoFN({
+        photo: payload.photo,
+        uid: payload.userID,
+        path: "deposits",
+      });
+
+      payload.photo = await photo;
+
+      await addDoc(colref, payload)
+        .then((docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+
+          this.loading.deposit = false;
+        })
+        .catch((error) => {
+          this.loading.deposit = false;
           this.initAlert({
             is: true,
             message: error.message,
