@@ -34,7 +34,7 @@
           item{{ cartedNfts && cartedNfts.length > 1 ? "s" : "" }}
         </p>
         <p
-          class="font-semibold active:text-green-600 text-sm active:scale-95 transit text-red-400 dark:text-red-500"
+          class="font-semibold active:text-green-600 text-sm active:scale-95 transit text-red-400 dark:text-red-500 cursor-pointer"
           @click="clearList"
           v-if="cartedNfts && cartedNfts.length > 0"
         >
@@ -243,10 +243,13 @@ function buyNft(cart) {
   cart.fullName = user.value && user.value.fullName;
   cart.email = user.value && user.value.email;
   cart.userID = user.value && user.value.userID;
+  cart.collection = user.value && user.value.userName;
 
   if (cart.stats.floor_eth >= user.value.wallet.balance) {
     userflowing.initAlert({
-      message: `You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase "${
+      message: `Dear ${
+        user.value && user.value.fullName
+      }, You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase "${
         cart.name
       }" From The ${
         cart?.collection.toUpperCase() || cart?.key.toUpperCase()

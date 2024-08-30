@@ -27,12 +27,23 @@
         <div
           class="pb-4 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20 transit"
         >
-          <BalanceCard text="Last Transaction:" data="31 April 2023" />
+          <BalanceCard
+            text="Last Transaction:"
+            :data="
+              transactions.length > 0
+                ? transactions[0].date
+                : 'No Transaction Yet'
+            "
+          />
         </div>
 
         <p class="mt-5">Transactions</p>
-        <section v-if="loading">
-          <main v-for="n in 5" :key="n" class="mt-1 transit">
+        <section v-if="transactions.length > 0">
+          <main
+            v-for="(transact, n) in transactions"
+            :key="transact.id"
+            class="mt-1 transit"
+          >
             <div
               class="flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
             >
@@ -40,28 +51,28 @@
                 class="rounded-xl min-w-9 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
               >
                 <img
-                  :src="n % 2 == 0 ? debit : credit"
+                  :src="checkImage(transact.type)"
                   alt=""
                   class="min-w-9 md:min-w-10 md:max-w-10 max-w-8"
                 />
               </div>
               <div class="font-light text-sm md:text-[16px] select-none w-full">
-                Your Deposit of 2.3ETH Has Been Approved
-                <p class="text-xs opacity-65">02/09/2024</p>
+                {{ transact.text }}
+                <p class="text-xs opacity-65">{{ transact.date }}</p>
               </div>
               <div
-                class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500"
+                class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500 capitalize"
               >
-                Pending
+                {{ transact.status }}
                 <p
                   class="text-sm opacity-100"
                   :class="
-                    n % 2 == 0
+                    transact.type == 'debit'
                       ? 'text-red-400 dark:text-red-500'
                       : 'text-green-500'
                   "
                 >
-                  2.45ETH
+                  {{ transact.amount }}ETH
                 </p>
               </div>
             </div>
@@ -69,7 +80,7 @@
             <div class="mx-auto text-center flex justify-center">
               <div
                 class="border-b w-full opacity-20 mx-4"
-                v-if="n != 5"
+                v-if="n + 1 != transactions.length"
                 :class="
                   theme == 'light' || theme == null
                     ? 'whiteT border-b-slate-500'
@@ -80,10 +91,10 @@
           </main>
         </section>
 
-        <section v-if="!loading">
+        <section v-else>
           <main v-for="n in 5" :key="n" class="mt-1 transit">
             <div
-              class="animate-pulse flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
+              class="animate-pulse flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-2 bg-slate-100 dark:bg-slate-800 transit"
             >
               <div
                 class="rounded-full bg-gray-300 dark:bg-gray-500 min-w-10 md:min-w-12 md:max-w-16 md:h-12 h-10 select-none transit"
@@ -125,14 +136,39 @@
 </template>
 
 <script setup>
+//stores
+import { userflow } from "@/stores/userflow";
+
+//components
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject, onMounted, ref } from "vue";
 import BalanceCard from "@/components/cards/balanceCard.vue";
+
+import { computed, inject, onMounted, ref } from "vue";
+
+//images
+import credit from "@/assets/svg/credit.svg";
+import debit from "@/assets/svg/debit.svg";
+
+const theme = inject("theme");
+const userflowing = userflow();
 
 const loading = ref(false);
 
+const transactions = computed(() => {
+  return userflowing.allTransactions;
+});
+
+function checkImage(type) {
+  if (type == "credit") {
+    return credit;
+  } else {
+    return debit;
+  }
+}
+
 onMounted(() => {
+  if (transactions.value.length == 0) userflowing.initUserTransactions();
   setTimeout(() => {
     loading.value = true;
   }, 5000);
@@ -143,11 +179,6 @@ onMounted(() => {
     behavior: "smooth",
   });
 });
-
-import credit from "@/assets/svg/credit.svg";
-import debit from "@/assets/svg/debit.svg";
-
-const theme = inject("theme");
 </script>
 
 <style></style>

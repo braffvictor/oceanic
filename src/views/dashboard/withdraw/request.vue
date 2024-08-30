@@ -95,6 +95,7 @@
             <section v-if="crypto">
               <div
                 class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+                :class="errorNetwork ? '!border-red-500' : null"
               >
                 <div class="relative w-full">
                   <input
@@ -110,6 +111,7 @@
                   <label
                     for="network"
                     class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-slate-500 dark:text-slate-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0 indent-3"
+                    :class="errorNetwork ? '!text-red-500' : null"
                     >Enter {{ crypto }} Network</label
                   >
                 </div>
@@ -127,6 +129,7 @@
               <!-- the wallet address-->
               <div
                 class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+                :class="errorAddress ? '!border-red-500' : null"
               >
                 <div class="relative w-full">
                   <input
@@ -142,6 +145,7 @@
                   <label
                     for="amount"
                     class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-slate-500 dark:text-slate-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0 indent-3"
+                    :class="errorAddress ? '!text-red-500' : null"
                     >Enter {{ crypto }} Wallet Address</label
                   >
                 </div>
@@ -159,6 +163,7 @@
             <section v-if="crypto">
               <div
                 class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+                :class="errorAmount ? '!border-red-500' : null"
               >
                 <div class="relative w-full">
                   <input
@@ -174,6 +179,7 @@
                   <label
                     for="amount"
                     class="w-96 indent-2 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-slate-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
+                    :class="errorAmount ? '!text-red-500' : null"
                     >Enter Amount in (ETH)</label
                   >
                 </div>
@@ -197,6 +203,7 @@
               <d-button
                 @click="submit"
                 type="elevated"
+                :loading="loading"
                 class="bg-green-400 dark:bg-green-500 w-full mt-5 shadow-md shadow-green-400 dark:shadow-green-500"
                 >Submit</d-button
               >
@@ -209,10 +216,32 @@
 </template>
 
 <script setup>
+//stores
+import { userflow } from "@/stores/userflow";
+import { authentication } from "@/stores/authentication";
+
+//composables
+import { getDate } from "@/composables/getDate";
+
+//components
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import { computed, inject, ref } from "vue";
 import DButton from "@/components/utils/DButton.vue";
+
+const userflowing = userflow();
+
+const loading = computed(() => {
+  return userflowing.loading.withdraw;
+});
+
+const useAuthentication = authentication();
+
+const user = computed(() => {
+  return useAuthentication.user;
+});
+
+const { getCurrentTimeAndDate } = getDate();
 
 const theme = inject("theme");
 
@@ -281,10 +310,49 @@ function submit() {
   checkCrypto();
   checkNetwork();
 
-  if (checkAddress() && checkAmount() && checkNetwork() && checkCrypto()) {
-    console.log("submitted");
-  } else {
-    console.log("not submitted");
+  if (
+    checkAddress() &&
+    checkAmount() &&
+    checkNetwork() &&
+    checkCrypto() &&
+    user.value
+  ) {
+    if (user.value.wallet.balance < amount.value) {
+      userflowing.initAlert({
+        is: true,
+        message: `Dear ${
+          user.value && user.value.fullName
+        }, You Do Not Have The Sufficient Amount In Your Wallet Balance For This Transaction.`,
+        type: "error",
+        timer: 5000,
+      });
+      return;
+    }
+
+    const payload = {
+      amount: amount.value,
+      convertAmount: convertAmount.value,
+      walletAddress: address.value,
+      crypto: crypto.value,
+      network: network.value,
+
+      fullName: user.value && user.value.fullName,
+      email: user.value && user.value.email,
+      userID: user.value && user.value.userID,
+      date: getCurrentTimeAndDate(),
+      formattedDate: getCurrentTimeAndDate("format"),
+      status: "pending",
+      category: "withdraws",
+      type: "debit",
+    };
+
+    console.log(payload);
+    userflowing.withdrawFN(payload).then(() => {
+      amount.value = "";
+      address.value = "";
+      crypto.value = "";
+      network.value = "";
+    });
   }
 }
 

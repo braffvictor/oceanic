@@ -22,8 +22,8 @@
         </div>
       </DDashbar>
 
-      <section class="px-3">
-        <main v-for="n in 3" :key="n">
+      <section class="px-3" v-if="nfts.length > 0">
+        <main v-for="nft in nfts" :key="nft.id">
           <div
             class="flex rounded-xl px-3 justify-start items-center md:items-center gap-x-2 gap-y-12 my-3"
           >
@@ -35,7 +35,7 @@
             <div
               class="font-normal italic md:text-[16px] select-none md:font-extralight w-full"
             >
-              Grounded
+              {{ nft.collection }} Collection
               <!-- <p class="text-xs opacity-65">02/09/2024</p> -->
             </div>
             <div class="float-end text-right">
@@ -50,7 +50,7 @@
           <!-- divider -->
           <div
             class="border-b w-full opacity-20"
-            v-if="n != 3"
+            v-if="n + 1 != nfts.length"
             :class="
               theme == 'light' || theme == null
                 ? 'whiteT border-b-slate-500'
@@ -64,9 +64,23 @@
 </template>
 
 <script setup>
+//stores
+import { userflow } from "@/stores/userflow";
+
+//components
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject, onMounted } from "vue";
+import { computed, inject, onMounted } from "vue";
+
+const userflowing = userflow();
+
+const nfts = computed(() => {
+  return userflowing.userNfts;
+});
+
+onMounted(() => {
+  if (nfts.value.length == 0) userflowing.initUserNfts();
+});
 
 onMounted(() => {
   window.scrollTo({

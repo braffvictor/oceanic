@@ -400,7 +400,8 @@ function buyNft(nft) {
     !nft ||
     !nft.name ||
     !collectionHeader.value ||
-    nft.stats.floor_eth < 0.1
+    nft.stats.floor_eth < 0.1 ||
+    !user.value
   ) {
     userflowing.initAlert({
       message: `An Error Occured`,
@@ -419,7 +420,9 @@ function buyNft(nft) {
 
   if (nft.stats.floor_eth >= user.value.wallet.balance) {
     userflowing.initAlert({
-      message: `You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase "${
+      message: `Dear, ${
+        user.value && user.value.fullName
+      }, You Do Not Have The Sufficient Amount In Your Wallet Balance To Purchase "${
         nft.name
       }" From The ${
         nft.collection.toUpperCase() || nft.key.toUpperCase()
@@ -435,6 +438,7 @@ function buyNft(nft) {
   nft.email = user.value && user.value.email;
   nft.userID = user.value && user.value.userID;
   nft.type = "bought";
+  nft.collection = user.value && user.value.userName;
   nft.category = "nfts";
   nft.status = "pending";
   nft.date = getCurrentTimeAndDate();
@@ -444,7 +448,7 @@ function buyNft(nft) {
   nft.description = nft.description
     ? nft.description
     : collectionHeader.value.description;
-  nft.category = collectionHeader.value.category;
+  nft.categoryType = collectionHeader.value.category;
   nft.created_date = collectionHeader.value.created_date;
 
   // console.log(nft);
@@ -493,6 +497,7 @@ function cartNft(nftDetails) {
     nftDetails.userID = user.value && user.value.userID;
     nftDetails.type = "bought";
     nftDetails.category = "nfts";
+    nftDetails.collection = user.value && user.value.userName;
     nftDetails.status = "pending";
     nftDetails.date = getCurrentTimeAndDate();
     nftDetails.formattedDate = getCurrentTimeAndDate("format");
@@ -501,12 +506,14 @@ function cartNft(nftDetails) {
     nftDetails.description = nftDetails.description
       ? nftDetails.description
       : collectionHeader.value.description;
-    nftDetails.category = collectionHeader.value.category;
+    nftDetails.categoryType = collectionHeader.value.category;
     nftDetails.created_date = collectionHeader.value.created_date;
 
     const newList = [nftDetails, ...cartedNfts];
     localStorage.setItem("watchList", JSON.stringify(newList));
     userflowing.checkLocalStorage(newList.length);
+
+    console.log(nftDetails);
 
     userflowing.initAlert({
       message: `${nftDetails.name} Added To Your Cart List`,

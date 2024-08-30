@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-auto pb-10">
     <main class="md:w-10/12 mx-auto">
-      <DDashbar>
-        <div class="w-full flex justify-between items-center">
+      <DDashbar class="md:w-10/12 mx-auto">
+        <div class="flex w-full justify-between items-center">
           <button
             @click="$router.go(-1)"
             class="rounded-full bg-slate-50 dark:bg-slate-900 active:scale-75 border flex justify-center items-center transit backdrop-blur-sm cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800"
@@ -40,20 +40,21 @@
               type="outlined"
               to="/dashboard/profile/collections"
               class="flex flex-col"
-              ><p>Collection</p>
-              <p class="text-green-500">0</p></DButton
             >
+              <p>Collection</p>
+              <p class="text-green-500">0</p>
+            </DButton>
 
-            <DButton type="outlined"
-              >Uploaded
+            <DButton type="outlined" class="flex flex-col"
+              ><p>Uploaded</p>
               <p class="text-green-500">0</p>
             </DButton>
-            <DButton type="outlined"
-              >Bought
+            <DButton type="outlined" class="flex flex-col"
+              ><p>Bought</p>
               <p class="text-green-500">0</p>
             </DButton>
-            <DButton type="outlined"
-              >All
+            <DButton type="outlined" class="flex flex-col"
+              ><p>All</p>
               <p class="text-green-500">0</p>
             </DButton>
           </section>
@@ -65,9 +66,9 @@
             <div
               class="rounded-xl transit bg-slate-100 dark:bg-slate-800 h-auto w-full shadow text-left p-4"
             >
-              <p>Name: David Swae</p>
-              <p class="my-2">Email: dave@gmail.com</p>
-              <p>Username: swaedavid</p>
+              <p>Name: {{ user && user.fullName }}</p>
+              <p class="my-2">Email: {{ user && user.email }}</p>
+              <p>Username: {{ user && user.userName }}</p>
             </div>
 
             <div class="mt-4 rounded-xl">
@@ -89,7 +90,7 @@
 <script setup>
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { inject, onMounted } from "vue";
+import { computed, inject, onMounted } from "vue";
 import { auth } from "@/services/firebase";
 import { signOut } from "firebase/auth";
 
@@ -97,6 +98,10 @@ import DButton from "@/components/utils/DButton.vue";
 import { authentication } from "@/stores/authentication";
 
 const useAuthentication = authentication();
+
+const user = computed(() => {
+  return useAuthentication.user;
+});
 
 function signOuting() {
   signOut(auth);

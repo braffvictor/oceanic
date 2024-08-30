@@ -50,6 +50,7 @@
             :key="nft.name"
             :nft="nft"
             :action="true"
+            :explore-page="true"
             :dashboard="true"
             :card-size="'min-w-40 min-h-64 max-w-40 max-h-64 md:min-w-56 md:min-h-72 md:max-w-56 md:max-h-72'"
           />

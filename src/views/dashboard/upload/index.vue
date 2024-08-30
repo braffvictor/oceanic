@@ -31,7 +31,7 @@
           SUBMIT YOUR NFT FOR EVALUATION
         </p>
         <p class="text-xs md:text-sm my-2 text-teal-600">
-          NOTE GAS FEES OF ETH 0.10 WILL BE DEDUCTED FROM YOUR BALANCE FOR YOUR
+          NOTE GAS FEES OF ETH 0.25 WILL BE DEDUCTED FROM YOUR BALANCE FOR YOUR
           FIRST UPLOAD
         </p>
 
@@ -333,6 +333,8 @@ function submit() {
   checkDescription();
   checkBidPrice();
 
+  // todo check for gas fees is avaiable in balance
+
   if (
     checkBidPrice() &&
     checkCategory() &&
@@ -342,8 +344,20 @@ function submit() {
     checkPhoto() &&
     checkCreator()
   ) {
+    // if (user.value.wallet.balance < 0.25 && !user.value.paidGas) {
+    //   userflowing.initAlert({
+    //     is: true,
+    //     message: `Dear ${
+    //       user.value && user.value.fullName
+    //     }, You Do Not Have The Sufficient Amount To Upload This NFT, Please Top Up Your Account To Upload Your NFT.`,
+    //     type: "error",
+    //     timer: 4500,
+    //   });
+    // }
+
     const payload = {
       creator: creator.value,
+      paidGas: user.value && user.value.paidGas,
       chain: "Ethereum",
       name: item.value,
       stats: {

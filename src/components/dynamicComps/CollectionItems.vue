@@ -128,7 +128,8 @@ const specificCollectionNfts = async (routeParams) => {
         delete nft.display_animation_url;
 
         nft.action = true;
-        nft.category = props.headerObj.category || "";
+        nft.category = "nfts";
+        nft.categoryType = props.headerObj.category || "";
         nft.created_date = props.headerObj.created_date || "";
         nft.description = nft.description
           ? nft.description

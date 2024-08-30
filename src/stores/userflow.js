@@ -21,9 +21,13 @@ export const userflow = defineStore("userflow", {
   state: () => ({
     themeState: localStorage.getItem("theme"),
     cartList: JSON.parse(localStorage.getItem("watchList") || "[]")?.length,
+    userNfts: [],
     nfts: [],
     randomNfts: [],
 
+    deposits: [],
+    withdraws: [],
+    allTransactions: [],
     notifications: [],
 
     alert: {
@@ -38,6 +42,7 @@ export const userflow = defineStore("userflow", {
       upload: false,
       buy: false,
       deposit: false,
+      withdraw: false,
     },
   }),
 
@@ -330,6 +335,18 @@ export const userflow = defineStore("userflow", {
 
       console.log(payload);
 
+      //dont really want the user to be uploading all the time....but just put the function there first
+      // if (!payload.paidGas) {
+      //   this.deduction({ amount: 0.25 });
+
+      //   const currentUser = doc(collection(db, "users", payload.userID));
+      //   updateDoc(currentUser, {
+      //     paidGas: true,
+      //   });
+      // }
+
+      //deduct gas fee from balance for the upload....and potentially change gas to true..can upload again and again
+
       await addDoc(colref, payload)
         .then((docRef) => {
           const currentUserDoc = doc(colref, docRef.id);
@@ -421,7 +438,10 @@ export const userflow = defineStore("userflow", {
               arr.push(docs.data());
 
               sorting = arr.sort((a, b) => {
-                return b.formattedDate.slice(8) - a.formattedDate.slice(8);
+                const dateA = new Date(a.formattedDate);
+                const dateB = new Date(b.formattedDate);
+
+                return dateB - dateA;
               });
             });
             console.log(sorting);
@@ -462,10 +482,158 @@ export const userflow = defineStore("userflow", {
             id: docRef.id,
           });
 
+          this.initAlert({
+            is: true,
+            message: `Your Deposit Of ${payload.amount} ETH Is Successful, Awaiting Approval.`,
+            type: "success",
+            timer: 5000,
+          });
+
           this.loading.deposit = false;
         })
         .catch((error) => {
           this.loading.deposit = false;
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async initUserDeposits() {
+      const colref = collection(db, "deposits");
+
+      const queryCollection = query(
+        colref,
+        where("userID", "==", auth.currentUser.uid)
+      );
+
+      const arr = [];
+      await getDocs(queryCollection)
+        .then((docRefs) => {
+          if (!docRefs.empty) {
+            docRefs.forEach((docs) => {
+              arr.push(docs.data());
+            });
+            this.deposits = arr;
+          } else {
+            this.deposits = [];
+          }
+        })
+        .catch((error) => {
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async withdrawFN(payload) {
+      this.loading.withdraw = true;
+
+      const colref = collection(db, "withdraws");
+
+      payload.text = `${payload.crypto} Withdrawal`;
+
+      await addDoc(colref, payload)
+        .then((docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+
+          //todo: to deduct the amount from the user balance....was thinking to leave it until admin approves it
+          this.deduction({ amount: payload.amount });
+
+          this.initAlert({
+            is: true,
+            message: `Withdrawal Of ${payload.convertAmount} Worth Of ${payload.crypto} Is Being Processed.`,
+            type: "success",
+            timer: 5000,
+          });
+          this.loading.withdraw = false;
+        })
+        .catch((error) => {
+          this.loading.withdraw = false;
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async initUserWithdraws() {
+      const colref = collection(db, "withdraws");
+
+      const queryCollection = query(
+        colref,
+        where("userID", "==", auth.currentUser.uid)
+      );
+
+      const arr = [];
+      await getDocs(queryCollection)
+        .then((docRefs) => {
+          if (!docRefs.empty) {
+            docRefs.forEach((docs) => {
+              arr.push(docs.data());
+            });
+            this.withdraws = arr;
+          } else {
+            this.withdraws = [];
+          }
+        })
+        .catch((error) => {
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async initUserTransactions() {
+      await this.initUserDeposits();
+      await this.initUserWithdraws();
+
+      const arr = [...this.deposits, ...this.withdraws];
+
+      this.allTransactions = arr.sort((a, b) => {
+        const dateA = new Date(a.formattedDate);
+        const dateB = new Date(b.formattedDate);
+
+        return dateB - dateA;
+      });
+      console.log(this.allTransactions);
+    },
+
+    async initUserNfts() {
+      const colref = collection(db, "nfts");
+
+      const queryCollection = query(
+        colref,
+        where("userID", "==", auth.currentUser.uid)
+      );
+
+      const arr = [];
+      await getDocs(queryCollection)
+        .then((docRefs) => {
+          if (!docRefs.empty) {
+            docRefs.forEach((docs) => {
+              arr.push(docs.data());
+            });
+            this.userNfts = arr;
+          } else {
+            this.userNfts = [];
+          }
+        })
+        .catch((error) => {
           this.initAlert({
             is: true,
             message: error.message,
