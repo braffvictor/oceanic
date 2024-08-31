@@ -360,6 +360,10 @@ function submit() {
       paidGas: user.value && user.value.paidGas,
       chain: "Ethereum",
       name: item.value,
+
+      // amount to be paid for gas fee
+      // gasfeeAmount : 0.25,
+
       stats: {
         floor_eth: bidPrice.value,
         floor_price: Math.abs(Math.round(bidPrice.value * 3043)),
@@ -369,9 +373,9 @@ function submit() {
       convertAmount: convertAmount.value,
 
       //what category does the nft belongs to
-      nftCategory: category.value,
+      categoryType: category.value,
       key: user.value && user.value.userName,
-      contract_adddress: generateAddress(),
+      contract_address: generateAddress(),
       identifier: generateID(),
 
       collection: collection.value.toLowerCase(),
@@ -392,8 +396,8 @@ function submit() {
       fullName: user.value && user.value.fullName,
       email: user.value && user.value.email,
     };
-    console.log(payload);
-    // userflowing.uploadFN(payload)
+    // console.log(payload);
+    userflowing.uploadFN(payload);
   } else {
     console.log(false);
   }

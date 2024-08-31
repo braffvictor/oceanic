@@ -31,7 +31,7 @@
 
         <div
           class="flex justify-between text-slate-900 font-bold dark:text-slate-100 mt-5"
-          v-if="!learn && !action && nft.stats"
+          v-if="!learn && !action && nft.stats && !dashboard"
         >
           <div v-if="!learn && nft && !action">
             <p class="text-gray-400 font-light">Floor</p>
@@ -125,6 +125,16 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
+  // to navigate in the profile directory
+  profile: {
+    type: Boolean,
+    default: false,
+  },
+  id: {
+    type: String,
+    default: "",
+  },
 });
 
 // let userflowCartList = userflow().cartList;
@@ -191,6 +201,8 @@ function checkRoute() {
     router.push(`${props.routeName}`);
   } else if (props.to) {
     router.push(`/collection/${props.nft && props.nft.key}`);
+  } else if (props.profile) {
+    router.push(`/dashboard/profile/item/${props.id}`);
   } else {
     () => {};
   }

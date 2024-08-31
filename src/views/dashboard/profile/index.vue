@@ -42,20 +42,31 @@
               class="flex flex-col"
             >
               <p>Collection</p>
-              <p class="text-green-500">0</p>
+              <p class="text-green-500">
+                {{ getUniqueByProperty(nfts, "collection").length }}
+              </p>
             </DButton>
 
-            <DButton type="outlined" class="flex flex-col"
+            <DButton
+              type="outlined"
+              class="flex flex-col"
+              to="/dashboard/profile/items/uploaded"
               ><p>Uploaded</p>
-              <p class="text-green-500">0</p>
+              <p class="text-green-500">{{ uploadedNfts.length }}</p>
             </DButton>
-            <DButton type="outlined" class="flex flex-col"
+            <DButton
+              type="outlined"
+              class="flex flex-col"
+              to="/dashboard/profile/items/bought"
               ><p>Bought</p>
-              <p class="text-green-500">0</p>
+              <p class="text-green-500">{{ boughtNfts.length }}</p>
             </DButton>
-            <DButton type="outlined" class="flex flex-col"
+            <DButton
+              type="outlined"
+              class="flex flex-col"
+              to="/dashboard/profile/items/all"
               ><p>All</p>
-              <p class="text-green-500">0</p>
+              <p class="text-green-500">{{ nfts.length }}</p>
             </DButton>
           </section>
 
@@ -88,19 +99,38 @@
 </template>
 
 <script setup>
-import DDashbar from "@/components/utils/DDashbar.vue";
-import SvgComp from "@/components/svgComp.vue";
-import { computed, inject, onMounted } from "vue";
+//stores
+import { authentication } from "@/stores/authentication";
+import { userflow } from "@/stores/userflow";
+
+//firebase
 import { auth } from "@/services/firebase";
 import { signOut } from "firebase/auth";
 
-import DButton from "@/components/utils/DButton.vue";
-import { authentication } from "@/stores/authentication";
+//components
+import DDashbar from "@/components/utils/DDashbar.vue";
+import SvgComp from "@/components/svgComp.vue";
+import { computed, inject, onMounted } from "vue";
 
+import DButton from "@/components/utils/DButton.vue";
 const useAuthentication = authentication();
 
 const user = computed(() => {
   return useAuthentication.user;
+});
+
+const userflowing = userflow();
+
+const nfts = computed(() => {
+  return userflowing.userNfts;
+});
+
+const boughtNfts = computed(() => {
+  return userflowing.userNfts.filter((nft) => nft.type == "bought");
+});
+
+const uploadedNfts = computed(() => {
+  return userflowing.userNfts.filter((nft) => nft.type == "uploaded");
 });
 
 function signOuting() {
@@ -110,7 +140,23 @@ function signOuting() {
 
 const theme = inject("theme");
 
+function getUniqueByProperty(arr, property) {
+  const seen = new Set();
+  const result = [];
+
+  for (const item of arr) {
+    if (!seen.has(item[property])) {
+      seen.add(item[property]);
+      result.push(item);
+    }
+  }
+
+  return result;
+}
+
 onMounted(() => {
+  if (nfts.value.length == 0) userflowing.initUserNfts();
+
   window.scrollTo({
     top: -10,
     left: 0,

@@ -156,6 +156,36 @@ const routes = [
         name: "profile collections",
         component: () => import("../views/dashboard/profile/collections.vue"),
       },
+      {
+        path: "/dashboard/profile/items/:id",
+        name: "profile items",
+        component: () => import("../views/dashboard/profile/items.vue"),
+        beforeEnter(to) {
+          const id = to.params.id;
+          const params = ["all", "bought", "uploaded"];
+          const exists = params.some((exist) => exist == id);
+
+          if (!exists) {
+            return {
+              name: "error-page",
+              params: { pathMatch: to.path.substring(1).split("/") },
+              query: to.query,
+              hash: to.hash,
+            };
+          }
+        },
+      },
+      {
+        path: "/dashboard/profile/item/:id",
+        name: "profile items view",
+        component: () => import("../views/dashboard/profile/itemDetails.vue"),
+      },
+      {
+        path: "/dashboard/profile/collections/:id",
+        name: "profile collections view",
+        component: () =>
+          import("../views/dashboard/profile/allCollectionItems.vue"),
+      },
     ],
   },
 

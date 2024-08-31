@@ -23,7 +23,16 @@
       </DDashbar>
 
       <section class="px-3" v-if="nfts.length > 0">
-        <main v-for="nft in nfts" :key="nft.id">
+        <main
+          v-for="(nft, n) in getUniqueByProperty(nfts, 'collection')"
+          :key="nft.id"
+          class="cursor-pointer"
+          @click="
+            $router.push(
+              `/dashboard/profile/collections/${nft.collection.trim()}`
+            )
+          "
+        >
           <div
             class="flex rounded-xl px-3 justify-start items-center md:items-center gap-x-2 gap-y-12 my-3"
           >
@@ -35,7 +44,7 @@
             <div
               class="font-normal italic md:text-[16px] select-none md:font-extralight w-full"
             >
-              {{ nft.collection }} Collection
+              {{ nft.collection }} <span class="not-italic">Collection</span>
               <!-- <p class="text-xs opacity-65">02/09/2024</p> -->
             </div>
             <div class="float-end text-right">
@@ -50,7 +59,7 @@
           <!-- divider -->
           <div
             class="border-b w-full opacity-20"
-            v-if="n + 1 != nfts.length"
+            v-if="n + 1 != getUniqueByProperty(nfts, 'collection').length"
             :class="
               theme == 'light' || theme == null
                 ? 'whiteT border-b-slate-500'
@@ -78,11 +87,22 @@ const nfts = computed(() => {
   return userflowing.userNfts;
 });
 
-onMounted(() => {
-  if (nfts.value.length == 0) userflowing.initUserNfts();
-});
+function getUniqueByProperty(arr, property) {
+  const seen = new Set();
+  const result = [];
+
+  for (const item of arr) {
+    if (!seen.has(item[property])) {
+      seen.add(item[property]);
+      result.push(item);
+    }
+  }
+
+  return result;
+}
 
 onMounted(() => {
+  if (nfts.value.length == 0) userflowing.initUserNfts();
   window.scrollTo({
     top: -10,
     left: 0,

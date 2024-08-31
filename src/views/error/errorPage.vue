@@ -29,7 +29,7 @@
         <d-button
           type="elevated"
           to="/"
-          class="bg-green-500 mt-5 !text-slate-50 shadow-green-500"
+          class="bg-green-500 mt-5 !text-slate-50 shadow-green-500 w-80 mx-auto text-center"
           >Navigate Back Home</d-button
         >
       </div>

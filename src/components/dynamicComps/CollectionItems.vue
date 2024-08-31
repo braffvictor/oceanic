@@ -5,7 +5,6 @@
     ></div>
     <span
       class="text-slate-900 dark:text-slate-100 md:text-md text-sm ml-1 mb-3"
-      @click="headerclick"
       >Live</span
     >
 
@@ -129,6 +128,7 @@ const specificCollectionNfts = async (routeParams) => {
 
         nft.action = true;
         nft.category = "nfts";
+        nft.type = "bought";
         nft.categoryType = props.headerObj.category || "";
         nft.created_date = props.headerObj.created_date || "";
         nft.description = nft.description

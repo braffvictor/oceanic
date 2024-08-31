@@ -21,7 +21,11 @@ export const userflow = defineStore("userflow", {
   state: () => ({
     themeState: localStorage.getItem("theme"),
     cartList: JSON.parse(localStorage.getItem("watchList") || "[]")?.length,
+
+    //for the users nfts
     userNfts: [],
+    nftDetails: null, //for the specific nft to display
+
     nfts: [],
     randomNfts: [],
 
@@ -52,6 +56,8 @@ export const userflow = defineStore("userflow", {
     getAlert: (state) => state.alert,
     getNfts: (state) => state.nfts,
     getRandoms: (state) => state.randomNfts,
+
+    getNftByID: (state) => (id) => state.userNfts.find((nft) => nft.id == id),
   },
 
   actions: {
@@ -193,6 +199,7 @@ export const userflow = defineStore("userflow", {
                 nft.identifier || 1500
               );
               nft.action = true;
+              nft.type = "bought";
               //todo generate a random name here instead of ####
               nft.name = nft.name ? nft.name : "####";
               nft.stats = {
