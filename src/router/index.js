@@ -4,11 +4,13 @@ import HomeView from "../views/HomeView.vue";
 import NProgress from "nprogress";
 
 import { authentication } from "@/stores/authentication";
+import { userflow } from "@/stores/userflow";
 
 import authWare from "@/middleware/auth";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/services/firebase";
+import { computed, watch } from "vue";
 
 const routes = [
   {
@@ -179,12 +181,65 @@ const routes = [
         path: "/dashboard/profile/item/:id",
         name: "profile items view",
         component: () => import("../views/dashboard/profile/itemDetails.vue"),
+
+        beforeEnter(to) {
+          setTimeout(() => {
+            const userflowing = userflow();
+            const arr = [];
+            const nfts = computed(() => {
+              return userflowing.userNfts;
+            });
+
+            nfts.value.forEach((nft) => {
+              arr.push(nft.id);
+            });
+
+            const id = to.params.id;
+            const params = arr;
+            const exists = params.some((exist) => exist == id);
+
+            if (!exists) {
+              return {
+                name: "error-page",
+                params: { pathMatch: to.path.substring(1).split("/") },
+                query: to.query,
+                hash: to.hash,
+              };
+            }
+          }, 500);
+        },
       },
       {
         path: "/dashboard/profile/collections/:id",
         name: "profile collections view",
         component: () =>
           import("../views/dashboard/profile/allCollectionItems.vue"),
+        beforeEnter(to) {
+          setTimeout(() => {
+            const userflowing = userflow();
+            const arr = [];
+            const nfts = computed(() => {
+              return userflowing.userNfts;
+            });
+
+            nfts.value.forEach((nft) => {
+              arr.push(nft.collection);
+            });
+
+            const id = to.params.id;
+            const params = arr;
+            const exists = params.some((exist) => exist == id);
+
+            if (!exists) {
+              return {
+                name: "error-page",
+                params: { pathMatch: to.path.substring(1).split("/") },
+                query: to.query,
+                hash: to.hash,
+              };
+            }
+          }, 500);
+        },
       },
     ],
   },
