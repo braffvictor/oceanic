@@ -42,9 +42,9 @@
               ·
             </div>
             <div
-              class="font-normal italic md:text-[16px] select-none md:font-extralight w-full"
+              class="font-normal italic md:text-[16px] select-none capitalize md:font-extralight w-full"
             >
-              {{ nft.collection }} <span class="not-italic">Collection</span>
+              {{ checkCollection(nft.collection) }}
               <!-- <p class="text-xs opacity-65">02/09/2024</p> -->
             </div>
             <div class="float-end text-right">
@@ -81,6 +81,8 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import { computed, inject, onMounted } from "vue";
 
+const theme = inject("theme");
+
 const userflowing = userflow();
 
 const nfts = computed(() => {
@@ -110,7 +112,13 @@ onMounted(() => {
   });
 });
 
-const theme = inject("theme");
+function checkCollection(collection) {
+  if (collection.includes("collection") || collection.includes("Collection")) {
+    return collection;
+  } else {
+    return `${collection} Collections`;
+  }
+}
 </script>
 
 <style></style>

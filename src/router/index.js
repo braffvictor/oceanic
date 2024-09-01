@@ -14,7 +14,7 @@ import { computed, watch } from "vue";
 
 const routes = [
   {
-    //for default layout and subpages
+    //todo for default layout and subpages routes
     component: () => import("@/layout/default"),
     name: "default",
     path: "/",
@@ -73,6 +73,7 @@ const routes = [
     ],
   },
 
+  //todo for all dashboard routes
   {
     path: "/dashboard",
     name: "dashboard",
@@ -80,7 +81,6 @@ const routes = [
     meta: {
       middleware: authWare,
     },
-
     children: [
       {
         path: "/dashboard/home",
@@ -242,6 +242,13 @@ const routes = [
         },
       },
     ],
+  },
+
+  //todo for all admin routes
+  {
+    path: "/admin",
+    name: "admin layout",
+    component: () => import("@/layout/admin"),
   },
 
   //for error page

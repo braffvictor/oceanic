@@ -19,6 +19,7 @@
       <div class="w-full relative">
         <input
           class="cursor-pointer placeholder:text-gray-500 placeholder:text-sm dark:placeholder:text-gray-400 text-sm bg-transparent outline-none w-full"
+          :class="err ? 'placeholder:!text-red-500' : null"
           type="text"
           v-model="input"
           :name="name"

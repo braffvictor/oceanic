@@ -3,7 +3,7 @@
     <section class="">
       <main class="flex-col md:flex-row flex gap-5">
         <div
-          class="border rounded-2xl overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit"
+          class="border rounded-2xl md:w-1/2 overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit"
         >
           <p class="p-2 text-slate-900 dark:text-slate-100">
             <SvgComp

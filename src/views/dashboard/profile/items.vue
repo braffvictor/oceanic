@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen">
+  <div class="min-h-screen">
     <main class="mx-auto md:w-11/12">
       <DDashbar>
         <div class="w-full flex justify-between items-center">
@@ -49,7 +49,7 @@
 
         <div class="text-center mx-auto flex justify-center">
           <div
-            class="grid grid-cols-2 justify-center items-center md:grid-cols-5 mt-7 gap-6 text-center mx-auto"
+            class="grid grid-cols-2 justify-center items-center md:grid-cols-4 mt-7 gap-6 text-center mx-auto"
             v-if="nfts && nfts.length > 0"
           >
             <NftCard
