@@ -17,7 +17,7 @@
       class="px-3 md:px-6 min-h-screen dark:bg-slate-900 bg-slate-100 w-full transit relative"
     >
       <div
-        class="mx-auto p-3 w-[93%] md:w-[96%] transit rounded-2xl gap-4 dark:bg-slate-900 bg-slate-50 h-auto -top-7 left-0 right-0 absolute grid md:grid-cols-3"
+        class="mx-auto p-3 w-[93%] md:w-[96%] transit rounded-2xl gap-4 dark:bg-slate-900 bg-slate-100 h-auto -top-7 left-0 right-0 absolute grid md:grid-cols-3"
       >
         <div
           class="border w-full h-56 mx-auto rounded-xl border-slate-700 dark:border-slate-200 dark:bg-slate-50 bg-slate-900"

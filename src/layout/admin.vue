@@ -6,7 +6,7 @@
     <!-- sidebar for pc -->
     <main
       @click.self="drawer = !drawer"
-      class="min-h-screen bg-slate-100 dark:bg-slate-900 hidden md:block transit relative !overflow-hidden"
+      class="min-h-screen bg-slate-100 dark:bg-slate-900 hidden md:block transit relative !overflow-hidden border-r dark:border-slate-800"
       :class="drawer ? 'w-[220px]' : 'w-16'"
     >
       <!-- toggle drawer button -->
