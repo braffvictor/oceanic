@@ -249,6 +249,13 @@ const routes = [
     path: "/admin",
     name: "admin layout",
     component: () => import("@/layout/admin"),
+    children: [
+      {
+        path: "/admin",
+        name: "admin dashboard page",
+        component: () => import("@/views/admin/dashboard.vue"),
+      },
+    ],
   },
 
   //for error page
