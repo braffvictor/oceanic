@@ -27,7 +27,7 @@
         />
       </button>
 
-      <section class="fixed transit" :class="drawer ? 'w-[188px]' : 'w-[60px]'">
+      <section class="fixed transit" :class="drawer ? 'w-[187px]' : 'w-[60px]'">
         <!-- first content...logo -->
         <div
           class="justify-center items-center gap-x-2 cursor-pointer pt-7 mb-3"
