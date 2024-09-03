@@ -6,7 +6,7 @@
     <!-- sidebar for pc -->
     <main
       @click.self="drawer = !drawer"
-      class="min-h-screen bg-slate-100 dark:bg-slate-900 hidden md:block transit relative !overflow-hidden border-r dark:border-slate-800"
+      class="min-h-screen bg-slate-100 dark:bg-slate-900 hidden md:block transit relative overflow-clip border-r dark:border-slate-800"
       :class="drawer ? 'w-[220px]' : 'w-16'"
     >
       <!-- toggle drawer button -->
@@ -68,7 +68,7 @@
       </section>
     </main>
 
-    <main class="w-full">
+    <main class="w-full min-w-96">
       <!-- navbar -->
       <DDashbar class="md:px-6 !bg-slate-100 dark:!bg-slate-900">
         <div class="w-full flex justify-between md:justify-start items-center">

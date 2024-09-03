@@ -129,8 +129,9 @@ const specificCollectionNfts = async (routeParams) => {
         nft.action = true;
         nft.category = "nfts";
         nft.type = "bought";
-        nft.categoryType = props.headerObj.category || "";
-        nft.created_date = props.headerObj.created_date || "";
+        nft.status = "pending";
+        nft.categoryType = props.headerObj.category || "Not Given";
+        nft.created_date = props.headerObj.created_date || "Nil";
         nft.description = nft.description
           ? nft.description
           : props.headerObj.description;

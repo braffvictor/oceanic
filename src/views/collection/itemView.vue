@@ -323,6 +323,7 @@ const specificCollectionNfts = async (routeParams) => {
         nft.action = true;
         //todo generate a random name here instead of ####
         nft.name = nft.name ? nft.name : "####";
+        nft.status = "pending";
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500
         );

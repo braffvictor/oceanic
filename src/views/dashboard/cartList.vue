@@ -245,6 +245,7 @@ function buyNft(cart) {
   cart.userID = user.value && user.value.userID;
   cart.collection = user.value && user.value.userName;
   cart.type = "bought";
+  cart.status = "pending";
 
   if (cart.stats.floor_eth >= user.value.wallet.balance) {
     userflowing.initAlert({
