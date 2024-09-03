@@ -87,7 +87,9 @@
       </DDashbar>
 
       <section class="h-auto">
-        <router-view />
+        <Transition duration="1000">
+          <router-view />
+        </Transition>
       </section>
     </main>
 
@@ -207,5 +209,16 @@ const links = computed(() => {
 <style>
 .pen {
   color: #0000003f;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.6s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0, 6;
+  transform: translateY(-20px);
 }
 </style>
