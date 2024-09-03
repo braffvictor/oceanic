@@ -5,9 +5,9 @@
   >
     <svg-comp
       :icon="icon"
-      Sclass="!stroke-slate-50 dark:!stroke-slate-900 fill-slate-50 dark:fill-slate-900 !min-w-10  !max-w-10 pt-1 pl-1"
+      :Sclass="`!stroke-slate-50 dark:!stroke-slate-900 fill-slate-50 dark:fill-slate-900 !min-w-10  !max-w-10 pt-1 pl-1 ${iconColor}`"
     />
-    <p class="text-center transit">{{ text }}</p>
+    <p class="text-center transit font-semibold">{{ text }}</p>
     <p class="text-center">{{ length }}</p>
   </div>
 </template>
@@ -30,6 +30,10 @@ const props = defineProps({
     default: 0,
   },
   to: {
+    type: String,
+    default: "",
+  },
+  iconColor: {
     type: String,
     default: "",
   },

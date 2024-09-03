@@ -255,6 +255,16 @@ const routes = [
         name: "admin dashboard page",
         component: () => import("@/views/admin/dashboard.vue"),
       },
+      {
+        path: "/admin/users",
+        name: "admin users page",
+        component: () => import("@/views/admin/users/allusers.vue"),
+      },
+      {
+        path: "/admin/users/:id",
+        name: "admin users type",
+        component: () => import("@/views/admin/users/userType.vue"),
+      },
     ],
   },
 
