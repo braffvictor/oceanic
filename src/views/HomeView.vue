@@ -147,6 +147,15 @@
             </swiper-slide>
           </template>
         </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
       </main>
     </section>
 
@@ -165,6 +174,15 @@
             >
               <!-- for home nft cards -->
               <NftCard :nft="nft" :to="true" :action="false" />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -189,6 +207,15 @@
             </swiper-slide>
           </template>
         </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
       </main>
     </section>
     <section class="h-auto mt-5 min-h-72">
@@ -209,6 +236,15 @@
             </swiper-slide>
           </template>
         </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
       </main>
     </section>
     <section class="h-auto mt-5 min-h-72">
@@ -226,6 +262,15 @@
             >
               <!-- for home nft cards -->
               <NftCard :nft="nft" :to="true" :action="false" />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -250,6 +295,15 @@
             </swiper-slide>
           </template>
         </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
       </main>
     </section>
 
@@ -266,6 +320,15 @@
             >
               <!-- for home nft cards -->
               <NftCard :nft="nft" :to="true" :action="false" />
+            </swiper-slide>
+          </template>
+        </swiping-cards>
+
+        <swiping-cards class="py-5" v-else>
+          <template #cards>
+            <swiper-slide v-for="n in 10" :key="n">
+              <!-- for home nft cards -->
+              <LoadingCards />
             </swiper-slide>
           </template>
         </swiping-cards>
@@ -411,6 +474,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/css";
+import LoadingCards from "@/components/cards/loadingCards.vue";
 export default {
   components: {
     Swiper,

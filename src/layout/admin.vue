@@ -96,7 +96,7 @@
     <!-- sidebar for mobile -->
     <section
       @click.self="drawer = !drawer"
-      class="min-h-screen min-w-full fixed top-0 left-0 z-20 md:hidden transition-all duration-300 ease-in-out"
+      class="min-h-[150vh] min-w-full fixed top-0 left-0 z-20 md:hidden transition-all duration-300 ease-in-out"
       :class="
         drawer
           ? 'translate-x-0 !bg-[#06061220] backdrop-blur-sm opacity-100'
@@ -105,7 +105,7 @@
     >
       <!-- content -->
       <main
-        class="min-h-screen w-[55%] md bg-slate-100 dark:bg-slate-800 shadow-md"
+        class="min-h-[150vh] w-[55%] md bg-slate-100 dark:bg-slate-800 shadow-md"
       >
         <!-- first content...logo -->
         <div class="justify-center items-center gap-x-2 cursor-pointer pt-7">

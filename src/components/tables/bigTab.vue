@@ -63,9 +63,37 @@
           </tr>
         </tbody>
         <tbody v-else>
-          <tr class="font-bold">
-            <td class="columns-4 row-span-4 w-full">
-              <p>Loading Collection, Please Hold...</p>
+          <tr
+            class="text-center cursor-pointer transit"
+            v-for="n in 5"
+            :key="n"
+          >
+            <td class="p-4 rounded-l-xl">
+              <div class="">
+                {{ n }}
+              </div>
+            </td>
+            <td class="py-4 animate-pulse">
+              <div class="flex items-center justify-start gap-x-3">
+                <div
+                  class="w-16 min-w-16 max-w-16 rounded-xl h-14 bg-slate-200 transit dark:bg-slate-700"
+                ></div>
+                <p
+                  class="w-28 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl"
+                ></p>
+              </div>
+            </td>
+            <td class="animate-pulse">
+              <p
+                class="w-20 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl mx-4"
+              ></p>
+            </td>
+            <td
+              class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100 animate-pulse"
+            >
+              <p
+                class="w-20 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl"
+              ></p>
             </td>
           </tr>
         </tbody>
@@ -116,6 +144,42 @@
               class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100"
             >
               {{ (Number(nft && nft.stats.floor_price) * 6000).toFixed(0) }}
+            </td>
+          </tr>
+        </tbody>
+
+        <tbody v-else>
+          <tr
+            class="text-center cursor-pointer transit"
+            v-for="n in 5"
+            :key="n"
+          >
+            <td class="p-4 rounded-l-xl">
+              <div class="">
+                {{ n + 5 }}
+              </div>
+            </td>
+            <td class="py-4 animate-pulse">
+              <div class="flex items-center justify-start gap-x-3">
+                <div
+                  class="w-16 min-w-16 max-w-16 rounded-xl h-14 bg-slate-200 transit dark:bg-slate-700"
+                ></div>
+                <p
+                  class="w-28 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl"
+                ></p>
+              </div>
+            </td>
+            <td class="animate-pulse">
+              <p
+                class="w-20 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl mx-4"
+              ></p>
+            </td>
+            <td
+              class="font-bold px-4 rounded-r-xl text-slate-900 dark:text-slate-100 animate-pulse"
+            >
+              <p
+                class="w-20 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl"
+              ></p>
             </td>
           </tr>
         </tbody>

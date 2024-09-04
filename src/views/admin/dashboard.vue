@@ -1,6 +1,6 @@
 <template>
   <main
-    class="h-auto pb-10 min-h-[160vh] md:min-h-screen bg-slate-100 dark:bg-slate-900 transit"
+    class="h-auto pb-10 min-h-screen bg-slate-100 dark:bg-slate-900 transit"
   >
     <div
       class="flex md:px-8 px-5 justify-between bg-slate-100 dark:bg-slate-900 items-center transit pb-3"

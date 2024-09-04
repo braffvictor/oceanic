@@ -16,54 +16,13 @@
       </div>
     </section>
 
-    <section class="w-11/12 md:w-7/12 mx-auto mt-5">
-      <div
-        class="border-2 dark:border-slate-200 border-slate-700 rounded-3xl h-40 w-full p-3 md:p-6 flex items-center justify-between"
-      >
-        <div>
-          <p class="font-bold text-xl">Swae David</p>
-          <p class="text-sm">swaeDavid@gmail.com</p>
-          <p class="text-sm">01/41/2044</p>
-        </div>
-
-        <div class="flex flex-col">
-          <p
-            class="border rounded-3xl border-yellow-500 text-yellow-500 p-1 text-sm"
-          >
-            Pending
-          </p>
-          <p
-            class="border rounded-3xl text-green-500 border-green-500 text-center p-2 text-sm"
-          >
-            Active
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <p
-            class="bg-slate-900 text-slate-100 dark:bg-slate-100 dark:text-slate-900 p-2 rounded-lg transit"
-          >
-            View User
-          </p>
-
-          <p
-            class="bg-green-500 text-slate-100 dark:text-slate-900 text-center p-1 rounded-lg transit"
-          >
-            Activate
-          </p>
-          <p
-            class="bg-red-500 text-slate-100 dark:text-slate-900 text-center p-1 rounded-lg transit"
-          >
-            Block
-          </p>
-        </div>
-      </div>
-    </section>
+    <admin-prop-card />
   </main>
 </template>
 
 <script setup>
 import AdminCard from "@/components/cards/adminCard.vue";
+import AdminPropCard from "@/components/cards/adminPropCard.vue";
 import { adminflow } from "@/stores/adminflow";
 import { computed, onMounted, onUnmounted } from "vue";
 
@@ -77,7 +36,7 @@ const dashCard = computed(() => {
   };
 });
 onMounted(() => {
-  adminflowing.adminRoutes = "";
+  adminflowing.adminRoutes = "Users Management";
   window.scrollTo({
     top: -10,
     left: 0,

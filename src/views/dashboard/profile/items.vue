@@ -138,7 +138,9 @@ const loading = ref(false);
 
 const filterNfts = computed(() => {
   return userflowing.userNfts.filter(
-    (nft) => nft.type == route.params.id && nft.name.includes(searchName.value)
+    (nft) =>
+      nft.type == route.params.id.toLowerCase() &&
+      nft.name.includes(searchName.value)
   );
 });
 </script>
