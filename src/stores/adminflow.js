@@ -2,7 +2,7 @@ import { db, auth } from "@/services/firebase";
 import { userflow } from "./userflow";
 
 import { defineStore } from "pinia";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 export const adminflow = defineStore("adminflow", {
   state: () => ({
@@ -220,6 +220,42 @@ export const adminflow = defineStore("adminflow", {
             is: true,
             type: "error",
             message: error.message,
+          });
+        });
+    },
+
+    async dynamicUpdate(payload) {
+      const userflowing = userflow();
+
+      const colref = collection(db, payload.category);
+
+      const currentUserDoc = doc(colref, payload.id);
+
+      await updateDoc(currentUserDoc, payload.data)
+        .then(() => {
+          userflowing.initAlert({
+            is: true,
+            type: "success",
+            message: payload.message,
+            close: true,
+          });
+
+          if (payload.category == "users") {
+            this.initAllUsers();
+          } else if (payload.category == "deposits") {
+            this.initAllDeposits();
+          } else if (payload.category == "withdraws") {
+            this.initAllWithdraws();
+          } else if (payload.category == "nfts") {
+            this.initAllNfts();
+          }
+        })
+        .catch((error) => {
+          userflowing.initAlert({
+            is: true,
+            type: "error",
+            message: error.message,
+            timer: 5000,
           });
         });
     },

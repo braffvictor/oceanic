@@ -1,6 +1,6 @@
 <template>
   <div
-    class="transit dark:active:bg-slate-300 active:bg-slate-700 rounded-xl w-full h-56 mx-auto flex flex-col justify-center items-center dark:bg-slate-50 bg-slate-900 text-slate-100 dark:text-slate-900 cursor-pointer"
+    class="transit dark:active:bg-slate-300 active:bg-slate-700 rounded-xl w-full h-56 mx-auto flex flex-col select-none justify-center items-center dark:bg-slate-50 bg-slate-900 text-slate-100 dark:text-slate-900 cursor-pointer"
     @click="to ? $router.push(to) : () => {}"
   >
     <svg-comp

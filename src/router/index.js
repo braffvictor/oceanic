@@ -251,7 +251,7 @@ const routes = [
     component: () => import("@/layout/admin"),
     children: [
       {
-        path: "/admin",
+        path: "/admin/dashboard",
         name: "admin dashboard page",
         component: () => import("@/views/admin/dashboard.vue"),
       },
@@ -264,6 +264,36 @@ const routes = [
         path: "/admin/users/:id",
         name: "admin users type",
         component: () => import("@/views/admin/users/userType.vue"),
+      },
+      {
+        path: "/admin/nfts",
+        name: "admin nfts page",
+        component: () => import("@/views/admin/nfts/allnfts.vue"),
+      },
+      {
+        path: "/admin/nfts/:id",
+        name: "admin nfts type",
+        component: () => import("@/views/admin/nfts/nftType.vue"),
+      },
+      {
+        path: "/admin/deposits",
+        name: "admin deposits page",
+        component: () => import("@/views/admin/deposits/alldeposits.vue"),
+      },
+      {
+        path: "/admin/deposits/:id",
+        name: "admin deposits type",
+        component: () => import("@/views/admin/deposits/depositType.vue"),
+      },
+      {
+        path: "/admin/withdraws",
+        name: "admin withdraws page",
+        component: () => import("@/views/admin/withdraws/allwithdraws.vue"),
+      },
+      {
+        path: "/admin/withdraws/:id",
+        name: "admin withdraws type",
+        component: () => import("@/views/admin/withdraws/withdrawType.vue"),
       },
     ],
   },
