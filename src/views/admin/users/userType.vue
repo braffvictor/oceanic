@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-slate-100 dark:bg-slate-900 transit min-h-screen">
+  <main class="bg-slate-100 dark:bg-slate-900 transit min-h-screen pb-10">
     <section
       class="px-3 dark:bg-slate-900 bg-slate-100 w-full transit relative md:pt-5"
     >

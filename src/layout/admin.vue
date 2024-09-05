@@ -106,12 +106,13 @@
     <!-- sidebar for mobile -->
     <section
       @click.self="drawer = !drawer"
-      class="min-h-[150vh] min-w-full fixed top-0 left-0 z-20 md:hidden transition-all duration-300 ease-in-out"
-      :class="
+      class="min-h-[150vh] min-w-full fixed top-0 left-0 z-20 md:hidden transition-all duration-300 ease-out"
+      :class="[
         drawer
-          ? 'translate-x-0 !bg-[#06061220] backdrop-blur-sm opacity-100'
-          : '-translate-x-full bg-transparent opacity-0'
-      "
+          ? 'translate-x-0  '
+          : '-translate-x-full bg-transparent opacity-0',
+        loading ? '!bg-[#06061220] transit backdrop-blur-sm ' : '',
+      ]"
     >
       <!-- content -->
       <main
@@ -177,7 +178,7 @@ import DButton from "@/components/utils/DButton.vue";
 import credit from "@/assets/svg/credit.svg";
 import burger from "@/assets/png/burger.png";
 
-import { computed, onMounted, provide, ref } from "vue";
+import { computed, onMounted, provide, ref, watch } from "vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import DAlert from "@/components/utils/DAlert.vue";
 
@@ -185,6 +186,18 @@ const drawer = ref(false);
 const userflowing = userflow();
 const themeState = computed(() => {
   return userflowing.themeState;
+});
+
+const loading = ref(false);
+
+watch(drawer, () => {
+  if (drawer.value) {
+    setTimeout(() => {
+      loading.value = true;
+    }, 160);
+  } else {
+    loading.value = false;
+  }
 });
 
 const adminflowing = adminflow();

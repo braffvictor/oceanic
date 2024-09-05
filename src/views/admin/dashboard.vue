@@ -3,7 +3,7 @@
     class="h-auto pb-10 min-h-screen bg-slate-100 dark:bg-slate-900 transit"
   >
     <div
-      class="flex md:px-8 px-5 justify-between bg-slate-100 dark:bg-slate-900 items-center transit pb-3"
+      class="flex md:px-8 px-5 justify-between bg-slate-100 dark:bg-slate-900 items-center transit"
     >
       <p class="">Welcome, Super Admin</p>
 
@@ -16,7 +16,7 @@
     </div>
 
     <section
-      class="px-3 dark:bg-slate-900 bg-slate-100 w-full transit relative"
+      class="px-3 dark:bg-slate-900 bg-slate-100 w-full transit relative pt-5"
     >
       <div
         class="mx-auto w-[93%] md:w-[96%] transit gap-4 dark:bg-slate-900 bg-slate-100 h-auto grid md:grid-cols-3"
