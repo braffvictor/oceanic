@@ -471,7 +471,7 @@ export const userflow = defineStore("userflow", {
       this.loading.deposit = true;
       const colref = collection(db, "deposits");
 
-      payload.text = "Account Top Up";
+      payload.text = "Account Deposit";
 
       const photo = await this.photoFN({
         photo: payload.photo,

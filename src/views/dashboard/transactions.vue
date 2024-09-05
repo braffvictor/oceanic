@@ -42,10 +42,11 @@
           <main
             v-for="(transact, n) in transactions"
             :key="transact.id"
-            class="mt-1 transit"
+            @click="(transaction = transact), (dialog = true)"
+            class="mt-1 transit cursor-pointer"
           >
             <div
-              class="flex rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
+              class="flex active:bg-slate-200 dark:active:bg-slate-700 active:scale-95 rounded-2xl p-4 md:p-5 justify-start items-center md:items-center gap-x-3 mb-1 bg-slate-100 dark:bg-slate-800 transit"
             >
               <div
                 class="rounded-xl min-w-9 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
@@ -61,7 +62,8 @@
                 <p class="text-xs opacity-65">{{ transact.date }}</p>
               </div>
               <div
-                class="text-sm md:text-[16px] select-none font-semibold md:font-light text-yellow-500 capitalize"
+                class="text-sm md:text-[16px] select-none font-semibold md:font-light capitalize"
+                :class="checkStatus(transact.status)"
               >
                 {{ transact.status }}
                 <p
@@ -132,6 +134,14 @@
         </section>
       </section>
     </div>
+
+    <!-- dialog -->
+    <DDialog
+      :dialog="dialog"
+      @closeDialog="(dialog = false), (loading = false)"
+      :loading="loading"
+      :data="transaction"
+    />
   </main>
 </template>
 
@@ -144,16 +154,29 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import BalanceCard from "@/components/cards/balanceCard.vue";
 
-import { computed, inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted, ref, watch } from "vue";
 
 //images
 import credit from "@/assets/svg/credit.svg";
 import debit from "@/assets/svg/debit.svg";
+import DDialog from "@/components/utils/DDialog.vue";
 
 const theme = inject("theme");
 const userflowing = userflow();
 
+const dialog = ref(false);
+const transaction = ref(null);
+
 const loading = ref(false);
+watch(dialog, () => {
+  if (dialog.value) {
+    setTimeout(() => {
+      loading.value = true;
+    }, 200);
+  } else {
+    loading.value = false;
+  }
+});
 
 const transactions = computed(() => {
   return userflowing.allTransactions;
@@ -167,11 +190,18 @@ function checkImage(type) {
   }
 }
 
+function checkStatus(status) {
+  if (status == "approved") {
+    return " text-green-500";
+  } else if (status == "pending") {
+    return " text-yellow-500";
+  } else if (status == "declined") {
+    return " text-red-500";
+  }
+}
+
 onMounted(() => {
   if (transactions.value.length == 0) userflowing.initUserTransactions();
-  setTimeout(() => {
-    loading.value = true;
-  }, 5000);
 
   window.scrollTo({
     top: -10,

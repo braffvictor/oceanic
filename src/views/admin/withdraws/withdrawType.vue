@@ -45,6 +45,15 @@
         />
       </TransitionGroup>
     </div>
+
+    <!-- dialog -->
+    <DDialog
+      :dialog="dialog"
+      @closeDialog="(dialog = false), (loading = false)"
+      :loading="loading"
+      :data="transaction"
+      :screen="true"
+    />
   </main>
 </template>
 
@@ -53,14 +62,29 @@
 import { adminflow } from "@/stores/adminflow";
 import { userflow } from "@/stores/userflow";
 
+import DDialog from "@/components/utils/DDialog.vue";
 import AdminCard from "@/components/cards/adminCard.vue";
 import AdminPropCard from "@/components/cards/adminPropCard.vue";
 import DTextfield from "@/components/utils/DTextfield.vue";
-import { computed, inject, onMounted, onUnmounted, ref } from "vue";
+import { computed, inject, onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 const search = ref("");
+
+const dialog = ref(false);
+const transaction = ref(null);
+const loading = ref(false);
+
+watch(dialog, () => {
+  if (dialog.value) {
+    setTimeout(() => {
+      loading.value = true;
+    }, 200);
+  } else {
+    loading.value = false;
+  }
+});
 
 const adminflowing = adminflow();
 const userflowing = userflow();
@@ -128,7 +152,8 @@ const actions = computed(() => {
       text: "View",
       color: "bg-slate-900 dark:bg-slate-100",
       action: (e, data) => {
-        console.log(data);
+        transaction.value = data;
+        dialog.value = true;
       },
     },
     {
