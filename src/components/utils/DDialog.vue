@@ -9,7 +9,7 @@
     ]"
   >
     <main
-      class="md:h-4/5 overflow-y-auto w-full md:w-6/12 bg-slate-100 dark:bg-slate-900 pt-2 md:pb-2 pb-3"
+      class="md:h-4/5 overflow-y-auto w-full md:w-6/12 bg-slate-100 dark:bg-slate-900 pt-2 md:pb-2 pb-3 md:rounded-xl"
       :class="screen ? 'h-screen rounded-none' : 'h-auto rounded-t-xl'"
     >
       <div class="flex justify-between items-center px-3 md:px-6 py-1">
@@ -44,6 +44,15 @@
       />
 
       <Nftprops :nft="data" v-if="data && data.category == 'nfts'" />
+
+      <div class="text-right float-end px-3 md:px-6 mt-3 hidden md:block">
+        <p
+          class="bg-slate-900 p-3 rounded-md cursor-pointer active:scale-75 transit dark:bg-slate-100 text-slate-100 dark:text-slate-900"
+          @click="$emit('closeDialog')"
+        >
+          Close
+        </p>
+      </div>
     </main>
   </section>
 </template>

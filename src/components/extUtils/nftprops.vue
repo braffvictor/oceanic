@@ -4,7 +4,7 @@
       <!-- the image proof displayed -->
       <div class="mx-auto text-center text-slate-900 dark:text-slate-100 mt-2">
         <div
-          class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
+          class="overflow-hidden rounded-lg inline-block mx-auto text-center"
         >
           <img
             :src="nft && nft.image_url"
@@ -115,7 +115,9 @@
 
       <div class="flex justify-between text-sm md:text-base">
         <p class="font-extralight text-gray-400">Date</p>
-        <p class="font-medium">{{ nft && nft.date }}</p>
+        <p class="font-medium">
+          {{ (nft && nft.date) || (nft && nft.created_date) }}
+        </p>
       </div>
     </section>
   </main>
