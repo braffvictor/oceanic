@@ -266,6 +266,11 @@ const routes = [
         component: () => import("@/views/admin/users/userType.vue"),
       },
       {
+        path: "/admin/edituser/:id",
+        name: "admin edit users type",
+        component: () => import("@/views/admin/users/edituser.vue"),
+      },
+      {
         path: "/admin/nfts",
         name: "admin nfts page",
         component: () => import("@/views/admin/nfts/allnfts.vue"),

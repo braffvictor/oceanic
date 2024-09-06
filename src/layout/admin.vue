@@ -108,9 +108,7 @@
       @click.self="drawer = !drawer"
       class="min-h-[150vh] min-w-full fixed top-0 left-0 z-20 md:hidden transition-all duration-300 ease-out"
       :class="[
-        drawer
-          ? 'translate-x-0  '
-          : '-translate-x-full bg-transparent opacity-0',
+        drawer ? 'translate-x-0  ' : '-translate-x-full bg-transparent ',
         loading ? '!bg-[#06061220] transit backdrop-blur-sm ' : '',
       ]"
     >

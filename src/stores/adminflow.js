@@ -23,6 +23,9 @@ export const adminflow = defineStore("adminflow", {
     getWithdraws: (state) => state.withdraws,
     getWallets: (state) => state.wallets,
     getNotifications: (state) => state.notifications,
+
+    getUserByUserID: (state) => (id) =>
+      state.users.find((user) => user.userID == id),
   },
 
   actions: {

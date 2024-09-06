@@ -9,8 +9,8 @@
     ]"
   >
     <main
-      class="md:h-4/5 overflow-y-auto w-full md:w-6/12 bg-slate-100 dark:bg-slate-900 pt-2 md:pb-2 pb-3 md:rounded-xl"
-      :class="screen ? 'h-screen rounded-none' : 'h-auto rounded-t-xl'"
+      class="md:h-4/5 overflow-y-auto w-full md:w-6/12 bg-slate-100 dark:bg-slate-900 pt-2 md:pb-2 pb-3 md:rounded-2xl"
+      :class="screen ? 'h-full rounded-none' : 'h-auto rounded-t-2xl'"
     >
       <div class="flex justify-between items-center px-3 md:px-6 py-1">
         <p class="font-semibold">{{ title }}</p>

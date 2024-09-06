@@ -15,7 +15,10 @@
           <div class="flex justify-center items-center gap-1">
             <div
               class="h-3 w-3 rounded-full inline-block"
-              :class="checkStatusBackground(transact && transact.status)"
+              :class="[
+                checkStatusBackground(transact && transact.status),
+                transact && transact.status == 'pending' ? 'animate-pulse' : '',
+              ]"
             ></div>
             <p class="font-semibold text-sm capitalize">
               {{ transact && transact.status }}
@@ -26,7 +29,7 @@
     </div>
 
     <section class="mt-5 px-3 md:px-6">
-      <p class="font-bold">Deposit Details</p>
+      <p class="font-bold">Deposit Details {{ user && user.role }}</p>
 
       <!-- the image proof displayed -->
       <div
@@ -36,7 +39,7 @@
         <div
           class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
         >
-          <img
+          <vLazyImage
             :src="transact && transact.photo"
             alt="Proof Of Payment"
             width="500"
@@ -122,6 +125,8 @@
 
 <script setup>
 import { authentication } from "@/stores/authentication";
+import vLazyImage from "v-lazy-image";
+
 import { computed } from "vue";
 
 const useAuthentication = authentication();

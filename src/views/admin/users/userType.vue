@@ -57,9 +57,10 @@ import AdminCard from "@/components/cards/adminCard.vue";
 import AdminPropCard from "@/components/cards/adminPropCard.vue";
 import DTextfield from "@/components/utils/DTextfield.vue";
 import { computed, inject, onMounted, onUnmounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 const search = ref("");
 
 const adminflowing = adminflow();
@@ -119,7 +120,7 @@ const actions = computed(() => {
       text: "View User",
       color: "bg-slate-900 dark:bg-slate-100",
       action: (e, data) => {
-        console.log(data);
+        router.push(`/admin/edituser/${data.userID}`);
       },
     },
     {

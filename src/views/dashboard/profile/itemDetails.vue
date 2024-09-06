@@ -28,7 +28,7 @@
 
       <section class="md:w-full mx-auto">
         <section class="px-3">
-          <main class="flex-col mt-10 md:flex-row flex gap-5">
+          <main class="flex-col md:flex-row flex gap-5">
             <div
               class="border rounded-2xl overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit md:w-1/2"
             >

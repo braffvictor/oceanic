@@ -6,7 +6,7 @@
         <div
           class="overflow-hidden rounded-lg inline-block mx-auto text-center"
         >
-          <img
+          <vLazyImage
             :src="nft && nft.image_url"
             alt="Nft image"
             width="500"
@@ -125,7 +125,10 @@
 
 <script setup>
 import { authentication } from "@/stores/authentication";
-import { computed } from "vue";
+
+import vLazyImage from "v-lazy-image";
+
+import { computed, onMounted } from "vue";
 
 const useAuthentication = authentication();
 
