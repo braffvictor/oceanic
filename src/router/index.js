@@ -7,6 +7,7 @@ import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
 
 import authWare from "@/middleware/auth";
+import adminAuthWare from "@/middleware/adminAuth";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/services/firebase";
@@ -249,6 +250,9 @@ const routes = [
     path: "/admin",
     name: "admin layout",
     component: () => import("@/layout/admin"),
+    meta: {
+      middleware: adminAuthWare,
+    },
     children: [
       {
         path: "/admin/dashboard",
