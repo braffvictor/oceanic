@@ -16,6 +16,7 @@ import { getDate } from "@/composables/getDate";
 const { getCurrentTimeAndDate } = getDate();
 
 import { authentication } from "./authentication";
+import router from "@/router";
 
 export const userflow = defineStore("userflow", {
   state: () => ({
@@ -489,6 +490,7 @@ export const userflow = defineStore("userflow", {
             id: docRef.id,
           });
 
+          router.push("/dashboard/home");
           this.initAlert({
             is: true,
             message: `Your Deposit Of ${payload.amount} ETH Is Successful, Awaiting Approval.`,
@@ -556,6 +558,7 @@ export const userflow = defineStore("userflow", {
           //todo: to deduct the amount from the user balance....was thinking to leave it until admin approves it
           this.deduction({ amount: payload.amount });
 
+          router.push("/dashboard/home");
           this.initAlert({
             is: true,
             message: `Withdrawal Of ${payload.convertAmount} Worth Of ${payload.crypto} Is Being Processed.`,

@@ -168,6 +168,7 @@
 //stores
 import { userflow } from "@/stores/userflow";
 import { adminflow } from "@/stores/adminflow";
+import { authentication } from "@/stores/authentication";
 
 //components
 import SvgComp from "@/components/svgComp.vue";
@@ -179,6 +180,9 @@ import burger from "@/assets/png/burger.png";
 import { computed, onMounted, provide, ref, watch } from "vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import DAlert from "@/components/utils/DAlert.vue";
+
+const useAuthentication = authentication();
+useAuthentication.userWatch();
 
 const drawer = ref(false);
 const userflowing = userflow();
@@ -205,7 +209,7 @@ onMounted(() => {
   if (adminflowing.nfts.length == 0) adminflowing.initAllNfts();
   if (adminflowing.deposits.length == 0) adminflowing.initAllDeposits();
   if (adminflowing.withdraws.length == 0) adminflowing.initAllWithdraws();
-  // if (adminflowing.wallets.length == 0) adminflowing.initAllWallet();
+  if (adminflowing.wallets.length == 0) adminflowing.initAllWallets();
   if (adminflowing.notifications.length == 0)
     adminflowing.initAllNotifications();
 });

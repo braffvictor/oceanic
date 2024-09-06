@@ -25,19 +25,26 @@
       <!-- the balance card -->
       <!-- this text and data should be for transaction and normal address should be kept here -->
       <main class="px-3">
-        <BalanceCard text="Last Transaction:" data="31 April 2023" />
+        <!-- you'll do something about the text and data prop in the balanceCard comp -->
+        <div
+          class="pb-4 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20 transit"
+        >
+          <BalanceCard />
+        </div>
 
         <section class="mt-3 text-slate-900 dark:text-slate-100">
           <p class="pl-1" @click="show = !show">Choose Crypto To Deposit In</p>
 
-          <main>
+          <main v-if="wallets.length > 0">
             <section
               class="rounded-2xl border flex justify-between p-4 mt-2 hover:bg-slate-200 dark:hover:bg-slate-700 transit cursor-pointer dark:border-slate-500"
-              @click="$router.push('/dashboard/deposit/ethereum')"
+              v-for="wallet in wallets"
+              :key="wallet.id"
+              @click="$router.push(`/dashboard/deposit/${wallet.id}`)"
             >
               <div>
-                <p>Ethereum</p>
-                <p class="text-xs opacity-55">ERC20</p>
+                <p>{{ wallet.walletName }}</p>
+                <p class="text-xs opacity-55">{{ wallet.walletNetwork }}</p>
               </div>
               <button>
                 <svg-comp
@@ -66,12 +73,20 @@
 </template>
 
 <script setup>
+import { adminflow } from "@/stores/adminflow";
+
 // components
 import BalanceCard from "@/components/cards/balanceCard.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 
-import { inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
+
+const adminflowing = adminflow();
+
+const wallets = computed(() => {
+  return adminflowing.wallets;
+});
 
 onMounted(() => {
   window.scrollTo({

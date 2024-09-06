@@ -41,11 +41,22 @@
           />
         </button>
         <p
+          v-if="user && user.role == 'user'"
           class="p-1 cursor-pointer"
           @click="$router.push('/dashboard/notification')"
         >
           🔔
         </p>
+        <div
+          v-if="user && user.role == 'admin'"
+          class="cursor-pointer"
+          @click="$router.push('/admin/account')"
+        >
+          <svgComp
+            icon="M12,2 C6.47715,2 2,6.47715 2,12 C2,17.5228 6.47715,22 12,22 C17.5228,22 22,17.5228 22,12 C22,6.47715 17.5228,2 12,2 Z M8.5,8.5 C8.5,6.567 10.067,5 12,5 C13.933,5 15.5,6.567 15.5,8.5 C15.5,10.433 13.933,12 12,12 C10.067,12 8.5,10.433 8.5,8.5 Z M5.2782,16.3396 C6.92693,14.9918 9.33472,14 12,14 C14.6653,14 17.0731,14.9918 18.7218,16.3396 C17.2969,18.5423 14.8187,20 12,20 C9.18136,20 6.70318,18.5423 5.2782,16.3396 Z"
+            Sclass="!stroke-slate-100 fill-slate-900 dark:!stroke-slate-900 dark:fill-slate-100"
+          />
+        </div>
       </div>
     </div>
   </main>
@@ -54,6 +65,8 @@
 <script setup>
 import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
+
+import svgComp from "../svgComp.vue";
 import { computed, inject, ref } from "vue";
 
 const userflowing = userflow();

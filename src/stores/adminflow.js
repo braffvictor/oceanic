@@ -2,11 +2,22 @@ import { db, auth } from "@/services/firebase";
 import { userflow } from "./userflow";
 
 import { defineStore } from "pinia";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 
 export const adminflow = defineStore("adminflow", {
   state: () => ({
     adminRoutes: "Admin Dashboard",
+
+    loading: {
+      wallet: false,
+    },
 
     users: [],
     nfts: [],
@@ -26,6 +37,9 @@ export const adminflow = defineStore("adminflow", {
 
     getUserByUserID: (state) => (id) =>
       state.users.find((user) => user.userID == id),
+
+    getWalletByID: (state) => (id) =>
+      state.wallets.find((wallet) => wallet.id == id),
   },
 
   actions: {
@@ -161,39 +175,6 @@ export const adminflow = defineStore("adminflow", {
         });
     },
 
-    async initAllWallet() {
-      const userflowing = userflow();
-      const colref = collection(db, "wallets");
-
-      let arr = [];
-      let sorting;
-      await getDocs(colref)
-        .then((docRefs) => {
-          if (!docRefs.empty) {
-            docRefs.forEach((docs) => {
-              arr.push(docs.data());
-              sorting = arr.sort((a, b) => {
-                const dateA = new Date(a.formattedDate);
-                const dateB = new Date(b.formattedDate);
-
-                return dateB - dateA;
-              });
-            });
-            this.wallets = sorting;
-            console.log(this.wallets);
-          } else {
-            this.wallets = [];
-          }
-        })
-        .catch((error) => {
-          userflowing.initAlert({
-            is: true,
-            type: "error",
-            message: error.message,
-          });
-        });
-    },
-
     async initAllNotifications() {
       const userflowing = userflow();
       const colref = collection(db, "notifications");
@@ -216,6 +197,111 @@ export const adminflow = defineStore("adminflow", {
             console.log(this.notifications);
           } else {
             this.notifications = [];
+          }
+        })
+        .catch((error) => {
+          userflowing.initAlert({
+            is: true,
+            type: "error",
+            message: error.message,
+          });
+        });
+    },
+
+    async walletFN(payload) {
+      this.loading.wallet = true;
+
+      const userflowing = userflow();
+      const colref = collection(db, "wallets");
+
+      const qrCode = await userflowing.photoFN({
+        path: "wallets",
+        uid: payload.userID,
+        photo: payload.qrCode,
+      });
+
+      payload.qrCode = await qrCode;
+
+      await addDoc(colref, payload)
+        .then((docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+
+          userflowing.initAlert({
+            is: true,
+            message: `${payload.walletName} Wallet Successfully Added`,
+            type: "info",
+            close: true,
+          });
+
+          this.initAllWallets();
+          this.loading.wallet = false;
+        })
+        .catch((err) => {
+          this.loading.wallet = false;
+          userflowing.initAlert({
+            is: true,
+            message: err.message,
+            type: "error",
+            timer: 5000,
+          });
+        });
+    },
+
+    async deleteWallet(payload) {
+      this.loading.wallet = true;
+      const userflowing = userflow();
+      const colref = collection(db, "wallets");
+
+      const currentUserDoc = doc(colref, payload.id);
+
+      await deleteDoc(currentUserDoc)
+        .then(() => {
+          userflowing.initAlert({
+            is: true,
+            message: `${payload.walletName} Wallet Has Been Deleted Successfully`,
+            type: "info",
+            close: true,
+          });
+
+          this.initAllWallets();
+          this.loading.wallet = false;
+        })
+        .catch((err) => {
+          this.loading.wallet = false;
+          userflowing.initAlert({
+            is: true,
+            message: err.message,
+            type: "error",
+            timer: 5000,
+          });
+        });
+    },
+
+    async initAllWallets() {
+      const userflowing = userflow();
+      const colref = collection(db, "wallets");
+
+      let arr = [];
+      let sorting;
+      await getDocs(colref)
+        .then((docRefs) => {
+          if (!docRefs.empty) {
+            docRefs.forEach((docs) => {
+              arr.push(docs.data());
+              sorting = arr.sort((a, b) => {
+                const dateA = new Date(a.formattedDate);
+                const dateB = new Date(b.formattedDate);
+
+                return dateB - dateA;
+              });
+            });
+            this.wallets = sorting;
+            console.log(this.wallets);
+          } else {
+            this.wallets = [];
           }
         })
         .catch((error) => {

@@ -386,8 +386,8 @@ function cartNft(nftDetails) {
     nftDetails.description = nftDetails.description
       ? nftDetails.description
       : collectionHeader.value.description;
-    nftDetails.category = collectionHeader.value.category;
-    nftDetails.created_date = collectionHeader.value.created_date;
+    nftDetails.categoryType = collectionHeader.value.category || "Not Given";
+    nftDetails.created_date = collectionHeader.value.created_date || "Nil";
 
     console.log(nftDetails);
 

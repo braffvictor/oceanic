@@ -182,6 +182,7 @@
 //stores
 import { userflow } from "@/stores/userflow";
 import { authentication } from "@/stores/authentication";
+import { adminflow } from "@/stores/adminflow";
 //composables
 
 import SvgComp from "@/components/svgComp.vue";
@@ -191,8 +192,12 @@ import { useRoute } from "vue-router";
 import DAlert from "@/components/utils/DAlert.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 
+const adminflowing = adminflow();
 const userflowing = userflow();
 const useAuthentication = authentication();
+
+//todo remove wallet function later
+adminflowing.initAllWallets();
 useAuthentication.userWatch();
 
 userflowing.initAllNfts();

@@ -38,7 +38,7 @@
     <slot v-if="!loading"> Sign Up </slot>
     <div
       v-if="loading"
-      class="rounded-br-lg mt-1 md:mt-0 rounded-tl-lg h-4 animate-spin w-4 my-auto border-2 border-slate-800 transit dark:border-slate-50 bg-slate-900 dark:bg-slate-100 mx-auto text-center"
+      class="rounded-br-lg mt-1 md:mt-0 rounded-tl-lg h-4 animate-spin w-4 my-auto border-2 border-slate-700 transit dark:border-slate-200 bg-slate-900 dark:bg-slate-100 mx-auto text-center"
     ></div>
   </router-link>
 

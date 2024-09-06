@@ -29,7 +29,7 @@
     </div>
 
     <section class="mt-5 px-3 md:px-6">
-      <p class="font-bold">Deposit Details {{ user && user.role }}</p>
+      <p class="font-bold">Deposit Details</p>
 
       <!-- the image proof displayed -->
       <div

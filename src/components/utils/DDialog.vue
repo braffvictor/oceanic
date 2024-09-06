@@ -45,6 +45,11 @@
 
       <Nftprops :nft="data" v-if="data && data.category == 'nfts'" />
 
+      <AddWallet
+        v-if="data && data.category == 'wallet'"
+        @closeDialog="$emit('closeDialog')"
+      />
+
       <div class="text-right float-end px-3 md:px-6 mt-3 hidden md:block">
         <p
           class="bg-slate-900 p-3 rounded-md cursor-pointer active:scale-75 transit dark:bg-slate-100 text-slate-100 dark:text-slate-900"
@@ -63,6 +68,7 @@ import { inject, ref, watch } from "vue";
 import Depositprops from "../extUtils/depositprops.vue";
 import Withdrawprops from "../extUtils/withdrawprops.vue";
 import Nftprops from "../extUtils/nftprops.vue";
+import AddWallet from "../extUtils/addWallet.vue";
 
 const theme = inject("theme");
 

@@ -160,7 +160,7 @@ export const authentication = defineStore("authentication", {
               } else if (user.role == "admin") {
                 router.push("/admin/dashboard");
                 userflowing.initAlert({
-                  message: `Welcome, Dear Super Admin`,
+                  message: `Welcome, Super Admin`,
                   is: true,
                   type: "success",
                 });

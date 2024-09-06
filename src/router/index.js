@@ -260,6 +260,11 @@ const routes = [
         component: () => import("@/views/admin/dashboard.vue"),
       },
       {
+        path: "/admin/account",
+        name: "admin dashboard account page",
+        component: () => import("@/views/admin/account.vue"),
+      },
+      {
         path: "/admin/users",
         name: "admin users page",
         component: () => import("@/views/admin/users/allusers.vue"),
