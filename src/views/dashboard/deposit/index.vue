@@ -33,7 +33,9 @@
         </div>
 
         <section class="mt-3 text-slate-900 dark:text-slate-100">
-          <p class="pl-1" @click="show = !show">Choose Crypto To Deposit In</p>
+          <p class="pl-1" @click="show = !show">
+            Choose Ethereum Network To Deposit In
+          </p>
 
           <main v-if="wallets.length > 0">
             <section
