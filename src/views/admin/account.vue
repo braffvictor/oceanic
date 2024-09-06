@@ -32,7 +32,7 @@
 
       <section v-if="wallets.length > 0">
         <main
-          class="border-2 border-slate-300 dark:border-slate-500 h-auto w-full rounded-2xl mt-7 p-2 md:p-4"
+          class="border-2 border-slate-300 dark:border-slate-500 h-auto w-full rounded-2xl mt-4 p-2 md:p-4"
           v-for="wallet in wallets"
           :key="wallet.id"
         >
