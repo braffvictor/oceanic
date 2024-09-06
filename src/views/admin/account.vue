@@ -22,10 +22,10 @@
         <div class="mx-auto text-center">
           <DButton
             type="elevated"
-            class="shadow !inline-block w-32 shadow-slate-900 rounded-lg bg-slate-900 dark:bg-slate-50 dark:shadow-slate-100 !text-slate-100 dark:!text-slate-900"
+            class="shadow !inline-block w-48 shadow-slate-900 rounded-lg bg-slate-900 dark:bg-slate-50 dark:shadow-slate-100 !text-slate-100 dark:!text-slate-900"
             @click="dialog = true"
             :loading="loading"
-            >Add Wallet
+            >Add Ethereum Wallet
           </DButton>
         </div>
       </section>
