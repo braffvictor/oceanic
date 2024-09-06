@@ -76,6 +76,11 @@ const user = computed(() => {
 
 onMounted(() => {
   adminflowing.adminRoutes = "Edit User";
+  window.scrollTo({
+    top: -10,
+    left: 0,
+    behavior: "smooth",
+  });
 });
 
 onUnmounted(() => {

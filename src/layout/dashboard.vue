@@ -195,7 +195,7 @@ const userflowing = userflow();
 const useAuthentication = authentication();
 useAuthentication.userWatch();
 
-// userflowing.initAllNfts();
+userflowing.initAllNfts();
 
 const route = useRoute();
 
