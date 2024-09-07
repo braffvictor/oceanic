@@ -65,16 +65,11 @@
                 class="text-sm md:text-[16px] select-none font-semibold md:font-light capitalize"
                 :class="checkStatus(transact.status)"
               >
-                {{ transact.status }}
+                {{ checkStatusText(transact.status) }}
                 <p
-                  class="text-sm opacity-100"
-                  :class="
-                    transact.type == 'debit'
-                      ? 'text-red-400 dark:text-red-500'
-                      : 'text-green-500'
-                  "
+                  class="text-sm opacity-100 text-slate-900 dark:text-slate-100 font-light"
                 >
-                  {{ transact.amount }}ETH
+                  {{ transact.amount.toFixed(1) }}ETH
                 </p>
               </div>
             </div>
@@ -191,12 +186,21 @@ function checkImage(type) {
 }
 
 function checkStatus(status) {
-  if (status == "approved") {
+  if (status == "approved" || status == "success") {
     return " text-green-500";
   } else if (status == "pending") {
     return " text-yellow-500";
-  } else if (status == "declined") {
+  } else if (status == "declined" || status == "failed") {
     return " text-red-500";
+  }
+}
+function checkStatusText(status) {
+  if (status == "approved" || status == "success") {
+    return "Success";
+  } else if (status == "pending") {
+    return "Pending";
+  } else if (status == "declined" || status == "failed") {
+    return "Failed";
   }
 }
 

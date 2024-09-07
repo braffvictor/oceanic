@@ -36,7 +36,7 @@
           :key="user.userID"
           :title="user.fullName"
           :text1="user.email"
-          :text2="user.userName"
+          :text3="`Balance: ${user.wallet.balance.toFixed(1)} ETH`"
           :date="user.joinDate"
           :verified="user.verified"
           :data="user"

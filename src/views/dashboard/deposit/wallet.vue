@@ -28,9 +28,15 @@
             <div
               class="overflow-hidden rounded-lg border inline-block mx-auto text-center"
             >
-              <img
+              <!-- <img
                 :src="wallet && wallet.qrCode"
                 alt=""
+                class="mx-auto text-center"
+              /> -->
+              <vLazyImage
+                :src="wallet && wallet.qrCode"
+                alt="Qr code"
+                width="300"
                 class="mx-auto text-center"
               />
             </div>
@@ -211,6 +217,7 @@ import { adminflow } from "@/stores/adminflow";
 //composables
 import { getDate } from "@/composables/getDate";
 
+import vLazyImage from "v-lazy-image";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import { computed, inject, onMounted, ref } from "vue";
@@ -337,4 +344,12 @@ const copyWallet = (address) => {
 };
 </script>
 
-<style></style>
+<style>
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
+}
+</style>

@@ -18,6 +18,7 @@ export const adminflow = defineStore("adminflow", {
 
     loading: {
       wallet: false,
+      balance: false,
     },
 
     users: [],
@@ -346,6 +347,80 @@ export const adminflow = defineStore("adminflow", {
             is: true,
             type: "error",
             message: error.message,
+            timer: 5000,
+          });
+        });
+    },
+
+    async adminControl(payload) {
+      this.loading.balance = true;
+      const userflowing = userflow();
+
+      const colref = collection(db, payload.category);
+
+      await addDoc(colref, payload)
+        .then(async (docRef) => {
+          const currentUserDoc = doc(colref, docRef.id);
+
+          updateDoc(currentUserDoc, {
+            id: docRef.id,
+          });
+
+          if (payload.category == "deposits") {
+            //add amount
+            userflowing.addition({
+              amount: payload.amount,
+              uid: payload.userID,
+            });
+
+            userflowing.initAlert({
+              is: true,
+              message: `You Have Just Deposited ${payload.amount} ETH Into ${payload.fullName} Wallet Balance`,
+              type: "info",
+              timer: 5000,
+            });
+
+            await userflowing.notificationFN({
+              email: payload.email,
+              type: "info",
+              uid: payload.userID,
+              open: false,
+              fullName: payload.fullName,
+              message: `${payload.amount} ETH Has Just Been Deposited Into Your Account, Please Contact Support For More Enquires.`,
+            });
+          } else if (payload.category == "withdraws") {
+            //deduct amount
+            await userflowing.deduction({
+              amount: payload.amount,
+              uid: payload.userID,
+            });
+
+            userflowing.initAlert({
+              is: true,
+              message: `You Have Withdrawn ${payload.amount} ETH From ${payload.fullName} Wallet Balance`,
+              type: "info",
+              timer: 5000,
+            });
+
+            await userflowing.notificationFN({
+              email: payload.email,
+              type: "info",
+              uid: payload.userID,
+              open: false,
+              fullName: payload.fullName,
+              message: `${payload.amount} ETH Has Just Been Deposited Into Your Account, Please Contact Support For More Enquires.`,
+            });
+          }
+          this.initAllUsers();
+          router.push("/admin/users/allusers");
+          this.loading.balance = false;
+        })
+        .catch((err) => {
+          this.loading.balance = false;
+          userflowing.initAlert({
+            is: true,
+            type: "error",
+            message: err.message,
             timer: 5000,
           });
         });

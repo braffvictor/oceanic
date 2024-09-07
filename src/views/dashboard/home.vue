@@ -7,7 +7,14 @@
       <section class="mt-2 px-3">
         <div class="mx-auto">
           <!-- the balance card -->
-          <BalanceCard />
+          <BalanceCard
+            text="ETH Address:"
+            :data="
+              (user && user.walletAddress.slice(0, 10)) +
+              '...' +
+              (user && user.walletAddress.slice(30))
+            "
+          />
         </div>
       </section>
 
@@ -131,6 +138,7 @@
 <script setup>
 // stores
 import { userflow } from "@/stores/userflow";
+import { authentication } from "@/stores/authentication";
 //components
 import BalanceCard from "@/components/cards/balanceCard.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
@@ -150,6 +158,8 @@ onMounted(() => {
   }, 3);
 });
 
+const useAuthentication = authentication();
+const user = computed(() => useAuthentication.user);
 const userflowing = userflow();
 
 const rando = Math.abs(Math.round(Math.random() * 98));

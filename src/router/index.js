@@ -303,6 +303,20 @@ const routes = [
         path: "/admin/user/activities/:id",
         name: "admin users deposit type",
         component: () => import("@/views/admin/users/useractivities.vue"),
+        beforeEnter(to) {
+          const arr = ["alldeposits", "allwithdraws", "allnfts"];
+
+          const queryParams = arr.some((q) => q == to.query.type);
+
+          if (!queryParams) {
+            return {
+              name: "error-page",
+              params: { pathMatch: to.path.substring(1).split("/") },
+              query: to.query,
+              hash: to.hash,
+            };
+          }
+        },
       },
       {
         path: "/admin/withdraws",

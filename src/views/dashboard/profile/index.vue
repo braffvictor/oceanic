@@ -87,7 +87,7 @@
                 class="w-full bg-red-500 text-white !shadow-red-500"
                 to="/"
                 type="elevated"
-                @click="signOuting"
+                @click="signOut"
                 >Log Out</DButton
               >
             </div>
@@ -102,10 +102,6 @@
 //stores
 import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
-
-//firebase
-import { auth } from "@/services/firebase";
-import { signOut } from "firebase/auth";
 
 //components
 import DDashbar from "@/components/utils/DDashbar.vue";
@@ -133,9 +129,8 @@ const uploadedNfts = computed(() => {
   return userflowing.userNfts.filter((nft) => nft.type == "uploaded");
 });
 
-function signOuting() {
-  signOut(auth);
-  useAuthentication.user = null;
+function signOut() {
+  useAuthentication.signOutUser();
 }
 
 const theme = inject("theme");

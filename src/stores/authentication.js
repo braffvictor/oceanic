@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import {
   collection,
@@ -215,6 +216,21 @@ export const authentication = defineStore("authentication", {
           router.push("/");
           this.user = null;
         }
+      });
+    },
+
+    async signOutUser() {
+      const userflowing = userflow();
+
+      signOut(auth).then(() => {
+        userflowing.initAlert({
+          is: true,
+          message: "You Are Always Welcome Back.",
+          type: "info",
+          timer: 3500,
+        });
+        router.push("/");
+        this.user = null;
       });
     },
   },

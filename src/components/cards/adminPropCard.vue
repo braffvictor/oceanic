@@ -38,7 +38,16 @@
           <div v-for="action in actions" :key="action.text">
             <p
               class="text-slate-100 dark:text-slate-900 p-2 rounded-lg transit active:scale-75 text-center font-semibold select-none cursor-pointer"
-              :class="action.color"
+              :class="[
+                action.color,
+                (data &&
+                  data.category == 'deposits' &&
+                  data.status == 'approved' &&
+                  action.text != 'View') ||
+                (data.status == 'declined' && action.text != 'View')
+                  ? 'bg-gray-500 pointer-events-none'
+                  : '',
+              ]"
               v-if="action.is"
               @click="action.action($event, data)"
             >
@@ -100,11 +109,11 @@ const props = defineProps({
 });
 
 function checkStatus(status) {
-  if (status == "approved") {
+  if (status == "approved" || status == "success") {
     return "border-green-500 text-green-500";
   } else if (status == "pending") {
     return "border-yellow-500 text-yellow-500";
-  } else if (status == "declined") {
+  } else if (status == "declined" || status == "failed") {
     return "border-red-500 text-red-500";
   }
 }

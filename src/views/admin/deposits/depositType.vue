@@ -186,6 +186,20 @@ const actions = computed(() => {
             message: message,
           };
           adminflowing.dynamicUpdate(payload);
+
+          userflowing.addition({
+            amount: data.amount,
+            uid: data.userID,
+          });
+
+          userflowing.notificationFN({
+            type: "success",
+            message: `Dear ${data.fullName}, Your Deposit of ${data.amount} ETH Has Been Successfully Approved, Please Contact Support For More Enquires. Thank You.`,
+            uid: data.userID,
+            email: data.email,
+            fullName: data.fullName,
+            open: false,
+          });
         }
       },
     },

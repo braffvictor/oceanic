@@ -146,23 +146,33 @@ const props = defineProps({
 });
 
 function checkStatus(status) {
-  if (status == "approved") {
+  if (status == "approved" || status == "success") {
     return "border-green-500 text-green-500";
   } else if (status == "pending") {
     return "border-yellow-500 text-yellow-500";
-  } else if (status == "declined") {
+  } else if (status == "declined" || status == "failed") {
     return "border-red-500 text-red-500";
   }
 }
 function checkStatusBackground(status) {
-  if (status == "approved") {
+  if (status == "approved" || status == "success") {
     return "bg-green-500";
   } else if (status == "pending") {
     return "bg-yellow-500";
-  } else if (status == "declined") {
+  } else if (status == "declined" || status == "failed") {
     return "bg-red-500";
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-lazy-image {
+  filter: blur(10px);
+  transition: all 0.7s;
+  opacity: 0;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
+  opacity: 1;
+}
+</style>

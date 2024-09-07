@@ -4,10 +4,10 @@
       class="dark:p-2 group mt-2 dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[55px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
       :class="[
         !type || type == 'default'
-          ? 'bg-transparent hover:border-b-gray-700 dark:hover:border-b-gray-400 dark:border-b-gray-600 border-b-gray-400 border-b hov'
+          ? 'bg-transparent hover:border-b-gray-700 dark:hover:border-b-gray-400 dark:border-b-gray-600 border-b-gray-400 border-b dark:has-[:focus]:border-green-500'
           : '',
         type == 'outlined'
-          ? 'rounded-lg dark:border-gray-600 border bg-transparent hover:border-gray-500 border-gray-400 dark:hover:border-slate-400 p-2'
+          ? 'rounded-lg dark:border-gray-600 border bg-transparent hover:border-gray-500 border-gray-400 dark:hover:border-slate-400 p-2 dark:has-[:focus]:border-green-500 '
           : '',
         type == 'filled'
           ? 'bg-slate-200 dark:bg-slate-900 rounded-tl-lg rounded-tr-lg border-b dark:border-b-gray-600 hover:border-b-gray-600 border-b-gray-400 dark:hover:bg-slate-800 hover:bg-slate-200 p-2 '

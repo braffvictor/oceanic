@@ -88,7 +88,7 @@ export const userflow = defineStore("userflow", {
       }, timer || 3000);
     },
 
-    async deduction({ amount }) {
+    async deduction({ amount, uid }) {
       const colref = collection(db, "users");
 
       const useAuthentication = authentication();
@@ -96,19 +96,53 @@ export const userflow = defineStore("userflow", {
         ? useAuthentication.user.userID
         : auth.currentUser.uid;
 
-      const currentUser = doc(colref, userID);
+      const currentUser = doc(colref, uid ? uid : userID);
 
       await getDoc(currentUser)
         .then((docRef) => {
           let newAmount;
 
           let oldAmount = docRef.data().wallet.balance;
-          if (amount > oldAmount) newAmount = 0;
           newAmount = oldAmount - amount;
+          if (amount > oldAmount) newAmount = 0;
 
           updateDoc(currentUser, {
             wallet: {
-              balance: newAmount,
+              balance: Math.abs(newAmount),
+            },
+          });
+        })
+        .catch((error) => {
+          this.initAlert({
+            is: true,
+            message: error.message,
+            type: "error",
+          });
+        });
+    },
+
+    async addition({ amount, uid }) {
+      const colref = collection(db, "users");
+
+      const useAuthentication = authentication();
+      const userID = useAuthentication.user.userID
+        ? useAuthentication.user.userID
+        : auth.currentUser.uid;
+
+      const currentUser = doc(colref, uid ? uid : userID);
+
+      await getDoc(currentUser)
+        .then((docRef) => {
+          let newAmount;
+
+          let oldAmount = docRef.data().wallet.balance;
+          newAmount = amount + oldAmount;
+
+          console.log(newAmount);
+
+          updateDoc(currentUser, {
+            wallet: {
+              balance: Math.abs(newAmount),
             },
           });
         })
