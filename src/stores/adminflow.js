@@ -10,6 +10,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import router from "@/router";
 
 export const adminflow = defineStore("adminflow", {
   state: () => ({
@@ -238,6 +239,7 @@ export const adminflow = defineStore("adminflow", {
 
           this.initAllWallets();
           this.loading.wallet = false;
+          router.push("/admin/dashboard/home");
         })
         .catch((err) => {
           this.loading.wallet = false;
