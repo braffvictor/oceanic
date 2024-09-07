@@ -117,7 +117,7 @@
 
       <!-- the button to control component -->
       <div class="flex mt-3 gap-x-4">
-        <DButton
+        <!-- <DButton
           class="!text-slate-900 dark:!text-slate-100 font-semibold"
           :class="
             activeBtn == 'overview'
@@ -126,7 +126,7 @@
           "
           @click="activeBtn = 'overview'"
           >Overview</DButton
-        >
+        > -->
         <DButton
           class="!text-slate-900 dark:!text-slate-100 font-semibold"
           :class="
