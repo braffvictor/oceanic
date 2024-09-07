@@ -28,7 +28,10 @@
       </main>
     </div>
 
-    <section class="mt-5 px-3 md:px-6">
+    <section
+      class="px-3 md:px-6"
+      :class="user && user.role == 'user' ? 'mt-5' : ''"
+    >
       <p class="font-bold">Deposit Details</p>
 
       <!-- the image proof displayed -->

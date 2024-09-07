@@ -300,6 +300,11 @@ const routes = [
         component: () => import("@/views/admin/deposits/depositType.vue"),
       },
       {
+        path: "/admin/user/activities/:id",
+        name: "admin users deposit type",
+        component: () => import("@/views/admin/users/useractivities.vue"),
+      },
+      {
         path: "/admin/withdraws",
         name: "admin withdraws page",
         component: () => import("@/views/admin/withdraws/allwithdraws.vue"),

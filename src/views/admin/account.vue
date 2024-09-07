@@ -37,15 +37,16 @@
           :key="wallet.id"
         >
           <section class="flex items-center justify-between">
-            <div class="text-base font-semibold">
-              <p>
-                {{ wallet.walletName }} <span>{{ wallet.walletNetwork }}</span>
+            <div class="text-base">
+              <p class="font-light">
+                {{ wallet.walletName }}
+                <span class="font-semibold"> ~ {{ wallet.walletNetwork }}</span>
               </p>
             </div>
 
-            <div class="px-5 md:px-4 float-end text-right">
+            <div class="float-end text-right">
               <DButton
-                class="!bg-transparent"
+                class="!bg-transparent !p-0"
                 :loading="loading"
                 @click="deleteWallet(wallet)"
               >
@@ -84,7 +85,7 @@ import svgComp from "@/components/svgComp.vue";
 import DDialog from "@/components/utils/DDialog.vue";
 import DButton from "@/components/utils/DButton.vue";
 
-import { computed, reactive, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from "vue";
 
 const adminflowing = adminflow();
 
@@ -121,6 +122,19 @@ const user = computed(() => {
 function deleteWallet(wallet) {
   adminflowing.deleteWallet(wallet);
 }
+
+onMounted(() => {
+  adminflowing.adminRoutes = "Admin Profile";
+  window.scrollTo({
+    top: -10,
+    left: 0,
+    behavior: "smooth",
+  });
+});
+
+onUnmounted(() => {
+  adminflowing.adminRoutes = "Admin Dashboard";
+});
 </script>
 
 <style scoped></style>
