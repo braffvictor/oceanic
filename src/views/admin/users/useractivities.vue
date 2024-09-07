@@ -194,8 +194,6 @@ const actions = computed(() => {
           if (data.category == "deposits") {
             let message = `${data.fullName} Deposit Of ${data.amount} ETH Has Been Approved Successfully.`;
 
-            // todo a function here to add amount to the user wallet balance
-
             const payload = {
               id: data.id,
               category: "deposits",
@@ -203,6 +201,21 @@ const actions = computed(() => {
               message: message,
             };
             adminflowing.dynamicUpdate(payload);
+            // todo a function here to add amount to the user wallet balance
+
+            userflowing.addition({
+              amount: data.amount,
+              uid: data.userID,
+            });
+
+            userflowing.notificationFN({
+              type: "success",
+              message: `Dear ${data.fullName}, Your Deposit of ${data.amount} ETH Has Been Successfully Approved, Please Contact Support For More Enquires. Thank You.`,
+              uid: data.userID,
+              email: data.email,
+              fullName: data.fullName,
+              open: false,
+            });
           } else if (data.category == "withdraws") {
             let message = `${data.fullName} Withdrawal Of ${data.amount} ETH Has Been Approved Successfully.`;
             const payload = {

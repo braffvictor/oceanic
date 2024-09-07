@@ -483,7 +483,7 @@ export const userflow = defineStore("userflow", {
                 const dateA = new Date(a.formattedDate);
                 const dateB = new Date(b.formattedDate);
 
-                return dateB - dateA;
+                return dateA - dateB;
               });
             });
             console.log(sorting);
