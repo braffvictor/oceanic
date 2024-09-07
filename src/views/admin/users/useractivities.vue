@@ -137,7 +137,7 @@ const dashCard = computed(() => {
   };
 });
 onMounted(() => {
-  adminflowing.adminRoutes = "Deposits Management";
+  adminflowing.adminRoutes = "User Activities";
   window.scrollTo({
     top: -10,
     left: 0,
