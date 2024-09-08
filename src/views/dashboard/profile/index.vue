@@ -28,11 +28,11 @@
           <div
             class="flex justify-center shadow-md items-center text-[60px] md:text-[80px] font-bold h-60 w-60 dark:border-gray-600 rounded-full mx-auto text-center bg-gradient-to-b from-green-100 transit via-purple-100 to-slate-50 dark:from-emerald-600 dark:to-slate-900 to-100%"
           >
-            <p>D S</p>
+            <p>{{ "D S" }}</p>
           </div>
         </div>
 
-        <main class="mt-8 md:w-6/12 mx-auto text-center transit">
+        <main class="mt-8 md:w-6/12 mx-auto text-center">
           <section
             class="grid grid-cols-2 md:grid-cols-4 justify-center items-center *:w-full gap-2"
           >
@@ -70,7 +70,7 @@
             </DButton>
           </section>
 
-          <section class="mt-4 transit">
+          <section class="mt-4">
             <p class="text-gray-500 dark:text-gray-400 text-left">
               Personal Details
             </p>
@@ -80,6 +80,12 @@
               <p>Name: {{ user && user.fullName }}</p>
               <p class="my-2">Email: {{ user && user.email }}</p>
               <p>Username: {{ user && user.userName }}</p>
+              <div
+                class="border border-red-500 p-2 rounded-md text-red-500 mt-4"
+              >
+                Your Account Is Not Verified, Please Contact Support To Verify
+                Your Account.
+              </div>
             </div>
 
             <div class="mt-4 rounded-xl">
@@ -93,6 +99,7 @@
             </div>
           </section>
         </main>
+        <!-- {{ splitName }} -->
       </section>
     </main>
   </div>
@@ -106,7 +113,7 @@ import { userflow } from "@/stores/userflow";
 //components
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
-import { computed, inject, onMounted } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 
 import DButton from "@/components/utils/DButton.vue";
 const useAuthentication = authentication();

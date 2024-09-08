@@ -388,6 +388,8 @@ export const adminflow = defineStore("adminflow", {
               fullName: payload.fullName,
               message: `${payload.amount} ETH Has Just Been Deposited Into Your Account, Please Contact Support For More Enquires.`,
             });
+
+            this.initAllDeposits();
           } else if (payload.category == "withdraws") {
             //deduct amount
             await userflowing.deduction({
@@ -410,6 +412,7 @@ export const adminflow = defineStore("adminflow", {
               fullName: payload.fullName,
               message: `${payload.amount} ETH Has Just Been Deposited Into Your Account, Please Contact Support For More Enquires.`,
             });
+            this.initAllWithdraws();
           }
           this.initAllUsers();
           router.push("/admin/users/allusers");

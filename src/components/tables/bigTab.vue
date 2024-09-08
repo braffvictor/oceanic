@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-auto min-h-96 bg-white dark:bg-slate-900 pt-5 w-full md:px-8 mt-28 md:mt-0 px-4 transit"
+    class="h-auto min-h-96 bg-white dark:bg-slate-900 pt-5 w-full md:px-8 mt-1 md:mt-0 px-4 transit"
   >
     <div class="flex items-center gap-x-5">
       <p class="dark:text-slate-100 inline">NFTs Collection</p>
@@ -17,7 +17,7 @@
           <tr class="*:font-extralight text-slate-500 text-sm">
             <th class="border-b p-3">#</th>
             <th class="border-b text-left">Collection</th>
-            <th class="border-b">Floor Price</th>
+            <th class="border-b pl-20">Floor Price</th>
             <th class="border-b">Volume</th>
           </tr>
         </thead>
@@ -35,21 +35,28 @@
             <td class="py-4">
               <div class="flex items-center justify-start gap-x-3">
                 <img
-                  class="block object-contain max-w-16 rounded-xl"
+                  class="block object-contain rounded-xl"
                   :src="nft.image_url"
                   alt=""
+                  width="70"
                 />
-                <p class="font-bold text-slate-900 dark:text-slate-100 flex">
-                  {{ nft.name }}
+                <div class="font-bold text-slate-900 dark:text-slate-100 flex">
+                  <p class="w-full p-1">
+                    {{
+                      nft.name.length > 20
+                        ? nft.name.slice(0, 20) + "..."
+                        : nft.name
+                    }}
+                  </p>
                   <img
                     src="@/assets/verified.svg"
                     alt="tick"
                     class="max-w-5 block pl-1"
                   />
-                </p>
+                </div>
               </div>
             </td>
-            <td>
+            <td class="pl-20 text-center">
               <p class="font-bold text-slate-900 px-3 dark:text-slate-100">
                 {{ nft.stats.floor_price.slice(0, 5)
                 }}{{ nft.stats.floor_price_symbol }}
@@ -105,7 +112,7 @@
           <tr class="*:font-extralight text-slate-500 text-sm">
             <th class="border-b p-3">#</th>
             <th class="border-b text-left">Collection</th>
-            <th class="border-b">Floor Price</th>
+            <th class="border-b pl-20">Floor Price</th>
             <th class="border-b">Volume</th>
           </tr>
         </thead>
@@ -120,12 +127,17 @@
             <td class="py-4">
               <div class="flex items-center justify-start gap-x-3">
                 <img
-                  class="block object-contain max-w-16 rounded-xl"
-                  :src="nft.large_image_url"
+                  class="block object-contain rounded-xl"
+                  :src="nft.image_url"
                   alt=""
+                  width="70"
                 />
                 <p class="font-bold text-slate-900 dark:text-slate-100 flex">
-                  {{ nft.name.slice(0, 7) }}
+                  {{
+                    nft.name.length > 20
+                      ? nft.name.slice(0, 20) + "..."
+                      : nft.name
+                  }}
                   <img
                     src="@/assets/verified.svg"
                     alt="tick"
@@ -134,7 +146,7 @@
                 </p>
               </div>
             </td>
-            <td>
+            <td class="pl-20">
               <p class="font-bold text-slate-900 px-3 dark:text-slate-100">
                 {{ nft.stats.floor_price.slice(0, 5)
                 }}{{ nft.stats.floor_price_symbol }}

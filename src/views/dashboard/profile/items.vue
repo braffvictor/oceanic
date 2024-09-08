@@ -64,32 +64,25 @@
             />
           </div>
 
-          <div v-else class="min-h-screen mt-10 text-center mx-auto">
-            <div class="mx-auto text-center flex justify-center">
+          <section v-else class="flex justify-center items-center">
+            <div class="mt-10">
               <img
-                src="@/assets/not-found.gif"
-                width="200"
-                class="mt-5 block"
+                src="@/assets/svg/filter.svg"
+                class="mx-auto rotate-180 text-center"
+                alt=""
+                width="150"
               />
+              <p class="font-light text-center mt-4" v-if="!searchName">
+                Empty List.
+              </p>
+              <p class="font-light text-center mt-4" v-if="searchName">
+                <span class="text-green-400 dark:text-green-500">{{
+                  searchName
+                }}</span>
+                Item Can't Be Found.
+              </p>
             </div>
-            <p
-              class="text-slate-900 font-semibold dark:text-slate-100 mt-4"
-              v-if="loading == false"
-            >
-              No NFTs found for
-              <span class="text-green-500">{{
-                searchName ? `${searchName} in` : ""
-              }}</span>
-              Your Collection
-            </p>
-
-            <p
-              class="text-slate-900 font-semibold dark:text-slate-100 mt-4"
-              v-if="loading == true"
-            >
-              Loading NFTs....Hold a bit
-            </p>
-          </div>
+          </section>
         </div>
       </section>
     </main>

@@ -228,6 +228,9 @@
 //stores
 import { userflow } from "@/stores/userflow";
 
+//composables
+import { getNames } from "@/composables/getNames";
+
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
@@ -240,6 +243,7 @@ import { getDate } from "@/composables/getDate";
 const route = useRoute();
 const userflowing = userflow();
 const { getCurrentTimeAndDate } = getDate();
+const { generateNFTName } = getNames();
 
 const listing = ref(false);
 const description = ref(false);
@@ -322,7 +326,7 @@ const specificCollectionNfts = async (routeParams) => {
       collectionNfts.value.forEach((nft) => {
         nft.action = true;
         //todo generate a random name here instead of ####
-        nft.name = nft.name ? nft.name : "####";
+        nft.name = nft.name ? nft.name : generateNFTName();
         nft.status = "pending";
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500

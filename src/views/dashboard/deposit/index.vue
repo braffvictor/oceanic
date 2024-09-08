@@ -29,7 +29,14 @@
         <div
           class="pb-4 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20 transit"
         >
-          <BalanceCard />
+          <BalanceCard
+            text="Last Transaction:"
+            :data="
+              transactions.length > 0
+                ? transactions[0].date
+                : 'No Transaction Yet'
+            "
+          />
         </div>
 
         <section class="mt-3 text-slate-900 dark:text-slate-100">
@@ -78,6 +85,7 @@
 
 <script setup>
 import { adminflow } from "@/stores/adminflow";
+import { userflow } from "@/stores/userflow";
 
 // components
 import BalanceCard from "@/components/cards/balanceCard.vue";
@@ -87,6 +95,10 @@ import SvgComp from "@/components/svgComp.vue";
 import { computed, inject, onMounted, ref } from "vue";
 
 const adminflowing = adminflow();
+const userflowing = userflow();
+const transactions = computed(() => {
+  return userflowing.allTransactions;
+});
 
 const wallets = computed(() => {
   return adminflowing.wallets;

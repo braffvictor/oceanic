@@ -38,6 +38,7 @@
           :text1="`${withdraw.amount.toFixed(1)} ETH `"
           :text2="withdraw.convertAmount"
           :text3="withdraw.email"
+          :text4="withdraw.adminText ? 'Admin Withdrawal' : 'User Withdrawal'"
           :date="withdraw.date"
           :data="withdraw"
           :actions="actions"
@@ -177,8 +178,6 @@ const actions = computed(() => {
         } else {
           let message = `${data.fullName} Withdrawal Of ${data.amount} ETH Has Been Approved Successfully.`;
 
-          // todo a function here to add amount to the user wallet balance
-
           const payload = {
             id: data.id,
             category: "withdraws",
@@ -209,7 +208,7 @@ const actions = computed(() => {
             timer: 5000,
           });
         } else {
-          let message = `${data.fullName} Withdrawal Of ${data.amount} ETH  Has Been Declined Successfully.`;
+          let message = `${data.fullName} Withdrawal Of ${data.amount} ETH  Has Been Declined Successfully, And Amount Has Been Successfully Returned To The ${data.fullName} Wallet Balance`;
 
           const payload = {
             id: data.id,
@@ -218,6 +217,17 @@ const actions = computed(() => {
             message: message,
           };
           adminflowing.dynamicUpdate(payload);
+
+          userflowing.addition({ amount: data.amount, uid: data.userID });
+
+          userflowing.notificationFN({
+            type: "info",
+            message: `Dear ${data.fullName}, Your Withdrawal Of ${data.amount} ETH Has Been Declined, And ${data.amount} ETH Has Been Reversed Back To Your Wallet Balance, Please Contact Support For More Enquires.`,
+            email: data.email,
+            uid: data.userID,
+            open: false,
+            fullName: data.fullName,
+          });
         }
       },
     },

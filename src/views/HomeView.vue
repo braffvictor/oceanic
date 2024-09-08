@@ -8,7 +8,7 @@
       :form="form"
       :type="type"
     />
-    <section class="h-svh">
+    <section class="h-[107vh] md:min-h-screen">
       <main class="md:px-8 relative h-full -mt-4 md:mt-8">
         <!-- div with just image -->
 
@@ -415,7 +415,7 @@ const type = ref("registration");
 
 const theme = inject("theme");
 
-const darkShade = ref("rgba(0, 0, 0, 0.247), #0e182f 90%");
+const darkShade = ref("rgba(0, 0, 0, 0.247), #0f172a 90%");
 const lightShade = ref("rgba(255, 255, 255, 0.216), white 90%");
 
 // const darkShade2 = ref("rgba(0, 0, 0, 0.247), rgba(0, 0, 0, 0.247)");

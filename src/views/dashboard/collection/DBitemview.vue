@@ -265,6 +265,8 @@
 import { userflow } from "@/stores/userflow";
 import { authentication } from "@/stores/authentication";
 
+import { getNames } from "@/composables/getNames";
+
 //components
 import CollectionActivities from "@/components/dynamicComps/CollectionActivities.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
@@ -280,6 +282,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const theme = inject("theme");
 const { getCurrentTimeAndDate } = getDate();
+const { generateNFTName } = getNames();
 
 const userflowing = userflow();
 const loading = computed(() => {
@@ -370,7 +373,7 @@ const specificCollectionNfts = async (routeParams) => {
       collectionNfts.value.forEach((nft) => {
         nft.action = true;
         //todo generate a random name here instead of ####
-        nft.name = nft.name ? nft.name : "####";
+        nft.name = nft.name ? nft.name : generateNFTName();
         nft.key = nft.collection;
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500

@@ -27,7 +27,14 @@
       <div
         class="pb-4 px-3 bg-slate-50 dark:bg-slate-900 sticky top-16 z-20 transit"
       >
-        <BalanceCard />
+        <BalanceCard
+          text="Last Transaction:"
+          :data="
+            transactions.length > 0
+              ? transactions[0].date
+              : 'No Transaction Yet'
+          "
+        />
       </div>
 
       <section class="mt-3 text-slate-900 dark:text-slate-100 px-3">
@@ -55,12 +62,18 @@
 </template>
 
 <script setup>
+import { userflow } from "@/stores/userflow";
 // components
 import BalanceCard from "@/components/cards/balanceCard.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 
-import { inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
+
+const userflowing = userflow();
+const transactions = computed(() => {
+  return userflowing.allTransactions;
+});
 
 onMounted(() => {
   window.scrollTo({

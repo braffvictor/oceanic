@@ -45,6 +45,11 @@
                   data.category == 'deposits' &&
                   data.status == 'approved' &&
                   action.text != 'View') ||
+                (data.status == 'declined' && action.text != 'View') ||
+                (data &&
+                  data.category == 'withdraws' &&
+                  data.status == 'approved' &&
+                  action.text != 'View') ||
                 (data.status == 'declined' && action.text != 'View')
                   ? '!bg-gray-500 pointer-events-none'
                   : '',

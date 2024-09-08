@@ -1,6 +1,9 @@
 <template>
   <main class="min-h-screen bg-slate-100 dark:bg-slate-900 transit">
-    <section class="md:w-7/12 mx-auto w-11/12 pt-5">
+    <section
+      class="md:w-7/12 mx-auto w-11/12 pt-5"
+      :class="user && user.blocked ? 'pointer-events-none opacity-75' : ''"
+    >
       <div
         class="rounded-2xl bg-slate-900 dark:bg-slate-100 transit h-auto pb-4 w-full shadow-md shadow-slate-900 text-slate-100 dark:text-slate-900 px-4 py-1 md:px-5"
       >
@@ -80,11 +83,21 @@
               >{{ user && user.verified ? "True" : "False" }}</span
             >
           </p>
+
+          <div
+            class="w-full bg-red-500 text-center mt-4 p-2 rounded-lg text-white"
+            v-if="user && user.blocked"
+          >
+            {{ user && user.fullName }} Account Has Been Blocked
+          </div>
         </main>
       </div>
     </section>
 
-    <section class="md:w-7/12 mx-auto w-11/12 pt-5">
+    <section
+      class="md:w-7/12 mx-auto w-11/12 pt-5"
+      :class="user && user.blocked ? 'pointer-events-none opacity-75' : ''"
+    >
       <div
         class="rounded-xl bg-slate-900 dark:bg-slate-100 transit h-auto w-full pb-5 shadow-md shadow-slate-900 text-slate-100 dark:text-slate-900 px-4 py-1 md:px-5"
       >
@@ -101,6 +114,7 @@
             class="shadow-slate-100 w-full text-slate-900 bg-slate-100 dark:text-slate-100 dark:bg-slate-900 dark:shadow-slate-900 mt-3 !rounded-lg"
             @click="dialog = true"
             :loading="loading"
+            :disabled="user && user.blocked"
             >Edit {{ user && user.fullName }} Account</DButton
           >
         </main>

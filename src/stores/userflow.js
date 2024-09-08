@@ -12,8 +12,10 @@ import {
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { defineStore } from "pinia";
 
+import { getNames } from "@/composables/getNames";
 import { getDate } from "@/composables/getDate";
 const { getCurrentTimeAndDate } = getDate();
+const { generateNFTName } = getNames();
 
 import { authentication } from "./authentication";
 import router from "@/router";
@@ -236,7 +238,7 @@ export const userflow = defineStore("userflow", {
               nft.action = true;
               nft.type = "bought";
               //todo generate a random name here instead of ####
-              nft.name = nft.name ? nft.name : "####";
+              nft.name = nft.name ? nft.name : generateNFTName();
               nft.stats = {
                 floor_price:
                   (Number(nft.identifier.slice(0, 4) || 1500) / 4000) * 3037.97,
@@ -590,7 +592,7 @@ export const userflow = defineStore("userflow", {
             id: docRef.id,
           });
 
-          //todo: to deduct the amount from the user balance....was thinking to leave it until admin approves it
+          //todo: to deduct the amount from the user balance....approve leave it be...but declined returns the balance
           this.deduction({ amount: payload.amount });
 
           router.push("/dashboard/home");

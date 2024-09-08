@@ -68,6 +68,18 @@
           ></div>
         </main>
       </section>
+
+      <section v-else class="flex justify-center items-center">
+        <div class="mt-10">
+          <img
+            src="@/assets/svg/filter.svg"
+            class="mx-auto rotate-180 text-center"
+            alt=""
+            width="150"
+          />
+          <p class="font-light text-center mt-4">You Have No Collection Yet.</p>
+        </div>
+      </section>
     </div>
   </main>
 </template>
@@ -80,6 +92,8 @@ import { userflow } from "@/stores/userflow";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";
 import { computed, inject, onMounted } from "vue";
+
+import filter from "@/assets/svg/filter.svg";
 
 const theme = inject("theme");
 

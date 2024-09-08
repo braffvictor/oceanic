@@ -65,11 +65,15 @@
 </template>
 
 <script setup>
+import { getNames } from "@/composables/getNames";
+
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import nftCard from "@/components/cards/nftCard.vue";
 import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+
+const { generateNFTName } = getNames();
 
 const props = defineProps({
   headerName: {
@@ -137,7 +141,7 @@ const specificCollectionNfts = async (routeParams) => {
           : props.headerObj.description;
         nft.banner_image_url = props.headerObj.banner_image_url || "";
         //todo generate a random name here instead of ####
-        nft.name = nft.name ? nft.name : "####";
+        nft.name = nft.name ? nft.name : generateNFTName();
         nft.contract_address = generateContractAddressWithSeed(
           nft.identifier || 1500
         );

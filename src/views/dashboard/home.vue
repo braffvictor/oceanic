@@ -10,9 +10,9 @@
           <BalanceCard
             text="ETH Address:"
             :data="
-              (user && user.walletAddress.slice(0, 10)) +
+              (user && user.walletAddress.slice(0, 7)) +
               '...' +
-              (user && user.walletAddress.slice(30))
+              (user && user.walletAddress.slice(35))
             "
           />
         </div>

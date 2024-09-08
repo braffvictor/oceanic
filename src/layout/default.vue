@@ -592,14 +592,14 @@ const dropLinks = computed(() => {
           name: "Collections",
           to: "/collections",
         },
-        {
-          name: "Random NFTs",
-          to: "/",
-        },
-        {
-          name: "Drops",
-          to: "/",
-        },
+        // {
+        //   name: "Random NFTs",
+        //   to: "/",
+        // },
+        // {
+        //   name: "Drops",
+        //   to: "/",
+        // },
         {
           name: "Activities",
           to: "/activities",

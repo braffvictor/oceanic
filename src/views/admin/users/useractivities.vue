@@ -36,7 +36,9 @@
           :key="type.id"
           :title="type.category == 'nfts' ? type.name : type.fullName"
           :text1="
-            type.category == 'nfts' ? type.fullName : `${type.amount} ETH `
+            type.category == 'nfts'
+              ? type.fullName
+              : `${type.amount.toFixed(1)} ETH `
           "
           :text2="
             type.category == 'nfts'
