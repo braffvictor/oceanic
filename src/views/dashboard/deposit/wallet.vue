@@ -60,7 +60,7 @@
         </p>
       </section>
 
-      <div class="rounded-3xl dark:border-slate-500 py-4 px-1 mt-4 mx-3">
+      <div class="rounded-3xl dark:border-slate-500 py-4 px-1 mt-2 mx-3">
         <p class="opacity-55 text-xs">Network</p>
         <p class="opacity-85 font-bold text-sm">
           {{ wallet && wallet.walletName }} ({{

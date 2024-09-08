@@ -35,7 +35,7 @@
           )"
           :key="withdraw.id"
           :title="withdraw.fullName"
-          :text1="`${withdraw.amount} ETH `"
+          :text1="`${withdraw.amount.toFixed(1)} ETH `"
           :text2="withdraw.convertAmount"
           :text3="withdraw.email"
           :date="withdraw.date"

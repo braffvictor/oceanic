@@ -47,6 +47,17 @@
           :date="
             type.category == 'nfts' ? type.created_date || type.date : type.date
           "
+          :text4="
+            type.adminText && type.category == 'deposits'
+              ? 'Admin Deposit'
+              : !type.adminText && type.category == 'deposits'
+              ? 'User Deposit'
+              : '' || (type.adminText && type.category == 'withdraws')
+              ? 'Admin Withdrawal'
+              : !type.adminText && type.category == 'withdraws'
+              ? 'User Withdrawal'
+              : ''
+          "
           :data="type"
           :actions="actions"
           :status="type.status"

@@ -4,14 +4,15 @@
       class="border-2 dark:border-slate-200 border-slate-700 rounded-3xl h-40 w-full p-3 md:p-6 flex items-center justify-between"
     >
       <div>
-        <p class="font-bold text-xl">{{ title }}</p>
-        <p class="text-sm">{{ text1 }}</p>
-        <p class="text-sm">{{ text2 }}</p>
-        <p class="text-sm">{{ text3 }}</p>
+        <p class="font-bold text-xl">{{ truncateText(title) }}</p>
+        <p class="text-sm">{{ truncateText(text1) }}</p>
+        <p class="text-sm">{{ truncateText(text2) }}</p>
+        <p class="text-sm">{{ truncateText(text3) }}</p>
+        <p class="text-sm">{{ truncateText(text4) }}</p>
         <p class="text-sm">{{ date }}</p>
       </div>
 
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1 text-center items-center justify-center">
         <p
           v-if="status"
           class="border rounded-lg p-1 text-sm capitalize"
@@ -45,7 +46,7 @@
                   data.status == 'approved' &&
                   action.text != 'View') ||
                 (data.status == 'declined' && action.text != 'View')
-                  ? 'bg-gray-500 pointer-events-none'
+                  ? '!bg-gray-500 pointer-events-none'
                   : '',
               ]"
               v-if="action.is"
@@ -61,6 +62,8 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
+
 const props = defineProps({
   data: {
     type: Object,
@@ -81,6 +84,10 @@ const props = defineProps({
     default: "",
   },
   text3: {
+    type: String,
+    default: "",
+  },
+  text4: {
     type: String,
     default: "",
   },
@@ -115,6 +122,16 @@ function checkStatus(status) {
     return "border-yellow-500 text-yellow-500";
   } else if (status == "declined" || status == "failed") {
     return "border-red-500 text-red-500";
+  }
+}
+
+function truncateText(text) {
+  if (window.screen.width > 768 && text) {
+    return text;
+  } else if (text && text.length > 15 && window.screen.width < 768) {
+    return text.slice(0, 16) + "...";
+  } else {
+    return text;
   }
 }
 </script>

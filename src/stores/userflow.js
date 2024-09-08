@@ -415,6 +415,7 @@ export const userflow = defineStore("userflow", {
             uid: payload.userID,
           });
           this.loading.upload = false;
+          router.push("/dashboard/home");
         })
         .catch((error) => {
           this.loading.upload = false;

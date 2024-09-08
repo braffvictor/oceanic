@@ -240,7 +240,7 @@ export const adminflow = defineStore("adminflow", {
 
           this.initAllWallets();
           this.loading.wallet = false;
-          router.push("/admin/dashboard/home");
+          router.push("/admin/dashboard");
         })
         .catch((err) => {
           this.loading.wallet = false;

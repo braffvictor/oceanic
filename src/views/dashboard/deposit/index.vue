@@ -46,7 +46,9 @@
             >
               <div>
                 <p>{{ wallet.walletName }}</p>
-                <p class="text-xs opacity-55">{{ wallet.walletNetwork }}</p>
+                <p class="text-xs opacity-55">
+                  Network: {{ wallet.walletNetwork }}
+                </p>
               </div>
               <button>
                 <svg-comp

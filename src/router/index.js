@@ -5,6 +5,7 @@ import NProgress from "nprogress";
 
 import { authentication } from "@/stores/authentication";
 import { userflow } from "@/stores/userflow";
+import { adminflow } from "@/stores/adminflow";
 
 import authWare from "@/middleware/auth";
 import adminAuthWare from "@/middleware/adminAuth";
@@ -97,6 +98,28 @@ const routes = [
         path: "/dashboard/deposit/:id",
         name: "dynamic deposit",
         component: () => import("@/views/dashboard/deposit/wallet.vue"),
+        beforeEnter(to) {
+          setTimeout(() => {
+            const adminflowing = adminflow();
+            const wallets = computed(() => adminflowing.wallets);
+
+            let arr = [];
+            wallets.value.forEach((wallet) => {
+              arr.push(wallet.id);
+            });
+
+            const exists = arr.some((exist) => exist == to.params.id);
+
+            if (!exists) {
+              return {
+                name: "error-page",
+                params: { pathMatch: to.path.substring(1).split("/") },
+                query: to.query,
+                hash: to.hash,
+              };
+            }
+          }, 1000);
+        },
       },
       {
         path: "/dashboard/withdraw",
