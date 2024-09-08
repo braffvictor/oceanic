@@ -42,7 +42,7 @@
       <p class="font-bold">Withdrawal Details</p>
 
       <div class="flex justify-between text-sm md:text-base mt-2">
-        <p class="font-extralight text-gray-500">FullName</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">FullName</p>
         <p class="font-medium">{{ transact && transact.fullName }}</p>
       </div>
       <!-- divider dash-->
@@ -50,7 +50,7 @@
         class="border border-gray-300 dark:border-gray-700 border-dashed my-2 w-full"
       ></div>
       <div class="flex justify-between text-sm md:text-base mt-2">
-        <p class="font-extralight text-gray-500">Email</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">Email</p>
         <p class="font-medium">{{ transact && transact.email }}</p>
       </div>
       <!-- divider dash-->
@@ -58,7 +58,9 @@
         class="border border-gray-300 dark:border-gray-700 border-dashed my-2 w-full"
       ></div>
       <div class="flex justify-between text-sm md:text-base mt-2">
-        <p class="font-extralight text-gray-500">Reference</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">
+          Reference
+        </p>
         <p class="font-medium">{{ transact && transact.id }}</p>
       </div>
       <!-- divider dash-->
@@ -67,7 +69,9 @@
       ></div>
 
       <div class="flex justify-between text-sm md:text-base">
-        <p class="font-extralight text-gray-500">Withdrawn Amount(ETH)</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">
+          Withdrawn Amount(ETH)
+        </p>
         <p class="font-medium">{{ transact && transact.amount }}ETH</p>
       </div>
       <!-- divider dash-->
@@ -76,7 +80,7 @@
       ></div>
 
       <div class="flex justify-between text-sm md:text-base">
-        <p class="font-extralight text-gray-500">Crypto</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">Crypto</p>
         <p class="font-medium capitalize">{{ transact && transact.crypto }}</p>
       </div>
       <!-- divider dash-->
@@ -85,7 +89,7 @@
       ></div>
 
       <div class="flex justify-between text-sm md:text-base">
-        <p class="font-extralight text-gray-500">Network</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">Network</p>
         <p class="font-medium capitalize">{{ transact && transact.network }}</p>
       </div>
       <!-- divider dash-->
@@ -94,7 +98,9 @@
       ></div>
 
       <div class="flex justify-between text-sm md:text-base">
-        <p class="font-extralight text-gray-500">Wallet Address</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">
+          Wallet Address
+        </p>
         <p class="font-medium">
           {{
             (transact && transact.walletAddress.slice(0, 10)) +
@@ -109,7 +115,7 @@
       ></div>
 
       <div class="flex justify-between items-center text-sm md:text-base">
-        <p class="font-extralight text-gray-500">Status</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">Status</p>
         <p
           class="font-medium border capitalize p-1 rounded-lg"
           :class="checkStatus(transact && transact.status)"
@@ -124,7 +130,7 @@
       ></div>
 
       <div class="flex justify-between text-sm md:text-base">
-        <p class="font-extralight text-gray-500">Date</p>
+        <p class="font-extralight text-gray-500 dark:text-gray-400">Date</p>
         <p class="font-medium">{{ transact && transact.date }}</p>
       </div>
     </section>
