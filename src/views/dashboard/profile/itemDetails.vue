@@ -32,11 +32,20 @@
             <div
               class="border rounded-2xl overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit md:w-1/2"
             >
-              <p class="p-2 text-slate-900 dark:text-slate-100">
+              <div
+                class="p-2 text-slate-900 dark:text-slate-100 flex justify-between items-center py-3"
+              >
                 <SvgComp
                   icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
                 />
-              </p>
+
+                <DButton
+                  type="elevated"
+                  @click="dialog = true"
+                  class="shadow-green-400 dark:shadow-green-500 bg-green-400 dark:bg-green-500"
+                  >Edit</DButton
+                >
+              </div>
               <!-- <img
                 :src="nftDetails && nftDetails.image_url"
                 :alt="nftDetails && nftDetails.name"
@@ -50,13 +59,11 @@
             </div>
             <div class="rounded-2xl md:w-8/12 w-full p-2">
               <p class="text-green-500 font-normal text-lg cursor-pointer">
-                {{ (userNFT && userNFT.key) || (userNFT && userNFT.collection)
+                {{ userNFT && userNFT.collection
                 }}<img
                   src="@/assets/verified.svg"
                   alt="tick"
-                  v-if="
-                    (userNFT && userNFT.key) || (userNFT && userNFT.collection)
-                  "
+                  v-if="userNFT && userNFT.collection"
                   class="max-w-5 inline pl-1"
                 />
               </p>
@@ -122,7 +129,6 @@
                   <d-button
                     class="w-full active:!bg-slate-300 dark:active:!bg-slate-600"
                     type="outlined"
-                    :loading="loading"
                     :to="$route.fullPath"
                     @click="() => {}"
                     >Selling For
@@ -259,19 +265,48 @@
         </section>
       </section>
     </main>
+
+    <DDialog
+      :dialog="dialog"
+      @closeDialog="dialog = false"
+      :data="type"
+      :screen="true"
+      title="Edit NFT Details"
+      :loading="loadingDialog"
+    />
   </div>
 </template>
 
 <script setup>
+import { userflow } from "@/stores/userflow";
+
+import DDialog from "@/components/utils/DDialog.vue";
 import SvgComp from "@/components/svgComp.vue";
 import vLazyImage from "v-lazy-image";
 import DDashbar from "@/components/utils/DDashbar.vue";
-import { userflow } from "@/stores/userflow";
-import { computed, inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import DButton from "@/components/utils/DButton.vue";
 
 const userNFT = computed(() => {
   return userflowing.getNftByID(route.params.id);
+});
+
+const dialog = ref(false);
+const loadingDialog = ref(false);
+const type = reactive({
+  category: "editnft",
+  nft: userNFT,
+});
+
+watch(dialog, () => {
+  if (dialog.value) {
+    setTimeout(() => {
+      loadingDialog.value = true;
+    }, 200);
+  } else {
+    loadingDialog.value = false;
+  }
 });
 
 onMounted(() => {

@@ -97,7 +97,11 @@
                 {{ userflowing.cartList }}
               </p>
               <SvgComp
-                Sclass="group-active:stroke-green-500 transit"
+                :Sclass="
+                  route.name.includes(link.text)
+                    ? 'dark:!fill-slate-200 !fill-slate-700 dark:!stroke-slate-300 !stroke-slate-800'
+                    : 'dark:!stroke-slate-200 !stroke-slate-700'
+                "
                 class=""
                 :icon="link.icon"
               />

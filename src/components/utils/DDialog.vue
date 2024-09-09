@@ -56,6 +56,12 @@
         @closeDialog="$emit('closeDialog')"
       />
 
+      <Editnft
+        v-if="data && data.category == 'editnft'"
+        :nft="data.nft"
+        @closeDialog="$emit('closeDialog')"
+      />
+
       <div class="text-right float-end px-3 md:px-6 mt-3 hidden md:block">
         <p
           class="bg-slate-900 p-3 rounded-md cursor-pointer active:scale-75 transit dark:bg-slate-100 text-slate-100 dark:text-slate-900"
@@ -76,6 +82,7 @@ import Withdrawprops from "../extUtils/withdrawprops.vue";
 import Nftprops from "../extUtils/nftprops.vue";
 import AddWallet from "../extUtils/addWallet.vue";
 import EditBalance from "../extUtils/editBalance.vue";
+import Editnft from "../extUtils/editnft.vue";
 
 const theme = inject("theme");
 

@@ -50,7 +50,9 @@
         <div class="text-center mx-auto flex justify-center">
           <div
             class="grid grid-cols-2 justify-center items-center md:grid-cols-4 mt-7 gap-6 text-center mx-auto"
-            v-if="nfts && nfts.length > 0"
+            v-if="
+              route.params.id == 'all' ? nfts.length > 0 : filterNfts.length > 0
+            "
           >
             <NftCard
               v-for="nft in route.params.id == 'all' ? nfts : filterNfts"
