@@ -19,12 +19,22 @@
     <section class="w-10/12 md:w-7/12 mx-auto my-6">
       <d-textfield
         @emitInput="(input) => (search = input)"
-        label="Search Users"
+        label="Search Users..."
         :type="theme == 'dark' ? 'filled' : 'default'"
       />
     </section>
 
-    <div class="w-full" v-if="dashCard[$route.params.id].array.length > 0">
+    <div
+      class="w-full"
+      v-if="
+        dashCard[$route.params.id].array.filter(
+          (userText) =>
+            userText.fullName.includes(search) ||
+            userText.fullName.toLowerCase().includes(search) ||
+            userText.email.includes(search)
+        ).length > 0
+      "
+    >
       <TransitionGroup name="list">
         <admin-prop-card
           v-for="user in dashCard[$route.params.id].array.filter(
@@ -45,6 +55,22 @@
         />
       </TransitionGroup>
     </div>
+
+    <section v-else class="flex justify-center items-center">
+      <div class="mt-10">
+        <img
+          src="@/assets/svg/darkfilter.svg"
+          class="mx-auto rotate-180 text-center dark:hidden"
+          alt=""
+          width="150"
+        />
+        <p class="font-light text-center mt-4" v-if="!search">Empty List</p>
+        <p class="font-light text-center mt-4" v-if="search">
+          <span class="text-green-400 dark:text-green-500">{{ search }}</span>
+          Not Found.
+        </p>
+      </div>
+    </section>
   </main>
 </template>
 

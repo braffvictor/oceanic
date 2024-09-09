@@ -78,10 +78,10 @@
                 Empty List.
               </p>
               <p class="font-light text-center mt-4" v-if="searchName">
-                <span class="text-green-400 dark:text-green-500">{{
-                  searchName
-                }}</span>
-                Item Can't Be Found.
+                <span class="text-green-400 dark:text-green-500"
+                  >Oops, We Can't Find {{ searchName }}</span
+                >
+                Item.
               </p>
             </div>
           </section>
