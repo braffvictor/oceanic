@@ -42,7 +42,7 @@
               ·
             </div>
             <div
-              class="font-normal italic md:text-[16px] select-none capitalize md:font-extralight w-full"
+              class="font-normal italic md:text-[16px] select-none md:font-extralight w-full"
             >
               {{ checkCollection(nft.collection) }}
               <!-- <p class="text-xs opacity-65">02/09/2024</p> -->

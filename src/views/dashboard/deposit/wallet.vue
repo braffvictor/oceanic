@@ -26,7 +26,7 @@
         <div class="mt-5 text-slate-900 dark:text-slate-100">
           <div class="mx-auto text-center">
             <div
-              class="overflow-hidden rounded-lg border inline-block mx-auto text-center"
+              class="overflow-hidden rounded-sm border inline-block mx-auto text-center"
             >
               <!-- <img
                 :src="wallet && wallet.qrCode"
@@ -36,7 +36,7 @@
               <vLazyImage
                 :src="wallet && wallet.qrCode"
                 alt="Qr code"
-                width="300"
+                width="250"
                 class="mx-auto text-center"
               />
             </div>

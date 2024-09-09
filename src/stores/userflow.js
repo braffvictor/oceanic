@@ -46,6 +46,7 @@ export const userflow = defineStore("userflow", {
     },
 
     loading: {
+      nft: false,
       upload: false,
       buy: false,
       deposit: false,
@@ -353,6 +354,8 @@ export const userflow = defineStore("userflow", {
             email: payload.email,
           });
           this.loading.buy = false;
+          router.push("/dashboard/home");
+          await this.initAllNfts();
         })
         .catch((error) => {
           this.loading.buy = false;
@@ -684,6 +687,34 @@ export const userflow = defineStore("userflow", {
           this.initAlert({
             is: true,
             message: error.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async editNftDetails(payload) {
+      this.loading.nft = true;
+      const colref = collection(db, "nfts");
+      const currentUserDoc = doc(colref, payload.id);
+
+      await updateDoc(currentUserDoc, payload)
+        .then(() => {
+          this.initAlert({
+            is: true,
+            message: "You Successfully Updated Your NFT Details.",
+            type: "info",
+          });
+
+          this.initUserNfts();
+          this.loading.nft = false;
+          router.push("/dashboard/profile/items/all");
+        })
+        .catch((err) => {
+          this.loading.nft = false;
+          this.initAlert({
+            is: true,
+            message: err.message,
             type: "error",
             close: false,
           });

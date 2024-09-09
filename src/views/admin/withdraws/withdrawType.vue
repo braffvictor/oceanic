@@ -24,7 +24,17 @@
       />
     </section>
 
-    <div class="w-full" v-if="dashCard[$route.params.id].array.length > 0">
+    <div
+      class="w-full"
+      v-if="
+        dashCard[$route.params.id].array.filter(
+          (withdrawText) =>
+            withdrawText.fullName.includes(search) ||
+            withdrawText.fullName.toLowerCase().includes(search) ||
+            withdrawText.email.includes(search)
+        ).length > 0
+      "
+    >
       <TransitionGroup name="list">
         <admin-prop-card
           v-for="withdraw in dashCard[$route.params.id].array.filter(
@@ -46,6 +56,28 @@
         />
       </TransitionGroup>
     </div>
+
+    <section v-else class="flex justify-center items-center">
+      <div class="mt-10">
+        <img
+          src="@/assets/svg/darkfilter.svg"
+          class="mx-auto rotate-180 text-center dark:hidden"
+          alt=""
+          width="150"
+        />
+        <img
+          src="@/assets/svg/whitefilter.svg"
+          class="mx-auto rotate-180 text-center hidden dark:block"
+          alt=""
+          width="150"
+        />
+        <p class="font-light text-center mt-4" v-if="!search">Empty List</p>
+        <p class="font-light text-center mt-4" v-if="search">
+          <span class="text-green-400 dark:text-green-500">{{ search }}</span>
+          Withdrawal Not Found.
+        </p>
+      </div>
+    </section>
 
     <!-- dialog -->
     <DDialog

@@ -263,9 +263,9 @@ function setLoading() {
   if (checkEmail() && checkPassword() && checkUsername() && checkFullname()) {
     const payload = {
       fullName: fullName.value,
-      email: email.value,
+      email: email.value.trim(),
       password: password.value,
-      userName: userName.value,
+      userName: userName.value.trim(),
     };
     useAuthentication.registerUser(payload);
   } else {

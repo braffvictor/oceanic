@@ -365,7 +365,7 @@ function submit() {
       // gasfeeAmount : 0.25,
 
       stats: {
-        floor_eth: bidPrice.value,
+        floor_eth: Math.abs(bidPrice.value),
         floor_price: Math.abs(Math.round(bidPrice.value * 3043)),
         floor_price_symbol: "ETH",
       },

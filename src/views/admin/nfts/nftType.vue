@@ -24,7 +24,22 @@
       />
     </section>
 
-    <div class="w-full" v-if="dashCard[$route.params.id].array.length > 0">
+    <div
+      class="w-full"
+      v-if="
+        dashCard[$route.params.id].array.filter(
+          (nftText) =>
+            nftText.fullName.includes(search) ||
+            nftText.fullName.toLowerCase().includes(search) ||
+            nftText.email.includes(search) ||
+            nftText.name.includes(search) ||
+            nftText.name.toLowerCase().includes(search) ||
+            nftText.collection.includes(search) ||
+            nftText.collection.toLowerCase().includes(search) ||
+            nftText.type.includes(search)
+        ).length > 0
+      "
+    >
       <TransitionGroup name="list">
         <admin-prop-card
           v-for="nft in dashCard[$route.params.id].array.filter(
@@ -39,8 +54,8 @@
               nftText.type.includes(search)
           )"
           :key="nft.id"
-          :title="nft.name"
-          :text1="nft.fullName"
+          :title="nft.fullName"
+          :text1="nft.name"
           :text2="nft.type.toUpperCase()"
           :date="nft.created_date"
           :data="nft"
@@ -49,6 +64,28 @@
         />
       </TransitionGroup>
     </div>
+
+    <section v-else class="flex justify-center items-center">
+      <div class="mt-10">
+        <img
+          src="@/assets/svg/darkfilter.svg"
+          class="mx-auto rotate-180 text-center dark:hidden"
+          alt=""
+          width="150"
+        />
+        <img
+          src="@/assets/svg/whitefilter.svg"
+          class="mx-auto rotate-180 text-center hidden dark:block"
+          alt=""
+          width="150"
+        />
+        <p class="font-light text-center mt-4" v-if="!search">Empty List</p>
+        <p class="font-light text-center mt-4" v-if="search">
+          <span class="text-green-400 dark:text-green-500">{{ search }}</span>
+          NFT Not Found.
+        </p>
+      </div>
+    </section>
 
     <!-- dialog -->
     <DDialog

@@ -90,7 +90,7 @@
                 ></p>
               </div>
             </td>
-            <td class="animate-pulse">
+            <td class="animate-pulse pl-20">
               <p
                 class="w-20 bg-slate-200 transit dark:bg-slate-700 h-6 rounded-xl mx-4"
               ></p>

@@ -33,16 +33,16 @@
               class="border rounded-2xl overflow-hidden dark:bg-slate-800 border-gray-300 dark:border-gray-600 transit md:w-1/2"
             >
               <div
-                class="p-2 text-slate-900 dark:text-slate-100 flex justify-between items-center py-3"
+                class="p-2 text-slate-900 dark:text-slate-100 flex justify-between items-center py-2"
               >
                 <SvgComp
                   icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
                 />
 
                 <DButton
-                  type="elevated"
+                  type="outlined"
                   @click="dialog = true"
-                  class="shadow-green-400 dark:shadow-green-500 bg-green-400 dark:bg-green-500"
+                  class="border-slate-900 !text-slate-900 dark:border-slate-100 dark:!text-slate-100 py-1 rounded-xl"
                   >Edit</DButton
                 >
               </div>
@@ -98,6 +98,17 @@
               <p class="mt-2 text-slate-900 dark:text-slate-100">
                 Created : {{ userNFT && userNFT.created_date }}
               </p>
+
+              <div v-if="userNFT && userNFT?.properties" class="mt-1">
+                Properties :
+                <span
+                  class="capitalize transit dark:shadow-sm select-none shadow-green-400 border border-green-400 text-sm font-thin rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4 mx-1"
+                  v-for="prop in userNFT && userNFT?.properties"
+                  :key="prop"
+                >
+                  {{ prop }}
+                </span>
+              </div>
 
               <div
                 class="border-gray-300 dark:border-gray-600 border transit rounded-xl p-3 md:p-5 mt-4 dark:bg-slate-800"

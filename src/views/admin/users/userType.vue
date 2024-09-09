@@ -64,6 +64,12 @@
           alt=""
           width="150"
         />
+        <img
+          src="@/assets/svg/whitefilter.svg"
+          class="mx-auto rotate-180 text-center hidden dark:block"
+          alt=""
+          width="150"
+        />
         <p class="font-light text-center mt-4" v-if="!search">Empty List</p>
         <p class="font-light text-center mt-4" v-if="search">
           <span class="text-green-400 dark:text-green-500">{{ search }}</span>
