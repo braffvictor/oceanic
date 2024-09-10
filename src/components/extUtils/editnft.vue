@@ -47,7 +47,9 @@
           @emitInput="(input) => (categoryType = input)"
           :lists="categories"
           name="category"
-          :placeholder="`Category: ${nft && nft?.categoryType?.toUpperCase()}`"
+          :placeholder="`Category: ${
+            (nft && nft?.categoryType?.toUpperCase()) || 'Not Given'
+          }`"
           type="outlined"
           :err="''"
         />
@@ -86,7 +88,9 @@
         />
         <DTextfield
           @emitInput="(input) => (date = input)"
-          :label="`Date: ${(nft && nft?.created_date) || (nft && nft?.date)}`"
+          :label="`Date: ${
+            (nft && nft?.created_date) || (nft && nft?.date) || 'Not Given'
+          }`"
           name="date"
           type="outlined"
         />
@@ -179,7 +183,9 @@ function submit() {
     collection: collectionName.value.trim()
       ? collectionName.value.trim()
       : nft.collection,
-    categoryType: categoryType.value ? categoryType.value : nft.categoryType,
+    categoryType: categoryType.value
+      ? categoryType.value
+      : nft.categoryType || "Not Given",
     date: date.value ? date.value : nft.date || nft.created_date,
     created_date: nft.created_date ? nft.created_date : date.value || nft.date,
     stats: {
@@ -191,7 +197,9 @@ function submit() {
         : nft.stats.floor_price,
       floor_price_symbol: "ETH",
     },
-    description: description.value ? description.value : nft.description,
+    description: description.value
+      ? description.value
+      : nft.description || "Not Given",
     properties:
       properties.value.length > 0
         ? properties.value

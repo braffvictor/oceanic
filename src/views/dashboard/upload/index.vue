@@ -378,7 +378,7 @@ function submit() {
       contract_address: generateAddress(),
       identifier: generateID(),
 
-      collection: collection.value.toLowerCase().trim(),
+      collection: collection.value.trim(),
       image_url: photo.value,
       properties: props.value,
       description: description.value,

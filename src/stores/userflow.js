@@ -338,11 +338,9 @@ export const userflow = defineStore("userflow", {
           //to ask on writeup in notification in firebase and popup alert
           this.initAlert({
             is: true,
-            message: `${
-              payload.name || "####"
-            } Purchase Successful, Now Added As One of Your Collection.`,
+            message: `${payload.name} Purchase Successful, Now Added As One of Your Collection.`,
             type: "success",
-            timer: 4000,
+            timer: 6000,
           });
 
           await this.notificationFN({
