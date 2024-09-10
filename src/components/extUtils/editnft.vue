@@ -186,8 +186,10 @@ function submit() {
     categoryType: categoryType.value
       ? categoryType.value
       : nft.categoryType || "Not Given",
-    date: date.value ? date.value : nft.date || nft.created_date,
-    created_date: nft.created_date ? nft.created_date : date.value || nft.date,
+    date: date.value ? date.value : nft.date || nft.created_date || "Not Given",
+    created_date: nft.created_date
+      ? nft.created_date
+      : date.value || nft.date || "Not Given",
     stats: {
       floor_eth: Math.abs(bidPrice.value)
         ? Math.abs(bidPrice.value)

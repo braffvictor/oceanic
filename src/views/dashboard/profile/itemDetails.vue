@@ -99,7 +99,10 @@
                 Created : {{ userNFT && userNFT.created_date }}
               </p>
 
-              <div v-if="userNFT && userNFT?.properties" class="mt-1">
+              <div
+                v-if="userNFT && userNFT?.properties.length > 0"
+                class="mt-1"
+              >
                 Properties :
                 <span
                   class="capitalize transit dark:shadow-sm select-none shadow-green-400 border border-green-400 text-sm font-thin rounded-2xl h-8 dark:border-green-500 dark:shadow-green-500 py-1 px-4 mx-1"
