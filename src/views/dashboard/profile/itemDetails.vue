@@ -100,7 +100,7 @@
               </p>
 
               <div
-                v-if="userNFT && userNFT?.properties.length > 0"
+                v-if="userNFT && userNFT?.properties?.length > 0"
                 class="mt-1"
               >
                 Properties :
