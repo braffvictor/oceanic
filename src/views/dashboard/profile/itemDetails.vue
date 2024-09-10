@@ -42,6 +42,7 @@
                 <DButton
                   type="outlined"
                   @click="dialog = true"
+                  :loading="loading"
                   class="border-slate-900 !text-slate-900 dark:border-slate-100 dark:!text-slate-100 py-1 rounded-xl"
                   >Edit</DButton
                 >
@@ -338,6 +339,10 @@ const theme = inject("theme");
 
 const userflowing = userflow();
 
+const loading = computed(() => {
+  return userflowing.loading.nft;
+});
+
 const listing = ref(true);
 const description = ref(true);
 const details = ref(true);
@@ -347,13 +352,13 @@ const detailsOfNft = computed(() => {
     {
       text: "Contract Address",
       data:
-        (userNFT.value && userNFT.value.contract_address.slice(0, 5)) +
+        (userNFT.value && userNFT.value?.contract_address?.slice(0, 5)) +
         "...." +
-        (userNFT.value && userNFT.value.contract_address.slice(10, 15)),
+        (userNFT.value && userNFT.value?.contract_address?.slice(10, 15)),
     },
     {
       text: "Token ID",
-      data: userNFT.value && userNFT.value.identifier.slice(0, 4),
+      data: userNFT.value && userNFT.value?.identifier?.slice(0, 4),
     },
     {
       text: "Token Standard",

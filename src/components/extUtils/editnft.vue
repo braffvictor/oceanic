@@ -100,7 +100,7 @@
             type="filled"
             :loading="loading"
             @click="submit"
-            class="bg-slate-900 shadow shadow-slate-900 dark:shadow-slate-100 dark:bg-slate-100 !text-slate-100 dark:!text-slate-900 rounded-md"
+            class="bg-slate-900 shadow shadow-slate-900 dark:shadow-slate-50 dark:bg-slate-50 !text-slate-100 dark:!text-slate-900 rounded-md"
             >Proceed</DButton
           >
         </button>
