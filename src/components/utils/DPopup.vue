@@ -114,7 +114,7 @@ let randoNumber = Math.round(Math.random() * users.value.length);
 setInterval(() => {
   // console.log(show.value);
   show.value = true;
-}, 10000);
+}, 65000);
 
 watch(show, () => {
   if (show.value) {
