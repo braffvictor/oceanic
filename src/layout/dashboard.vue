@@ -179,7 +179,7 @@
 
     <!-- todo alert comp -->
     <DAlert />
-    <DPopup :show="drawer" />
+    <DPopup />
   </div>
 </template>
 

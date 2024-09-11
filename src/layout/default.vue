@@ -488,6 +488,7 @@
 
     <!-- todo alert comp -->
     <d-alert />
+    <DPopup />
   </div>
 </template>
 
@@ -495,6 +496,7 @@
 // stores
 import { userflow } from "@/stores/userflow";
 
+import DPopup from "@/components/utils/DPopup.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import DCartList from "@/components/utils/DCartList.vue";
