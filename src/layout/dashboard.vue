@@ -258,12 +258,13 @@ const theme = provide("theme", themeState);
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.6s ease-in-out;
+  transition: all 0.9s ease-in-out;
 }
 
 .v-enter-from,
 .v-leave-to {
   opacity: 0.9;
+  filter: blur(4px);
   transform: translateY(10px);
 }
 </style>

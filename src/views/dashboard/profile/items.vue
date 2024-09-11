@@ -115,8 +115,10 @@ const user = computed(() => {
 });
 const userflowing = userflow();
 const nfts = computed(() => {
-  return userflowing.userNfts.filter((nft) =>
-    nft.name.includes(searchName.value)
+  return userflowing.userNfts.filter(
+    (nft) =>
+      nft.name.includes(searchName.value) ||
+      nft.name.toLowerCase().includes(searchName.value)
   );
 });
 
@@ -137,8 +139,9 @@ const loading = ref(false);
 const filterNfts = computed(() => {
   return userflowing.userNfts.filter(
     (nft) =>
-      nft.type == route.params.id.toLowerCase() &&
-      nft.name.includes(searchName.value)
+      (nft.type == route.params.id.toLowerCase() &&
+        nft.name.includes(searchName.value)) ||
+      nft.name.toLowerCase().includes(searchName.value)
   );
 });
 </script>

@@ -126,19 +126,13 @@
                   {{
                     userNFT && userNFT.stats.floor_eth.toString().slice(0, 5)
                   }}ETH
-                  <span class="text-sm text-gray-400"
-                    >${{
-                      userNFT &&
-                      userNFT.stats.floor_price
-                        .toLocaleString()
-                        .slice(
-                          0,
-                          (userNFT && userNFT.stats.floor_price)
-                            .toLocaleString()
-                            .indexOf(".")
-                        ) + ".00"
-                    }}</span
-                  >
+                  <span class="text-sm text-gray-400">{{
+                    userNFT &&
+                    userNFT.stats?.floor_price?.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })
+                  }}</span>
                 </p>
                 <div class="flex gap-4 mt-3">
                   <d-button

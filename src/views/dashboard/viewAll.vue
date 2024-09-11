@@ -159,14 +159,8 @@
         <section v-else class="flex justify-center items-center">
           <div class="mt-10">
             <img
-              src="@/assets/svg/darkfilter.svg"
-              class="mx-auto rotate-180 text-center dark:hidden"
-              alt=""
-              width="150"
-            />
-            <img
-              src="@/assets/svg/whitefilter.svg"
-              class="mx-auto rotate-180 text-center hidden dark:block"
+              src="@/assets/svg/filter.svg"
+              class="mx-auto rotate-180 text-center"
               alt=""
               width="150"
             />

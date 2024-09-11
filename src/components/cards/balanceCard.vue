@@ -15,7 +15,10 @@
         <p class="text-xs md:text-sm opacity-70">
           ${{
             user && user.wallet.balance
-              ? (user?.wallet?.balance * 3047.3).toLocaleString(2)
+              ? (user?.wallet?.balance * 3047.3)?.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })
               : "0.00"
           }}
         </p>
