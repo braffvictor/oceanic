@@ -256,6 +256,17 @@
               </div>
             </div>
           </div>
+          <DButton
+            type="outlined"
+            class="border-red-500 !text-red-500 mt-3 mx-3"
+            @click="deleteNft(userNFT && userNFT)"
+            :loading="loading"
+          >
+            <p>
+              Delete
+              <span class="font-bold"> {{ userNFT && userNFT.name }}</span>
+            </p>
+          </DButton>
 
           <!-- <main class="pb-8 px-2">
             <div
@@ -364,6 +375,13 @@ const detailsOfNft = computed(() => {
     },
   ];
 });
+
+function deleteNft(payload) {
+  if (payload) {
+    userflowing.deleteNFT(payload);
+    // console.log(payload);
+  }
+}
 
 function checkStatus(status) {
   if (status == "approved") {

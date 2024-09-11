@@ -79,7 +79,6 @@
           </section>
         </section>
       </main>
-      <DPopup />
     </main>
   </div>
 </template>
@@ -90,7 +89,6 @@ import { adminflow } from "@/stores/adminflow";
 import { userflow } from "@/stores/userflow";
 
 // components
-import DPopup from "@/components/utils/DPopup.vue";
 import BalanceCard from "@/components/cards/balanceCard.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
 import SvgComp from "@/components/svgComp.vue";

@@ -494,7 +494,8 @@ function cartNft(nftDetails) {
     nftDetails.userID = user.value && user.value.userID;
     nftDetails.type = "bought";
     nftDetails.category = "nfts";
-    nftDetails.collection = user.value && user.value.userName;
+    nftDetails.collection =
+      nftDetails.key || nftDetails.collection || "Not Given";
     nftDetails.status = "pending";
     nftDetails.date = getCurrentTimeAndDate();
     nftDetails.formattedDate = getCurrentTimeAndDate("format");

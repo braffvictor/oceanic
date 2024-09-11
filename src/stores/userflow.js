@@ -2,6 +2,7 @@ import { str, db, auth } from "@/services/firebase";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -331,6 +332,7 @@ export const userflow = defineStore("userflow", {
           updateDoc(currentUserDoc, {
             id: docRef.id,
           });
+          router.push("/dashboard/home");
 
           //deduct from balance
           await this.deduction({ amount: payload.stats.floor_eth });
@@ -352,7 +354,6 @@ export const userflow = defineStore("userflow", {
             email: payload.email,
           });
           this.loading.buy = false;
-          router.push("/dashboard/home");
           await this.initAllNfts();
         })
         .catch((error) => {
@@ -704,9 +705,40 @@ export const userflow = defineStore("userflow", {
             type: "info",
           });
 
+          router.push("/dashboard/profile/items/all");
           this.initUserNfts();
           this.loading.nft = false;
+        })
+        .catch((err) => {
+          this.loading.nft = false;
+          this.initAlert({
+            is: true,
+            message: err.message,
+            type: "error",
+            close: false,
+          });
+        });
+    },
+
+    async deleteNFT(payload) {
+      this.loading.nft = true;
+      const colref = collection(db, "nfts");
+
+      const currentUserDoc = doc(colref, payload.id);
+
+      await deleteDoc(currentUserDoc)
+        .then(() => {
+          this.initAlert({
+            is: true,
+            message: `You Just Deleted ${
+              payload.name
+            } From Your ${checkCollection(payload.collection)}`,
+            type: "info",
+            timer: 5000,
+          });
+          this.loading.nft = false;
           router.push("/dashboard/profile/items/all");
+          this.initUserNfts();
         })
         .catch((err) => {
           this.loading.nft = false;
@@ -720,6 +752,19 @@ export const userflow = defineStore("userflow", {
     },
   },
 });
+
+function checkCollection(collection) {
+  if (
+    collection.includes("collection") ||
+    collection.includes("Collection") ||
+    collection.includes("collections") ||
+    collection.includes("Collections")
+  ) {
+    return collection;
+  } else {
+    return `${collection} Collections`;
+  }
+}
 
 function generateContractAddressWithSeed(seed) {
   const hexChars = "0123456789abcdef";

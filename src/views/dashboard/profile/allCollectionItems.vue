@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen pb-10">
     <main class="md:w-11/12 mx-auto">
       <DDashbar>
         <div class="w-full flex justify-between items-center">
@@ -117,7 +117,8 @@ const collectionNft = computed(() => {
     (nft) =>
       (nft.collection.toLowerCase().trim() == route.params.id.toLowerCase() &&
         nft.name.includes(searchName.value)) ||
-      nft.name.toLowerCase().includes(searchName.value)
+      (nft.collection.toLowerCase().trim() == route.params.id.toLowerCase() &&
+        nft.name.toLowerCase().includes(searchName.value))
   );
 });
 

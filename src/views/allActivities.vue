@@ -5,22 +5,22 @@
     <p class="text-2xl md:text-3xl font-bold">All Events</p>
     <div class="flex text-lg md:text-xl font-light mt-3 justify-between">
       <p>Event Type</p>
-      <DDropDown class="md:hidden" :title="event" :children="eventBtns" />
+      <DDropDown class="" :title="event" :children="eventBtns" />
     </div>
-    <div class="flex mt-3 gap-x-6 hidden md:block">
-      <DButton
-        class="!text-slate-900 dark:!text-slate-100 font-semibold w-1/12"
-        v-for="btn in eventBtns"
-        :key="btn.name"
-        :class="
-          activeBtn == btn.name
-            ? '!bg-gray-200 dark:!bg-gray-700'
-            : '!bg-transparent'
-        "
-        @click="(activeBtn = btn.name), btn.action()"
-        >{{ btn.name }}</DButton
-      >
-    </div>
+    <!-- <div class="flex flex-row mt-3 gap-x-6 md:block">
+      <div v-for="btn in eventBtns" :key="btn.name">
+        <DButton
+          class="!text-slate-900 dark:!text-slate-100 font-semibold w-1/12 block"
+          :class="
+            activeBtn == btn.name
+              ? '!bg-gray-200 dark:!bg-gray-700'
+              : '!bg-transparent'
+          "
+          @click="(activeBtn = btn.name), btn.action()"
+          >{{ btn.name }}</DButton
+        >
+      </div>
+    </div> -->
 
     <div
       class="overflow-auto border border-gray-300 cursor-pointer dark:border-gray-600 rounded-xl p-3 mt-3 min-h-screen transit"

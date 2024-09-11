@@ -127,7 +127,12 @@ onMounted(() => {
 });
 
 function checkCollection(collection) {
-  if (collection.includes("collection") || collection.includes("Collection")) {
+  if (
+    collection.includes("collection") ||
+    collection.includes("Collection") ||
+    collection.includes("collections") ||
+    collection.includes("Collections")
+  ) {
     return collection;
   } else {
     return `${collection} Collections`;

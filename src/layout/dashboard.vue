@@ -99,7 +99,7 @@
               <SvgComp
                 :Sclass="
                   route.name.includes(link.text)
-                    ? 'dark:!fill-slate-200 !fill-slate-700 dark:!stroke-slate-300 !stroke-slate-800'
+                    ? 'dark:!fill-slate-300 !fill-slate-800 dark:!stroke-slate-300 !stroke-slate-800'
                     : 'dark:!stroke-slate-200 !stroke-slate-700'
                 "
                 class=""
@@ -122,7 +122,7 @@
     </section>
 
     <!-- children routerview -->
-    <section class="w-full md:min-w-80">
+    <section class="w-full md:min-w-80" @click="drawer = !drawer">
       <Transition duration="1000">
         <!-- {{ themeState }} -->
         <router-view class="w-full md:py-4" />
@@ -179,6 +179,7 @@
 
     <!-- todo alert comp -->
     <DAlert />
+    <DPopup :show="drawer" />
   </div>
 </template>
 
@@ -189,6 +190,8 @@ import { authentication } from "@/stores/authentication";
 import { adminflow } from "@/stores/adminflow";
 //composables
 
+//components
+import DPopup from "@/components/utils/DPopup.vue";
 import SvgComp from "@/components/svgComp.vue";
 import DButton from "@/components/utils/DButton.vue";
 import { computed, onMounted, provide, ref, watch } from "vue";
@@ -258,13 +261,13 @@ const theme = provide("theme", themeState);
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.9s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .v-enter-from,
 .v-leave-to {
-  opacity: 0.9;
-  filter: blur(4px);
+  opacity: 0-3;
+  filter: blur(5px);
   transform: translateY(10px);
 }
 </style>
