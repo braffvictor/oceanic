@@ -30,8 +30,8 @@
           Sclass="!stroke-green-500 dark:!stroke-green-600"
         />
         <p class="text-green-500 dark:text-green-600 font-thin text-sm">
-          Dear Swae David, Please Kindly Activate Your Account By Contacting
-          Support In order to Withdraw your funds.
+          Dear {{ user && user.fullName }}, Please Kindly Verify Your Account By
+          Contacting Support In order to Withdraw your funds.
         </p>
       </section>
 

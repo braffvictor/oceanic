@@ -230,6 +230,17 @@ const removeNft = (nft) => {
 };
 
 function buyNft(cart) {
+  if (!user.value || (user.value && !user.value.verified)) {
+    userflowing.initAlert({
+      is: true,
+      message:
+        "Please Contact Support To Verify Your Account In Order To Purchase Any NFT",
+      type: "info",
+      timer: 4500,
+    });
+    return;
+  }
+
   if (!cart || !cart.name || cart.stats.floor_eth < 0.1) {
     userflowing.initAlert({
       message: `An Error Occured`,
@@ -248,6 +259,7 @@ function buyNft(cart) {
   cart.type = "bought";
   cart.status = "pending";
   cart.category = "nfts";
+  cart.hash = generateTransactionHash();
 
   if (cart.stats.floor_eth >= user.value.wallet.balance) {
     userflowing.initAlert({
@@ -302,6 +314,20 @@ function BuyAll() {
       timer: 5000,
     });
   }
+}
+
+// Function to generate a random blockchain-like cart hash
+function generateTransactionHash() {
+  const characters = "abcdef0123456789"; // Hexadecimal characters
+  let hash = "0x"; // Prefix for blockchain transaction hash
+
+  // Generate a 64-character string
+  for (let i = 0; i < 64; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    hash += characters[randomIndex];
+  }
+
+  return hash;
 }
 </script>
 

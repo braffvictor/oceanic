@@ -373,6 +373,15 @@ const detailsOfNft = computed(() => {
       text: "Creator Earnings",
       data: "5%",
     },
+    {
+      text: "Transaction Hash",
+      data:
+        (userNFT.value && userNFT.value?.hash?.slice(0, 5)) ||
+        "0xfasdl" +
+          "...." +
+          (userNFT.value && userNFT.value?.hash?.slice(59)) ||
+        "fasbdkfs",
+    },
   ];
 });
 

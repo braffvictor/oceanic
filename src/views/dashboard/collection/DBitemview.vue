@@ -437,6 +437,7 @@ function buyNft(nft) {
   nft.type = "bought";
   nft.collection = user.value && user.value.userName;
   nft.category = "nfts";
+  nft.hash = generateTransactionHash();
   nft.status = "pending";
   nft.date = getCurrentTimeAndDate();
   nft.formattedDate = getCurrentTimeAndDate("format");
@@ -565,6 +566,20 @@ function generateContractAddressWithSeed(seed) {
   }
 
   return address;
+}
+
+// Function to generate a random blockchain-like transaction hash
+function generateTransactionHash() {
+  const characters = "abcdef0123456789"; // Hexadecimal characters
+  let hash = "0x"; // Prefix for blockchain transaction hash
+
+  // Generate a 64-character string
+  for (let i = 0; i < 64; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    hash += characters[randomIndex];
+  }
+
+  return hash;
 }
 
 specificCollectionDetails(route.params.id);

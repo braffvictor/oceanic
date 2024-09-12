@@ -8,7 +8,7 @@
     "
   >
     <div
-      class="p-2 w-full h-auto backdrop-blur-xl border-gray-500 text-slate-100 flex items-center gap-x-3"
+      class="p-2 w-full h-auto border-gray-500 text-slate-100 flex items-center gap-x-3"
     >
       <div>
         <img src="@/assets/png/icon2.png" alt="" width="50" />
@@ -126,7 +126,7 @@ const randomNft = computed(() => {
 setInterval(() => {
   // console.log(show.value);
   show.value = true;
-}, 70000);
+}, 5000);
 
 watch(show, () => {
   if (show.value) {

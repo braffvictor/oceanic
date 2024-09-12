@@ -389,6 +389,7 @@ function submit() {
       categoryType: category.value,
       key: user.value && user.value.userName,
       contract_address: generateAddress(),
+      hash: generateTransactionHash(),
       identifier: generateID(),
 
       collection: collection.value.trim(),
@@ -452,6 +453,20 @@ function generateAddress() {
   // console.log(contractAddress)
 
   return contractAddress;
+}
+
+// Function to generate a random blockchain-like transaction hash
+function generateTransactionHash() {
+  const characters = "abcdef0123456789"; // Hexadecimal characters
+  let hash = "0x"; // Prefix for blockchain transaction hash
+
+  // Generate a 64-character string
+  for (let i = 0; i < 64; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    hash += characters[randomIndex];
+  }
+
+  return hash;
 }
 
 function generateID() {
