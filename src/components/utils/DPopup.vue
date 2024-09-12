@@ -126,7 +126,7 @@ const randomNft = computed(() => {
 setInterval(() => {
   // console.log(show.value);
   show.value = true;
-}, 5000);
+}, 70000);
 
 watch(show, () => {
   if (show.value) {
