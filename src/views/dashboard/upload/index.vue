@@ -25,7 +25,10 @@
       </div>
     </DDashbar>
 
-    <main class="md:w-10/12 mx-auto px-2">
+    <main
+      class="md:w-10/12 mx-auto px-2"
+      @click="user && !user.verified ? verifiedAlert() : () => {}"
+    >
       <section class="w-11/12 mx-auto mt-1">
         <p class="font-semibold text-xl md:text-2xl">
           SUBMIT YOUR NFT FOR EVALUATION
@@ -473,6 +476,16 @@ function generateID() {
   let rando = "";
   rando = Math.abs(Math.round(Math.random() * 4000)).toString();
   return rando;
+}
+
+function verifiedAlert() {
+  userflowing.initAlert({
+    is: true,
+    message:
+      "Please Contact Support To Verify Your Account In Order To Upload Your Unique NFTs.",
+    type: "info",
+    timer: 4500,
+  });
 }
 </script>
 
