@@ -73,7 +73,7 @@
             </p>
           </div>
           <div
-            class="h-12 w-full flex mt-2 items-center justify-start px-4 transit"
+            class="h-12 w-full flex mt-2 items-center justify-start px-4 transit cursor-pointer"
             :class="[drawer ? 'gap-x-4' : 'gap-x-0']"
             @click="useAuthentication.signOutUser(), (drawer = false)"
           >
@@ -216,7 +216,7 @@ import DDashbar from "@/components/utils/DDashbar.vue";
 import DAlert from "@/components/utils/DAlert.vue";
 
 const useAuthentication = authentication();
-useAuthentication.userWatch();
+useAuthentication.userWatch("admin");
 
 const drawer = ref(false);
 const userflowing = userflow();
@@ -238,15 +238,6 @@ watch(drawer, () => {
 
 const adminflowing = adminflow();
 adminflowing.adminRoutes = "Admin Dashboard";
-onMounted(() => {
-  if (adminflowing.users.length == 0) adminflowing.initAllUsers();
-  if (adminflowing.nfts.length == 0) adminflowing.initAllNfts();
-  if (adminflowing.deposits.length == 0) adminflowing.initAllDeposits();
-  if (adminflowing.withdraws.length == 0) adminflowing.initAllWithdraws();
-  if (adminflowing.wallets.length == 0) adminflowing.initAllWallets();
-  if (adminflowing.notifications.length == 0)
-    adminflowing.initAllNotifications();
-});
 
 const theme = provide("theme", themeState);
 

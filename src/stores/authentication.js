@@ -26,6 +26,7 @@ const { getCurrentTimeAndDate } = getDate();
 
 //stores
 import { userflow } from "./userflow";
+import { adminflow } from "./adminflow";
 
 export const authentication = defineStore("authentication", {
   state: () => ({
@@ -194,17 +195,20 @@ export const authentication = defineStore("authentication", {
         });
     },
 
-    async userWatch() {
+    async userWatch(role) {
       onAuthStateChanged(auth, async (user) => {
         if (user) {
-          await this.getUserData(user.uid);
+          await this.getUserData({ uid: user.uid, role: role });
         } else {
           router.push("/");
         }
       });
     },
 
-    async getUserData(uid) {
+    async getUserData({ uid, role }) {
+      const userflowing = userflow();
+      const adminflowing = adminflow();
+
       const colref = collection(db, "users");
       const currentUser = doc(colref, uid);
 
@@ -217,6 +221,12 @@ export const authentication = defineStore("authentication", {
           this.user = null;
         }
       });
+
+      if (role == "admin") {
+        adminflowing.initAdminApp();
+      } else if (role == "user") {
+        userflowing.initApp();
+      }
     },
 
     async signOutUser() {

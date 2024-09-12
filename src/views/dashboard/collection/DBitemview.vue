@@ -511,7 +511,7 @@ function cartNft(nftDetails) {
     localStorage.setItem("watchList", JSON.stringify(newList));
     userflowing.checkLocalStorage(newList.length);
 
-    console.log(nftDetails);
+    // console.log(nftDetails);
 
     userflowing.initAlert({
       message: `${nftDetails.name} Added To Your Cart List`,

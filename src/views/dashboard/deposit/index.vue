@@ -40,7 +40,7 @@
         </div>
 
         <section class="mt-3 text-slate-900 dark:text-slate-100">
-          <p class="pl-1" @click="show = !show">
+          <p class="pl-1" v-if="wallets.length > 0">
             Choose Ethereum Network To Deposit In
           </p>
 
@@ -66,15 +66,15 @@
             </section>
           </main>
 
-          <section class="mt-3" v-if="show">
+          <section class="mt-6" v-else>
             <div class="mx-auto text-center">
               <img
-                src="@/assets/png/empty.png"
-                width="170"
+                src="@/assets/svg/filter.svg"
+                width="150"
                 alt=""
-                class="mx-auto text-center"
+                class="mx-auto rotate-180 text-center"
               />
-              <p class="font-light">No Wallet Address Found</p>
+              <p class="font-light">No Deposits Address Yet</p>
             </div>
           </section>
         </section>

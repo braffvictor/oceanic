@@ -91,12 +91,10 @@
         <p class="font-medium capitalize">
           ${{
             nft &&
-            nft.stats.floor_price
-              .toLocaleString()
-              .slice(
-                0,
-                (nft && nft.stats.floor_price).toLocaleString().indexOf(".")
-              ) + ".00"
+            nft.stats.floor_price?.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })
           }}
         </p>
       </div>

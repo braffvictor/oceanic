@@ -89,121 +89,133 @@
       </div>
 
       <!-- form like -->
-      <section class="px-1 mx-2">
-        <!-- the amount paid in ethereum -->
-        <div
-          class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
-          :class="errorAmount ? '!border-red-500' : null"
-        >
-          <div>
-            <SvgComp
-              icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
-              :Sclass="
-                errorAmount
-                  ? 'group-has-[:focus]:stroke-red-500 !stroke-red-500'
-                  : 'group-has-[:focus]:stroke-green-500'
-              "
-              class=""
-            />
-          </div>
-          <div class="relative w-full">
-            <input
-              type="number"
-              name="amount"
-              v-model="amount"
-              @keyup="checkAmount()"
-              id="amount"
-              class="block px-0 w-full mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              for="amount"
-              class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
-              :class="errorAmount ? '!text-red-500' : null"
-              >Deposited Amount in (ETH)</label
-            >
-          </div>
-        </div>
-        <p
-          class="mt-3 text-xs font-light font-sans text-center"
-          :class="amount ? ' transit' : 'scale-y-0 transit hidden'"
-        >
-          Dollar Conversion : {{ convertAmount }}
-        </p>
-
-        <p
-          class="text-xs text-red-500 transit mt-3 text-center"
-          :class="errorAmount ? 'transit ' : 'scale-y-0 transit'"
-        >
-          {{ errorAmount }}
-        </p>
-      </section>
-
-      <!-- the proof of payment in ethereum -->
-      <section class="px-1 pb-4 mx-2">
-        <label
-          for="proof"
-          class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
-          :class="errorPhoto ? '!border-red-500' : null"
-        >
-          <div>
-            <SvgComp
-              icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
-              :Sclass="
-                errorPhoto
-                  ? 'group-has-[:focus]:stroke-red-500 !stroke-red-500'
-                  : 'group-has-[:focus]:stroke-green-500'
-              "
-            />
-          </div>
-          <div class="relative w-full">
-            <input
-              type="file"
-              name="proof"
-              @change="
-                (event) => (
-                  (photo = event.target.files[0]), checkImage(), checkPhoto()
-                )
-              "
-              id="proof"
-              class="cursor-pointer file:bg-transparent file:w-0 file:px-0 file:mx-0 file:border-0 px-0 w-full mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
-              placeholder="Proof"
-              required
-            />
-            <label
-              for="amount"
-              class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
-              :class="errorPhoto ? '!text-red-500' : null"
-              >Proof Of Payment</label
-            >
-          </div>
-        </label>
-
-        <p
-          class="text-xs text-red-500 transit mt-3 text-center"
-          :class="errorPhoto ? 'transit ' : 'scale-y-0 transit'"
-        >
-          {{ errorPhoto }}
-        </p>
-
-        <!-- the image proof displayed -->
-        <div class="mx-auto text-center mt-5" v-if="proof">
+      <form
+        @submit="submit"
+        :class="
+          user && !user.verified ? 'opacity-65 pointer-events-none' : null
+        "
+      >
+        <section class="px-1 mx-2">
+          <!-- the amount paid in ethereum -->
           <div
-            class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
+            class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+            :class="errorAmount ? '!border-red-500' : null"
           >
-            <img :src="proof" alt="" width="300" class="mx-auto text-center" />
+            <div>
+              <SvgComp
+                icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
+                :Sclass="
+                  errorAmount
+                    ? 'group-has-[:focus]:stroke-red-500 !stroke-red-500'
+                    : 'group-has-[:focus]:stroke-green-500'
+                "
+                class=""
+              />
+            </div>
+            <div class="relative w-full">
+              <input
+                type="number"
+                name="amount"
+                v-model="amount"
+                @keyup="checkAmount()"
+                id="amount"
+                class="block px-0 w-full mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="amount"
+                class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
+                :class="errorAmount ? '!text-red-500' : null"
+                >Deposited Amount in (ETH)</label
+              >
+            </div>
           </div>
-        </div>
+          <p
+            class="mt-3 text-xs font-light font-sans text-center"
+            :class="amount ? ' transit' : 'scale-y-0 transit hidden'"
+          >
+            Dollar Conversion : {{ convertAmount }}
+          </p>
 
-        <d-button
-          type="elevated"
-          :loading="loading"
-          @click="submit"
-          class="bg-green-400 dark:bg-green-500 w-full mt-5 shadow-md shadow-green-400 dark:shadow-green-500"
-          >Submit</d-button
-        >
-      </section>
+          <p
+            class="text-xs text-red-500 transit mt-3 text-center"
+            :class="errorAmount ? 'transit ' : 'scale-y-0 transit'"
+          >
+            {{ errorAmount }}
+          </p>
+        </section>
+
+        <!-- the proof of payment in ethereum -->
+        <section class="px-1 pb-4 mx-2">
+          <label
+            for="proof"
+            class="group mt-2 p-1 rounded-lg dark:border-gray-600 border bg-transparent dark:text-slate-100 text-slate-900 overflow-hidden caret:slate-700 dark:caret-slate-100 h-[50px] has-[:focus]:border-green-500 outline-none transit relative z-0 flex items-center gap-x-3"
+            :class="errorPhoto ? '!border-red-500' : null"
+          >
+            <div>
+              <SvgComp
+                icon="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"
+                :Sclass="
+                  errorPhoto
+                    ? 'group-has-[:focus]:stroke-red-500 !stroke-red-500'
+                    : 'group-has-[:focus]:stroke-green-500'
+                "
+              />
+            </div>
+            <div class="relative w-full">
+              <input
+                type="file"
+                name="proof"
+                @change="
+                  (event) => (
+                    (photo = event.target.files[0]), checkImage(), checkPhoto()
+                  )
+                "
+                id="proof"
+                class="cursor-pointer file:bg-transparent file:w-0 file:px-0 file:mx-0 file:border-0 px-0 w-full mt-2 text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white focus:outline-none focus:ring-0 peer"
+                placeholder="Proof"
+                required
+              />
+              <label
+                for="amount"
+                class="w-96 peer-focus:w-96 peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-8 peer-focus:text-green-500 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:left-0"
+                :class="errorPhoto ? '!text-red-500' : null"
+                >Proof Of Payment</label
+              >
+            </div>
+          </label>
+
+          <p
+            class="text-xs text-red-500 transit mt-3 text-center"
+            :class="errorPhoto ? 'transit ' : 'scale-y-0 transit'"
+          >
+            {{ errorPhoto }}
+          </p>
+
+          <!-- the image proof displayed -->
+          <div class="mx-auto text-center mt-5" v-if="proof">
+            <div
+              class="overflow-hidden rounded-lg shadow-sm inline-block mx-auto text-center"
+            >
+              <img
+                :src="proof"
+                alt=""
+                width="300"
+                class="mx-auto text-center"
+              />
+            </div>
+          </div>
+
+          <d-button
+            type="elevated"
+            :loading="loading"
+            @click="submit"
+            class="bg-green-400 dark:bg-green-500 w-full mt-5 shadow-md shadow-green-400 dark:shadow-green-500 !text-slate-100 dark:!text-slate-900"
+            >Submit</d-button
+          >
+        </section>
+      </form>
     </main>
   </div>
 </template>
@@ -256,7 +268,12 @@ const proof = ref(null);
 
 const convertAmount = computed(() => {
   const dollars = Number(amount.value) * 3043;
-  return amount.value ? `$${dollars.toLocaleString()}` : "";
+  return amount.value
+    ? `${dollars?.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}`
+    : "";
 });
 
 const errorAmount = ref("");

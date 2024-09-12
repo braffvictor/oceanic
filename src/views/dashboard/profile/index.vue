@@ -157,8 +157,6 @@ function getUniqueByProperty(arr, property) {
 }
 
 onMounted(() => {
-  if (nfts.value.length == 0) userflowing.initUserNfts();
-
   window.scrollTo({
     top: -10,
     left: 0,

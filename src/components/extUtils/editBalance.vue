@@ -162,7 +162,12 @@ const bidPriceError = ref("");
 
 const convertAmount = computed(() => {
   const dollars = Number(bidPrice.value) * 3043;
-  return bidPrice.value ? `$${dollars.toLocaleString()}` : "";
+  return bidPrice.value
+    ? `${dollars?.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}`
+    : "";
 });
 
 // for withdraws

@@ -57,7 +57,7 @@
 
           <div
             class="float-end text-right cursor-pointer"
-            @click="showSearch = !showSearch"
+            @click="(showSearch = !showSearch), (search = '')"
           >
             <DButton class="!bg-transparent !p-0">
               <svg-comp

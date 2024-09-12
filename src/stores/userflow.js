@@ -750,6 +750,12 @@ export const userflow = defineStore("userflow", {
           });
         });
     },
+
+    initApp() {
+      this.initUserTransactions();
+      this.initUserNotifications();
+      this.initUserNfts();
+    },
   },
 });
 

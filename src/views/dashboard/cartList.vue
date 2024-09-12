@@ -135,10 +135,11 @@
             <div class="font-semibold">
               <p class="font-semibold">{{ totalETH.toFixed(3) }}ETH</p>
               <p class="font-light text-slate-400">
-                ${{
-                  totalPrice
-                    .toLocaleString()
-                    .slice(0, totalPrice.toLocaleString().indexOf(".")) + ".00"
+                {{
+                  totalPrice?.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })
                 }}
               </p>
             </div>

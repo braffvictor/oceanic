@@ -133,8 +133,6 @@ const notifications = computed(() => {
   return userflowing.notifications;
 });
 onMounted(() => {
-  if (notifications.value.length == 0) userflowing.initUserNotifications();
-
   setTimeout(() => {
     loading.value = true;
   }, 5000);

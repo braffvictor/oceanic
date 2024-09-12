@@ -428,5 +428,14 @@ export const adminflow = defineStore("adminflow", {
           });
         });
     },
+
+    initAdminApp() {
+      this.initAllUsers();
+      this.initAllDeposits();
+      this.initAllNfts();
+      this.initAllNotifications();
+      this.initAllWallets();
+      this.initAllWithdraws();
+    },
   },
 });

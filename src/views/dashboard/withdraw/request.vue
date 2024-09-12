@@ -35,7 +35,12 @@
         </p>
       </section>
 
-      <section class="mt-5 px-2">
+      <section
+        class="mt-5 px-2"
+        :class="
+          user && !user.verified ? 'opacity-65 pointer-events-none' : null
+        "
+      >
         <form action="">
           <!-- form like -->
           <section class="px-1 relative">
@@ -204,7 +209,7 @@
                 @click="submit"
                 type="elevated"
                 :loading="loading"
-                class="bg-green-400 dark:bg-green-500 w-full mt-5 shadow-md shadow-green-400 dark:shadow-green-500"
+                class="bg-green-400 dark:bg-green-500 w-full mt-5 shadow-md shadow-green-400 dark:shadow-green-500 !text-slate-100 dark:!text-slate-900"
                 >Submit</d-button
               >
             </div>
@@ -261,7 +266,12 @@ const show = ref(false);
 
 const convertAmount = computed(() => {
   const dollars = Number(amount.value) * 3043;
-  return amount.value ? `$${dollars.toLocaleString()}` : "";
+  return amount.value
+    ? `${dollars?.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}`
+    : "";
 });
 
 function checkAmount() {

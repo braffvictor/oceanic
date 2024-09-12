@@ -153,7 +153,12 @@ const date = ref("");
 const checkBidPrice = () => checkInput("Bid price", bidPrice, bidPriceError);
 const convertAmount = computed(() => {
   const dollars = Number(bidPrice.value) * 3043;
-  return bidPrice.value ? `$${dollars.toLocaleString()}` : "";
+  return bidPrice.value
+    ? `${dollars?.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}`
+    : "";
 });
 
 function getInput(input) {

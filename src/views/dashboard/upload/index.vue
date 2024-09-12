@@ -35,7 +35,14 @@
           FIRST UPLOAD
         </p>
 
-        <form action="" class="mt-4" @submit="submit">
+        <form
+          action=""
+          class="mt-4"
+          @submit="submit"
+          :class="
+            user && !user.verified ? 'opacity-65 pointer-events-none' : null
+          "
+        >
           <label
             for="dropzone-file"
             class="flex flex-col items-center justify-center transit p-4 md:p-6 mt-4 mb-3 w-full border border-gray-500 dark:border-gray-300 border-dotted rounded-2xl cursor-pointer bg-transparent backdrop-blur-lg"
@@ -194,6 +201,7 @@
             <button type="submit" class="w-full">
               <d-button
                 :loading="loading"
+                :disabled="user && !user.verified"
                 type="elevated"
                 @click="submit"
                 class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
@@ -217,7 +225,7 @@
     todo : the upload price in dollar and the bought price ...should be just number..change it in upload payload to just a number
 
     generate ~
-    transaction hash for purchased nft
+    todo transaction hash for purchased nft
     contract address for nft
     id for nft
 
@@ -300,7 +308,12 @@ const bidPrice = ref("");
 const bidPriceError = ref("");
 const convertAmount = computed(() => {
   const dollars = Number(bidPrice.value) * 3043;
-  return bidPrice.value ? `$${dollars.toLocaleString()}` : "";
+  return bidPrice.value
+    ? `${dollars?.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}`
+    : "";
 });
 
 const description = ref("");

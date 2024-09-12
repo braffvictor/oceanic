@@ -122,7 +122,7 @@
     </section>
 
     <!-- children routerview -->
-    <section class="w-full md:min-w-80" @click="drawer = !drawer">
+    <section class="w-full md:min-w-80">
       <Transition duration="1000">
         <!-- {{ themeState }} -->
         <router-view class="w-full md:py-4" />
@@ -204,8 +204,7 @@ const userflowing = userflow();
 const useAuthentication = authentication();
 
 //todo remove wallet function later
-adminflowing.initAllWallets();
-useAuthentication.userWatch();
+useAuthentication.userWatch("user");
 
 userflowing.initAllNfts();
 
