@@ -126,6 +126,7 @@
 
             <div class="w-full mt-4 mb-6">
               <d-button
+                @click="login"
                 type="elevated"
                 class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
                 >Complete purchase</d-button
@@ -147,6 +148,7 @@ import DButton from "@/components/utils/DButton.vue";
 import vLazyImage from "v-lazy-image";
 import { onMounted, ref } from "vue";
 
+const userflowing = userflow();
 onMounted(() => {
   checkAmount();
 });
@@ -158,7 +160,6 @@ const props = defineProps({
 });
 
 let cartedNfts = ref(JSON.parse(localStorage.getItem("watchList")) || []);
-const userflowing = userflow();
 
 //to round up the total amount
 let totalETH = ref(0);
@@ -197,6 +198,15 @@ const removeNft = (nft) => {
     JSON.parse(localStorage.getItem("watchList") || "[]")?.length
   );
 };
+
+function login() {
+  userflowing.initAlert({
+    is: true,
+    message: "Please Log in To Purchase Any NFT.",
+    type: "info",
+    timer: 4500,
+  });
+}
 </script>
 
 <style scoped>

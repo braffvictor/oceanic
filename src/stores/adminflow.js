@@ -64,7 +64,7 @@ export const adminflow = defineStore("adminflow", {
               });
             });
             this.users = sorting;
-            console.log(this.users);
+            // console.log(this.users);
           } else {
             this.users = [];
           }
@@ -97,7 +97,7 @@ export const adminflow = defineStore("adminflow", {
               });
             });
             this.nfts = sorting;
-            console.log(this.nfts);
+            // console.log(this.nfts);
           } else {
             this.nfts = [];
           }
@@ -130,7 +130,7 @@ export const adminflow = defineStore("adminflow", {
               });
             });
             this.deposits = sorting;
-            console.log(this.deposits);
+            // console.log(this.deposits);
           } else {
             this.deposits = [];
           }
@@ -163,7 +163,7 @@ export const adminflow = defineStore("adminflow", {
               });
             });
             this.withdraws = sorting;
-            console.log(this.withdraws);
+            // console.log(this.withdraws);
           } else {
             this.withdraws = [];
           }
@@ -196,7 +196,7 @@ export const adminflow = defineStore("adminflow", {
               });
             });
             this.notifications = sorting;
-            console.log(this.notifications);
+            // console.log(this.notifications);
           } else {
             this.notifications = [];
           }
@@ -302,7 +302,7 @@ export const adminflow = defineStore("adminflow", {
               });
             });
             this.wallets = sorting;
-            console.log(this.wallets);
+            // console.log(this.wallets);
           } else {
             this.wallets = [];
           }

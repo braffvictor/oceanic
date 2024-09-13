@@ -351,6 +351,11 @@ const routes = [
         name: "admin withdraws type",
         component: () => import("@/views/admin/withdraws/withdrawType.vue"),
       },
+      {
+        path: "/admin/notifications",
+        name: "admin notifications type",
+        component: () => import("@/views/admin/notifications.vue"),
+      },
     ],
   },
 

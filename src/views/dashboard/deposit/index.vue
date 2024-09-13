@@ -74,7 +74,7 @@
                 alt=""
                 class="mx-auto rotate-180 text-center"
               />
-              <p class="font-light">No Deposits Address Yet</p>
+              <p class="font-light">No Deposit Address Yet</p>
             </div>
           </section>
         </section>

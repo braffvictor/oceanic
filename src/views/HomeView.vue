@@ -380,7 +380,7 @@
             />
           </div>
         </div>
-        <div class="rounded-xl text-center mx-auto mt-8 md:mt-0">
+        <div class="rounded-xl text-center mx-auto mt-8 md:mt-0 h-full w-full">
           <img
             src="https://solanart.io/solanart-logo-black.svg"
             alt=""

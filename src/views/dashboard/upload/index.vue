@@ -34,7 +34,7 @@
           SUBMIT YOUR NFT FOR EVALUATION
         </p>
         <p class="text-xs md:text-sm my-2 text-teal-600">
-          NOTE GAS FEES OF ETH 0.25 WILL BE DEDUCTED FROM YOUR BALANCE FOR YOUR
+          NOTE GAS FEES OF 0.25 ETH WILL BE DEDUCTED FROM YOUR BALANCE FOR YOUR
           FIRST UPLOAD
         </p>
 
@@ -43,7 +43,9 @@
           class="mt-4"
           @submit="submit"
           :class="
-            user && !user.verified ? 'opacity-65 pointer-events-none' : null
+            user && !user.verified
+              ? 'opacity-90 blur-sm pointer-events-none'
+              : null
           "
         >
           <label
@@ -208,7 +210,8 @@
                 type="elevated"
                 @click="submit"
                 class="shadow-green-400 mt-5 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
-                >Mint {{ item }}</d-button
+                >Mint
+                <span class="ml-2 font-semibold"> {{ item }}</span></d-button
               >
             </button>
           </div>
@@ -360,16 +363,17 @@ function submit() {
     checkPhoto() &&
     checkCreator()
   ) {
-    // if (user.value.wallet.balance < 0.25 && !user.value.paidGas) {
-    //   userflowing.initAlert({
-    //     is: true,
-    //     message: `Dear ${
-    //       user.value && user.value.fullName
-    //     }, You Do Not Have The Sufficient Amount To Upload This NFT, Please Top Up Your Account To Upload Your NFT.`,
-    //     type: "error",
-    //     timer: 4500,
-    //   });
-    // }
+    if (user.value.wallet.balance < 0.25) {
+      userflowing.initAlert({
+        is: true,
+        message: `Dear ${
+          user.value && user.value.fullName
+        }, You Do Not Have The Sufficient Amount To Upload This NFT, Please Top Up Your Account To Upload Your NFT.`,
+        type: "error",
+        timer: 4500,
+      });
+      return;
+    }
 
     const payload = {
       creator: creator.value,
@@ -378,7 +382,7 @@ function submit() {
       name: item.value,
 
       // amount to be paid for gas fee
-      // gasfeeAmount : 0.25,
+      gasfeeAmount: 0.25,
 
       stats: {
         floor_eth: Math.abs(bidPrice.value),

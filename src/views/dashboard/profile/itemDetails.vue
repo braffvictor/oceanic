@@ -59,12 +59,26 @@
               />
             </div>
             <div class="rounded-2xl md:w-8/12 w-full p-2">
+              <section
+                class="border-green-400 border bg-green-50 dark:bg-green-200 transit dark:border-green-500 rounded-xl p-3 flex gap-1 mb-2"
+                v-if="userNFT && userNFT.status != 'approved'"
+              >
+                <SvgComp
+                  icon="M12,2 C17.5228,2 22,6.47715 22,12 C22,17.5228 17.5228,22 12,22 C6.47715,22 2,17.5228 2,12 C2,6.47715 6.47715,2 12,2 Z M11.99,10 L11,10 C10.4477,10 10,10.4477 10,11 C10,11.51285 10.386027,11.9355092 10.8833761,11.9932725 L11,12 L11,16.99 C11,17.5106133 11.3938293,17.9392373 11.8999333,17.9940734 L12.01,18 L12.5,18 C13.0523,18 13.5,17.5523 13.5,17 C13.5,16.6710222 13.3411062,16.3791012 13.0958694,16.1968582 L13,16.1338 L13,11.01 C13,10.4893867 12.6060836,10.0607627 12.1000493,10.0059266 L11.99,10 Z M12,7 C11.4477,7 11,7.44772 11,8 C11,8.55228 11.4477,9 12,9 C12.5523,9 13,8.55228 13,8 C13,7.44772 12.5523,7 12,7 Z"
+                  Sclass="!stroke-green-500 dark:!stroke-green-600"
+                />
+                <p
+                  class="text-green-500 dark:text-green-600 font-light text-sm"
+                >
+                  Once Your NFT Has Been Approved, The Blue Tick Will Show.
+                </p>
+              </section>
               <p class="text-green-500 font-normal text-lg cursor-pointer">
                 {{ userNFT && userNFT.collection
                 }}<img
                   src="@/assets/verified.svg"
                   alt="tick"
-                  v-if="userNFT && userNFT.collection"
+                  v-if="userNFT && userNFT.status == 'approved'"
                   class="max-w-5 inline pl-1"
                 />
               </p>
@@ -375,12 +389,9 @@ const detailsOfNft = computed(() => {
     },
     {
       text: "Transaction Hash",
-      data:
-        (userNFT.value && userNFT.value?.hash?.slice(0, 5)) ||
-        "0xfasdl" +
-          "...." +
-          (userNFT.value && userNFT.value?.hash?.slice(59)) ||
-        "fasbdkfs",
+      data: `${
+        (userNFT.value && userNFT.value?.hash?.slice(0, 5)) || "hashless"
+      }...${(userNFT.value && userNFT.value?.hash?.slice(61)) || "nft"}`,
     },
   ];
 });

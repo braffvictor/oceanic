@@ -60,6 +60,7 @@
               :nft="nft"
               :id="nft.id"
               :profile="true"
+              :hide-tick="nft.status == 'approved' ? false : true"
               :action="false"
               :dashboard="dashboard"
               :card-size="'min-w-40 min-h-64 max-w-40 max-h-64 md:min-w-56 md:min-h-72 md:max-w-56 md:max-h-72'"

@@ -145,7 +145,7 @@
             </div>
           </div>
 
-          <div class="w-full mt-4">
+          <!-- <div class="w-full mt-4">
             <d-button
               :loading="loading"
               type="elevated"
@@ -153,7 +153,7 @@
               class="shadow-green-400 w-full bg-green-400 dark:bg-green-500 text-white dark:!text-slate-900 active:!bg-green-300"
               >Complete purchase</d-button
             >
-          </div>
+          </div> -->
         </TransitionGroup>
       </div>
     </div>

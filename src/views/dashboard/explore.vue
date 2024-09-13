@@ -39,9 +39,9 @@
         </div>
       </section>
 
-      <div class="text-center mx-auto">
+      <div class="text-center mx-auto flex justify-center">
         <div
-          class="grid grid-cols-2 sm:grid-cols-3 justify-around items-center md:grid-cols-4 mt-7 px-2"
+          class="grid grid-cols-2 justify-center items-center md:grid-cols-4 mt-7 gap-6 text-center mx-auto"
           v-if="randomNfts && randomNfts.length > 0"
         >
           <nftCard

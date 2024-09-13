@@ -206,6 +206,10 @@ const useAuthentication = authentication();
 //todo remove wallet function later
 useAuthentication.userWatch("user");
 
+const user = computed(() => {
+  return useAuthentication.user;
+});
+
 userflowing.initAllNfts();
 
 const route = useRoute();
@@ -247,6 +251,17 @@ const themeState = computed(() => {
 });
 
 const theme = provide("theme", themeState);
+
+const abrv = ref("");
+
+watch(user, () => {
+  let split = user.value?.fullName?.split(" ");
+  split?.forEach((name) => {
+    abrv.value += name[0] + " ";
+  });
+
+  userflowing.name = abrv.value.trim();
+});
 </script>
 
 <style>

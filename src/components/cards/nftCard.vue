@@ -24,7 +24,7 @@
           <img
             src="@/assets/verified.svg"
             alt="tick"
-            v-if="!learn"
+            v-if="!learn && !hideTick"
             class="max-w-5 inline pl-1"
           />
         </p>
@@ -122,6 +122,11 @@ const props = defineProps({
     default: "",
   },
   dashboard: {
+    type: Boolean,
+    default: false,
+  },
+
+  hideTick: {
     type: Boolean,
     default: false,
   },

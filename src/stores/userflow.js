@@ -19,12 +19,16 @@ const { getCurrentTimeAndDate } = getDate();
 const { generateNFTName } = getNames();
 
 import { authentication } from "./authentication";
+import { adminflow } from "./adminflow";
+
 import router from "@/router";
 
 export const userflow = defineStore("userflow", {
   state: () => ({
     themeState: localStorage.getItem("theme"),
     cartList: JSON.parse(localStorage.getItem("watchList") || "[]")?.length,
+
+    name: "",
 
     //for the users nfts
     userNfts: [],
@@ -142,7 +146,7 @@ export const userflow = defineStore("userflow", {
           let oldAmount = docRef.data().wallet.balance;
           newAmount = amount + oldAmount;
 
-          console.log(newAmount);
+          // console.log(newAmount);
 
           updateDoc(currentUser, {
             wallet: {
@@ -195,7 +199,7 @@ export const userflow = defineStore("userflow", {
             );
           });
 
-          console.log(this.nfts[0]);
+          // console.log(this.nfts[0]);
         })
         .then(async () => {
           setTimeout(async () => {
@@ -270,9 +274,9 @@ export const userflow = defineStore("userflow", {
           });
       };
 
-      setTimeout(() => {
-        console.log(this.randomNfts[0]);
-      }, 2000);
+      // setTimeout(() => {
+      //   console.log(this.randomNfts[0]);
+      // }, 2000);
 
       const keys = [];
       if (this.getNfts.length > 0) {
@@ -354,6 +358,7 @@ export const userflow = defineStore("userflow", {
             email: payload.email,
           });
           this.loading.buy = false;
+          this.initUserNfts();
           await this.initAllNfts();
         })
         .catch((error) => {
@@ -379,19 +384,24 @@ export const userflow = defineStore("userflow", {
 
       payload.image_url = await image_url;
 
-      console.log(payload);
+      // console.log(payload);
 
       //dont really want the user to be uploading all the time....but just put the function there first
-      // if (!payload.paidGas) {
-      //   this.deduction({ amount: 0.25 });
-
-      //   const currentUser = doc(collection(db, "users", payload.userID));
-      //   updateDoc(currentUser, {
-      //     paidGas: true,
-      //   });
-      // }
-
       //deduct gas fee from balance for the upload....and potentially change gas to true..can upload again and again
+      if (!payload.paidGas) {
+        this.deduction({ amount: payload.gasfeeAmount });
+
+        const currentUser = doc(collection(db, "users"), payload.userID);
+        updateDoc(currentUser, {
+          paidGas: true,
+        }).catch((err) => {
+          this.initAlert({
+            is: true,
+            message: err.message,
+            type: "error",
+          });
+        });
+      }
 
       await addDoc(colref, payload)
         .then((docRef) => {
@@ -419,6 +429,8 @@ export const userflow = defineStore("userflow", {
             uid: payload.userID,
           });
           this.loading.upload = false;
+
+          this.initUserNfts();
           router.push("/dashboard/home");
         })
         .catch((error) => {
@@ -491,7 +503,7 @@ export const userflow = defineStore("userflow", {
                 return dateA - dateB;
               });
             });
-            console.log(sorting);
+            // console.log(sorting);
             this.notifications = sorting;
           } else {
             this.notifications = [];
@@ -659,7 +671,7 @@ export const userflow = defineStore("userflow", {
 
         return dateB - dateA;
       });
-      console.log(this.allTransactions);
+      // console.log(this.allTransactions);
     },
 
     async initUserNfts() {
@@ -752,9 +764,12 @@ export const userflow = defineStore("userflow", {
     },
 
     initApp() {
+      const adminflowing = adminflow();
+
       this.initUserTransactions();
       this.initUserNotifications();
       this.initUserNfts();
+      adminflowing.initAllWallets();
     },
   },
 });

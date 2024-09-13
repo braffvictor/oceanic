@@ -43,7 +43,7 @@
           @click="searchBar = true"
           type="text"
           v-model="searchCollection"
-          placeholder="Search Collection, NFTs..."
+          placeholder="Search Collection..."
           class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-full h-9 justify-self-start inline-block align-start rounded-xl indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
         />
 
@@ -105,7 +105,7 @@
             <input
               type="text"
               v-model="searchCollection"
-              placeholder="Search Collection, NFTs..."
+              placeholder="Search Collection..."
               class="fixed bg-gray-200 mx-auto left-8 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-10/12 h-10 justify-self-start inline-block align-start rounded-xl indent-5 focus:ring-green-400 focus:ring-1 outline-none transit" />
             <div class="mb-12"></div
           ></d-search-bar>
@@ -400,7 +400,7 @@
               Join our mailing list to stay in the loop with our newest feature
               releases, NFT drops, and tips and tricks for navigating solana.
             </p>
-            <div class="my-3">
+            <div class="my-3 flex">
               <input
                 type="text"
                 placeholder="Your Email Address"
