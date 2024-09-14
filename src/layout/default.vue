@@ -403,12 +403,14 @@
             <div class="my-3 flex">
               <input
                 type="text"
+                v-model="newsLetter"
                 placeholder="Your Email Address"
                 class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-8/12 h-12 justify-self-start inline-block align-start rounded-lg indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
               />
               <d-button
                 class="w-3/12 text-center !rounded-lg h-12 ml-3 bg-green-400 dark:bg-green-500 dark:!text-slate-900 !text-slate-100"
                 type="filled"
+                @click="clearNewsLetter"
                 >Sign Up</d-button
               >
             </div>
@@ -506,6 +508,8 @@ import router from "@/router";
 import { useHead } from "@vueuse/head";
 import { computed, onBeforeMount, onMounted, provide, ref, watch } from "vue";
 import DAlert from "@/components/utils/DAlert.vue";
+
+const newsLetter = ref("");
 
 const userflowing = userflow();
 const showAlert = ref(false);
@@ -657,6 +661,16 @@ const filterSearch = computed(() => {
     );
   });
 });
+
+function clearNewsLetter() {
+  newsLetter.value = "";
+  userflowing.initAlert({
+    is: true,
+    message: "Your Email Address Has Been Submitted For Our News Letter",
+    type: "info",
+    close: true,
+  });
+}
 </script>
 
 <style scoped>

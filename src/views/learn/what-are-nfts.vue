@@ -227,13 +227,15 @@
             </p>
             <div class="my-3 flex">
               <input
-                type="text"
+                type="email"
+                v-model="newsLetter"
                 placeholder="Your Email Address"
                 class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-800 dark:caret-slate-100 md:w-9/12 w-8/12 h-12 justify-self-start inline-block align-start rounded-lg indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
               />
               <d-button
                 class="w-4/12 md:w-3/12 text-center h-12 ml-3 bg-green-400 dark:bg-green-500 dark:!text-slate-900 !text-slate-100"
                 type="filled"
+                @click="clearNewsLetter"
                 >Sign Up</d-button
               >
             </div>
@@ -306,11 +308,17 @@
 </template>
 
 <script setup>
+//stores
+import { userflow } from "@/stores/userflow";
+
 import DButton from "@/components/utils/DButton.vue";
 import nftCard from "@/components/cards/nftCard.vue";
 import vLazyImage from "v-lazy-image";
 import SwipingCards from "@/components/swipingCards.vue";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
+
+const userflowing = userflow();
+const newsLetter = ref("");
 
 onMounted(() => {
   // to save scroll screen position
@@ -348,6 +356,18 @@ const learnNft = computed(() => {
     },
   ];
 });
+
+function clearNewsLetter() {
+  if (newsLetter.value.length > 0) {
+    newsLetter.value = "";
+    userflowing.initAlert({
+      is: true,
+      message: "Your Email Address Has Been Submitted For Our News Letter",
+      type: "info",
+      close: true,
+    });
+  }
+}
 </script>
 
 <script>
