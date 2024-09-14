@@ -402,7 +402,7 @@
             </p>
             <div class="my-3 flex">
               <input
-                type="text"
+                type="email"
                 v-model="newsLetter"
                 placeholder="Your Email Address"
                 class="bg-gray-200 dark:text-slate-100 text-slate-900 dark:bg-slate-700 dark:caret-slate-100 w-8/12 h-12 justify-self-start inline-block align-start rounded-lg indent-5 focus:ring-green-400 focus:ring-1 outline-none transit"
@@ -663,13 +663,15 @@ const filterSearch = computed(() => {
 });
 
 function clearNewsLetter() {
-  newsLetter.value = "";
-  userflowing.initAlert({
-    is: true,
-    message: "Your Email Address Has Been Submitted For Our News Letter",
-    type: "info",
-    close: true,
-  });
+  if (newsLetter.value.length > 0) {
+    newsLetter.value = "";
+    userflowing.initAlert({
+      is: true,
+      message: "Your Email Address Has Been Submitted For Our News Letter",
+      type: "info",
+      close: true,
+    });
+  }
 }
 </script>
 
