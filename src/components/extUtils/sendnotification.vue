@@ -25,8 +25,10 @@
           type="elevated"
           :loading="loading"
           @click="submit"
-          class="w-full mt-5 shadow-slate-900 rounded-lg bg-slate-900 dark:bg-slate-50 dark:shadow-slate-100 !text-slate-100 dark:!text-slate-900"
-          >Send</DButton
+          class="break-words w-full mt-5 shadow-slate-900 rounded-lg bg-slate-900 dark:bg-slate-50 dark:shadow-slate-100 !text-slate-100 dark:!text-slate-900"
+          >Send To<span class="ml-1 font-semibold">{{
+            user && user.fullName
+          }}</span></DButton
         >
       </button>
     </form>

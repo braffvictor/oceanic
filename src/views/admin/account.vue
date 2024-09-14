@@ -30,9 +30,9 @@
         </div>
       </section>
 
-      <section v-if="wallets.length > 0">
+      <section v-if="wallets.length > 0" class="mt-5">
         <main
-          class="border-2 border-slate-300 dark:border-slate-500 h-auto w-full rounded-2xl mt-4 p-2 md:p-4"
+          class="border border-slate-600 dark:border-slate-400 h-auto w-full rounded-2xl mt-4 p-2 md:p-4"
           v-for="wallet in wallets"
           :key="wallet.id"
         >

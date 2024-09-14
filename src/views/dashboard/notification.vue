@@ -25,6 +25,9 @@
       <main v-for="(notify, n) in notifications" :key="notify.id">
         <div
           class="flex rounded-xl p-3 justify-start items-start md:items-center gap-x-2"
+          :class="
+            !notify.open ? 'animate__lightSpeedInRight animate__animated' : null
+          "
         >
           <div
             class="rounded-xl min-w-8 md:min-w-10 md:max-w-10 select-none transit cursor-pointer md:rounded-2xl transit bg-transparent"
@@ -132,9 +135,21 @@ const loading = ref(false);
 const notifications = computed(() => {
   return userflowing.notifications;
 });
+
 onMounted(() => {
   setTimeout(() => {
     loading.value = true;
+
+    if (notifications.value.length > 0) {
+      let notOPenNotifications = notifications.value.filter(
+        (notification) => !notification.open
+      );
+      if (notOPenNotifications.length > 0) {
+        notOPenNotifications.forEach((notification) => {
+          userflowing.updateNotification(notification);
+        });
+      }
+    }
   }, 5000);
 
   window.scrollTo({

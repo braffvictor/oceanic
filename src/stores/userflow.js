@@ -504,7 +504,7 @@ export const userflow = defineStore("userflow", {
                 const dateA = new Date(a.formattedDate);
                 const dateB = new Date(b.formattedDate);
 
-                return dateA - dateB;
+                return dateB - dateA;
               });
             });
             // console.log(sorting);
@@ -774,6 +774,27 @@ export const userflow = defineStore("userflow", {
       this.initUserNotifications();
       this.initUserNfts();
       adminflowing.initAllWallets();
+    },
+
+    async updateNotification(payload) {
+      const colref = collection(db, "notifications");
+
+      const currentUserDoc = doc(colref, payload.id);
+
+      await updateDoc(currentUserDoc, {
+        open: true,
+      })
+        .then(() => {
+          this.initUserNotifications();
+        })
+        .catch((err) => {
+          this.initAlert({
+            is: true,
+            message: err.message,
+            type: "error",
+            close: false,
+          });
+        });
     },
   },
 });

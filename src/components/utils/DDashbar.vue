@@ -40,13 +40,21 @@
             alt="dark mode"
           />
         </button>
-        <p
+        <div
           v-if="user && user.role == 'user'"
-          class="p-1 cursor-pointer"
+          class="p-1 cursor-pointer relative"
           @click="$router.push('/dashboard/notification')"
         >
-          🔔
-        </p>
+          <p>🔔</p>
+          <p
+            v-if="notify"
+            :class="
+              notify
+                ? 'w-2 h-2 rounded-full bg-green-500 absolute top-1 right-1 animate-bounce'
+                : 'opacity-0 bg-transparent'
+            "
+          ></p>
+        </div>
         <div
           v-if="user && user.role == 'admin'"
           class="cursor-pointer"
@@ -75,6 +83,10 @@ const userAuthentication = authentication();
 
 const user = computed(() => {
   return userAuthentication.user;
+});
+
+const notify = computed(() => {
+  return userflowing.notifications.find((notification) => !notification.open);
 });
 </script>
 

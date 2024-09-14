@@ -260,7 +260,7 @@ watch(user, () => {
     abrv.value += name[0] + " ";
   });
 
-  userflowing.name = abrv.value.trim();
+  if (userflowing.name.length == 0) userflowing.name = abrv.value.trim();
 });
 </script>
 
