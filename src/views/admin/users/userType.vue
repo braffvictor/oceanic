@@ -114,8 +114,9 @@ const dashCard = computed(() => {
     allusers: {
       icon: "M7.5,5C5.6,5,4,6.6,4,8.5S5.6,12,7.5,12S11,10.4,11,8.5S9.4,5,7.5,5z M16.5,5C14.6,5,13,6.6,13,8.5s1.6,3.5,3.5,3.5S20,10.4,20,8.5S18.4,5,16.5,5z M7.5,14C2.6,14,1,18,1,18v2h13v-2C14,18,12.4,14,7.5,14z M16.5,14c-1.5,0-2.7,0.4-3.6,0.9 c1.4,1.2,2,2.6,2.1,2.7l0.1,0.2V20h8v-2C23,18,21.4,14,16.5,14z",
       text: "All Users",
-      length: adminflowing.getUsers.length,
-      array: adminflowing.getUsers,
+      length: adminflowing.getUsers.filter((user) => user.role == "user")
+        .length,
+      array: adminflowing.getUsers.filter((user) => user.role == "user"),
     },
     verifiedusers: {
       icon: "M7.5,5C5.6,5,4,6.6,4,8.5S5.6,12,7.5,12S11,10.4,11,8.5S9.4,5,7.5,5z M16.5,5C14.6,5,13,6.6,13,8.5s1.6,3.5,3.5,3.5S20,10.4,20,8.5S18.4,5,16.5,5z M7.5,14C2.6,14,1,18,1,18v2h13v-2C14,18,12.4,14,7.5,14z M16.5,14c-1.5,0-2.7,0.4-3.6,0.9 c1.4,1.2,2,2.6,2.1,2.7l0.1,0.2V20h8v-2C23,18,21.4,14,16.5,14z",
@@ -150,7 +151,7 @@ const actions = computed(() => {
     {
       is: true,
       text: "View User",
-      color: "bg-slate-900 dark:bg-slate-100",
+      color: "1bg-slate-900 dark:!bg-slate-100",
       action: (e, data) => {
         router.push(`/admin/edituser/${data.userID}`);
       },
@@ -158,7 +159,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "allusers" ? true : false,
       text: "Verify",
-      color: "bg-green-500",
+      color: "!bg-green-500",
       action: (e, data) => {
         if (data.verified) {
           userflowing.initAlert({
@@ -184,7 +185,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "verifiedusers" ? true : false,
       text: "Unverify",
-      color: "bg-red-500",
+      color: "!bg-red-500",
       action: (e, data) => {
         let message = `${data.fullName} Account Is Successfully Unverified`;
 
@@ -200,7 +201,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "allusers" ? true : false,
       text: "Block",
-      color: "bg-red-500",
+      color: "!bg-red-500",
       action: (e, data) => {
         if (data.blocked) {
           userflowing.initAlert({
@@ -226,7 +227,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "blockedusers" ? true : false,
       text: "Unblock",
-      color: "bg-green-500",
+      color: "!bg-green-500",
       action: (e, data) => {
         let message = `${data.fullName} Account Is Successfully Unblocked`;
 
