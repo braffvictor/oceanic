@@ -151,7 +151,7 @@ const actions = computed(() => {
     {
       is: true,
       text: "View User",
-      color: "1bg-slate-900 dark:!bg-slate-100",
+      color: "bg-slate-900 dark:bg-slate-100",
       action: (e, data) => {
         router.push(`/admin/edituser/${data.userID}`);
       },
@@ -185,7 +185,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "verifiedusers" ? true : false,
       text: "Unverify",
-      color: "!bg-red-500",
+      color: "bg-red-500",
       action: (e, data) => {
         let message = `${data.fullName} Account Is Successfully Unverified`;
 
@@ -201,7 +201,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "allusers" ? true : false,
       text: "Block",
-      color: "!bg-red-500",
+      color: "bg-red-500",
       action: (e, data) => {
         if (data.blocked) {
           userflowing.initAlert({
@@ -227,7 +227,7 @@ const actions = computed(() => {
     {
       is: route.params.id == "blockedusers" ? true : false,
       text: "Unblock",
-      color: "!bg-green-500",
+      color: "bg-green-500",
       action: (e, data) => {
         let message = `${data.fullName} Account Is Successfully Unblocked`;
 
