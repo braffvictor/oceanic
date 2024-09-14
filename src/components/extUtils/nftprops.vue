@@ -77,7 +77,9 @@
         <p class="font-extralight text-gray-500 dark:text-gray-400">
           Bidprice(ETH)
         </p>
-        <p class="font-medium capitalize">{{ nft && nft.stats.floor_eth }}</p>
+        <p class="font-medium capitalize">
+          {{ nft && nft.stats.floor_eth }}ETH
+        </p>
       </div>
       <!-- divider dash-->
       <div
