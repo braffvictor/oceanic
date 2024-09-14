@@ -178,8 +178,12 @@
     </section>
 
     <!-- todo alert comp -->
+
     <DAlert />
     <DPopup />
+
+    <!-- todo the translation widget -->
+    <!-- <div class="gtranslate_wrapper"></div> -->
   </div>
 </template>
 
@@ -198,6 +202,7 @@ import { computed, onMounted, provide, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import DAlert from "@/components/utils/DAlert.vue";
 import DDashbar from "@/components/utils/DDashbar.vue";
+import { useHead } from "@vueuse/head";
 
 const adminflowing = adminflow();
 const userflowing = userflow();
@@ -205,6 +210,48 @@ const useAuthentication = authentication();
 
 //todo remove wallet function later
 useAuthentication.userWatch("user");
+
+// onMounted(() => {
+//   window.gtranslateSettings = {
+//     default_language: "en",
+//     detect_browser_language: true,
+//     languages: [
+//       "en",
+//       "fr",
+//       "de",
+//       "it",
+//       "es",
+//       "ko",
+//       "ps",
+//       "sd",
+//       "fy",
+//       "xh",
+//       "mn",
+//       "bs",
+//       "sn",
+//       "my",
+//       "zh-CN",
+//       "zh-TW",
+//       "ru",
+//       "hu",
+//     ],
+//     wrapper_selector: ".gtranslate_wrapper",
+//   };
+// });
+
+//for the head properties
+useHead({
+  script: [
+    // tidio link
+    // {
+    //   src: "//code.tidio.co/zccgj8k6v1twa1uydrnxydegil8o2rlv.js",
+    // },
+    // for translation
+    // {
+    //   src: "https://cdn.gtranslate.net/widgets/latest/float.js",
+    // },
+  ],
+});
 
 const user = computed(() => {
   return useAuthentication.user;

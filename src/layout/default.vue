@@ -478,7 +478,7 @@
       </main>
     </section>
     <!-- todo the translation widget -->
-    <!-- <div class="gtranslate_wrapper"></div> -->
+    <div class="gtranslate_wrapper"></div>
 
     <!-- todo cart List -->
     <d-cart-list
@@ -519,31 +519,31 @@ userflowing.initAllNfts();
 onBeforeMount(() => {
   // getNftCollection("eth-main");
   window.scrollTo(0, 0);
-  // window.gtranslateSettings = {
-  //   default_language: "en",
-  //   detect_browser_language: true,
-  //   languages: [
-  //     "en",
-  //     "fr",
-  //     "de",
-  //     "it",
-  //     "es",
-  //     "ko",
-  //     "ps",
-  //     "sd",
-  //     "fy",
-  //     "xh",
-  //     "mn",
-  //     "bs",
-  //     "sn",
-  //     "my",
-  //     "zh-CN",
-  //     "zh-TW",
-  //     "ru",
-  //     "hu",
-  //   ],
-  //   wrapper_selector: ".gtranslate_wrapper",
-  // };
+  window.gtranslateSettings = {
+    default_language: "en",
+    detect_browser_language: true,
+    languages: [
+      "en",
+      "fr",
+      "de",
+      "it",
+      "es",
+      "ko",
+      "ps",
+      "sd",
+      "fy",
+      "xh",
+      "mn",
+      "bs",
+      "sn",
+      "my",
+      "zh-CN",
+      "zh-TW",
+      "ru",
+      "hu",
+    ],
+    wrapper_selector: ".gtranslate_wrapper",
+  };
 });
 
 //for the head properties
@@ -554,9 +554,9 @@ useHead({
     //   src: "//code.tidio.co/zccgj8k6v1twa1uydrnxydegil8o2rlv.js",
     // },
     // for translation
-    // {
-    //   src: "https://cdn.gtranslate.net/widgets/latest/float.js",
-    // },
+    {
+      src: "https://cdn.gtranslate.net/widgets/latest/float.js",
+    },
   ],
 });
 
