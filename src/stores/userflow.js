@@ -445,6 +445,8 @@ export const userflow = defineStore("userflow", {
     },
 
     async notificationFN({ type, message, uid, open, fullName, email }) {
+      const adminflowing = adminflow();
+      adminflowing.loading.notification = true;
       const colref = collection(db, "notifications");
 
       await addDoc(colref, {
@@ -464,8 +466,10 @@ export const userflow = defineStore("userflow", {
           updateDoc(currentUserDoc, {
             id: docRef.id,
           });
+          adminflowing.loading.notification = false;
         })
         .catch((error) => {
+          adminflowing.loading.notification = false;
           this.initAlert({
             is: true,
             message: error.message,

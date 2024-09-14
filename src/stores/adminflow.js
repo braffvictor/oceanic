@@ -19,6 +19,11 @@ export const adminflow = defineStore("adminflow", {
     loading: {
       wallet: false,
       balance: false,
+      notification: false,
+      user: false,
+      deposit: false,
+      withdraw: false,
+      nft: false,
     },
 
     users: [],
@@ -319,6 +324,17 @@ export const adminflow = defineStore("adminflow", {
     async dynamicUpdate(payload) {
       const userflowing = userflow();
 
+      //for controlling the btns
+      if (payload.category == "users") {
+        this.loading.user = true;
+      } else if (payload.category == "deposits") {
+        this.loading.deposit = true;
+      } else if (payload.category == "withdraws") {
+        this.loading.withdraw = true;
+      } else if (payload.category == "nfts") {
+        this.loading.nft = true;
+      }
+
       const colref = collection(db, payload.category);
 
       const currentUserDoc = doc(colref, payload.id);
@@ -341,8 +357,15 @@ export const adminflow = defineStore("adminflow", {
           } else if (payload.category == "nfts") {
             this.initAllNfts();
           }
+
+          this.loading.deposit = false;
+          this.loading.withdraw = false;
+          this.loading.nft = false;
         })
         .catch((error) => {
+          this.loading.deposit = false;
+          this.loading.withdraw = false;
+          this.loading.nft = false;
           userflowing.initAlert({
             is: true,
             type: "error",

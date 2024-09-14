@@ -89,7 +89,7 @@
           Bidprice($)
         </p>
         <p class="font-medium capitalize">
-          ${{
+          {{
             nft &&
             nft.stats.floor_price?.toLocaleString("en-US", {
               style: "currency",

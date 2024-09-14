@@ -6,6 +6,12 @@
       <div
         class="mx-auto transit gap-4 dark:bg-slate-900 bg-slate-100 justify-center items-center text-center h-auto pt-2"
       >
+        <d-button
+          class="inline-block md:w-2/12 mx-auto text-center mb-3 w-4/12 border-slate-900 dark:border-slate-100"
+          type="outlined"
+          to="/admin/notifications/send"
+          >Send To User</d-button
+        >
         <admin-card
           :icon="dashCard.icon"
           :text="dashCard.text"
@@ -19,7 +25,7 @@
     <section class="w-10/12 md:w-7/12 mx-auto my-6">
       <d-textfield
         @emitInput="(input) => (search = input)"
-        label="Search Notifications"
+        label="Search Notification..."
         :type="theme == 'dark' ? 'filled' : 'default'"
       />
     </section>
@@ -28,26 +34,28 @@
       class="w-full"
       v-if="
         dashCard.array.filter(
-          (userText) =>
-            userText.fullName.includes(search) ||
-            userText.fullName.toLowerCase().includes(search) ||
-            userText.email.includes(search)
+          (notifyText) =>
+            notifyText.fullName.includes(search) ||
+            notifyText.fullName.toLowerCase().includes(search) ||
+            notifyText.email.includes(search)
         ).length > 0
       "
     >
       <TransitionGroup name="list">
         <admin-prop-card
-          v-for="user in dashCard.array.filter(
-            (userText) =>
-              userText.fullName.includes(search) ||
-              userText.fullName.toLowerCase().includes(search) ||
-              userText.email.includes(search)
+          v-for="notify in dashCard.array.filter(
+            (notifyText) =>
+              notifyText.fullName.includes(search) ||
+              notifyText.fullName.toLowerCase().includes(search) ||
+              notifyText.email.includes(search)
           )"
-          :key="user.userID"
-          :title="user.fullName"
-          :text1="user.email"
-          :date="user.joinDate"
-          :data="user"
+          :key="notify.id"
+          :title="notify.fullName"
+          :text1="notify.email"
+          :truncate="false"
+          :text2="notify.message"
+          :date="notify.date"
+          :data="notify"
           :actions="actions"
         />
       </TransitionGroup>
@@ -70,7 +78,7 @@
         <p class="font-light text-center mt-4" v-if="!search">Empty List</p>
         <p class="font-light text-center mt-4" v-if="search">
           <span class="text-green-400 dark:text-green-500">{{ search }}</span>
-          User Not Found.
+          Notification Not Found.
         </p>
       </div>
     </section>
@@ -92,6 +100,7 @@
 import { adminflow } from "@/stores/adminflow";
 import { userflow } from "@/stores/userflow";
 
+import DButton from "@/components/utils/DButton.vue";
 import DDialog from "@/components/utils/DDialog.vue";
 import AdminCard from "@/components/cards/adminCard.vue";
 import AdminPropCard from "@/components/cards/adminPropCard.vue";
@@ -125,7 +134,7 @@ const dashCard = computed(() => {
     icon: "M9.33497 4.72727V5.25342C6.64516 6.35644 4.76592 9.97935 4.83412 13.1192L4.83409 14.8631C3.45713 16.6333 3.53815 19.2727 6.9735 19.2727H9.33497C9.33497 19.996 9.61684 20.6897 10.1186 21.2012C10.6203 21.7127 11.3008 22 12.0104 22C12.72 22 13.4005 21.7127 13.9022 21.2012C14.404 20.6897 14.6858 19.996 14.6858 19.2727H17.0538C20.4826 19.2727 20.5323 16.6278 19.1555 14.8576L19.1938 13.1216C19.2631 9.97811 17.3803 6.35194 14.6858 5.25049V4.72727C14.6858 4.00396 14.404 3.31026 13.9022 2.7988C13.4005 2.28734 12.72 2 12.0104 2C11.3008 2 10.6203 2.28734 10.1186 2.7988C9.61684 3.31026 9.33497 4.00395 9.33497 4.72727ZM12.9022 4.72727C12.9022 4.74573 12.9017 4.76414 12.9006 4.78246C12.6101 4.74603 12.3142 4.72727 12.014 4.72727C11.7113 4.72727 11.413 4.74634 11.1203 4.78335C11.1192 4.76474 11.1186 4.74603 11.1186 4.72727C11.1186 4.48617 11.2126 4.25494 11.3798 4.08445C11.547 3.91396 11.7739 3.81818 12.0104 3.81818C12.2469 3.81818 12.4738 3.91396 12.641 4.08445C12.8083 4.25494 12.9022 4.48617 12.9022 4.72727ZM11.1186 19.2727C11.1186 19.5138 11.2126 19.7451 11.3798 19.9156C11.547 20.086 11.7739 20.1818 12.0104 20.1818C12.2469 20.1818 12.4738 20.086 12.641 19.9156C12.8083 19.7451 12.9022 19.5138 12.9022 19.2727H11.1186ZM17.0538 17.4545C17.8157 17.4545 18.2267 16.5435 17.7309 15.9538C17.49 15.6673 17.3616 15.3028 17.3699 14.9286L17.4106 13.0808C17.4787 9.99416 15.0427 6.54545 12.014 6.54545C8.98598 6.54545 6.55028 9.99301 6.61731 13.0789L6.65748 14.9289C6.66561 15.303 6.53726 15.6674 6.29639 15.9538C5.80054 16.5435 6.21158 17.4545 6.9735 17.4545H17.0538Z",
     text: "All Notifications",
     length: adminflowing.getNotifications.length,
-    array: adminflowing.getUsers,
+    array: adminflowing.getNotifications,
   };
 });
 
@@ -143,24 +152,24 @@ onUnmounted(() => {
 
 const actions = computed(() => {
   return [
-    {
-      is: true,
-      text: "Send Notification",
-      color: "bg-slate-900 dark:bg-slate-100",
-      action: (e, data) => {
-        data.type = "notification";
-        transaction.value = data;
-        dialog.value = true;
-      },
-    },
+    // {
+    //   is: true,
+    //   text: "Send Notification",
+    //   color: "bg-slate-900 dark:bg-slate-100",
+    //   action: (e, data) => {
+    //     data.type = "notification";
+    //     transaction.value = data;
+    //     dialog.value = true;
+    //   },
+    // },
   ];
 });
 </script>
 
 <style>
 .list-move, /* apply transition to moving elements */
-      .list-enter-active,
-      .list-leave-active {
+        .list-enter-active,
+        .list-leave-active {
   transition: all 0.5s ease;
 }
 
@@ -171,7 +180,7 @@ const actions = computed(() => {
 }
 
 /* ensure leaving items are taken out of layout flow so that moving
-         animations can be calculated correctly. */
+           animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
 }

@@ -354,7 +354,13 @@ const routes = [
       {
         path: "/admin/notifications",
         name: "admin notifications type",
-        component: () => import("@/views/admin/notifications.vue"),
+        component: () =>
+          import("@/views/admin/notifications/allnotifications.vue"),
+      },
+      {
+        path: "/admin/notifications/send",
+        name: "admin notifications send",
+        component: () => import("@/views/admin/notifications/send.vue"),
       },
     ],
   },

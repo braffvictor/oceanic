@@ -5,8 +5,8 @@
     >
       <div>
         <p class="font-bold text-xl">{{ truncateText(title) }}</p>
-        <p class="text-sm">{{ truncateText(text1) }}</p>
-        <p class="text-sm">{{ truncateText(text2) }}</p>
+        <p class="text-sm">{{ truncate ? truncateText(text1) : text1 }}</p>
+        <p class="text-sm">{{ truncate ? truncateText(text2) : text2 }}</p>
         <p class="text-sm">{{ truncateText(text3) }}</p>
         <p class="text-sm">{{ truncateText(text4) }}</p>
         <p class="text-sm">{{ date }}</p>
@@ -117,6 +117,11 @@ const props = defineProps({
     default: () => {
       return [];
     },
+  },
+
+  truncate: {
+    type: Boolean,
+    default: true,
   },
 });
 
