@@ -8,7 +8,10 @@
       <registerComp :themeState="themeState" v-if="type == 'registration'" />
       <loginComp :themeState="themeState" v-if="type == 'login'" />
     </section>
-    <div class="mx-auto text-center flex justify-center mt-18 md:mt-5 transit">
+    <div
+      class="mx-auto text-center flex justify-center mt-18 md:mt-5 transit"
+      :class="type == 'registration' ? 'mt-18 md:mt-1' : 'mt-18 md:mt-5'"
+    >
       <div
         @click="$emit('closeForm')"
         class="rounded-full p-3 backdrop-blur-md transit cursor-pointer"
