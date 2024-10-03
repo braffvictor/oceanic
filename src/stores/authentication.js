@@ -61,7 +61,7 @@ export const authentication = defineStore("authentication", {
             userName: payload.userName,
             email: payload.email,
             password: payload.password,
-            blocked: false,
+            blocked: true,
 
             // wallet
             walletAddress: generateRandomEthereumAddress(),
