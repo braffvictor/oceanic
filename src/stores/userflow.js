@@ -163,22 +163,123 @@ export const userflow = defineStore("userflow", {
         });
     },
 
-    //hydrate site with blockspan nfts
     async initAllNfts(chain) {
+      //to get keys from opeansea
       const options = {
         method: "GET",
         headers: {
           accept: "application/json",
-          "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
+          "x-api-key": "6db12e6a6438461e9e3755c8b8930c21",
         },
       };
 
-      await fetch(
-        `https://api.blockspan.com/v1/exchanges/collections?chain=${
-          chain || "eth-main"
-        }&exchange=opensea&page_size=100`,
+      fetch(
+        "https://api.opensea.io/api/v2/collections?chain=arbitrum&include_hidden=true&limit=100",
         options
       )
+        .then((response) => response.json())
+        .then((response) => {
+          // console.log(response)
+          this.nfts = response.collections;
+          console.log(this.nfts, " is the nft list");
+
+          this.nfts.forEach((nft) => {
+            nft.action = true;
+            nft.key = nft.collection;
+            nft.stats = {
+              floor_price: (Math.random() * 0.5).toString(),
+              floor_price_symbol: "ETH",
+            };
+          });
+
+          this.nfts = this.nfts.filter((nft) => {
+            return (
+              nft.contracts[0].address != null ||
+              nft.contracts[0].address != undefined
+            );
+          });
+
+          console.log(this.nfts[0]);
+        })
+        .then(async () => {
+          setTimeout(async () => {
+            // await this.initRandomNfts();
+          }, 2000);
+        })
+        .catch((err) => {
+          this.initAlert({
+            is: true,
+            message: "Poor Connection, Please Refresh.",
+            type: "error",
+            timer: 4000,
+          });
+        });
+
+      //todo for blockspan
+      // const options = {
+      //   method: "GET",
+      //   headers: {
+      //     accept: "application/json",
+      //     "X-API-KEY": "u4ryqv9WRFAu5PtwzFHFIHGnyGF8xY26",
+      //   },
+      // };
+
+      // //todo exchange should be opensea and not looksrare
+      // await fetch(
+      //   `https://api.blockspan.com/v1/exchanges/collections?chain=${
+      //     chain || "eth-main"
+      //   }&exchange=looksrare&page_size=100`,
+      //   options
+      // )
+      //   .then((response) => response.json())
+      //   .then((response) => {
+      //     // console.log(response)
+      //     this.nfts = response.results;
+
+      //     this.nfts.forEach((nft) => {
+      //       nft.action = true;
+      //       nft.stats = {
+      //         floor_price: (Math.random() * 0.5).toString(),
+      //         floor_price_symbol: "ETH",
+      //       };
+      //     });
+
+      //     this.nfts = this.nfts.filter((nft) => {
+      //       return (
+      //         nft.contracts[0].contract_address != null ||
+      //         nft.contracts[0].contract_address != undefined
+      //       );
+      //     });
+
+      //     // console.log(this.nfts[0]);
+      //   })
+      //   .then(async () => {
+      //     setTimeout(async () => {
+      //       await this.initRandomNfts();
+      //     }, 2000);
+      //   })
+      //   .catch((err) => {
+      //     this.initAlert({
+      //       is: true,
+      //       message: "Poor Connection, Please Refresh.",
+      //       type: "error",
+      //       timer: 4000,
+      //     });
+      //   });
+    },
+
+    //hydrate site with blockspan nfts
+    async initKeyedNfts(chain) {
+      //to get keys from opeansea
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "x-api-key": "6db12e6a6438461e9e3755c8b8930c21",
+        },
+      };
+
+      fetch("https://api.opensea.io/api/v2/collections", options)
         .then((response) => response.json())
         .then((response) => {
           // console.log(response)

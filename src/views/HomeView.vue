@@ -126,7 +126,7 @@
     </section>
 
     <!-- for the large table -->
-    <big-tab />
+    <big-tab @click="() => console.log(userflowing.nfts)" />
 
     <!-- nft cards collection swipes -->
     <section class="h-auto md:mt-12 mt-8 min-h-72">
