@@ -217,6 +217,7 @@ export const userflow = defineStore("userflow", {
       //   });
 
       //todo for blockspan
+
       const options = {
         method: "GET",
         headers: {
@@ -253,11 +254,14 @@ export const userflow = defineStore("userflow", {
           });
 
           // console.log(this.nfts[0]);
+          if (this.nfts.length == 0) this.nfts = [];
         })
         .then(async () => {
-          setTimeout(async () => {
-            await this.initRandomNfts();
-          }, 2000);
+          if (this.nfts.length != 0) {
+            setTimeout(async () => {
+              await this.initRandomNfts();
+            }, 2000);
+          }
         })
         .catch((err) => {
           this.initAlert({
