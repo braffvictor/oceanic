@@ -53,11 +53,11 @@
         <div class="flex justify-between items-center">
           <p class="font-light">🔥Hot Collection</p>
           <p
-            class="font-semibold flex items-center cursor-pointer active:text-green-500 transit group text-sm py-2 pl-2"
+            class="font-semibold flex items-center cursor-pointer active:text-green-500 transit group text-sm py-2 pl-2 text-green-400"
             @click.self="$router.push('/dashboard/view-all')"
           >
             View All<SvgComp
-              Sclass="group-active:!stroke-green-500"
+              Sclass="group-active:!stroke-green-500 !stroke-green-400"
               class="pt-1 inline"
               icon="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
             />

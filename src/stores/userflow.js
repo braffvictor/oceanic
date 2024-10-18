@@ -660,6 +660,7 @@ export const userflow = defineStore("userflow", {
           });
 
           this.loading.deposit = false;
+          this.initUserTransactions();
         })
         .catch((error) => {
           this.loading.deposit = false;
@@ -727,6 +728,7 @@ export const userflow = defineStore("userflow", {
             timer: 5000,
           });
           this.loading.withdraw = false;
+          this.initUserTransactions();
         })
         .catch((error) => {
           this.loading.withdraw = false;
